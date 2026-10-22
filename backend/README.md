@@ -39,6 +39,8 @@ cp -n backend/.env.example backend/.env
 
 当前已实现健康检查接口；旅游攻略生成、RAG 检索和外部 LLM 调用尚未实现。
 
+# From NuieHytoilee, 10.23
+
 ## 首次配置
 
 我的本地环境配置使用 Anaconda Prompt，进入项目根目录后执行：
@@ -71,3 +73,10 @@ python -m uvicorn app.main:app --app-dir backend --reload
 ```json
 {"status":"ok"}
 ```
+
+当前已实现：
+- GET /api/health：健康检查。
+- POST /api/travel/plan：校验旅游需求并返回 mock 示例行程。
+
+旅游接口已通过正常请求、简单非法参数检查和天数上下限的本地验证。
+RAG 检索和外部 LLM 调用尚未实现。

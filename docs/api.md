@@ -31,3 +31,25 @@
 ## 联调记录
 
 在这里记录确认日期、变更内容，以及需要一起修改的前端和后端代码。
+
+### 10.23记录 旅游行程规划：POST /api/travel/plan
+
+状态：已本地验证，可用于 mock 接口联调。
+当前仅返回示例行程，尚未接入 RAG 和 LLM。
+
+请求为 JSON：
+- destination：必填字符串，去除首尾空白后为 1～80 个字符。
+- days：必填整数，范围 1～14。
+- interests：可选字符串列表，默认 []，最多 10 项；
+  每项去除首尾空白后为 1～80 个字符。
+- 不接受未定义的字段。
+
+成功：HTTP 200。
+返回 mode、destination、days、interests、itinerary、sources、notice。
+itinerary 每项包含 day 和 activities。
+当前 mode 固定为 mock，sources 为空列表，不调用检索或 LLM。
+
+参数错误：HTTP 422，使用 FastAPI 默认的 detail 错误格式。
+
+待确认：与前端共同确认字段；接入 RAG 和 LLM 后补充来源结构、
+空检索、超时和模型调用失败的处理约定。
