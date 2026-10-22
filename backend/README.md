@@ -32,3 +32,42 @@ cp -n backend/.env.example backend/.env
 4. 补充关键功能测试和可复现的运行说明。
 
 数据目录约定见 `../data/README.md`。访问数据时应明确按项目根目录解析路径，避免依赖启动终端所在的位置。
+
+# 后端
+
+技术栈：Python 3.11、FastAPI、Uvicorn。
+
+当前已实现健康检查接口；旅游攻略生成、RAG 检索和外部 LLM 调用尚未实现。
+
+## 首次配置
+
+我的本地环境配置使用 Anaconda Prompt，进入项目根目录后执行：
+
+```bat
+conda create -n rag-backend python=3.11 pip
+conda activate rag-backend
+python -m pip install -r backend\requirements.txt
+```
+
+## 本地启动
+
+(Anaconda Prompt)
+在项目根目录执行：
+
+```bat
+conda activate rag-backend
+python -m uvicorn app.main:app --app-dir backend --reload
+```
+
+服务运行时保持终端打开，按 Ctrl+C 停止。
+
+## 验证
+
+- 健康检查：http://127.0.0.1:8000/api/health
+- 接口文档：http://127.0.0.1:8000/docs
+
+健康检查成功时返回 HTTP 200：
+
+```json
+{"status":"ok"}
+```
