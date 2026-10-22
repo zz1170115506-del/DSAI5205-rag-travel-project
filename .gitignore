@@ -1,0 +1,39 @@
+# macOS and local editor state
+.DS_Store
+.idea/
+
+# Local environment files; keep shareable examples
+.env
+.env.*
+!.env.example
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Frontend dependencies and build output
+node_modules/
+dist/
+build/
+.next/
+
+# Logs and test output
+*.log
+logs/
+coverage/
+.coverage
+htmlcov/
+
+# Local datasets and generated indexes
+/data/raw/*
+!/data/raw/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+/data/indexes/*
+!/data/indexes/.gitkeep
