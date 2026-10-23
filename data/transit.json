@@ -1,0 +1,896 @@
+{
+  "version": "2026-10-22.1",
+  "checked": "2026-10-22",
+  "note": "官方线路和出口资料的本地参考快照；步行时长、转车和候车余量为项目估算，非实时导航。站区图推导的街面接驳单独标记；不保证最短、无障碍、营业或出口当前开放。 线路图覆盖本地景点相关六条线，不包含机场快线、轻铁及东铁特殊支线；候选路径按站数与换乘余量计算，不宣称最快。",
+  "sources": {
+    "network": {
+      "name": "港铁官方线路及车站图",
+      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+      "checked": "2026-10-22"
+    },
+    "cen": {
+      "name": "港铁官方站区街道图 · CEN",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/cen.pdf",
+      "checked": "2026-10-22"
+    },
+    "adm": {
+      "name": "港铁官方站区街道图 · ADM",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/adm.pdf",
+      "checked": "2026-10-22"
+    },
+    "shw": {
+      "name": "港铁官方站区街道图 · SHW",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/shw.pdf",
+      "checked": "2026-10-22"
+    },
+    "tst": {
+      "name": "港铁官方站区街道图 · TST",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+      "checked": "2026-10-22"
+    },
+    "ssp": {
+      "name": "港铁官方站区街道图 · SSP",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/ssp.pdf",
+      "checked": "2026-10-22"
+    },
+    "dih": {
+      "name": "港铁官方站区街道图 · DIH",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/dih.pdf",
+      "checked": "2026-10-22"
+    },
+    "wac": {
+      "name": "港铁官方站区街道图 · WAC",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/wac.pdf",
+      "checked": "2026-10-22"
+    },
+    "cab": {
+      "name": "港铁官方站区街道图 · CAB",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/cab.pdf",
+      "checked": "2026-10-22"
+    },
+    "pre": {
+      "name": "港铁官方站区街道图 · PRE",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/pre.pdf",
+      "checked": "2026-10-22"
+    },
+    "mok": {
+      "name": "港铁官方站区街道图 · MOK",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/mok.pdf",
+      "checked": "2026-10-22"
+    },
+    "jor": {
+      "name": "港铁官方站区街道图 · JOR",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/jor.pdf",
+      "checked": "2026-10-22"
+    },
+    "ymt": {
+      "name": "港铁官方站区街道图 · YMT",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/ymt.pdf",
+      "checked": "2026-10-22"
+    },
+    "kow": {
+      "name": "港铁官方站区街道图 · KOW",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+      "checked": "2026-10-22"
+    },
+    "aus": {
+      "name": "港铁官方站区街道图 · AUS",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+      "checked": "2026-10-22"
+    },
+    "tuc": {
+      "name": "港铁官方站区街道图 · TUC",
+      "url": "https://www.mtr.com.hk/archive/en/services/maps/tuc.pdf",
+      "checked": "2026-10-22"
+    },
+    "pmq": {
+      "name": "PMQ 官方交通指引",
+      "url": "https://www.pmq.org.hk/access/?lang=ch",
+      "checked": "2026-10-22"
+    },
+    "mplus": {
+      "name": "M+ 官方交通指引",
+      "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+      "checked": "2026-10-22"
+    },
+    "peak": {
+      "name": "山顶缆车官方交通指引",
+      "url": "https://www.thepeak.com.hk/en/getting-to-the-peak/transportation",
+      "checked": "2026-10-22"
+    },
+    "nlb": {
+      "name": "新大屿山巴士官方路线表",
+      "url": "https://nlb.com.hk/route",
+      "checked": "2026-10-22"
+    },
+    "zoo": {
+      "name": "香港动植物公园官方交通资料",
+      "url": "https://www.hkzbg.gov.hk/en/visitPage.html",
+      "checked": "2026-10-22"
+    },
+    "paitai": {
+      "name": "华人庙宇委员会官方交通指引",
+      "url": "https://www.ctc.org.hk/en/temple/灣仔玉虛宮北帝廟/",
+      "checked": "2026-10-22"
+    },
+    "hopyik": {
+      "name": "旅发局合益泰地址资料",
+      "url": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-hop-yik-tai.html",
+      "checked": "2026-10-22"
+    }
+  },
+  "lines": [
+    {
+      "id": "TWL",
+      "name": "荃湾线",
+      "color_name": "红色",
+      "color": "#e2231a",
+      "stations": [
+        "荃湾",
+        "大窝口",
+        "葵兴",
+        "葵芳",
+        "荔景",
+        "美孚",
+        "荔枝角",
+        "长沙湾",
+        "深水埗",
+        "太子",
+        "旺角",
+        "油麻地",
+        "佐敦",
+        "尖沙咀",
+        "金钟",
+        "中环"
+      ]
+    },
+    {
+      "id": "ISL",
+      "name": "港岛线",
+      "color_name": "蓝色",
+      "color": "#0075c9",
+      "stations": [
+        "坚尼地城",
+        "香港大学",
+        "西营盘",
+        "上环",
+        "中环",
+        "金钟",
+        "湾仔",
+        "铜锣湾",
+        "天后",
+        "炮台山",
+        "北角",
+        "鲗鱼涌",
+        "太古",
+        "西湾河",
+        "筲箕湾",
+        "杏花邨",
+        "柴湾"
+      ]
+    },
+    {
+      "id": "KTL",
+      "name": "观塘线",
+      "color_name": "绿色",
+      "color": "#00ab4e",
+      "stations": [
+        "黄埔",
+        "何文田",
+        "油麻地",
+        "旺角",
+        "太子",
+        "石硖尾",
+        "九龙塘",
+        "乐富",
+        "黄大仙",
+        "钻石山",
+        "彩虹",
+        "九龙湾",
+        "牛头角",
+        "观塘",
+        "蓝田",
+        "油塘",
+        "调景岭"
+      ]
+    },
+    {
+      "id": "TCL",
+      "name": "东涌线",
+      "color_name": "橙色",
+      "color": "#f38b00",
+      "stations": [
+        "香港",
+        "九龙",
+        "奥运",
+        "南昌",
+        "荔景",
+        "青衣",
+        "欣澳",
+        "东涌"
+      ]
+    },
+    {
+      "id": "TML",
+      "name": "屯马线",
+      "color_name": "棕色",
+      "color": "#9a3820",
+      "stations": [
+        "屯门",
+        "兆康",
+        "天水围",
+        "朗屏",
+        "元朗",
+        "锦上路",
+        "荃湾西",
+        "美孚",
+        "南昌",
+        "柯士甸",
+        "尖东",
+        "红磡",
+        "何文田",
+        "土瓜湾",
+        "宋皇台",
+        "启德",
+        "钻石山",
+        "显径",
+        "大围",
+        "车公庙",
+        "沙田围",
+        "第一城",
+        "石门",
+        "大水坑",
+        "恒安",
+        "马鞍山",
+        "乌溪沙"
+      ]
+    },
+    {
+      "id": "EAL",
+      "name": "东铁线",
+      "color_name": "浅蓝色",
+      "color": "#53b7e8",
+      "forward_direction": "罗湖／落马洲",
+      "stations": [
+        "金钟",
+        "会展",
+        "红磡",
+        "旺角东",
+        "九龙塘",
+        "大围",
+        "沙田",
+        "火炭",
+        "大学",
+        "大埔墟",
+        "太和",
+        "粉岭",
+        "上水",
+        "罗湖"
+      ]
+    }
+  ],
+  "walking_interchanges": [
+    {
+      "stations": [
+        "中环",
+        "香港"
+      ],
+      "minutes": 12,
+      "note": "跟随站内通道往中环／香港站，换乘至相应线路；步行时间为估算。"
+    },
+    {
+      "stations": [
+        "尖沙咀",
+        "尖东"
+      ],
+      "minutes": 20,
+      "note": "须出入闸，经站内指示的地下行人通道步行换站；票务依港铁当日规定。 本地计算额外预留出入闸及找路时间，优先考虑普通站内换乘。"
+    }
+  ],
+  "access": {
+    "tai-kwun": {
+      "options": [
+        {
+          "station": "中环",
+          "exit": "D1",
+          "walk_minutes": 15,
+          "walk_note": "沿皇后大道中前往中环街市一带，接半山扶梯往大馆方向；留意坡道。",
+          "sources": [
+            "cen"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "pmq": {
+      "options": [
+        {
+          "station": "上环",
+          "exit": "E2",
+          "walk_minutes": 15,
+          "walk_note": "经新纪元广场、文咸东街往威灵顿街，再沿鸭巴甸街上行至 PMQ。",
+          "sources": [
+            "pmq"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "中环",
+          "exit": "C",
+          "walk_minutes": 18,
+          "walk_note": "经德辅道中、租庇利街往中环街市，乘半山扶梯至士丹顿街，再往 PMQ。",
+          "sources": [
+            "pmq"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "man-mo": {
+      "options": [
+        {
+          "station": "上环",
+          "exit": "A2",
+          "walk_minutes": 15,
+          "walk_note": "沿站区街道图往荷李活道文武庙方向步行，路段有上坡。",
+          "sources": [
+            "shw"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "escalator": {
+      "options": [
+        {
+          "station": "中环",
+          "exit": "C",
+          "walk_minutes": 8,
+          "walk_note": "往中环街市、租庇利街一带，按半山自动扶梯标识前往。",
+          "sources": [
+            "cen",
+            "pmq"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "lan-fong-yuen": {
+      "options": [
+        {
+          "station": "中环",
+          "exit": "D2",
+          "walk_minutes": 12,
+          "walk_note": "按站区图往结志街，核对兰芳园中环店门牌；注意同名分店。",
+          "sources": [
+            "cen"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "avenue-stars": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "尖东",
+          "exit": "J",
+          "walk_minutes": 10,
+          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "hkmoa": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "尖东",
+          "exit": "J",
+          "walk_minutes": 10,
+          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "space-museum": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "尖东",
+          "exit": "J",
+          "walk_minutes": 10,
+          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "clock-tower": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿梳士巴利道向文化中心、钟楼方向步行；天星码头在钟楼旁海滨。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "station_map_reference"
+        },
+        {
+          "station": "尖东",
+          "exit": "L6",
+          "walk_minutes": 8,
+          "walk_note": "按钟楼、文化中心方向出站，到海滨后依码头标识步行。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "star-ferry": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿梳士巴利道向文化中心、钟楼方向步行；天星码头在钟楼旁海滨。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "station_map_reference"
+        },
+        {
+          "station": "尖东",
+          "exit": "L6",
+          "walk_minutes": 8,
+          "walk_note": "按钟楼、文化中心方向出站，到海滨后依码头标识步行。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "knutsford": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "B1",
+          "walk_minutes": 10,
+          "walk_note": "沿弥敦道往金巴利道方向，再核对诺士佛台入口；街区有梯级。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "art-park": {
+      "options": [
+        {
+          "station": "九龙",
+          "exit": "C1",
+          "walk_minutes": 18,
+          "walk_note": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。",
+          "sources": [
+            "kow",
+            "mplus"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "柯士甸",
+          "exit": "D1",
+          "walk_minutes": 20,
+          "walk_note": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。",
+          "sources": [
+            "aus"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "mplus": {
+      "options": [
+        {
+          "station": "九龙",
+          "exit": "C1",
+          "walk_minutes": 18,
+          "walk_note": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。",
+          "sources": [
+            "kow",
+            "mplus"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "柯士甸",
+          "exit": "D1",
+          "walk_minutes": 20,
+          "walk_note": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。",
+          "sources": [
+            "aus"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "palace-museum": {
+      "options": [
+        {
+          "station": "九龙",
+          "exit": "C1",
+          "walk_minutes": 28,
+          "walk_note": "经圆方和艺术广场天桥进入西九文化区，再沿园区标识前往香港故宫；园区内需继续步行。",
+          "sources": [
+            "kow",
+            "mplus"
+          ],
+          "basis": "station_map_reference"
+        },
+        {
+          "station": "柯士甸",
+          "exit": "D1",
+          "walk_minutes": 30,
+          "walk_note": "按西九文化区导向离站，经行人通道进入园区，再前往香港故宫；核对施工改道。",
+          "sources": [
+            "aus"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "temple-street": {
+      "options": [
+        {
+          "station": "佐敦",
+          "exit": "A",
+          "walk_minutes": 8,
+          "walk_note": "沿佐敦道往庙街方向，在街口核对庙街路牌。",
+          "sources": [
+            "jor"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "hing-kee": {
+      "options": [
+        {
+          "station": "油麻地",
+          "exit": "C",
+          "walk_minutes": 10,
+          "walk_note": "循文明里／庙街方向步行，再核对兴记煲仔饭店名及门牌。",
+          "sources": [
+            "ymt"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "sham-shui-po": {
+      "options": [
+        {
+          "station": "深水埗",
+          "exit": "D2",
+          "walk_minutes": 5,
+          "walk_note": "从黄金电脑商场一带开始街区散步；并非整个深水埗唯一入口。",
+          "sources": [
+            "ssp"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "hop-yik-tai": {
+      "options": [
+        {
+          "station": "深水埗",
+          "exit": "C2",
+          "walk_minutes": 5,
+          "walk_note": "按站区图前往桂林街 121 号合益泰小食，现场核对门牌。",
+          "sources": [
+            "ssp",
+            "hopyik"
+          ],
+          "basis": "station_map_reference"
+        }
+      ],
+      "connector": ""
+    },
+    "nan-lian": {
+      "options": [
+        {
+          "station": "钻石山",
+          "exit": "C2",
+          "walk_minutes": 8,
+          "walk_note": "沿凤德道南莲园池导向步行，游园后可循连接步道前往志莲净苑。",
+          "sources": [
+            "dih"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "hk-park": {
+      "options": [
+        {
+          "station": "金钟",
+          "exit": "C1",
+          "walk_minutes": 12,
+          "walk_note": "按香港公园导向，经金钟／太古广场一带的行人设施前往园区。",
+          "sources": [
+            "adm"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "zoological-gardens": {
+      "options": [
+        {
+          "station": "中环",
+          "exit": "D2",
+          "walk_minutes": 20,
+          "walk_note": "按公园官网及站区图往雅宾利道入口方向上行；有坡道，不保证无障碍。",
+          "sources": [
+            "zoo"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "kowloon-park": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "A1",
+          "walk_minutes": 6,
+          "walk_note": "按九龙公园导向入园，再在园内地图确认目标区域。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "victoria-park": {
+      "options": [
+        {
+          "station": "铜锣湾",
+          "exit": "E",
+          "walk_minutes": 12,
+          "walk_note": "沿记利佐治街／高士威道一带往维多利亚公园，依现场过街指示入园。",
+          "sources": [
+            "cab"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "blue-house": {
+      "options": [
+        {
+          "station": "湾仔",
+          "exit": "A3",
+          "walk_minutes": 12,
+          "walk_note": "经太原街往皇后大道东，再沿石水渠街前往蓝屋建筑群。",
+          "sources": [
+            "wac"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "pak-tai-wanchai": {
+      "options": [
+        {
+          "station": "湾仔",
+          "exit": "A3",
+          "walk_minutes": 15,
+          "walk_note": "经太原街、皇后大道东及石水渠街，再转往隆安街北帝庙。",
+          "sources": [
+            "paitai"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "science-museum": {
+      "options": [
+        {
+          "station": "尖沙咀",
+          "exit": "B2",
+          "walk_minutes": 18,
+          "walk_note": "沿金马伦道往漆咸道南，再按科学馆道／科学馆指示前往。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        },
+        {
+          "station": "尖东",
+          "exit": "P2",
+          "walk_minutes": 15,
+          "walk_note": "沿漆咸道南及科学馆道方向步行，按科学馆导向前往入口。",
+          "sources": [
+            "tst"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "goldfish-market": {
+      "options": [
+        {
+          "station": "太子",
+          "exit": "B2",
+          "walk_minutes": 8,
+          "walk_note": "按金鱼街／通菜街北段方向步行，街市沿街分布。",
+          "sources": [
+            "pre"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "flower-market": {
+      "options": [
+        {
+          "station": "太子",
+          "exit": "B1",
+          "walk_minutes": 8,
+          "walk_note": "往花墟道及花墟方向步行，现场核对街市路牌。",
+          "sources": [
+            "pre"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "ladies-market": {
+      "options": [
+        {
+          "station": "旺角",
+          "exit": "D3",
+          "walk_minutes": 8,
+          "walk_note": "沿亚皆老街往通菜街女人街方向步行。",
+          "sources": [
+            "mok"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": ""
+    },
+    "peak": {
+      "options": [
+        {
+          "station": "中环",
+          "exit": "J2",
+          "walk_minutes": 15,
+          "walk_note": "按花园道／山顶缆车中环总站指示步行，路段上坡。",
+          "sources": [
+            "cen",
+            "peak"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": "peak_tram"
+    },
+    "big-buddha": {
+      "options": [
+        {
+          "station": "东涌",
+          "exit": "B",
+          "walk_minutes": 8,
+          "walk_note": "出站后按东涌达东路巴士总站导向前往，核对新大屿山巴士 23 号站牌。",
+          "sources": [
+            "tuc",
+            "nlb"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": "ngong_ping_bus"
+    },
+    "ngong-ping": {
+      "options": [
+        {
+          "station": "东涌",
+          "exit": "B",
+          "walk_minutes": 8,
+          "walk_note": "出站后按东涌达东路巴士总站导向前往，核对新大屿山巴士 23 号站牌。",
+          "sources": [
+            "tuc",
+            "nlb"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": "ngong_ping_bus"
+    },
+    "tai-o": {
+      "options": [
+        {
+          "station": "东涌",
+          "exit": "B",
+          "walk_minutes": 8,
+          "walk_note": "出站后按东涌达东路巴士总站导向前往，核对新大屿山巴士 11 号站牌。",
+          "sources": [
+            "tuc",
+            "nlb"
+          ],
+          "basis": "official_exit_listing"
+        }
+      ],
+      "connector": "tai_o_bus"
+    }
+  }
+}

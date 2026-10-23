@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "scenario": "synthetic local-only calendar dates",
+  "selected_range": [
+    "2026-10-24",
+    "2026-10-26"
+  ],
+  "inclusive_days": 3,
+  "generated_dates": [
+    "2026-10-24 周六",
+    "2026-10-25 周日",
+    "2026-10-26 周一"
+  ],
+  "history_refresh_restores_dates": true,
+  "download_contains_range_and_day_dates": true,
+  "reversed_dates_blocked": true,
+  "over_three_days_blocked": true,
+  "desktop_overflow": false,
+  "model_calls": 0,
+  "amap_calls": 0,
+  "opening_day_validation": false
+}

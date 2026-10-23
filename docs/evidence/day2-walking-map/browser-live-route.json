@@ -1,0 +1,19 @@
+{
+  "kind": "real_original_day2_browser_test",
+  "image_height": 400,
+  "image_loaded": true,
+  "image_width": 640,
+  "info": "路线信息起点：香港动植物公园（图中 1） · 终点：兰芳园(中环大厦店)（图中 2）。查询时间：2026-10-23T11:26:36.529174+00:00。道路和入口以现场通行为准。",
+  "navigation": "https://uri.amap.com/direction?from=114.160739%2C22.275103%2C%E9%A6%99%E6%B8%AF%E5%8A%A8%E6%A4%8D%E7%89%A9%E5%85%AC%E5%9B%AD&to=114.1588%2C22.279878%2C%E5%85%B0%E8%8A%B3%E5%9B%AD%28%E4%B8%AD%E7%8E%AF%E5%A4%A7%E5%8E%A6%E5%BA%97%29&mode=walk&coordinate=gaode&src=hk-travel-assistant",
+  "overflow": false,
+  "route": "756 米 · 约 11 分钟在高德中导航 ↗",
+  "steps": [
+    "向东北步行79米左转",
+    "向西北步行40米右转",
+    "沿雅宾利道向北步行254米左转",
+    "沿云咸街向西北步行315米右转",
+    "向北步行19米直行",
+    "沿阁麟街向北步行36米左转",
+    "沿摆花街向西步行13米到达目的地"
+  ]
+}

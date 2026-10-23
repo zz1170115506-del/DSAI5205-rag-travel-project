@@ -1,34 +1,9 @@
-# 后端
+# 后端入口
 
-先按 Python 项目划分模块。Web 框架、模型服务、检索方案和依赖清单将在实现时确定。
+当前后端入口在仓库根目录 [`app.py`](../app.py)，业务模块在 [`travel/`](../travel/)，采用 FastAPI、LangGraph 与官方 MCP SDK。Python 依赖清单及锁文件均在根目录。
 
-| 目录 | 职责 |
-| --- | --- |
-| `app/api/` | 接收请求、校验参数、组织响应 |
-| `app/core/` | 配置读取、日志和公共设置 |
-| `app/services/` | 组织旅行问答与规划等业务流程 |
-| `app/rag/ingestion/` | 读取资料、切分文本、生成向量并建立索引 |
-| `app/rag/retrieval/` | 检索与问题相关的知识片段 |
-| `app/rag/generation/` | 构造提示词、调用模型、整理答案与来源 |
-| `tests/` | 后续功能的测试 |
+在根目录执行 `python3 start.py`。完整运行与验证方法见根目录 README。配置使用根目录 `.env.example`；此目录原 `.env.example` 为初始方案草稿，当前应用不读取其中的 `LLM_*` 变量。
 
-## 本地配置
+`travel/chat.py` 处理统一对话与历史；`agent.py` 管理模型工具循环；`retrieval.py` 处理词法召回和特征重排；`planner.py` 与 `itinerary_edits.py` 规划和修改行程；`maps.py` 适配高德 Web 服务。
 
-从仓库根目录执行：
-
-```bash
-cp -n backend/.env.example backend/.env
-```
-
-`.env.example` 目前是配置草案；应用入口与配置加载逻辑尚未实现。这一步仅创建本地配置文件。
-
-后续确定 Python 版本和依赖管理方式时，应提交相应的依赖清单，补充安装与启动步骤。虚拟环境可放在 `backend/.venv/`。
-
-## 开发顺序
-
-1. 与前端约定 `../docs/api.md` 中的接口。
-2. 实现应用入口、配置读取与基础接口。
-3. 接入资料处理、检索和模型生成流程。
-4. 补充关键功能测试和可复现的运行说明。
-
-数据目录约定见 `../data/README.md`。访问数据时应明确按项目根目录解析路径，避免依赖启动终端所在的位置。
+此目录保留初始仓库骨架，当前实现没有重复复制到 `backend/app/`。新增功能请先约定实际文件路径，避免两套实现分叉。

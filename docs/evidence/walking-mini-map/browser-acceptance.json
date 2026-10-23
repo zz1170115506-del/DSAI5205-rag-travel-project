@@ -1,0 +1,49 @@
+{
+  "range": "public synthetic Kowloon day plan",
+  "local_street_map": {
+    "provider": "OpenStreetMap",
+    "approximate_markers": [
+      "A",
+      "B"
+    ],
+    "loaded": true,
+    "navigation_line_drawn": false,
+    "height_px": 220
+  },
+  "amap_live": {
+    "origin": "星光大道 · 梳士巴利道南",
+    "origin_coordinate": [
+      114.181313,
+      22.292341
+    ],
+    "destination": "诺士佛台 · 尖沙咀诺士佛台",
+    "destination_coordinate": [
+      114.178839,
+      22.298401
+    ],
+    "candidate_choice_required": true,
+    "distance_m": 972,
+    "display_minutes": 13,
+    "steps": 8,
+    "native_static_image_returned": true,
+    "image_zoom_verified": true
+  },
+  "desktop_viewport": [
+    1422,
+    800
+  ],
+  "horizontal_overflow": false,
+  "mobile_verified": false,
+  "cloud_model_called": false,
+  "regression": {
+    "python_passed": 218,
+    "frontend_passed": 12,
+    "stdio_passed": true
+  },
+  "sources": [
+    "https://lbs.amap.com/api/webservice/guide/api/direction",
+    "https://lbs.amap.com/api/webservice/guide/api/staticmaps",
+    "https://lbs.amap.com/api/uri-api/guide/travel/route",
+    "https://developers.google.com/maps/documentation/urls/get-started"
+  ]
+}

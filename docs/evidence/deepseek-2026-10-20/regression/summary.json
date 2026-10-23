@@ -1,0 +1,31 @@
+{
+  "time_utc": "2026-10-20T12:04:33.228919+00:00",
+  "external_api_verification": false,
+  "checks": [
+    {
+      "check": "python-tests",
+      "exit_code": 0
+    },
+    {
+      "check": "data-validation",
+      "exit_code": 0
+    },
+    {
+      "check": "development-retrieval",
+      "exit_code": 0
+    },
+    {
+      "check": "local-doctor",
+      "exit_code": 0
+    },
+    {
+      "check": "agent-acceptance",
+      "exit_code": 0
+    },
+    {
+      "check": "frontend-tests",
+      "exit_code": 0
+    }
+  ],
+  "all_passed": true
+}

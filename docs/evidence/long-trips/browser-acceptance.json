@@ -1,0 +1,43 @@
+{
+  "selected_range": [
+    "2026-10-24",
+    "2026-11-06"
+  ],
+  "inclusive_days": 14,
+  "main_app": {
+    "url": "http://127.0.0.1:8767/",
+    "calendar_days": 14,
+    "last_day_map_filter": true,
+    "download_day_count": 14,
+    "refresh_restored_range": true,
+    "desktop_overflow": false
+  },
+  "isolated_qa": {
+    "url": "http://127.0.0.1:8768/",
+    "separate_history": true,
+    "model_enabled": false,
+    "amap_enabled": false,
+    "after_indoor_followup": {
+      "calendar_days": 14,
+      "sightseeing_days": 7,
+      "flex_days": 7,
+      "last_date": "2026-11-06",
+      "flex_details_opened": true,
+      "download_day_count": 14,
+      "download_flex_day_count": 7
+    }
+  },
+  "observed_old_bug": {
+    "plan_conflict_triggered_amap_search": true,
+    "query": "改成只选室内",
+    "unrelated_candidates": 3,
+    "fixed": true,
+    "regression_external_calls_forbidden": true
+  },
+  "regression": {
+    "python": 207,
+    "node": 9,
+    "real_stdio": true
+  },
+  "opening_day_verification": false
+}

@@ -1,0 +1,47 @@
+{
+  "time_utc": "2026-10-19T07:47:31.344859+00:00",
+  "url": "http://127.0.0.1:8767/",
+  "mode": "local_rule_demo_with_real_stdio",
+  "external_model_verified": false,
+  "checks": [
+    {
+      "name": "new conversation generates one-day Kowloon plan",
+      "passed": true
+    },
+    {
+      "name": "second turn changes indoor only and retains region/days/pace",
+      "passed": true
+    },
+    {
+      "name": "indoor and mandatory outdoor-place conflict is visible",
+      "passed": true
+    },
+    {
+      "name": "user removes indoor constraint and planning resumes",
+      "passed": true
+    },
+    {
+      "name": "downloaded UTF-8 text matches current agent plan",
+      "passed": true
+    },
+    {
+      "name": "reset removes visible memory/conversation/plan",
+      "passed": true
+    },
+    {
+      "name": "model option disabled without configuration",
+      "passed": true
+    },
+    {
+      "name": "console error-level logs empty",
+      "passed": true
+    }
+  ],
+  "download": {
+    "characters": 1042,
+    "sha256": "11945716ae30c34f12d3367149445ba8b3c0ce7eb8ebc508384c36ac90c70e70",
+    "contains_expected_place": true
+  },
+  "screenshot": "browser.png",
+  "all_passed": true
+}

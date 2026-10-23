@@ -1,0 +1,23 @@
+{
+  "kind": "real_browser_public_poi_amap_test",
+  "horizontal_overflow": false,
+  "image_height": 400,
+  "image_loaded": true,
+  "image_width": 640,
+  "local_sketch_present": false,
+  "navigation": "https://uri.amap.com/direction?from=114.181313%2C22.292341%2C%E6%98%9F%E5%85%89%E5%A4%A7%E9%81%93&to=114.178839%2C22.298401%2C%E8%AF%BA%E5%A3%AB%E4%BD%9B%E5%8F%B0&mode=walk&coordinate=gaode&src=hk-travel-assistant",
+  "removed_phrase_present": false,
+  "route": "972 米 · 约 13 分钟在高德中导航 ↗",
+  "steps": [
+    "向东北步行83米左转",
+    "向西北步行79米向右前方行走",
+    "向北步行81米向左前方行走",
+    "向北步行26米左转",
+    "沿么地道向西步行48米右转",
+    "沿漆咸道南向北步行400米左转",
+    "沿天文台道向西步行160米左转",
+    "沿诺士佛台向西步行95米到达目的地"
+  ],
+  "interaction": "Expanded panel loaded AMap automatically; two same-name addresses selected; route automatically calculated without fetch button; image zoom verified.",
+  "initial_failure": "First location lookup could not confirm data. Fixed outage propagation and unsuccessful lookup cache before successful retry."
+}

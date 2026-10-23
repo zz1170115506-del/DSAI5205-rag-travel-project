@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-22",
+  "url": "http://127.0.0.1:8767/#ask",
+  "model_enabled": false,
+  "amap_real_requests": 0,
+  "verified": [
+    "previous history gains exit and route references without rewriting its original times",
+    "select start station Tsim Sha Tsui, 1 day Kowloon and must-visit Nan Lian",
+    "plan shows Tsuen Wan Line towards Tsuen Wan, four stops to Prince Edward",
+    "explicit change to Kwun Tong Line towards Tiu Keng Leng, five stops to Diamond Hill",
+    "Diamond Hill C2 exit and last-mile walking reference visible",
+    "official source links and check date expand in the page",
+    "actual browser text download includes both lines, transfer station, direction, exit and source URLs",
+    "service restart and browser reload restore selected start station and the plan",
+    "no horizontal page overflow at 1910 CSS px"
+  ],
+  "download_content_check": {
+    "荃湾线": true,
+    "太子站换乘观塘线": true,
+    "调景岭": true,
+    "C2": true,
+    "交通来源：": true,
+    "核对 2026-10-22": true
+  },
+  "screenshot": "transit-directions.png",
+  "boundary": "Curated official-reference topology and exits; local time budgets, not real-time navigation, field travel or opening validation."
+}
