@@ -1,34 +1,28 @@
-# 后端
+# Python 后端
 
-先按 Python 项目划分模块。Web 框架、模型服务、检索方案和依赖清单将在实现时确定。
-
-| 目录 | 职责 |
-| --- | --- |
-| `app/api/` | 接收请求、校验参数、组织响应 |
-| `app/core/` | 配置读取、日志和公共设置 |
-| `app/services/` | 组织旅行问答与规划等业务流程 |
-| `app/rag/ingestion/` | 读取资料、切分文本、生成向量并建立索引 |
-| `app/rag/retrieval/` | 检索与问题相关的知识片段 |
-| `app/rag/generation/` | 构造提示词、调用模型、整理答案与来源 |
-| `tests/` | 后续功能的测试 |
-
-## 本地配置
-
-从仓库根目录执行：
+从仓库根目录配置 `.env`；不加载 backend/.env。Python 3.12，依赖及传递版本见 requirements.lock.txt。
 
 ```bash
-cp -n backend/.env.example backend/.env
+python3.12 -m venv backend/.venv
+backend/.venv/bin/pip install -r backend/requirements.lock.txt
+cd backend
+.venv/bin/python -m app.cli bootstrap --demo
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8080
 ```
 
-`.env.example` 目前是配置草案；应用入口与配置加载逻辑尚未实现。这一步仅创建本地配置文件。
+bootstrap 迁移数据库、导入虚构资料并生成索引。已有真实资料时使用 `migrate`、`ingest --input ... --version ...`、`build-index` 分别维护，不重新 bootstrap 演示数据。运行时需单 worker。
 
-后续确定 Python 版本和依赖管理方式时，应提交相应的依赖清单，补充安装与启动步骤。虚拟环境可放在 `backend/.venv/`。
+| 路径 | 内容 |
+| --- | --- |
+| app/models.py、migrations/ | ORM 和 Alembic 初始迁移 |
+| app/core/ | ENV 配置、数据库连接 |
+| app/rag/ingestion/ | CSV/JSON 导入、校验、去重、切分 |
+| app/rag/retrieval/ | 余弦、BM25、实体关系、RRF、筛选 |
+| app/rag/provider.py | 真实兼容 API 和显式 mock 适配器 |
+| app/agent/ | 类型化计划、意图路由、约束、预算内行程组合 |
+| app/services/runs.py | 流式事件、Hook、取消、会话版本与任务状态 |
+| app/memory/ | 显式偏好提取、更新和删除 |
+| app/evaluation/ | 固定集检索/回答流程评测与逐条结果 |
+| tests/ | 回归、接口、模型协议与交互状态测试 |
 
-## 开发顺序
-
-1. 与前端约定 `../docs/api.md` 中的接口。
-2. 实现应用入口、配置读取与基础接口。
-3. 接入资料处理、检索和模型生成流程。
-4. 补充关键功能测试和可复现的运行说明。
-
-数据目录约定见 `../data/README.md`。访问数据时应明确按项目根目录解析路径，避免依赖启动终端所在的位置。
+详细配置、导入与 Docker 步骤见 [运行指南](../Doc/04-run-and-env.md)。

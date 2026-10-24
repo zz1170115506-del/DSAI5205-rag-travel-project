@@ -1,0 +1,79 @@
+x-api: &api
+  build:
+    context: .
+    dockerfile: backend/Dockerfile
+  environment: &api-env
+    DATABASE_URL: mysql
+    MYSQL_DATABASE: ${MYSQL_DATABASE:-travel}
+    MYSQL_USER: ${MYSQL_USER:-travel}
+    MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Fill MYSQL_PASSWORD in .env}
+    MYSQL_HOST: mysql
+    DATA_ROOT: /data
+    APP_ENV: ${APP_ENV:-development}
+    MODEL_MODE: ${MODEL_MODE:-mock}
+    LLM_BASE_URL: ${LLM_BASE_URL:-}
+    LLM_API_KEY: ${LLM_API_KEY:-}
+    LLM_MODEL: ${LLM_MODEL:-}
+    EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-}
+    EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+    EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+    EMBEDDING_DIM: ${EMBEDDING_DIM:-256}
+    ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}
+    COOKIE_SECURE: ${COOKIE_SECURE:-false}
+    ENABLE_GRAPH: ${ENABLE_GRAPH:-true}
+    ENABLE_MEMORY: ${ENABLE_MEMORY:-true}
+    MAX_TOOL_CALLS: ${MAX_TOOL_CALLS:-6}
+    RUN_TIMEOUT_SECONDS: ${RUN_TIMEOUT_SECONDS:-60}
+    MODEL_TIMEOUT_SECONDS: ${MODEL_TIMEOUT_SECONDS:-30}
+    MAX_ACTIVE_RUNS: ${MAX_ACTIVE_RUNS:-8}
+    MOCK_TOKEN_DELAY: ${MOCK_TOKEN_DELAY:-0.015}
+  depends_on:
+    mysql:
+      condition: service_healthy
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-travel}
+      MYSQL_USER: ${MYSQL_USER:-travel}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Fill MYSQL_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Fill MYSQL_ROOT_PASSWORD in .env}
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_bin"]
+    volumes: ["mysql-data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    restart: unless-stopped
+  api:
+    <<: *api
+    volumes: ["rag-data:/data:ro"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/ready')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  web:
+    build: ./frontend
+    ports: ["${WEB_PORT:-8080}:80"]
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+  tools:
+    <<: *api
+    user: "0:0"
+    profiles: ["tools"]
+    volumes:
+      - rag-data:/data
+      - ./data/raw:/data/raw:ro
+      - ./data/templates:/input:ro
+      - ./data/reports:/reports
+      - ./data/demo:/demo:ro
+    command: ["python", "-m", "app.cli", "--help"]
+volumes:
+  mysql-data:
+  rag-data:

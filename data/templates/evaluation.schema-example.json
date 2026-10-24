@@ -1,0 +1,24 @@
+{
+  "case_id": "synthetic_format_001",
+  "group_id": "synthetic_group_001",
+  "category": "unanswerable",
+  "split": "dev",
+  "dataset_version": "synthetic-empty-v1",
+  "question": "虚构的示例景点今天是否有临时活动？",
+  "history": [],
+  "profile": {},
+  "relevant_entity_ids": [],
+  "relevant_chunk_ids": [],
+  "expected_facts": [],
+  "constraints": {},
+  "answerable": false,
+  "expected_behavior": "abstain",
+  "rubric": {
+    "version": "v1",
+    "must_state_insufficient_evidence": true,
+    "must_not_invent_event": true
+  },
+  "synthetic": true,
+  "verified_by": "format-example-only",
+  "verified_at": "2026-10-24T00:00:00Z"
+}

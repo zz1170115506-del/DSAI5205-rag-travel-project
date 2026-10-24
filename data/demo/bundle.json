@@ -1,0 +1,722 @@
+{
+  "sources": [
+    {
+      "source_id": "src_demo",
+      "title": "虚构景点流程测试夹具",
+      "url": "https://example.invalid/synthetic-travel-data",
+      "publisher": "项目测试夹具",
+      "source_type": "synthetic",
+      "language": "zh-Hans",
+      "license_note": "团队原创虚构测试数据，非真实旅行资料。",
+      "status": "verified",
+      "retrieved_at": "2026-10-24T00:00:00Z",
+      "verified_at": "2026-10-24T00:00:00Z"
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "district_tst",
+      "entity_type": "district",
+      "name_zh": "演示尖沙咀区",
+      "name_en": "district_tst",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "district_central",
+      "entity_type": "district",
+      "name_zh": "演示中环区",
+      "name_en": "district_central",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "theme_history",
+      "entity_type": "theme",
+      "name_zh": "历史文化",
+      "name_en": "theme_history",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "theme_science",
+      "entity_type": "theme",
+      "name_zh": "科学科普",
+      "name_en": "theme_science",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "theme_nature",
+      "entity_type": "theme",
+      "name_zh": "自然风光",
+      "name_en": "theme_nature",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "theme_art",
+      "entity_type": "theme",
+      "name_zh": "艺术",
+      "name_en": "theme_art",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "aud_family",
+      "entity_type": "audience",
+      "name_zh": "亲子",
+      "name_en": "aud_family",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "station_tst",
+      "entity_type": "station",
+      "name_zh": "演示车站",
+      "name_en": "station_tst",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_history",
+      "entity_type": "attraction",
+      "name_zh": "演示历史馆",
+      "name_en": "Demo History Museum",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_science",
+      "entity_type": "attraction",
+      "name_zh": "演示科学馆",
+      "name_en": "Demo Science Museum",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_harbour",
+      "entity_type": "attraction",
+      "name_zh": "演示海滨步道",
+      "name_en": "Demo Harbour Walk",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_art",
+      "entity_type": "attraction",
+      "name_zh": "演示艺术馆",
+      "name_en": "Demo Art Gallery",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_park",
+      "entity_type": "attraction",
+      "name_zh": "演示山顶公园",
+      "name_en": "Demo Hill Park",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_street",
+      "entity_type": "attraction",
+      "name_zh": "演示文化街",
+      "name_en": "Demo Culture Street",
+      "source_id": "src_demo"
+    }
+  ],
+  "entity_aliases": [
+    {
+      "entity_id": "attr_history",
+      "alias": "Demo History Museum",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_history",
+      "alias": "测试历史馆",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_science",
+      "alias": "Demo Science Museum",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_science",
+      "alias": "测试科学馆",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_harbour",
+      "alias": "Demo Harbour Walk",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_harbour",
+      "alias": "测试海滨步道",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_art",
+      "alias": "Demo Art Gallery",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_art",
+      "alias": "测试艺术馆",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_park",
+      "alias": "Demo Hill Park",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_park",
+      "alias": "测试山顶公园",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_street",
+      "alias": "Demo Culture Street",
+      "language": "en",
+      "source_id": "src_demo"
+    },
+    {
+      "entity_id": "attr_street",
+      "alias": "测试文化街",
+      "language": "zh-Hans",
+      "source_id": "src_demo"
+    }
+  ],
+  "attractions": [
+    {
+      "entity_id": "attr_history",
+      "category": "museum",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.3015,
+      "longitude": 114.1774,
+      "summary": "虚构历史馆，展示演示城市的发展与文化，适合了解历史。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "indoor",
+      "visit_minutes": 60,
+      "ticket_price_min_hkd": 0,
+      "ticket_price_max_hkd": 0,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "entity_id": "attr_science",
+      "category": "museum",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.3008,
+      "longitude": 114.1785,
+      "summary": "虚构科学馆，提供互动科学展览，适合亲子和科普体验。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "indoor",
+      "visit_minutes": 90,
+      "ticket_price_min_hkd": 30,
+      "ticket_price_max_hkd": 30,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "entity_id": "attr_harbour",
+      "category": "park",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.293,
+      "longitude": 114.174,
+      "summary": "虚构海滨步道，适合户外散步和欣赏海景。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "outdoor",
+      "visit_minutes": 45,
+      "ticket_price_min_hkd": 0,
+      "ticket_price_max_hkd": 0,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "entity_id": "attr_art",
+      "category": "museum",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.2941,
+      "longitude": 114.172,
+      "summary": "虚构艺术馆，展示绘画和设计，适合室内艺术体验。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "indoor",
+      "visit_minutes": 60,
+      "ticket_price_min_hkd": 20,
+      "ticket_price_max_hkd": 20,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "entity_id": "attr_park",
+      "category": "park",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.272,
+      "longitude": 114.145,
+      "summary": "虚构山顶公园，适合自然风光和户外活动。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "outdoor",
+      "visit_minutes": 120,
+      "ticket_price_min_hkd": 0,
+      "ticket_price_max_hkd": 0,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "entity_id": "attr_street",
+      "category": "heritage",
+      "address_zh": "香港演示位置（坐标仅用于地图测试）",
+      "latitude": 22.283,
+      "longitude": 114.151,
+      "summary": "虚构文化街，展示传统文化和历史建筑的演示故事。",
+      "story": "这是一条为演示检索而编写的虚构故事。",
+      "setting": "outdoor",
+      "visit_minutes": 40,
+      "ticket_price_min_hkd": 0,
+      "ticket_price_max_hkd": 0,
+      "ticket_note": "仅为虚构测试价格，不可用于真实出行。",
+      "primary_source_id": "src_demo",
+      "field_evidence": {
+        "address_zh": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "latitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "longitude": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "summary": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "story": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "setting": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "visit_minutes": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_min_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        },
+        "ticket_price_max_hkd": {
+          "source_id": "src_demo",
+          "locator": "虚构夹具"
+        }
+      },
+      "verified_at": "2026-10-24T00:00:00Z"
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "rel_history_LOCATED_IN",
+      "subject_id": "attr_history",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_history_HAS_THEME",
+      "subject_id": "attr_history",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_history",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_history_NEAR_STATION",
+      "subject_id": "attr_history",
+      "predicate": "NEAR_STATION",
+      "object_id": "station_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_science_LOCATED_IN",
+      "subject_id": "attr_science",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_science_HAS_THEME",
+      "subject_id": "attr_science",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_science",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_science_NEAR_STATION",
+      "subject_id": "attr_science",
+      "predicate": "NEAR_STATION",
+      "object_id": "station_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_science_family",
+      "subject_id": "attr_science",
+      "predicate": "SUITABLE_FOR",
+      "object_id": "aud_family",
+      "source_id": "src_demo",
+      "evidence": "虚构亲子标签",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_harbour_LOCATED_IN",
+      "subject_id": "attr_harbour",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_harbour_HAS_THEME",
+      "subject_id": "attr_harbour",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_nature",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_harbour_NEAR_STATION",
+      "subject_id": "attr_harbour",
+      "predicate": "NEAR_STATION",
+      "object_id": "station_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_art_LOCATED_IN",
+      "subject_id": "attr_art",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_art_HAS_THEME",
+      "subject_id": "attr_art",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_art",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_art_NEAR_STATION",
+      "subject_id": "attr_art",
+      "predicate": "NEAR_STATION",
+      "object_id": "station_tst",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_park_LOCATED_IN",
+      "subject_id": "attr_park",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_central",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_park_HAS_THEME",
+      "subject_id": "attr_park",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_nature",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_street_LOCATED_IN",
+      "subject_id": "attr_street",
+      "predicate": "LOCATED_IN",
+      "object_id": "district_central",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    },
+    {
+      "relation_id": "rel_street_HAS_THEME",
+      "subject_id": "attr_street",
+      "predicate": "HAS_THEME",
+      "object_id": "theme_history",
+      "source_id": "src_demo",
+      "evidence": "虚构关系，仅用于流程测试。",
+      "verified_at": "2026-10-24T00:00:00Z"
+    }
+  ],
+  "images": [],
+  "documents": [
+    {
+      "document_id": "doc_history",
+      "attraction_id": "attr_history",
+      "source_id": "src_demo",
+      "title": "演示历史馆介绍",
+      "language": "mixed",
+      "clean_text": "演示历史馆（Demo History Museum）。虚构历史馆，展示演示城市的发展与文化，适合了解历史。 室内外类型：indoor。建议游玩60分钟，演示参考票价0港币。地区：演示尖沙咀区。全部内容为虚构数据，不可用于真实出行。"
+    },
+    {
+      "document_id": "doc_science",
+      "attraction_id": "attr_science",
+      "source_id": "src_demo",
+      "title": "演示科学馆介绍",
+      "language": "mixed",
+      "clean_text": "演示科学馆（Demo Science Museum）。虚构科学馆，提供互动科学展览，适合亲子和科普体验。 室内外类型：indoor。建议游玩90分钟，演示参考票价30港币。地区：演示尖沙咀区。全部内容为虚构数据，不可用于真实出行。"
+    },
+    {
+      "document_id": "doc_harbour",
+      "attraction_id": "attr_harbour",
+      "source_id": "src_demo",
+      "title": "演示海滨步道介绍",
+      "language": "mixed",
+      "clean_text": "演示海滨步道（Demo Harbour Walk）。虚构海滨步道，适合户外散步和欣赏海景。 室内外类型：outdoor。建议游玩45分钟，演示参考票价0港币。地区：演示尖沙咀区。全部内容为虚构数据，不可用于真实出行。"
+    },
+    {
+      "document_id": "doc_art",
+      "attraction_id": "attr_art",
+      "source_id": "src_demo",
+      "title": "演示艺术馆介绍",
+      "language": "mixed",
+      "clean_text": "演示艺术馆（Demo Art Gallery）。虚构艺术馆，展示绘画和设计，适合室内艺术体验。 室内外类型：indoor。建议游玩60分钟，演示参考票价20港币。地区：演示尖沙咀区。全部内容为虚构数据，不可用于真实出行。"
+    },
+    {
+      "document_id": "doc_park",
+      "attraction_id": "attr_park",
+      "source_id": "src_demo",
+      "title": "演示山顶公园介绍",
+      "language": "mixed",
+      "clean_text": "演示山顶公园（Demo Hill Park）。虚构山顶公园，适合自然风光和户外活动。 室内外类型：outdoor。建议游玩120分钟，演示参考票价0港币。地区：演示中环区。全部内容为虚构数据，不可用于真实出行。"
+    },
+    {
+      "document_id": "doc_street",
+      "attraction_id": "attr_street",
+      "source_id": "src_demo",
+      "title": "演示文化街介绍",
+      "language": "mixed",
+      "clean_text": "演示文化街（Demo Culture Street）。虚构文化街，展示传统文化和历史建筑的演示故事。 室内外类型：outdoor。建议游玩40分钟，演示参考票价0港币。地区：演示中环区。全部内容为虚构数据，不可用于真实出行。"
+    }
+  ]
+}

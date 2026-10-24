@@ -37,3 +37,11 @@ htmlcov/
 !/data/processed/.gitkeep
 /data/indexes/*
 !/data/indexes/.gitkeep
+
+# Runtime and evaluation artifacts
+*.db
+*.db-journal
+/data/reports/*
+!/data/reports/.gitkeep
+/data/evaluation/*
+!/data/evaluation/.gitkeep
