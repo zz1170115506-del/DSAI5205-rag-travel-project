@@ -1,0 +1,20 @@
+✔ valid draft restores and clear removes both cache formats (0.483292ms)
+✔ changed knowledge version and removed place reject old draft (0.067083ms)
+✔ malformed and incomplete storage never breaks startup (0.392209ms)
+✔ invalid saved inputs, missing legs and inconsistent times are rejected (0.127584ms)
+✔ disabled browser storage falls back to current-page operation (0.093708ms)
+✔ inclusive same-day and three-day ranges (1.520291ms)
+✔ calendar boundaries are timezone independent (0.08125ms)
+✔ reject partial, nonexistent, reversed and unsupported ranges (0.114791ms)
+✔ long ranges derive complete inclusive calendar lengths (0.435625ms)
+✔ compact map is available only for walking legs (0.454959ms)
+✔ walking navigation uses place names and has no key (0.082625ms)
+✔ map labels and attributes escape hostile names (0.547833ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45.623584

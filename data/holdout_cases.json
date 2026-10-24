@@ -1,0 +1,25 @@
+{
+ "protocol": {"created":"2026-10-19","purpose":"Small author-written retained challenge set, authored after reading source but before running these questions. Not blind, independent or real-user evaluation.","freeze":"No tuning on this set; preserve failures. Relevant IDs are judged from the 21-record corpus; all listed relevant records count in Recall@3.","positive_metrics":["Hit@3","Recall@3","MRR@3"],"negative_metric":"Empty-result rate","retrievers":["name_alias_substring","current_bm25"]},
+ "cases":[
+ {"id":"h01","category":"paraphrase","question":"哪儿可以看中国书画和香港艺术？","relevant":["hkmoa"]},
+ {"id":"h02","category":"paraphrase","question":"想逛从旧警署改成的艺术空间","relevant":["tai-kwun"]},
+ {"id":"h03","category":"paraphrase","question":"唐代风格园林和清静寺院","relevant":["nan-lian"]},
+ {"id":"h04","category":"paraphrase","question":"想看渔村里的棚屋","relevant":["tai-o"]},
+ {"id":"h05","category":"food","question":"哪家店可以吃丝袜奶茶配猪扒包","kind":"food","relevant":["lan-fong-yuen"]},
+ {"id":"h06","category":"food","question":"桂林街的肠粉小食店","kind":"food","relevant":["hop-yik-tai"]},
+ {"id":"h07","category":"food","question":"油麻地附近想吃蚝饼和煲仔饭","kind":"food","relevant":["hing-kee"]},
+ {"id":"h08","category":"traditional","question":"西九文化區有甚麼當代藝術？","relevant":["mplus"]},
+ {"id":"h09","category":"traditional","question":"想在維多利亞港旁看電影明星手印","relevant":["avenue-stars"]},
+ {"id":"h10","category":"english","question":"Where can I visit an old police compound for art?","relevant":["tai-kwun"]},
+ {"id":"h11","category":"english","question":"I want to explore West Kowloon Art Park","relevant":["art-park"]},
+ {"id":"h12","category":"alias","question":"带爸妈去志莲净苑走走","relevant":["nan-lian"]},
+ {"id":"h13","category":"filter","question":"九龙的室内艺术展馆","region":"九龙","indoor_only":true,"relevant":["hkmoa","mplus","palace-museum"]},
+ {"id":"h14","category":"filter","question":"香港岛创意设计商店","region":"香港岛","relevant":["pmq"]},
+ {"id":"h15","category":"dynamic","question":"M+ 明天几点关门，门票多少钱？","relevant":["mplus"],"dynamic":true},
+ {"id":"h16","category":"dynamic","question":"大澳今天有没有船和实时天气？","relevant":["tai-o"],"dynamic":true},
+ {"id":"h17","category":"negative","question":"火星探测器通信协议","relevant":[]},
+ {"id":"h18","category":"negative","question":"釜山有哪些海滨夜景","relevant":[]},
+ {"id":"h19","category":"negative","question":"香港机场行李寄存费用","relevant":[]},
+ {"id":"h20","category":"negative","question":"迪士尼今天排队多久","relevant":[]}
+ ]
+}

@@ -1,0 +1,22 @@
+{
+  "date_hong_kong": "2026-10-19",
+  "application_version": "1.1.0",
+  "url": "http://127.0.0.1:8766",
+  "method": "Observed browser UI interaction through in-app browser; downloaded file read locally",
+  "checks": [
+    {"name":"initial_data_and_disabled_model", "passed":true},
+    {"name":"food_answer_citation_and_detail", "passed":true},
+    {"name":"stdio_trace_visible", "passed":true},
+    {"name":"missing_amap_key_message", "passed":true},
+    {"name":"required_food_in_two_day_plan", "passed":true},
+    {"name":"downloaded_utf8_file", "passed":true, "characters":1799},
+    {"name":"draft_and_required_place_restore_after_reload", "passed":true},
+    {"name":"indoor_required_place_conflict_then_recovery", "passed":true},
+    {"name":"clear_remains_cleared_after_reload", "passed":true},
+    {"name":"library_search_one_result_and_service_status", "passed":true}
+  ],
+  "observed_console_error_entries": 0,
+  "mobile_tested_this_round": false,
+  "real_model_verified": false,
+  "real_amap_verified": false
+}

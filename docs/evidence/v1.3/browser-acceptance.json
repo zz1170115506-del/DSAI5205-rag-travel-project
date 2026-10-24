@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-22",
+  "project": "港慢游 hk-travel-assistant",
+  "design_reference": "user supplied TravelTrace ZIP; original unchanged",
+  "scope": "author development acceptance, not model accuracy benchmark",
+  "browser_checks": {
+    "homepage_to_unified_chat_plan": true,
+    "restart_restores_history": true,
+    "followup_keeps_kowloon_one_day_and_adds_indoor": true,
+    "latest_turn_download_verified": true,
+    "plan_then_place_question_switch": true,
+    "history_read_delete": true,
+    "new_record_search_detail_source_and_must_visit_toggle": true,
+    "unknown_place_not_configured_message": true,
+    "route_not_configured_message": true,
+    "homepage_new_plan_defaults_to_local_mode": true
+  },
+  "narrow_layout": {
+    "height": 1260,
+    "scrollWidth": 582,
+    "tripSettingsOpen": false,
+    "width": 582,
+    "no_horizontal_overflow": true,
+    "note": "requested 390 device pixels; actual CSS viewport 582 due browser zoom/minimum sizing; responsive breakpoint checked, no physical phone tested"
+  },
+  "live_model": {
+    "metrics": {
+      "cost": null,
+      "decisions": 4,
+      "elapsed_ms": 7185,
+      "external_model_verified": true,
+      "live_model_responses": 4,
+      "model_calls": 4,
+      "model_responses": 4,
+      "tool_calls": 3
+    },
+    "tools": [
+      "search_places",
+      "place_detail",
+      "place_detail"
+    ],
+    "citations_shown": [
+      "science-museum",
+      "space-museum"
+    ],
+    "fresh_synthetic_conversation": true
+  },
+  "real_amap_verified": false,
+  "amap_enabled": false,
+  "regression": {
+    "time_utc": "2026-10-22T10:54:07.284132+00:00",
+    "external_api_verification": false,
+    "checks": [
+      {
+        "check": "python-tests",
+        "exit_code": 0
+      },
+      {
+        "check": "data-validation",
+        "exit_code": 0
+      },
+      {
+        "check": "development-retrieval",
+        "exit_code": 0
+      },
+      {
+        "check": "local-doctor",
+        "exit_code": 0
+      },
+      {
+        "check": "agent-acceptance",
+        "exit_code": 0
+      },
+      {
+        "check": "frontend-tests",
+        "exit_code": 0
+      }
+    ],
+    "all_passed": true
+  },
+  "holdout_sha256": "01c5e215f9fa3f45b28707fe5ef8c3caa5ea4c42935b426cfdb62c99e043a31b",
+  "github_pushed": false,
+  "canvas_accessed": false
+}

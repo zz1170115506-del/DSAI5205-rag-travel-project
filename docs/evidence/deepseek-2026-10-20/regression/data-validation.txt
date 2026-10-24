@@ -1,0 +1,7 @@
+{
+  "valid": true,
+  "records": 21,
+  "version": "2026-10-19.1",
+  "sha256": "3a2c82f40b03bc6d6ac91e6bfbf25f608aa91cdfd3ec5b720c37313fee4bc68f",
+  "validation": "structure and provenance fields only; human source review still required"
+}

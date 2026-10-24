@@ -1,0 +1,1334 @@
+{
+  ".editorconfig": {
+    "sha256": "88441dedc568e6f605bb92ef569d3b07009d6026a430ab0728c64b485846aa3f",
+    "bytes": 282
+  },
+  ".env.example": {
+    "sha256": "5e45a269faf876b1bac1ca69e6752cdb1d33b63cd4364095e64ffdc4dd346c0f",
+    "bytes": 223
+  },
+  ".gitignore": {
+    "sha256": "e65a36502a0d3cf36b056914ae6b3346848583ac2e6e022a87c161893d971904",
+    "bytes": 690
+  },
+  "README.md": {
+    "sha256": "999950bf6d001810e5fb209b638f81cf36f63fe9422082f8df491a1e7bef3180",
+    "bytes": 6770
+  },
+  "app.py": {
+    "sha256": "20735018ebc0adfbf03fd52e481efc5839954bd61cf6a9fb6540bfb3b91ac832",
+    "bytes": 9338
+  },
+  "backend/.env.example": {
+    "sha256": "bd5c7d3e7bf7ae1565186ff5a9ad8eea861d050be3f11164203f17076a8b7c0f",
+    "bytes": 290
+  },
+  "backend/README.md": {
+    "sha256": "719b02208df3e3ed22277320ad67c5e151791020407b77fded0f6c7eaf678300",
+    "bytes": 843
+  },
+  "backend/app/__init__.py": {
+    "sha256": "51ff981e116df621bd7b1daab23cd76e20279b322ced3679c72651b10dfb23b1",
+    "bytes": 71
+  },
+  "backend/app/api/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/app/core/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/app/rag/generation/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/app/rag/ingestion/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/app/rag/retrieval/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/app/services/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "backend/tests/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "data/README.md": {
+    "sha256": "f63bc182723b57d9d5af2faef8631657d25a3e1955f8230868c68083418c1201",
+    "bytes": 1455
+  },
+  "data/eval_cases.json": {
+    "sha256": "5cb429b9d760c5cfead6c5d962966a76a1c48e4be60c2120f8547d9c817e2434",
+    "bytes": 1447
+  },
+  "data/holdout_cases.json": {
+    "sha256": "01c5e215f9fa3f45b28707fe5ef8c3caa5ea4c42935b426cfdb62c99e043a31b",
+    "bytes": 2811
+  },
+  "data/indexes/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "data/places.json": {
+    "sha256": "eb742c0ce5e1348fc9dfb808a364021ddbaf28abbd1003b4437fbb28e7610d91",
+    "bytes": 34056
+  },
+  "data/processed/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "data/raw/.gitkeep": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "data/transit.json": {
+    "sha256": "9a093622d94720979796f4a80daa8ae8cfb840ec1ec27eeb36ba4748d6a2dd7c",
+    "bytes": 24143
+  },
+  "docs/Agent优化说明.md": {
+    "sha256": "c99b872600344c7929130c602e8064bfa2f8550692d89cf589f43c9b427b056a",
+    "bytes": 8146
+  },
+  "docs/DeepSeek接入说明.md": {
+    "sha256": "9a8a5e650e8f6463fb28003ba2569dbd1b180aead19fe741a51ddd2382f72111",
+    "bytes": 2701
+  },
+  "docs/GitHub发布说明.md": {
+    "sha256": "6b2f749eb87a0340d261c8f59f9e087b9ec9356f1808fa2c1a5b08c78cd45d45",
+    "bytes": 983
+  },
+  "docs/api.md": {
+    "sha256": "ff5a48e6ed49a9e826ee00432c2d6cdda820fedf05b799e2deba0b38d37974d2",
+    "bytes": 3480
+  },
+  "docs/development.md": {
+    "sha256": "517f95ab29ed570004406e7daa50da23637a9fb50ee1fc533bb50a3d3c7e6ac9",
+    "bytes": 1788
+  },
+  "docs/evidence/agent-v1/acceptance.json": {
+    "sha256": "51e1cb64074ca8ed91e7beeac3826f024962e8088a2b2aba2581ba6408e60121",
+    "bytes": 129427
+  },
+  "docs/evidence/agent-v1/browser-acceptance.json": {
+    "sha256": "6ede18f781d15c5ebb7888d0f27099314319416ba378b91e8d2efd41d478ef53",
+    "bytes": 1197
+  },
+  "docs/evidence/agent-v1/browser-export.txt": {
+    "sha256": "11945716ae30c34f12d3367149445ba8b3c0ce7eb8ebc508384c36ac90c70e70",
+    "bytes": 2013
+  },
+  "docs/evidence/agent-v1/browser.png": {
+    "sha256": "f26b557cef9582f06ed9280674fc8b56ac0521cee1459b5426c831b2add07da7",
+    "bytes": 280339
+  },
+  "docs/evidence/agent-v1/first-filter-fixture-failure.txt": {
+    "sha256": "fe424985a43882a704c3b5f6eaf87f24b248576c50937986fe2520b06ded4c41",
+    "bytes": 1023
+  },
+  "docs/evidence/agent-v1/protocol.md": {
+    "sha256": "629406e9ec2fc01d96f11f022dd116458648b11d201ffe7141ee24993bea179b",
+    "bytes": 1584
+  },
+  "docs/evidence/agent-v1/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/agent-v1/regression/data-validation.txt": {
+    "sha256": "79ae7dbdf91425985fa5d60750e14fe0254a8b2f57e5c6c9a72d692a37beacd6",
+    "bytes": 238
+  },
+  "docs/evidence/agent-v1/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/agent-v1/regression/frontend-tests.txt": {
+    "sha256": "211f4b4234dd977a9cc85e8a666e04e671557daca6de3256d296b82850f6bd8c",
+    "bytes": 505
+  },
+  "docs/evidence/agent-v1/regression/local-doctor.txt": {
+    "sha256": "e562ac20b7aa9d76aa85980079be46cc4e68ef12d2685900e7396b845b7a9240",
+    "bytes": 845
+  },
+  "docs/evidence/agent-v1/regression/pytest.xml": {
+    "sha256": "180433aeb9665751214e10ec6ba701e8b88d8541fc2beb19f3ad4be75fa04355",
+    "bytes": 15534
+  },
+  "docs/evidence/agent-v1/regression/python-tests.txt": {
+    "sha256": "b5e0e4c0ec97dae63c488acd10b0d8500036919fa693d1f2cd92050d8885f1cc",
+    "bytes": 180
+  },
+  "docs/evidence/agent-v1/regression/summary.json": {
+    "sha256": "0246bfda4f0d67ce9422d7862f52f5fb8b0884015e78bec9fab4898f7d3640d8",
+    "bytes": 538
+  },
+  "docs/evidence/amap-first-walk/browser-amap-compact.png": {
+    "sha256": "0241d0f5a1a59743c199458ea1ffa7c104d7cb384f394544eb2387f1621d9d04",
+    "bytes": 68377
+  },
+  "docs/evidence/amap-first-walk/browser-amap-zoom.png": {
+    "sha256": "502a60c90675e3420a39e377f9fb1052a1356e25aa34b31f17dccf21da7bb8c5",
+    "bytes": 61359
+  },
+  "docs/evidence/amap-first-walk/browser-live-route.json": {
+    "sha256": "5e373a258625adc03ac1f6a989fd04b3842a02462d91a5b5c0ee499171a72572",
+    "bytes": 1195
+  },
+  "docs/evidence/amap-first-walk/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/amap-first-walk/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/amap-first-walk/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/amap-first-walk/regression/frontend-tests.txt": {
+    "sha256": "23652aaf11b0799ec7ca3625dddd2a358855a17bffff3228538bd8cc4bad92c8",
+    "bytes": 1365
+  },
+  "docs/evidence/amap-first-walk/regression/local-doctor.txt": {
+    "sha256": "aab871fe4180bb29a4d30bba7c5f849d96eacca94e8812e5011c69b66f0adadb",
+    "bytes": 843
+  },
+  "docs/evidence/amap-first-walk/regression/pytest.xml": {
+    "sha256": "b83b6243dc4e548d18a28757c4a9453592a414f5643c00fcc91af399ef4e2a19",
+    "bytes": 35027
+  },
+  "docs/evidence/amap-first-walk/regression/python-tests.txt": {
+    "sha256": "ce3f32904045b0447b1cf0281cff6ddbf31c60b205766f70818b3ae1f7b2f781",
+    "bytes": 341
+  },
+  "docs/evidence/amap-first-walk/regression/summary.json": {
+    "sha256": "ae06697078df2f6de1bf6dfa6e761cf73bbf4f488935961be7e3e6987dc7863f",
+    "bytes": 538
+  },
+  "docs/evidence/amap-first-walk/验收说明.md": {
+    "sha256": "bf0c8fb56b63f97d90df27877ff5bd1362cefb634ac4d90bf7c81cdf8b005415",
+    "bytes": 3107
+  },
+  "docs/evidence/browser/acceptance.json": {
+    "sha256": "3431ec5a393f3d22be004664f45051ad5b7d38063e4a235896dfc7fa84635947",
+    "bytes": 1022
+  },
+  "docs/evidence/browser/answer.png": {
+    "sha256": "8bd8f03b372657ffc4c88069bd8cc0c3135816f9d9c690588403a0d3a08aca40",
+    "bytes": 225063
+  },
+  "docs/evidence/browser/exported-plan.txt": {
+    "sha256": "f0d07cbd69aa684437885f4fd717ccd54c4e3b26b085f64d6acda287c9bc7e4e",
+    "bytes": 3411
+  },
+  "docs/evidence/browser/itinerary.png": {
+    "sha256": "008d7e35fa0745a3d06cee43f7e62a935c839e7b0b71489e428ebf34ad4be07e",
+    "bytes": 338351
+  },
+  "docs/evidence/conversation-context/browser-followup-route.png": {
+    "sha256": "9d8870bbf3f1f4bee515a25e783a4a790e90802da998d75a97ff7dcecb62a85c",
+    "bytes": 76378
+  },
+  "docs/evidence/conversation-context/browser-selected-places.png": {
+    "sha256": "4ce67f9c5b8bcb59bffeba164a6deeb34e531bf014b421fdd46e0bdff370ad23",
+    "bytes": 76480
+  },
+  "docs/evidence/conversation-context/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/conversation-context/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/conversation-context/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/conversation-context/regression/frontend-tests.txt": {
+    "sha256": "7e070daf3757859dc3da24a0e947e2c0549fbe061ef7361cb53b4175082852b9",
+    "bytes": 969
+  },
+  "docs/evidence/conversation-context/regression/local-doctor.txt": {
+    "sha256": "266b5bc719f60a3561ef894de1b5d52275392d45b47cacfffb8e6efae8781fcc",
+    "bytes": 843
+  },
+  "docs/evidence/conversation-context/regression/pytest.xml": {
+    "sha256": "f0d56bc70b54041c0fdab17571ae223353639e092e99b773d9f523d45f670316",
+    "bytes": 28957
+  },
+  "docs/evidence/conversation-context/regression/python-tests.txt": {
+    "sha256": "2ce9de8ac47e84ef015ee2041e9937f003fa4055d984c8a8a1d4b882f6d0ab01",
+    "bytes": 341
+  },
+  "docs/evidence/conversation-context/regression/summary.json": {
+    "sha256": "c55381c7ec42d3aeb8ae58ba8f99d49ce67e00ba8e77b0e5e12ce825f6fa0d06",
+    "bytes": 538
+  },
+  "docs/evidence/conversation-context/验收说明.md": {
+    "sha256": "bbdc6d44029a33f95eadc844bbfe437d54f63e53fce0a7d8ccfd095b14359a5e",
+    "bytes": 3380
+  },
+  "docs/evidence/day2-walking-map/browser-live-route.json": {
+    "sha256": "10262bab261629257f0887027a47eaf6da7d70cc4c234332b3abaa81e02a7a2d",
+    "bytes": 1018
+  },
+  "docs/evidence/day2-walking-map/browser-park-lan-fong-yuen.png": {
+    "sha256": "00d05ab571cc154f0c28df915a47c12a0632e4111ce42d3f2d2aef1586c30c25",
+    "bytes": 60835
+  },
+  "docs/evidence/day2-walking-map/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/day2-walking-map/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/day2-walking-map/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/day2-walking-map/regression/frontend-tests.txt": {
+    "sha256": "0847c620e36f2d6dc6961e460d5eda97c20ea96394913d5390451a4362591dab",
+    "bytes": 1358
+  },
+  "docs/evidence/day2-walking-map/regression/local-doctor.txt": {
+    "sha256": "64342ec7d968f40dac95e6d13b4e69f8206c5b9320c8b5bb4c158a2908126e70",
+    "bytes": 843
+  },
+  "docs/evidence/day2-walking-map/regression/pytest.xml": {
+    "sha256": "9547b7104baf9e9d25922d3100ae4c83e8ede9307857f9af4e3d6e4b3354e3cb",
+    "bytes": 36737
+  },
+  "docs/evidence/day2-walking-map/regression/python-tests.txt": {
+    "sha256": "70cde72979c557146fe9265141c85dee5fd52addc4b8df2741808502642cf095",
+    "bytes": 421
+  },
+  "docs/evidence/day2-walking-map/regression/summary.json": {
+    "sha256": "b9e4a9e09e1d51d339c27f3d75a68d4ae51f2b92a12b70f1519f5764b937cb17",
+    "bytes": 538
+  },
+  "docs/evidence/day2-walking-map/验收说明.md": {
+    "sha256": "1413bbb2cce2a15c023a70f3b1825a4123397ca7808b6b7ec572aa89967f4fa2",
+    "bytes": 2284
+  },
+  "docs/evidence/deepseek-2026-10-20/browser-live.jpg": {
+    "sha256": "88ca0fd0c65cd9bb592c824c69d11463c388296d6703330771d37f3df5cc14e9",
+    "bytes": 151479
+  },
+  "docs/evidence/deepseek-2026-10-20/browser-live.txt": {
+    "sha256": "d4447f9c5cc2003c626e2751753b8a9d30b2458bbb01147335e67e84774432cf",
+    "bytes": 4976
+  },
+  "docs/evidence/deepseek-2026-10-20/live-smoke.json": {
+    "sha256": "418fa372fb9a61f0dd9fbee3b46f773037a758f0407e5cc667bca0d9c3db6f7c",
+    "bytes": 2447
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/data-validation.txt": {
+    "sha256": "79ae7dbdf91425985fa5d60750e14fe0254a8b2f57e5c6c9a72d692a37beacd6",
+    "bytes": 238
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/frontend-tests.txt": {
+    "sha256": "8ab9b80402455cf5ae8cbe69017d87f1bd6697fa0efa9f7cdab8d21eb001f0bd",
+    "bytes": 505
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/local-doctor.txt": {
+    "sha256": "5b90f698690646ca5d3d3bc87f20f2bbf6611c25fec99bcd926a6594cb3191d9",
+    "bytes": 844
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/pytest.xml": {
+    "sha256": "7efd352c27979e09655e494c761e822680857c959d5b2a704fb39fe648deed59",
+    "bytes": 15534
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/python-tests.txt": {
+    "sha256": "4f17e03d614e810df4e94ef6ac47b65bfad1d7b7428c44e2f5cc964f4c41f557",
+    "bytes": 180
+  },
+  "docs/evidence/deepseek-2026-10-20/regression/summary.json": {
+    "sha256": "87be89760f5e59b4d286b1ca8cea490b42ffce6db2de48d11a9afb3b07a81806",
+    "bytes": 538
+  },
+  "docs/evidence/floating-web-test/browser-floating-history.png": {
+    "sha256": "b87e72bf7b3a94f579108726c0fa1ac15ad09c6e5868665efb6d72d618ff5d5f",
+    "bytes": 65774
+  },
+  "docs/evidence/floating-web-test/browser-floating-preferences.png": {
+    "sha256": "0420101092c1120ca42811ae9a59fa1d396b4bf6c2ac964a5ea392d0af4a8580",
+    "bytes": 72138
+  },
+  "docs/evidence/floating-web-test/browser-memory-recall.png": {
+    "sha256": "af3e635a4415aa02c76f57a65fc42d63579a3d0876ddedb55a0b5eb71f24be5d",
+    "bytes": 64223
+  },
+  "docs/evidence/floating-web-test/browser-six-turns.json": {
+    "sha256": "585a7092492d8fe4168bf91fc3c0405c43c840eb7f7d4d4e319040fe277f2527",
+    "bytes": 16146
+  },
+  "docs/evidence/floating-web-test/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/floating-web-test/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/floating-web-test/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/floating-web-test/regression/frontend-tests.txt": {
+    "sha256": "77c90e2051d37157798747e89774e753c4e7111417747a72efb0f89177c54674",
+    "bytes": 965
+  },
+  "docs/evidence/floating-web-test/regression/local-doctor.txt": {
+    "sha256": "65b6930cf3ae62f8ec532dd10cce3483ed2ef741c085da215b3f5fc5721804c3",
+    "bytes": 843
+  },
+  "docs/evidence/floating-web-test/regression/pytest.xml": {
+    "sha256": "d2540ead0b96a1acdd616feccbad17161ec7f97aa68a29c4c5ef9c1688b3958d",
+    "bytes": 33796
+  },
+  "docs/evidence/floating-web-test/regression/python-tests.txt": {
+    "sha256": "cbf13a74c9f1b1ec5b126bbfda63645c0ee6038258bc25a4764a4eb23c91ef0c",
+    "bytes": 341
+  },
+  "docs/evidence/floating-web-test/regression/summary.json": {
+    "sha256": "fa5f1a801d1348cc30e6e9fefd801685bd316479d54ec3d9c5bcaa6723fd7ff4",
+    "bytes": 538
+  },
+  "docs/evidence/floating-web-test/验收说明.md": {
+    "sha256": "98046523ef99c08ac6855a56299a99b6657264fe652db815ce87797626380e7e",
+    "bytes": 2793
+  },
+  "docs/evidence/four-place-fix/browser-form.json": {
+    "sha256": "2b93369ef536e6d27e31a75cd1e5f3580f6b4ac57785387be9bf1e191add9ae7",
+    "bytes": 2397
+  },
+  "docs/evidence/four-place-fix/browser-four-place-form.png": {
+    "sha256": "78bdc16c349675dc6ca8aeb73991e0463ddadce769f4cf98ea8742450131b586",
+    "bytes": 62444
+  },
+  "docs/evidence/four-place-fix/browser-four-place-recall.png": {
+    "sha256": "2a42d0a606122d89f8c2500011634546f1c35a6af6c9971e30e7c573f94cd9d6",
+    "bytes": 68254
+  },
+  "docs/evidence/four-place-fix/browser-seven-turns.json": {
+    "sha256": "ede20803eba4644f4a76d3a612e4a1fcf01dd317cbfad2414f66e689234daca5",
+    "bytes": 16379
+  },
+  "docs/evidence/four-place-fix/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/four-place-fix/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/four-place-fix/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/four-place-fix/regression/frontend-tests.txt": {
+    "sha256": "19289aa541450d8af2d4e830c0ddb0ada09e4fa809682e59e1e0d4769539538c",
+    "bytes": 966
+  },
+  "docs/evidence/four-place-fix/regression/local-doctor.txt": {
+    "sha256": "3197905667da27c4f85dca1602d60722033d50e0fe60542ddef82cbdc88c1193",
+    "bytes": 843
+  },
+  "docs/evidence/four-place-fix/regression/pytest.xml": {
+    "sha256": "28fbb9286c808f072e27c6500dedeffb656d12c3c09fa7c2dc8af0270f77a616",
+    "bytes": 34901
+  },
+  "docs/evidence/four-place-fix/regression/python-tests.txt": {
+    "sha256": "98dcd0022a683132b24e816c5cc1a53ee7c5c48a57b3bab49d2343bd17559c2e",
+    "bytes": 341
+  },
+  "docs/evidence/four-place-fix/regression/summary.json": {
+    "sha256": "fa7032fcecaac0f57b58df1f241952fbd2d3ec50d761acfdeeb7c625ac6cb947",
+    "bytes": 538
+  },
+  "docs/evidence/four-place-fix/验收说明.md": {
+    "sha256": "e05b5a24b111ed3d5fe4a01e02f101c0f416a5f07f6c31bdc10ab504eb263d2f",
+    "bytes": 3791
+  },
+  "docs/evidence/history-actions/browser-delete-confirm.png": {
+    "sha256": "374cf9345c533455c08e3727af04731ac25ae895d9218522ce32af5bdfd5913b",
+    "bytes": 33901
+  },
+  "docs/evidence/history-actions/browser-history-actions.png": {
+    "sha256": "1d6e2b924532b595b70d248ce2b2d1e2d05cc8519cb8ec87a9534a0b8eb50109",
+    "bytes": 82464
+  },
+  "docs/evidence/history-actions/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/history-actions/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/history-actions/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/history-actions/regression/frontend-tests.txt": {
+    "sha256": "b20701a6fc0bbc03c393416a84ccbc788006ea6805063edc18d6fce3b02067fb",
+    "bytes": 965
+  },
+  "docs/evidence/history-actions/regression/local-doctor.txt": {
+    "sha256": "2bffbfdb8b51a51d726b625f763f9d86b9bc9749837968bd3de249dfdfb9cd03",
+    "bytes": 843
+  },
+  "docs/evidence/history-actions/regression/pytest.xml": {
+    "sha256": "154ffebb0724700d10c60db31cac934cc8b8db771e9c042956d0535791b4bdfb",
+    "bytes": 30119
+  },
+  "docs/evidence/history-actions/regression/python-tests.txt": {
+    "sha256": "8812bbfbdba91c336f0dc32564fd35779885dd10d4a14c148952283cba43378e",
+    "bytes": 341
+  },
+  "docs/evidence/history-actions/regression/summary.json": {
+    "sha256": "a1195433e93046da0549955d4dc75fdb18a8ede2848479249c192cff81a46792",
+    "bytes": 538
+  },
+  "docs/evidence/history-actions/验收说明.md": {
+    "sha256": "967a282641b34384bd1bc2035a780f66f80c09c04d3903d7d29ad6ec0a215256",
+    "bytes": 3094
+  },
+  "docs/evidence/home-restored/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/home-restored/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/home-restored/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/home-restored/regression/frontend-tests.txt": {
+    "sha256": "36d6245fc119ae00709500ace24f12c5ceb1818ad68c16f9d3b1990ccc893603",
+    "bytes": 767
+  },
+  "docs/evidence/home-restored/regression/local-doctor.txt": {
+    "sha256": "7d1aaf84a4a48fc1e264e565a930e7834e75b1432542c5af92f98db0804b2bad",
+    "bytes": 843
+  },
+  "docs/evidence/home-restored/regression/pytest.xml": {
+    "sha256": "99530b2d3e6bbccf968e6d8065f850e42bebd6177da0c8de27a9020f846538ef",
+    "bytes": 24341
+  },
+  "docs/evidence/home-restored/regression/python-tests.txt": {
+    "sha256": "13f75d8ffab0546865364e1f02f3b8a70a4c054bbee0c2d5e02c610b8b4ae3dd",
+    "bytes": 260
+  },
+  "docs/evidence/home-restored/regression/summary.json": {
+    "sha256": "d69617ba49a5c89b0ba6d525b6674863cc68a9b618d411b3d51a86581131f860",
+    "bytes": 538
+  },
+  "docs/evidence/home-restored/static-home.png": {
+    "sha256": "71330284a2154b6348bbc5e727cd0dcd9a4fa98d28c04b5e0e56eab5e1afab95",
+    "bytes": 80571
+  },
+  "docs/evidence/long-trips/browser-acceptance.json": {
+    "sha256": "cced7b364318c6ebaf615dda4de9d7253745f35ef509cad5152cae0797fe4439",
+    "bytes": 1024
+  },
+  "docs/evidence/long-trips/fourteen-days.png": {
+    "sha256": "061919b3700bf48f82761b1a316f3a4f4529711b180d06fa981a2129cd85f13a",
+    "bytes": 158606
+  },
+  "docs/evidence/long-trips/indoor-flex-day.png": {
+    "sha256": "6ea090501bca664b5f836c7574ccc2177c7e0d3e2483e6d780d2dc973442bc3c",
+    "bytes": 84260
+  },
+  "docs/evidence/long-trips/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/long-trips/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/long-trips/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/long-trips/regression/frontend-tests.txt": {
+    "sha256": "60b6c7cbe851f36c349e91b569b540308ae354955f246f9beb4efd282629d478",
+    "bytes": 774
+  },
+  "docs/evidence/long-trips/regression/local-doctor.txt": {
+    "sha256": "7e7531015f1c9a941306bfa98efe1f5bcdb4fb9ebe58be415f6c54b7bb5e2497",
+    "bytes": 843
+  },
+  "docs/evidence/long-trips/regression/pytest.xml": {
+    "sha256": "71b6b246a005dd8f414489fe2cf10988be1e20882bdd45d25fa1ae6b00f900d4",
+    "bytes": 24341
+  },
+  "docs/evidence/long-trips/regression/python-tests.txt": {
+    "sha256": "90007332db4a453baefffbfea0c017106ef9355e6a79417b2a22f5546cf23d01",
+    "bytes": 260
+  },
+  "docs/evidence/long-trips/regression/summary.json": {
+    "sha256": "b49a75ae9167efe2ac8634eb0f666b2aec885c0ad909ba1b8334da943ac34da5",
+    "bytes": 538
+  },
+  "docs/evidence/model-conversation/browser-model-recall.png": {
+    "sha256": "05bae008a6e760b116023ba02d976e86a4c4cf226f963b8f206d78bd3255ed94",
+    "bytes": 85617
+  },
+  "docs/evidence/model-conversation/browser-rename.png": {
+    "sha256": "9a4af6e3bfab5d02cd2e2fae0b3d804eae6f6f0b209715d551f49ed14d9f9916",
+    "bytes": 36624
+  },
+  "docs/evidence/model-conversation/live-smoke-accepted.json": {
+    "sha256": "624b3c5a59f8178f43c39fbae455f13e65ddba445cf71bbe3bdc97bf0d58608b",
+    "bytes": 13491
+  },
+  "docs/evidence/model-conversation/live-smoke-final-verified.json": {
+    "sha256": "e1f8dc3ebed57c111ab80c0f6a529f0dbebd1543d8c3d7fa9070bc4d587ea998",
+    "bytes": 5614
+  },
+  "docs/evidence/model-conversation/live-smoke-final.json": {
+    "sha256": "6513b56456bd3bcc8495fd422a000606ea565192336bc7471e4184c3bac31a3e",
+    "bytes": 13342
+  },
+  "docs/evidence/model-conversation/live-smoke-resumed.json": {
+    "sha256": "e651fbfc305fc39db4a6e27e6f67c40637240217d4ac5958594c55f31517b8ab",
+    "bytes": 17977
+  },
+  "docs/evidence/model-conversation/live-smoke-retest.json": {
+    "sha256": "d051b5586d06f047888daa0e27366ed8ffb2ef3bf4b6ef6a6d5e18ed1f5338c3",
+    "bytes": 9845
+  },
+  "docs/evidence/model-conversation/live-smoke-verified.json": {
+    "sha256": "5ef844d6083b9ae31893a289ce0a4a65773dd986020790dfc317499ee0533944",
+    "bytes": 17694
+  },
+  "docs/evidence/model-conversation/live-smoke.json": {
+    "sha256": "ba410acd5772477c384663961324a0c5a709e547fb3188a53c9e3a7637b69f6a",
+    "bytes": 14134
+  },
+  "docs/evidence/model-conversation/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/model-conversation/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/model-conversation/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/model-conversation/regression/frontend-tests.txt": {
+    "sha256": "4a33badb84e718ec511510bc1e5a177afc6cdf20eb2df912acfa950f230bbdca",
+    "bytes": 966
+  },
+  "docs/evidence/model-conversation/regression/local-doctor.txt": {
+    "sha256": "94a21236172f509a6a84961cfc1d87243bd33948fbdd9241dfc1a6e087423d77",
+    "bytes": 843
+  },
+  "docs/evidence/model-conversation/regression/pytest.xml": {
+    "sha256": "4ddf103c9b9edc57953d3145030c61225c10ec04c570ee440d28eb54643f8582",
+    "bytes": 33796
+  },
+  "docs/evidence/model-conversation/regression/python-tests.txt": {
+    "sha256": "fa0378b04209cedbaaa8b6cc202dd67fede42bf98fa39a583061d8659b52ba3c",
+    "bytes": 341
+  },
+  "docs/evidence/model-conversation/regression/summary.json": {
+    "sha256": "3c7f1de21e4ee062422590481ad74304b0104fceeb8d098fedba24594ff95877",
+    "bytes": 538
+  },
+  "docs/evidence/model-conversation/验收说明.md": {
+    "sha256": "f2d85e0f504df278c96a972869f727685108b62ed8c3e81ea2d2cf5560f10d52",
+    "bytes": 5839
+  },
+  "docs/evidence/poi-name-fix/browser-live-route.json": {
+    "sha256": "ee5c2f40ad8999a06e581eb56b26eff6b30086e55b873c190dde627b5e24eb2a",
+    "bytes": 725
+  },
+  "docs/evidence/poi-name-fix/browser-pmq-escalator.png": {
+    "sha256": "62ca5f32e460d2a9660eb00492113f60ff69aa4292bf9c51e3788f52708eaf14",
+    "bytes": 63985
+  },
+  "docs/evidence/poi-name-fix/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/poi-name-fix/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/poi-name-fix/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/poi-name-fix/regression/frontend-tests.txt": {
+    "sha256": "eed5efcf7738968c624d90e809fca5e1315edbc3c8dc3594b1766061e5ac6941",
+    "bytes": 1358
+  },
+  "docs/evidence/poi-name-fix/regression/local-doctor.txt": {
+    "sha256": "c9371a070841b6df251e922ccb6a320ac7084018c94488a5e8c0777ce72fb501",
+    "bytes": 843
+  },
+  "docs/evidence/poi-name-fix/regression/pytest.xml": {
+    "sha256": "6b877cbe62a0430737515ada73c1412a4418ddc748fa369f79ffe56bfd410572",
+    "bytes": 35728
+  },
+  "docs/evidence/poi-name-fix/regression/python-tests.txt": {
+    "sha256": "78806dde73e9bfacd73a613cead19cee5bccde211b18f633b1295178a7936822",
+    "bytes": 421
+  },
+  "docs/evidence/poi-name-fix/regression/summary.json": {
+    "sha256": "4c244a3f0b88a7803874ed99964cd4724e407381286349af082ac14dc09c219f",
+    "bytes": 538
+  },
+  "docs/evidence/poi-name-fix/验收说明.md": {
+    "sha256": "70114e2a093330fb17c42dd9b24def7d62fc00cc9d8161f34c7d83eaba5f8d4a",
+    "bytes": 2148
+  },
+  "docs/evidence/real-map/browser-acceptance.json": {
+    "sha256": "78ca95b5c4d514581a57a7fbcf86388b493df9d9183619c9843cfbb2f2389de6",
+    "bytes": 1060
+  },
+  "docs/evidence/real-map/itinerary-map.png": {
+    "sha256": "77e362b3b439910731c3b43168b09545f805d2508d15b503ad15af979bd00c89",
+    "bytes": 166710
+  },
+  "docs/evidence/real-map/place-lookup.png": {
+    "sha256": "7c448567dd721fd64756b2efdb16c70775f718135ba32d52309ced27816bdd31",
+    "bytes": 105994
+  },
+  "docs/evidence/real-map/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/real-map/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/real-map/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/real-map/regression/frontend-tests.txt": {
+    "sha256": "d582d1ca7850f9ed00840d7615f43a0aeb15e4ba8130c9bfab03264135be0957",
+    "bytes": 504
+  },
+  "docs/evidence/real-map/regression/local-doctor.txt": {
+    "sha256": "f4543811edfdcdddcbc2515ec2c1a94c0c5e5c7c1c3178c8c2c9969e559f44b5",
+    "bytes": 844
+  },
+  "docs/evidence/real-map/regression/pytest.xml": {
+    "sha256": "a27c9ddb2e373127f3bfd167256035e68f2ef126d0047e5b5b2543354fa00d87",
+    "bytes": 17718
+  },
+  "docs/evidence/real-map/regression/python-tests.txt": {
+    "sha256": "bf49c57048403354b7ef3f79348f6344e5004f6f46e135b647ccf042379cb7f3",
+    "bytes": 260
+  },
+  "docs/evidence/real-map/regression/summary.json": {
+    "sha256": "93274c0133dfc9d9cac0afc0caaccf078da2b59eb466f92b37aab80da6ece119",
+    "bytes": 538
+  },
+  "docs/evidence/release-2026-10-23/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/release-2026-10-23/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/release-2026-10-23/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/release-2026-10-23/frontend-tests.txt": {
+    "sha256": "d42dcbc460064eabf8fa5692ccc081438a4272f3dac14636b2824d038529d93c",
+    "bytes": 1362
+  },
+  "docs/evidence/release-2026-10-23/local-doctor.txt": {
+    "sha256": "e190831393c4e53110dc83973f29054ce4f3a9eacfadf4466338b5eb806acdef",
+    "bytes": 845
+  },
+  "docs/evidence/release-2026-10-23/pytest.xml": {
+    "sha256": "03080d6f4f4dc9895d24d4f8b53f6afb9b6616bbcf152f0afaae53f40eb5be11",
+    "bytes": 36737
+  },
+  "docs/evidence/release-2026-10-23/python-tests.txt": {
+    "sha256": "07d3a069c38d24cf0d678ad73a20180e05fa98a26cb8538d184eeb7b0c59960d",
+    "bytes": 421
+  },
+  "docs/evidence/release-2026-10-23/release-audit.json": {
+    "sha256": "567ecb2c1703062edba941c8c9d6a00f8fce90e2683ed412cccbd8d46d3a6df8",
+    "bytes": 838
+  },
+  "docs/evidence/release-2026-10-23/summary.json": {
+    "sha256": "0203283cb897155427204865777967e129794e91defa026e171404e920e2fe87",
+    "bytes": 538
+  },
+  "docs/evidence/transit/browser-acceptance.json": {
+    "sha256": "41001b233953ff02791f47bb177eeb2978379ab1b64a05dff105a3fc06f121c3",
+    "bytes": 1240
+  },
+  "docs/evidence/transit/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/transit/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/transit/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/transit/regression/frontend-tests.txt": {
+    "sha256": "db75dd082c5dacdf1acc527b51ae06d868958213b5237bdaebffa06227dca636",
+    "bytes": 499
+  },
+  "docs/evidence/transit/regression/local-doctor.txt": {
+    "sha256": "5d200c1e9a36382c24b86bda5612644341533d00d19d0ae3fa29c9dce6717693",
+    "bytes": 844
+  },
+  "docs/evidence/transit/regression/pytest.xml": {
+    "sha256": "ff21733ff383a5102ddef4e8b45d6c2d62aa2aedac48ca0b55ebf795c3cc2870",
+    "bytes": 18963
+  },
+  "docs/evidence/transit/regression/python-tests.txt": {
+    "sha256": "b7bfa4b7445b8b8885007d94243d8a3fe6e9b9447c2eedc669d158e3d9851261",
+    "bytes": 260
+  },
+  "docs/evidence/transit/regression/summary.json": {
+    "sha256": "3db2492a4840bbe8fe858ab44d02c0ef400632bb98b9af6b547078d32cb038f1",
+    "bytes": 538
+  },
+  "docs/evidence/transit/source-review.json": {
+    "sha256": "be34ea5308a6be816845b162815dc8d9c0b601895f81c2d36e293f23af24c470",
+    "bytes": 5410
+  },
+  "docs/evidence/transit/transit-directions.png": {
+    "sha256": "5a4c2af719b6f72ffe465438950792275cc2e517726d49c1ac6554c534c15ccd",
+    "bytes": 116895
+  },
+  "docs/evidence/travel-dates/browser-acceptance.json": {
+    "sha256": "6325d09ae68d3dbdae9d17e72aa3993bc1e617ffbc4944953fd84cdf705ffd80",
+    "bytes": 540
+  },
+  "docs/evidence/travel-dates/home-dates.png": {
+    "sha256": "516b58a26c0b3dbc81b70a798d607d581899048011105c160b0e23dcfb0f9563",
+    "bytes": 147341
+  },
+  "docs/evidence/travel-dates/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/travel-dates/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/travel-dates/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/travel-dates/regression/frontend-tests.txt": {
+    "sha256": "d3c9f545f6187da71684c48d50bd926e884df27d2816f9f316a3acf65ee523a4",
+    "bytes": 700
+  },
+  "docs/evidence/travel-dates/regression/local-doctor.txt": {
+    "sha256": "68edc14aac3825a7ce514582901a7a8d4fdeeaea618c657e7dcb799372730860",
+    "bytes": 843
+  },
+  "docs/evidence/travel-dates/regression/pytest.xml": {
+    "sha256": "e36da196b7f89404203de9d1669cbccbae767a0e06482db3be56fc8fa7bf8b35",
+    "bytes": 22117
+  },
+  "docs/evidence/travel-dates/regression/python-tests.txt": {
+    "sha256": "f3787f88114bccf88b40f6b5cd62cae19516b66e4b88317101918067ac1ecffe",
+    "bytes": 260
+  },
+  "docs/evidence/travel-dates/regression/summary.json": {
+    "sha256": "6e45b60987740ba155e11bc2050e59984817695ffb6e379566a6bf0b20e466d6",
+    "bytes": 538
+  },
+  "docs/evidence/unified-search/amap-search.png": {
+    "sha256": "badfbef5756d56190aedc3db9f31b2b6d25faede7acfbc2595983f6e3a0f93d9",
+    "bytes": 79344
+  },
+  "docs/evidence/unified-search/browser-acceptance.json": {
+    "sha256": "993fc29d9b50ddfb9156f8665bbd2f1adbdb6fbc921c4543e28448740f8932ff",
+    "bytes": 1358
+  },
+  "docs/evidence/unified-search/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/unified-search/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/unified-search/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/unified-search/regression/frontend-tests.txt": {
+    "sha256": "13250aaeff7e0ddc6e90564d5d7be008256ff265c2db34930f271edbc5c0a8d7",
+    "bytes": 503
+  },
+  "docs/evidence/unified-search/regression/local-doctor.txt": {
+    "sha256": "3a4dea74eaf81c7d57044b9bd772484783ef882f8ce642cbb48a7940407d176b",
+    "bytes": 843
+  },
+  "docs/evidence/unified-search/regression/pytest.xml": {
+    "sha256": "fc326ce4cf64b04ee91f4515aeb15c8b49daae38926eeaf00f90c858fbe4f694",
+    "bytes": 20554
+  },
+  "docs/evidence/unified-search/regression/python-tests.txt": {
+    "sha256": "dcfb410e7cfce8d07d1ec95f1001aa5e25a6c0c5b083db2dd1c931c48cc26b34",
+    "bytes": 260
+  },
+  "docs/evidence/unified-search/regression/summary.json": {
+    "sha256": "410345edc1c822f8e6a22285b9fa679e6266f77fe1b6fe684da51bb1180ff06a",
+    "bytes": 538
+  },
+  "docs/evidence/v1.3/browser-acceptance.json": {
+    "sha256": "d2e6ddfb8b87024a8d3200f392ca39a38ac432e059075630ae502d5fef9f10e3",
+    "bytes": 2314
+  },
+  "docs/evidence/v1.3/chat.jpg": {
+    "sha256": "4c7e54e62660c6ee0d5bb3a3687b821b6a9dad4263ad513a0136bf3b30e1435e",
+    "bytes": 131339
+  },
+  "docs/evidence/v1.3/home.jpg": {
+    "sha256": "469f4a59671f660b0e52a6c916f014617268c6cb2952c1a54b142c7ba1b27438",
+    "bytes": 148249
+  },
+  "docs/evidence/v1.3/live-model.json": {
+    "sha256": "ca7de5b7087483da0c639a49d00d70434deee816febfdbebc4989b4a74f80ddf",
+    "bytes": 3776
+  },
+  "docs/evidence/v1.3/mobile-chat.jpg": {
+    "sha256": "5c95c342e1ffe4c6659959ece30ba86854ff417606129802f4e764c9210c5d00",
+    "bytes": 84519
+  },
+  "docs/evidence/v1.3/mobile-home.jpg": {
+    "sha256": "469f4a59671f660b0e52a6c916f014617268c6cb2952c1a54b142c7ba1b27438",
+    "bytes": 148249
+  },
+  "docs/evidence/v1.3/narrow-metrics.json": {
+    "sha256": "e7a56b1a4183da5202c1a7de97a2294c16a7a47dd9f20a8ee5d34d4c42efa64b",
+    "bytes": 70
+  },
+  "docs/evidence/v1.3/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/v1.3/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/v1.3/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/v1.3/regression/frontend-tests.txt": {
+    "sha256": "ef464487490f4203c30e10e6b94d0c25a659e9bf532a293ae81abbfb3b6ea201",
+    "bytes": 503
+  },
+  "docs/evidence/v1.3/regression/local-doctor.txt": {
+    "sha256": "6cc6731d793e20776a6ba96754f703b099458d37424973dbccd5d22235c316ae",
+    "bytes": 844
+  },
+  "docs/evidence/v1.3/regression/pytest.xml": {
+    "sha256": "10264033881508c16bf481fc4865473e3eb4ab81f963c3af2916b86c82baefc3",
+    "bytes": 17464
+  },
+  "docs/evidence/v1.3/regression/python-tests.txt": {
+    "sha256": "aa1db4d9f3c3df698a049fdae84c7af35891a5d7bc4d9ffcb01635b5b6eb48df",
+    "bytes": 260
+  },
+  "docs/evidence/v1.3/regression/summary.json": {
+    "sha256": "4617149b9199d18cde55ed8c17224c5c0408c16860a756ff139fcb2c0c2c4a14",
+    "bytes": 538
+  },
+  "docs/evidence/walk-map-only/browser-check.json": {
+    "sha256": "b78910eb32082d6cd4f740073b64ab246ed8a702fadc39ceed367901ffd3af59",
+    "bytes": 181
+  },
+  "docs/evidence/walk-map-only/browser-map-only.png": {
+    "sha256": "0d6e49a082cf532b3af53bedbb4e71a3106065ad7aa2c1a63f07bea7e56263e4",
+    "bytes": 50834
+  },
+  "docs/evidence/walk-map-only/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/walk-map-only/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/walk-map-only/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/walk-map-only/regression/frontend-tests.txt": {
+    "sha256": "dd1e78a78c5c112cdbef5ff22bcc41da076d0fac9f5741dca9bee1cbe6e769d7",
+    "bytes": 1361
+  },
+  "docs/evidence/walk-map-only/regression/local-doctor.txt": {
+    "sha256": "c55981f3543a8e854346cf1202eeed0765a71962d5916310dc6a65de4884b2de",
+    "bytes": 843
+  },
+  "docs/evidence/walk-map-only/regression/pytest.xml": {
+    "sha256": "b1f38a01d0c19eb94968c500484541976cb43e19a14155cbf5dfeaa75e34fc3f",
+    "bytes": 36737
+  },
+  "docs/evidence/walk-map-only/regression/python-tests.txt": {
+    "sha256": "9c6190907e9289b007ede7f49850fe56199c0d9d59b9da0df91f462de818108a",
+    "bytes": 421
+  },
+  "docs/evidence/walk-map-only/regression/summary.json": {
+    "sha256": "d1a7bc6803821b849b221454c52481848735f9e27d1e0db689e905b72e3cb967",
+    "bytes": 538
+  },
+  "docs/evidence/walking-mini-map/amap-walking-route.png": {
+    "sha256": "2859c5bf345217b00f5c34aaabae0361fe4ce3897d7d5f671ead97af8deabca2",
+    "bytes": 73942
+  },
+  "docs/evidence/walking-mini-map/browser-acceptance.json": {
+    "sha256": "8ae2669161b2db201f900c6df2d3038ca9be7907c907e017ed5382e2ff8791ab",
+    "bytes": 1217
+  },
+  "docs/evidence/walking-mini-map/browser-route.png": {
+    "sha256": "bad6ede437a9a4d52d830baeabe1ec106df8541fcecde30c136cc92063ddff7c",
+    "bytes": 85708
+  },
+  "docs/evidence/walking-mini-map/regression/agent-acceptance.txt": {
+    "sha256": "6d79636841436f71853aff066923da39c4e1a4d8fed1c340159447dc1a99f649",
+    "bytes": 444
+  },
+  "docs/evidence/walking-mini-map/regression/data-validation.txt": {
+    "sha256": "6fd8f8808a41d682a4ff8d90c834bd43b75ef53a8b2a89dcf9d4a2325a603e9d",
+    "bytes": 238
+  },
+  "docs/evidence/walking-mini-map/regression/development-retrieval.txt": {
+    "sha256": "3b4fefb1ae7cd4cc9bb8af239d80739b19f756d1c0ba7e92e56c651a8a46a9a3",
+    "bytes": 1040
+  },
+  "docs/evidence/walking-mini-map/regression/frontend-tests.txt": {
+    "sha256": "877dafea47d9032407eaaa73cf8b950cf044729662f2393fc862850883d3a6c3",
+    "bytes": 971
+  },
+  "docs/evidence/walking-mini-map/regression/local-doctor.txt": {
+    "sha256": "4f16ec6a0a6171449b84d0a2408cca743fb8b8d44f61855bd8ad73c98d215b40",
+    "bytes": 843
+  },
+  "docs/evidence/walking-mini-map/regression/pytest.xml": {
+    "sha256": "ff9c62aca6d4ea055e7ddae94493d2787d12cd7a496a4c83fcc4b4efd8e95200",
+    "bytes": 25641
+  },
+  "docs/evidence/walking-mini-map/regression/python-tests.txt": {
+    "sha256": "ea220e02f0e47294a54268e85ad39a6f23bd1f77e70f1edaaa5edfce9aca2d94",
+    "bytes": 340
+  },
+  "docs/evidence/walking-mini-map/regression/summary.json": {
+    "sha256": "587a5a952e61e57f3d05c120c2ba469b944d6f28d33acb4ebba91cc1708d23ad",
+    "bytes": 538
+  },
+  "docs/数据说明.md": {
+    "sha256": "10671e7bf806ea273186d795bf335aa2b96aa37183760713f33f462a099b813a",
+    "bytes": 1599
+  },
+  "docs/港慢游1.3改造说明.md": {
+    "sha256": "43ee6bf7783ffac98576176bf8f1cda0c520002d4e8c7b0c7e725f59432666fe",
+    "bytes": 10994
+  },
+  "docs/港铁交通指引.md": {
+    "sha256": "a4737ef43e5bb84255a7e92e6164a9bb6f4a30dae8a003d4bd8a82e8e3b8e719",
+    "bytes": 4549
+  },
+  "frontend/README.md": {
+    "sha256": "b945f35b8e2a50db0afa7173b249d992e315c7f5238ff6298bd9b697e2a3fb0b",
+    "bytes": 538
+  },
+  "requirements-dev.txt": {
+    "sha256": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15",
+    "bytes": 34
+  },
+  "requirements-lock.txt": {
+    "sha256": "2610a1017a3904c28d71bf43f2e1915d198fe2ac8d2c4d6ba44f8059e63dfc0a",
+    "bytes": 1240
+  },
+  "requirements.txt": {
+    "sha256": "27506a2b2c39e17f69f3eefd0c78185094fc40f4415b153b92a7c56f4a91cad6",
+    "bytes": 98
+  },
+  "run.py": {
+    "sha256": "dd0baf9871f49008f195701910ebc0162ad93576b1c1ddfe393bbf4040599035",
+    "bytes": 383
+  },
+  "scripts/README.md": {
+    "sha256": "3c7508a1f84ad296b0f732d2ec9dd1a1be5e4313cdd68659af325ae9351a0f36",
+    "bytes": 928
+  },
+  "scripts/doctor.py": {
+    "sha256": "e34b17c59608942dbdf167b185588baac438aeae9152d69ba61d1ab2841e194b",
+    "bytes": 1631
+  },
+  "scripts/evaluate.py": {
+    "sha256": "d7ad8bcd755368846533b1fa332dc236db33e9775e74f95b7546693afd49f17f",
+    "bytes": 845
+  },
+  "scripts/evaluate_agent.py": {
+    "sha256": "4067a282a85aacbc8eacf3c8c3eeed9a0672fc1088e1ee12d4c297178ba81bd3",
+    "bytes": 4145
+  },
+  "scripts/evaluate_holdout.py": {
+    "sha256": "f3725a4b5f61c9f6a5e1eec9b32bd51dddee3a1b5e313ae232d1dd1310b61dfd",
+    "bytes": 2599
+  },
+  "scripts/manage_data.py": {
+    "sha256": "df08fde08bf0d3791ae2b9c2fae767ac08ece1a0b129b78de4954671580bfc35",
+    "bytes": 1181
+  },
+  "scripts/package_source.py": {
+    "sha256": "f040fa2a6019855bb4661d748aef1ab5723635b680e7eafd48c7debe65111e70",
+    "bytes": 2034
+  },
+  "scripts/smoke_multiturn.py": {
+    "sha256": "24379ebc50f2f61bbf743d40595ef15ffeba0fbaa1bae32770ff48d82bfb9dfa",
+    "bytes": 5886
+  },
+  "scripts/verify.py": {
+    "sha256": "e6b17fb5bc23cfde019378781e7f436e148e1ce6ffaae1045df737dea0c05a36",
+    "bytes": 1968
+  },
+  "start.py": {
+    "sha256": "17d814e322631436d8dee18bafd13936cd0132d29c48e105b211cb22e79dddd2",
+    "bytes": 1524
+  },
+  "static/app.js": {
+    "sha256": "06645345640b97017bee56411ccfc4279a62e2ee1bbe467817cd0d49456f4e62",
+    "bytes": 42347
+  },
+  "static/harbour.svg": {
+    "sha256": "ad5afd4f8eed17e193f7ddc0e73175df1c51667c0f79f9edbfa1194006593206",
+    "bytes": 2045
+  },
+  "static/icon.svg": {
+    "sha256": "3493e97953b9e266974574de2c2e8d96a4972a1343aa560026c4aa19b9b2d568",
+    "bytes": 331
+  },
+  "static/index.html": {
+    "sha256": "5d5b6260cdc034116bac8ba6d7a9e32b879f11a2c78c50393afe4cf04800e8d1",
+    "bytes": 15391
+  },
+  "static/itinerary-map.js": {
+    "sha256": "5fc7c4f1a736398ea52a891ddb4b3b6bbec818235ab774b48706aefa1f2b7db0",
+    "bytes": 7391
+  },
+  "static/plan-storage.mjs": {
+    "sha256": "8c47e787c739c443b37d5ae5f5d0ecf3097f92f0c8327b5d1befaf30d5615119",
+    "bytes": 2673
+  },
+  "static/style.css": {
+    "sha256": "c81bf7719c96efb6114283d07b835610a18855911316ca1b7e9d7352701faea9",
+    "bytes": 53039
+  },
+  "static/trip-dates.mjs": {
+    "sha256": "98848f7f9f3dedf1edea571f48e3e332ffd70f62bc67e431997f2da446b65998",
+    "bytes": 1057
+  },
+  "static/vendor/leaflet/LICENSE": {
+    "sha256": "53e8dc25862014e4324741ca18fbe3611e11d42ef69f59f86ea8c5389647d4cb",
+    "bytes": 1395
+  },
+  "static/vendor/leaflet/leaflet.css": {
+    "sha256": "a7837102824184820dfa198d1ebcd109ff6d0ff9a2672a074b9a1b4d147d04c6",
+    "bytes": 14806
+  },
+  "static/vendor/leaflet/leaflet.js": {
+    "sha256": "db49d009c841f5ca34a888c96511ae936fd9f5533e90d8b2c4d57596f4e5641a",
+    "bytes": 147552
+  },
+  "static/vendor/leaflet/provenance.json": {
+    "sha256": "9fe883e664c8bccec85182f6b87c1553fa16e7659005fce11f596e368ff6493a",
+    "bytes": 452
+  },
+  "static/walking-map.mjs": {
+    "sha256": "ba6c3026a314c26e9a600085fd77fa6eb0741cfbf7481b1b8cd8150253e16f36",
+    "bytes": 7909
+  },
+  "tests/conftest.py": {
+    "sha256": "9efea2d4bf187df88099eaf1d0200a5b9b9ee46c43d44c5d8ffa26290fc4b594",
+    "bytes": 304
+  },
+  "tests/plan-storage.test.mjs": {
+    "sha256": "6ef50e4cc835a111df34cca23f94e2ce6a0fcc1d926927eef5402beaa5fc2b96",
+    "bytes": 2277
+  },
+  "tests/test_agent.py": {
+    "sha256": "4f33805a2e584ead9cccad510a69ade5c08ff8c4c35b27d928f090eaf5d04ba7",
+    "bytes": 16135
+  },
+  "tests/test_amap_contract.py": {
+    "sha256": "8b619f64947ede6bef4b6e4ef0bdcea4245fa3577c38c93a3b07290d94cd4b82",
+    "bytes": 1658
+  },
+  "tests/test_core.py": {
+    "sha256": "c5dcd54fef46625b8f0bfca787b5e64c1faaea0a2aa521431ef71146603d596e",
+    "bytes": 7924
+  },
+  "tests/test_hardening.py": {
+    "sha256": "a26857efb3a9cf578360f156024c4376501d25e5779c86fbed53215fb7db3ee0",
+    "bytes": 4406
+  },
+  "tests/test_history_flags.py": {
+    "sha256": "71eb1f1004f32bb0b921e35ee06fb504e87bc47397a13b250ba8be700f29a5fa",
+    "bytes": 4287
+  },
+  "tests/test_many_places.py": {
+    "sha256": "31c639dc823f45db311b17cd56bca5ff5fbfeeff9f1f3530e04a5f001b44699f",
+    "bytes": 4571
+  },
+  "tests/test_model_conversation.py": {
+    "sha256": "174588d5ee85e5b3b18040848055ea6c73346cceca7cc0ceed3b4b21c9dcbd4a",
+    "bytes": 12528
+  },
+  "tests/test_place_context.py": {
+    "sha256": "125a1fbed1e19c93ea789da00427508c4c0ee765e4d9aa0b59dff3f14506decc",
+    "bytes": 8172
+  },
+  "tests/test_place_search.py": {
+    "sha256": "90c91d6c11c741aa4e35a01d14c6b98d0c83662956bc517834010f02ee8b8f54",
+    "bytes": 4662
+  },
+  "tests/test_transit.py": {
+    "sha256": "f11891e09945534e987b73d82bb2c1b226308ff350ddc2dd56dc407a0b1c3245",
+    "bytes": 6488
+  },
+  "tests/test_trip_dates.py": {
+    "sha256": "c7fb89cea0ba0438da05deeee701d9ab54a1dc63f88be3a559029c33a2c8d874",
+    "bytes": 7817
+  },
+  "tests/test_unified_chat.py": {
+    "sha256": "0683c8e06d640824bd6609273910d8ed71745faaeb0aae799023f25a77b5cd17",
+    "bytes": 9519
+  },
+  "tests/test_walking_map.py": {
+    "sha256": "710d91c8dac39b6fabc7c31459c9bbc967c9945b39a410038e570ee6bd08d49e",
+    "bytes": 11319
+  },
+  "tests/trip-dates.test.mjs": {
+    "sha256": "b8b47c8f437aa6c5fa36415eb1bac0597fa8b5c420bb990bfa73d0f03450d86d",
+    "bytes": 1192
+  },
+  "tests/walking-map.test.mjs": {
+    "sha256": "1078832db58ff23d3092d2ef352a75b96861207b7b51dd46b25fb12dad7533f5",
+    "bytes": 6478
+  },
+  "travel/__init__.py": {
+    "sha256": "e0cb192e3e2a79b5504b6274c2eec41399e2a296148fac40de20e30b348f597d",
+    "bytes": 52
+  },
+  "travel/agent.py": {
+    "sha256": "4e7a8e4b4d237214033fd6738bcc937e198cbd4b9739c1492cb137cff148aa64",
+    "bytes": 43822
+  },
+  "travel/answers.py": {
+    "sha256": "64d76e1e26a245af93a793a1d6043c954deb9611a807395a873c6a96ee701de2",
+    "bytes": 5024
+  },
+  "travel/chat.py": {
+    "sha256": "dd2b8c4cdb455a47bccdef540bc34d03f63fb1eff5d445f930acfd2e573711d1",
+    "bytes": 11915
+  },
+  "travel/config.py": {
+    "sha256": "7ab7b6beaeebd54619b80cf78613596b1edeb3606ca3ceab95fc232cac1f1dbf",
+    "bytes": 1129
+  },
+  "travel/conversation_memory.py": {
+    "sha256": "dd4a03ecd6cb41f0bdb1df66f90ff7d0de5b87a692c70bc8b8ad5bb9299ea562",
+    "bytes": 2788
+  },
+  "travel/data_validation.py": {
+    "sha256": "ca9140a9ae1be96f112f85f677f41a651256128a40f7c25aea7224a854d3f42c",
+    "bytes": 3354
+  },
+  "travel/history.py": {
+    "sha256": "9113838880caefd7eff83e77d7efa9dbc00d8d89827072f2a1dc683a0276e159",
+    "bytes": 4471
+  },
+  "travel/itinerary_edits.py": {
+    "sha256": "92a54702872eb6db3d96979b536cb14be5c09acecd0885278250ac67b879e2a9",
+    "bytes": 6192
+  },
+  "travel/knowledge.py": {
+    "sha256": "e45873f0fc9daf1426e75815cc7f5a9d14f2b8a204358d40e8360fb0f157224a",
+    "bytes": 4751
+  },
+  "travel/maps.py": {
+    "sha256": "a34648e15f906f8ce4b98b1f093c5ca5734400372f1bc13d4bc2e131d3d11ad1",
+    "bytes": 13235
+  },
+  "travel/mcp_client.py": {
+    "sha256": "25559ce500c15d73c029e4e9b15ea7d95e8518d8487cf5844e80361f61572d47",
+    "bytes": 5682
+  },
+  "travel/mcp_server.py": {
+    "sha256": "84eb384917b0ba1262bb5d8a0f42dc8d2e5073368b0f184fd8a27fb5a29d6a87",
+    "bytes": 1835
+  },
+  "travel/place_context.py": {
+    "sha256": "2c530fb57c9db2fdbc872dc56051c459d8cb1b3d3f5e239f164a942dd211ada7",
+    "bytes": 7176
+  },
+  "travel/place_search.py": {
+    "sha256": "7e322c23e7e501cfd16aab547e634faa762dd63bdf78bed283f40711bf68a320",
+    "bytes": 3094
+  },
+  "travel/planner.py": {
+    "sha256": "dbfd35e3b3bc0b98dbcad6451c0e132b86b3fcd75dab00f9a7ac25f17fe9aaf2",
+    "bytes": 12883
+  },
+  "travel/retrieval.py": {
+    "sha256": "749f9937eed08beb31b53fbaaa84275fc6845780b474dc506ab67b72aa78dd5a",
+    "bytes": 3779
+  },
+  "travel/transit.py": {
+    "sha256": "acb0898ad2d5fd187ade899a224ea9e999d3830f0a7a5b2e04bd2c1539de5246",
+    "bytes": 13605
+  },
+  "travel/trip_dates.py": {
+    "sha256": "9d9fa7b39cccb68d0b497372446d928789d6aa2b22a4dc5a2334fdaa5411e360",
+    "bytes": 1437
+  },
+  "启动港慢游.bat": {
+    "sha256": "8bef3c94043fa4ab988f1848eb2ba4ac1191c181f241590702a937100f8e9c12",
+    "bytes": 61
+  },
+  "启动港慢游.command": {
+    "sha256": "60cef3b750a9d1ee1f09086262887863d3dddebae2ab1b4cc8db983e2fb7cdfd",
+    "bytes": 767
+  }
+}

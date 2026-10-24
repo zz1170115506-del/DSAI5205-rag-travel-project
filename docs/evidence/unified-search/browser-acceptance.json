@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-22",
+  "url": "http://127.0.0.1:8767/#places",
+  "search_inputs_in_library": 1,
+  "old_lookup_panel_removed": true,
+  "verified": [
+    "local Blue House query returns one canonical record with detail/source/must-visit actions",
+    "COA submit automatically falls back from local miss to real AMap, returns two Hong Kong POIs",
+    "lowercase coa input without submit automatically queries after debounce and returns two real POIs",
+    "external card shows address, category, coordinates, fetched_at and provider source",
+    "expand JSON shows provider=amap, external_unreviewed, curated_knowledge=false",
+    "no horizontal overflow at 1910 CSS pixels"
+  ],
+  "real_queries": [
+    {
+      "query": "COA",
+      "path": "official direct diagnostic",
+      "http_status": 200,
+      "infocode": "10000",
+      "poi_count": 2
+    },
+    {
+      "query": "COA",
+      "path": "unified browser search",
+      "normalized_hk_results": 2
+    },
+    {
+      "query": "coa",
+      "path": "automatic debounced browser search",
+      "normalized_hk_results": 2
+    }
+  ],
+  "credentials_exposed": false,
+  "model_requests": 0,
+  "route_api_verification": false,
+  "screenshot": "amap-search.png",
+  "boundary": "Successful POI lookups only; not verification of walking route, static map, other provider services or every geographic query."
+}

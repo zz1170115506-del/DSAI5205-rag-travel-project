@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-22",
+  "url": "http://127.0.0.1:8767/#ask",
+  "basemap": "OpenStreetMap standard tiles",
+  "leaflet": "1.9.4",
+  "real_tiles_observed_loaded": 12,
+  "viewport_css": {
+    "width": 1910,
+    "height": 1075
+  },
+  "horizontal_overflow": false,
+  "verified": [
+    "two-day local plan renders on real basemap",
+    "day 1 and day 2 filters change markers",
+    "stop list opens corresponding numbered popup",
+    "keyboard Enter opens map marker popup",
+    "popup opens local place detail dialog",
+    "fit all restores itinerary bounds",
+    "refresh after service restart restores history and map",
+    "unknown Cape DAguilar query returns disabled and external search links",
+    "tile images use origin referrer only; document default remains no-referrer"
+  ],
+  "amap_real_requests": 0,
+  "new_model_requests": 0,
+  "boundary": "Real basemap only; points approximate, dashed lines visit order; no live route verification. No user location permission requested.",
+  "screenshots": [
+    "itinerary-map.png",
+    "place-lookup.png"
+  ]
+}

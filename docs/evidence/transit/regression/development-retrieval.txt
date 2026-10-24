@@ -1,0 +1,24 @@
+PASS 太平山顶能看什么？ → peak
+PASS 兰芳园有什么特色？ → lan-fong-yuen
+PASS 蘭芳園奶茶 → lan-fong-yuen
+PASS Hong Kong Museum of Art → hkmoa
+PASS M+ 有什么展览方向？ → mplus
+PASS 想看故宫文物 → palace-museum
+PASS 天星小轮在哪里？ → star-ferry
+PASS 中环半山扶梯 → escalator,lan-fong-yuen,pmq
+PASS 大馆历史建筑 → tai-kwun
+PASS PMQ 文创购物 → pmq
+PASS 上环文武庙 → man-mo
+PASS 深水埗有什么小吃？ → hop-yik-tai
+PASS 庙街煲仔饭 → hing-kee
+PASS 尖沙咀哪里吃饭？ → knutsford,lan-fong-yuen,hing-kee
+PASS 大澳渔村棚屋 → tai-o
+PASS 昂坪天坛大佛 → big-buddha,ngong-ping
+PASS 南莲园池园林 → nan-lian
+PASS 下雨天室内博物馆 → palace-museum,mplus,hkmoa
+PASS 西九海边散步 → art-park,mplus,palace-museum
+PASS 星光大道看维港 → avenue-stars
+PASS 量子纠缠实验 → 无结果
+PASS 东京有什么景点 → 无结果
+
+手写开发例题通过：22/22；不得作为独立泛化准确率。

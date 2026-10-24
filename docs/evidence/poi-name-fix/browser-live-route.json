@@ -1,0 +1,17 @@
+{
+  "image_height": 400,
+  "image_loaded": true,
+  "image_width": 640,
+  "navigation": "https://uri.amap.com/direction?from=114.156867%2C22.28073%2CPMQ%E5%85%83%E5%88%9B%E6%96%B9&to=114.158864%2C22.279343%2C%E4%B8%AD%E7%8E%AF%E8%87%B3%E5%8D%8A%E5%B1%B1%E8%87%AA%E5%8A%A8%E6%89%B6%E6%A2%AF&mode=walk&coordinate=gaode&src=hk-travel-assistant",
+  "overflow": false,
+  "route": "339 米 · 约 5 分钟在高德中导航 ↗",
+  "steps": [
+    "向东北步行21米向左前方行走",
+    "向西北步行13米右转",
+    "向西北步行2米右转",
+    "向东南步行65米左转",
+    "沿鸭巴甸街向东北步行15米右转",
+    "沿荷李活道向东南步行220米左转",
+    "向北步行3米到达目的地"
+  ]
+}

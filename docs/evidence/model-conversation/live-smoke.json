@@ -1,0 +1,493 @@
+{
+  "time_utc": "2026-10-23T04:32:29.779379+00:00",
+  "kind": "synthetic_live_smoke_not_quality_benchmark",
+  "model": "deepseek-flash",
+  "checks": {
+    "six_turns_completed": false,
+    "selected_exact_two": true,
+    "move_preserves_rest_day": true,
+    "replace_and_exclude": true,
+    "swap_after_database_restore": false,
+    "all_real_model_responses": true
+  },
+  "all_passed": false,
+  "rows": [
+    {
+      "turn": 1,
+      "question": "合成游客测试：我与父母同行，想在香港看海，推荐两个适合慢慢散步的地方，先不排行程。",
+      "answer": {
+        "text": "已保存本轮更新的旅行条件，可继续告诉我如何安排行程。",
+        "citations": [
+          "avenue-stars",
+          "art-park",
+          "peak"
+        ],
+        "notice": "模型选择工具 · 引用编号已校验，事实仍需核对；模型成文不合格，展示本地工具结果",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": false
+      },
+      "trip": {
+        "days": null,
+        "start_date": null,
+        "end_date": null,
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [],
+        "start_station": "",
+        "only_selected": false,
+        "excluded_places": []
+      },
+      "notes": [
+        "与父母同行，希望看海并慢慢散步"
+      ],
+      "day_place_ids": [],
+      "trace": [
+        {
+          "tool": "search_places",
+          "status": "success",
+          "arguments": {
+            "query": "海边 海港 散步 轻松",
+            "limit": 5,
+            "region": "全部",
+            "indoor_only": false
+          },
+          "elapsed_ms": 301,
+          "retrieval": {
+            "recall": "SQLite FTS5 BM25",
+            "reranker": "名称/别名、词覆盖、街区与主题特征重排（非神经模型）",
+            "candidate_count": 3,
+            "returned_count": 3,
+            "knowledge_records": 33
+          },
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → search_places"
+            ],
+            "arguments": {
+              "query": "海边 海港 散步 轻松",
+              "limit": 5,
+              "region": "全部",
+              "indoor_only": false
+            },
+            "elapsed_ms": 301,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        },
+        {
+          "tool": "place_detail",
+          "status": "success",
+          "arguments": {
+            "place_id": "avenue-stars"
+          },
+          "elapsed_ms": 287,
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → place_detail"
+            ],
+            "arguments": {
+              "place_id": "avenue-stars"
+            },
+            "elapsed_ms": 287,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        },
+        {
+          "tool": "place_detail",
+          "status": "success",
+          "arguments": {
+            "place_id": "art-park"
+          },
+          "elapsed_ms": 288,
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → place_detail"
+            ],
+            "arguments": {
+              "place_id": "art-park"
+            },
+            "elapsed_ms": 288,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        },
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "pace": "轻松"
+            },
+            "notes": [
+              "与父母同行，希望看海并慢慢散步"
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "decisions": 5,
+        "elapsed_ms": 7373,
+        "model_responses": 5,
+        "live_model_responses": 5,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 2,
+      "question": "那就刚才这两处吧，2026-10-24到2026-10-25，只去它们，慢慢来。",
+      "answer": {
+        "text": "已按你的要求排好两天轻松草案：10月24日去星光大道，10月25日去西九艺术公园，只安排这两处，其余时间自由休息。星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，适合慢慢散步、看海和拍照 [avenue-stars]；西九艺术公园是西九文化区的海滨公共空间，可散步、休息并欣赏维港 [art-park]。这是可调整草案，交通与时间均为估算，不含酒店往返；开放安排等请出发前查官网。",
+        "citations": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": []
+      },
+      "notes": [
+        "与父母同行，希望看海并慢慢散步",
+        "只去星光大道和西九艺术公园"
+      ],
+      "day_place_ids": [
+        [
+          "avenue-stars"
+        ],
+        [
+          "art-park"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "days": 2,
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-25",
+              "pace": "轻松",
+              "must_visit": [
+                "avenue-stars",
+                "art-park"
+              ],
+              "only_selected": true
+            },
+            "notes": [
+              "与父母同行，希望看海并慢慢散步",
+              "只去星光大道和西九艺术公园"
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "plan_itinerary",
+          "status": "success",
+          "arguments": {
+            "days": 2,
+            "start_date": "2026-10-24",
+            "end_date": "2026-10-25",
+            "region": "全部",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [
+              "avenue-stars",
+              "art-park"
+            ],
+            "start_station": "",
+            "only_selected": true,
+            "excluded_places": []
+          },
+          "elapsed_ms": 318,
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → plan_itinerary"
+            ],
+            "arguments": {
+              "days": 2,
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-25",
+              "region": "全部",
+              "interests": [
+                "海港夜景",
+                "本地美食"
+              ],
+              "pace": "轻松",
+              "rain": false,
+              "public_only": false,
+              "must_visit": [
+                "avenue-stars",
+                "art-park"
+              ],
+              "start_station": "",
+              "only_selected": true,
+              "excluded_places": []
+            },
+            "elapsed_ms": 318,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 4627,
+        "model_responses": 3,
+        "live_model_responses": 3,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 3,
+      "question": "第一天想休息，不删景点，把两处都挪到第二天。",
+      "answer": {
+        "text": "已按你的要求调整：10月24日第一天留作休息与自由活动，不删景点；星光大道和西九艺术公园都移到10月25日第二天，顺序为星光大道 [avenue-stars] 后西九艺术公园 [art-park]。其他安排保留，时间与交通为估算，出发前请核对官网。",
+        "citations": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "ack",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": []
+      },
+      "notes": [
+        "与父母同行，希望看海并慢慢散步",
+        "只去星光大道和西九艺术公园"
+      ],
+      "day_place_ids": [
+        [],
+        [
+          "avenue-stars",
+          "art-park"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "revise_itinerary",
+          "status": "success",
+          "arguments": {
+            "edits": [
+              {
+                "action": "move",
+                "place_id": "avenue-stars",
+                "day": 2,
+                "position": 1
+              },
+              {
+                "action": "move",
+                "place_id": "art-park",
+                "day": 2,
+                "position": 2
+              }
+            ]
+          },
+          "elapsed_ms": 1,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 2,
+        "tool_calls": 1,
+        "decisions": 2,
+        "elapsed_ms": 2122,
+        "model_responses": 2,
+        "live_model_responses": 2,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 4,
+      "question": "第二天最后那个换成香港艺术馆，以后也别再加回被换掉的那处，另一处照旧。",
+      "answer": {
+        "text": "已按记住的条件逐天生成行程草案，详见下方。其中 1 天按你的已选地点数量保留为休息／自由活动日。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+        "citations": [],
+        "notice": "模型调用未完成 · 本轮已停止",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": false
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": [
+          "art-park"
+        ]
+      },
+      "notes": [
+        "与父母同行，希望看海并慢慢散步",
+        "只去星光大道和西九艺术公园"
+      ],
+      "day_place_ids": [
+        [],
+        [
+          "avenue-stars",
+          "hkmoa"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "must_visit": [
+                "avenue-stars",
+                "hkmoa"
+              ],
+              "excluded_places": [
+                "art-park"
+              ]
+            }
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "revise_itinerary",
+          "status": "success",
+          "arguments": {
+            "edits": [
+              {
+                "action": "replace",
+                "place_id": "art-park",
+                "replacement_id": "hkmoa",
+                "day": 2
+              }
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 3715,
+        "model_responses": 3,
+        "live_model_responses": 3,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "model_error"
+    }
+  ]
+}

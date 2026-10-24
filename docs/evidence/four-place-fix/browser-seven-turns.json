@@ -1,0 +1,460 @@
+{
+  "kind": "synthetic_real_browser_model_flow_not_accuracy_benchmark",
+  "turns": [
+    {
+      "answer": "已记住：与爸妈同行、节奏轻松，只去这四处——中环至半山自动扶梯 出处 ↗、元创方 PMQ 出处 ↗、兰芳园（中环）出处 ↗、香港动植物公园 出处 ↗，暂不安排行程。需要排行程时告诉我天数即可。",
+      "days": [],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 2,
+          "elapsed_ms": 4750,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 2,
+          "model_calls": 2,
+          "model_responses": 2,
+          "tool_calls": 1
+        },
+        "steps": [
+          {
+            "arguments": {
+              "changes": {
+                "must_visit": [
+                  "escalator",
+                  "pmq",
+                  "lan-fong-yuen",
+                  "zoological-gardens"
+                ],
+                "only_selected": true,
+                "pace": "轻松"
+              },
+              "notes": [
+                "与爸妈同行，节奏轻松"
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "update_trip"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "和爸妈去香港，想轻松走。只去中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园这四处。先记住选择，暂时别排行程。",
+      "trip": "这趟旅程：全部 · 待确认 天 · 轻松 · 不限室内 · 只安排已选地点 · 必去 中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "依据当前收录的官方资料，可以先考虑：\n\n1. 中环至半山自动扶梯（中环）：扶梯连接中环与半山社区，沿线可探索街道、店铺和文化空间。适合作为中环步行路线的一部分。 出处 ↗\n\n2. 元创方 PMQ（中环）：前警察宿舍活化为设计创意空间，集合本地设计店和工艺工作室。可以和中环街区、大馆串成一条文化散步路线。 出处 ↗\n\n3. 兰芳园（中环）（中环）：中环结志街的老牌食店，以港式丝袜奶茶闻名，也可品尝猪扒包等茶餐厅食物。适合作为中环游览的餐饮候选。 出处 ↗\n\n4. 香港动植物公园（中环）：香港历史悠久的城市公园，设花园、温室及鸟兽展示空间，可从中环街区延伸作绿地散步。 出处 ↗\n\n如果想把这些地点串起来，可以直接继续说“安排两天行程”，或调整左侧的旅行偏好。",
+      "days": [],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 2,
+          "elapsed_ms": 2744,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 2,
+          "model_calls": 2,
+          "model_responses": 2,
+          "tool_calls": 1
+        },
+        "steps": [
+          {
+            "arguments": {
+              "changes": {
+                "must_visit": [
+                  "escalator",
+                  "pmq",
+                  "lan-fong-yuen",
+                  "zoological-gardens"
+                ],
+                "only_selected": true,
+                "pace": "轻松"
+              },
+              "notes": [
+                "与爸妈同行，节奏轻松",
+                "只去中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园"
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "update_trip"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "请帮我把这几个地点串成行程。",
+      "trip": "这趟旅程：全部 · 待确认 天 · 轻松 · 不限室内 · 只安排已选地点 · 必去 中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "已按记住的条件逐天生成行程草案，详见下方。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+      "days": [
+        {
+          "places": [
+            "元创方 PMQ",
+            "中环至半山自动扶梯"
+          ],
+          "title": "中环与山顶"
+        },
+        {
+          "places": [
+            "香港动植物公园",
+            "兰芳园（中环）"
+          ],
+          "title": "中环与山顶"
+        }
+      ],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 3,
+          "elapsed_ms": 13250,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 3,
+          "model_calls": 3,
+          "model_responses": 3,
+          "tool_calls": 2
+        },
+        "steps": [
+          {
+            "arguments": {
+              "changes": {
+                "days": 2
+              }
+            },
+            "elapsed_ms": 1,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "update_trip"
+          },
+          {
+            "arguments": {
+              "days": 2,
+              "end_date": null,
+              "excluded_places": [],
+              "interests": [
+                "海港夜景",
+                "本地美食"
+              ],
+              "must_visit": [
+                "escalator",
+                "pmq",
+                "lan-fong-yuen",
+                "zoological-gardens"
+              ],
+              "only_selected": true,
+              "pace": "轻松",
+              "public_only": false,
+              "rain": false,
+              "region": "全部",
+              "start_date": null,
+              "start_station": ""
+            },
+            "elapsed_ms": 706,
+            "message": "",
+            "protocol": {
+              "arguments": {
+                "days": 2,
+                "end_date": null,
+                "excluded_places": [],
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "must_visit": [
+                  "escalator",
+                  "pmq",
+                  "lan-fong-yuen",
+                  "zoological-gardens"
+                ],
+                "only_selected": true,
+                "pace": "轻松",
+                "public_only": false,
+                "rain": false,
+                "region": "全部",
+                "start_date": null,
+                "start_station": ""
+              },
+              "elapsed_ms": 706,
+              "live_amap": false,
+              "server": "本地香港旅行 MCP",
+              "status": "success",
+              "steps": [
+                "initialize",
+                "tools/list",
+                "tools/call → plan_itinerary"
+              ],
+              "transport": "stdio"
+            },
+            "status": "success",
+            "tool": "plan_itinerary"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "玩两天",
+      "trip": "这趟旅程：全部 · 2 天 · 轻松 · 不限室内 · 只安排已选地点 · 必去 中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "已把香港动植物公园 出处 ↗ 挪到第一天，排在元创方 PMQ 出处 ↗ 和中环至半山自动扶梯 出处 ↗ 之后；第二天保留兰芳园（中环） 出处 ↗，没有加入其他地点。",
+      "days": [
+        {
+          "places": [
+            "元创方 PMQ",
+            "中环至半山自动扶梯",
+            "香港动植物公园"
+          ],
+          "title": "按你的修改安排行程"
+        },
+        {
+          "places": [
+            "兰芳园（中环）"
+          ],
+          "title": "按你的修改安排行程"
+        }
+      ],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 2,
+          "elapsed_ms": 6218,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 2,
+          "model_calls": 2,
+          "model_responses": 2,
+          "tool_calls": 1
+        },
+        "steps": [
+          {
+            "arguments": {
+              "edits": [
+                {
+                  "action": "move",
+                  "day": 1,
+                  "place_id": "zoological-gardens",
+                  "position": 3
+                }
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "revise_itinerary"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "把香港动植物公园挪到第一天，另外三个都保留，第二天也保留，不要加别的地方。",
+      "trip": "这趟旅程：全部 · 2 天 · 轻松 · 不限室内 · 只安排已选地点 · 必去 中环至半山自动扶梯、元创方 PMQ、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "已按确认状态记录：两天只去大馆 出处 ↗、中环至半山自动扶梯 出处 ↗、香港动植物公园 出处 ↗ 和兰芳园（中环） 出处 ↗；第一天为大馆、扶梯、动植物公园，第二天保留兰芳园。元创方 PMQ 出处 ↗ 以后不再安排。本轮仅修复回答格式，未执行新的行程修改。",
+      "days": [
+        {
+          "places": [
+            "大馆",
+            "中环至半山自动扶梯",
+            "香港动植物公园"
+          ],
+          "title": "按你的修改安排行程"
+        },
+        {
+          "places": [
+            "兰芳园（中环）"
+          ],
+          "title": "按你的修改安排行程"
+        }
+      ],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 4,
+          "elapsed_ms": 7777,
+          "external_model_verified": true,
+          "format_repairs": 1,
+          "live_model_responses": 5,
+          "model_calls": 5,
+          "model_responses": 5,
+          "tool_calls": 3
+        },
+        "steps": [
+          {
+            "arguments": {
+              "changes": {
+                "excluded_places": [
+                  "pmq"
+                ],
+                "must_visit": [
+                  "escalator",
+                  "tai-kwun",
+                  "lan-fong-yuen",
+                  "zoological-gardens"
+                ],
+                "only_selected": true
+              }
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "update_trip"
+          },
+          {
+            "arguments": {
+              "edits": [
+                {
+                  "action": "replace",
+                  "place_id": "pmq",
+                  "replacement_id": "tai-kwun"
+                }
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "revise_itinerary"
+          },
+          {
+            "arguments": {
+              "notes": [
+                "与爸妈同行，节奏轻松",
+                "只去中环至半山自动扶梯、大馆、兰芳园（中环）、香港动植物公园",
+                "元创方 PMQ 以后不再安排"
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "update_trip"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "元创方换成大馆，其他三个不变；元创方以后不要再排，仍然只去这四处。",
+      "trip": "这趟旅程：全部 · 2 天 · 轻松 · 不限室内 · 只安排已选地点 · 已排除 元创方 PMQ · 必去 中环至半山自动扶梯、大馆、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "已互换两天：第一天为兰芳园（中环）出处 ↗，第二天为大馆 出处 ↗、中环至半山自动扶梯 出处 ↗、香港动植物公园 出处 ↗。其他条件未动，仍只去这四处，元创方 PMQ 不再安排。",
+      "days": [
+        {
+          "places": [
+            "兰芳园（中环）"
+          ],
+          "title": "按你的修改安排行程"
+        },
+        {
+          "places": [
+            "大馆",
+            "中环至半山自动扶梯",
+            "香港动植物公园"
+          ],
+          "title": "按你的修改安排行程"
+        }
+      ],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 2,
+          "elapsed_ms": 2678,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 2,
+          "model_calls": 2,
+          "model_responses": 2,
+          "tool_calls": 1
+        },
+        "steps": [
+          {
+            "arguments": {
+              "edits": [
+                {
+                  "action": "swap_days",
+                  "day": 1,
+                  "other_day": 2
+                }
+              ]
+            },
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "revise_itinerary"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "前后两天互换一下，其他条件不要动。",
+      "trip": "这趟旅程：全部 · 2 天 · 轻松 · 不限室内 · 只安排已选地点 · 已排除 元创方 PMQ · 必去 中环至半山自动扶梯、大馆、兰芳园（中环）、香港动植物公园"
+    },
+    {
+      "answer": "目前两天只去四处：兰芳园（中环）出处 ↗、大馆 出处 ↗、中环至半山自动扶梯 出处 ↗、香港动植物公园 出处 ↗。第一天是兰芳园，第二天是大馆、扶梯和动植物公园。同行的是爸妈，节奏轻松。元创方 PMQ 出处 ↗ 以后不再安排。",
+      "days": [],
+      "execution": {
+        "metrics": {
+          "cost": null,
+          "decisions": 2,
+          "elapsed_ms": 8748,
+          "external_model_verified": true,
+          "format_repairs": 0,
+          "live_model_responses": 2,
+          "model_calls": 2,
+          "model_responses": 2,
+          "tool_calls": 1
+        },
+        "steps": [
+          {
+            "arguments": {},
+            "elapsed_ms": 0,
+            "message": "",
+            "protocol": {
+              "transport": "validated_local_state"
+            },
+            "status": "success",
+            "tool": "read_itinerary"
+          }
+        ],
+        "stop_reason": "complete"
+      },
+      "question": "现在还去哪些地方？跟谁一起？什么节奏？不要再排哪一处？",
+      "trip": "这趟旅程：全部 · 2 天 · 轻松 · 不限室内 · 只安排已选地点 · 已排除 元创方 PMQ · 必去 中环至半山自动扶梯、大馆、兰芳园（中环）、香港动植物公园"
+    }
+  ],
+  "checks": {
+    "seven_completed": true,
+    "real_model": true,
+    "no_tool_errors": true,
+    "four_planned": true,
+    "move": true,
+    "replace": true,
+    "reload_swap": true,
+    "recall": true
+  },
+  "all_passed": true,
+  "known_fallback": "Round 2 displayed local text after model prose validation failed; corrected missing-duration fallback separately verified. Round 3 kept valid tool itinerary with local summary. Round 5 had one no-tool format repair."
+}

@@ -1,0 +1,23 @@
+{
+  "source_snapshot": "1.3.23",
+  "date": "2026-10-23",
+  "checks": "297 Python + 17 frontend; data, development retrieval, real local stdio MCP and Agent acceptance passed",
+  "source_runtime_matches": true,
+  "root_files_checked": [
+    "app.py",
+    "run.py",
+    "start.py",
+    "requirements.txt",
+    "requirements-dev.txt",
+    "requirements-lock.txt",
+    ".env.example",
+    "data/places.json",
+    "data/transit.json",
+    "data/eval_cases.json",
+    "data/holdout_cases.json"
+  ],
+  "secret_and_path_scan": "No configured secret, credential pattern, private absolute path or runtime database in candidate files",
+  "private_history": "excluded",
+  "publish_strategy": "feature branch and pull request per repository collaboration guide",
+  "holdout_sha256": "01c5e215f9fa3f45b28707fe5ef8c3caa5ea4c42935b426cfdb62c99e043a31b"
+}

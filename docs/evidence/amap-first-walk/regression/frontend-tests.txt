@@ -1,0 +1,25 @@
+✔ valid draft restores and clear removes both cache formats (1.854959ms)
+✔ changed knowledge version and removed place reject old draft (0.083417ms)
+✔ malformed and incomplete storage never breaks startup (0.639625ms)
+✔ invalid saved inputs, missing legs and inconsistent times are rejected (0.171958ms)
+✔ disabled browser storage falls back to current-page operation (0.109333ms)
+✔ inclusive same-day and three-day ranges (7.560375ms)
+✔ calendar boundaries are timezone independent (0.129625ms)
+✔ reject partial, nonexistent, reversed and unsupported ranges (0.131666ms)
+✔ long ranges derive complete inclusive calendar lengths (0.622334ms)
+✔ compact map is available only for walking legs (0.78575ms)
+✔ walking navigation uses place names and has no key (0.139458ms)
+✔ map labels and attributes escape hostile names (0.260917ms)
+✔ visible walking panel automatically requests and displays AMap route (4.144417ms)
+✔ ambiguous positions require selection then automatically calculate route (1.019875ms)
+✔ unavailable route shows retry without a substitute map (0.327292ms)
+✔ disposed panel ignores a late route response (0.297333ms)
+✔ failed place lookup is not cached and retry reaches provider again (0.296208ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.445083

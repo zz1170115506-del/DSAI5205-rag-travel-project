@@ -1,0 +1,16 @@
+✔ valid draft restores and clear removes both cache formats (1.07825ms)
+✔ changed knowledge version and removed place reject old draft (0.06275ms)
+✔ malformed and incomplete storage never breaks startup (0.409958ms)
+✔ invalid saved inputs, missing legs and inconsistent times are rejected (0.169667ms)
+✔ disabled browser storage falls back to current-page operation (0.112583ms)
+✔ inclusive same-day and three-day ranges (3.957792ms)
+✔ calendar boundaries are timezone independent (0.082833ms)
+✔ reject partial, nonexistent, reversed and unsupported ranges (0.154792ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 48.959208
