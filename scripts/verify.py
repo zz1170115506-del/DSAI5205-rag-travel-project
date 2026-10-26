@@ -8,6 +8,7 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--node',default=shutil.which('node'));parser.add_argument('--out',type=Path,default=ROOT/'docs/evidence/latest')
     args=parser.parse_args();args.out.mkdir(parents=True,exist_ok=True)
     env=dict(os.environ);env.pop('MODEL_API_KEY',None);env.pop('AMAP_API_KEY',None)
+    env['RETRIEVAL_MODE']='bm25'
     tasks=[('python-tests',[sys.executable,'-m','pytest','-q','--junitxml='+str(args.out/'pytest.xml')]),('data-validation',[sys.executable,'scripts/manage_data.py','data/places.json']),('development-retrieval',[sys.executable,'scripts/evaluate.py']),('local-doctor',[sys.executable,'scripts/doctor.py','--mcp']),('agent-acceptance',[sys.executable,'scripts/evaluate_agent.py'])]
     if args.node:tasks.append(('frontend-tests',[args.node,'--test','tests/plan-storage.test.mjs','tests/trip-dates.test.mjs','tests/walking-map.test.mjs']))
     results=[]

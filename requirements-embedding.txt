@@ -1,0 +1,3 @@
+# Optional local CPU embeddings. Keeps the existing application dependency pins.
+-r requirements-lock.txt
+fastembed==0.9.1

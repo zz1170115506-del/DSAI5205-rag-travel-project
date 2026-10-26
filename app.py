@@ -17,6 +17,7 @@ from travel.knowledge import INTERESTS, REGIONS, dataset, get_place, places, sea
 from travel.mcp_client import ToolError, amap_search, local_call
 from travel.chat import build_router
 from travel.retrieval import retrieve
+from travel.embeddings import retrieval_status
 
 # 避免外部 HTTP 日志把带 key 的高德 URL 打印出来。
 logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -130,6 +131,7 @@ def status():
     from zoneinfo import ZoneInfo
     return {'today_hk': datetime.now(ZoneInfo('Asia/Hong_Kong')).date().isoformat(), 'max_trip_days': MAX_TRIP_DAYS, 'name': '港慢游', 'version': app.version, 'knowledge_version': dataset()['version'],
             'place_count': len(places()), 'model_configured': bool(settings.model_api_key),
+            'retrieval': retrieval_status(),
             'model_name': settings.model_name if settings.model_api_key else None,
             'amap_configured': settings.amap_enabled and bool(settings.amap_api_key),
             'amap_enabled': settings.amap_enabled, 'amap_key_present': settings.amap_key_present or bool(settings.amap_api_key),

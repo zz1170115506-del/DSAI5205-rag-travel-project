@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from travel.config import ROOT,Settings
 from travel.data_validation import load_validated
+from travel.embeddings import retrieval_status
 from travel.mcp_client import local_call
 
 def main():
@@ -13,6 +14,7 @@ def main():
     try:
         data=load_validated(ROOT/'data/places.json');settings=Settings.from_env()
         result={'ok':True,'python':platform.python_version(),'platform':platform.system()+' '+platform.machine(),'packages':{p:version(p) for p in ['fastapi','mcp','httpx','pydantic','uvicorn','langgraph']},'knowledge_version':data['version'],'records':len(data['places']),'model_key_present':bool(settings.model_api_key),'amap_key_present':bool(settings.amap_api_key),'external_requests_made':False}
+        result['retrieval']=retrieval_status()
         if args.mcp:
             found,trace=asyncio.run(local_call('search_places',{'query':'深水埗有什么小吃','kind':'food','limit':3}))
             result['mcp']={'trace':trace,'result_ids':[p['id'] for p in found['results']]}
