@@ -218,7 +218,14 @@ async function showRoute(button){
  target.innerHTML=`${image}<p class="fine-print">高德步行参考：${(data.distance_m/1000).toFixed(1)} 公里 · 约 ${Math.ceil(data.duration_s/60)} 分钟。${esc(data.message)}${data.map_image?'':' 当前仅渲染返回的路径，无地图底图。'}<br>来源：${esc(data.source.name)} · ${esc(data.source.fetched_at)}</p>`;
  }catch(e){target.innerHTML=errorHTML(e.message);}finally{button.disabled=false;}
 }
-function statusHTML(s){return `<div class="status-card"><h3>本地资料与检索</h3><span class="badge">${s.place_count} 条 · 真实本地工具</span><p>SQLite BM25 找到候选，再按名称、街区和文本覆盖程度重排。回答可查出处与执行记录。</p></div><div class="status-card"><h3>大模型工具助手</h3><span class="badge">${s.model_configured?'已配置 · 手动开启':'尚未配置'}</span><p>${s.model_configured?esc(s.model_name)+' 可用于问答与工具选择。':'当前使用规则工具演示。'}开启后，问题、有限历史及工具资料会发送给配置的模型服务。</p></div><div class="status-card"><h3>高德地点与路线</h3><span class="badge">${s.amap_configured?'已配置 · 按需查询':s.amap_enabled===false?'自动查询未启用':'尚未配置 · 不发外部请求'}</span><p>行程默认显示 OpenStreetMap 真实底图，无需高德 Key。高德另提供地点查询和步行路线接口，启用后需验证香港覆盖和权限。</p></div>`;}
+function statusHTML(s){
+ const r=s.retrieval||{};
+ const hybrid=r.configured_mode==='hybrid';
+ const ready=r.index_ready&&r.dependency_available;
+ const retrievalLabel=hybrid?(ready?'语义＋关键词 · 索引就绪':'关键词检索 · 语义待准备'):'关键词检索';
+ const retrievalNote=hybrid?'结合语义相似度与关键词查找相关地点；语义检索不可用时自动使用关键词检索。每条回答可查看实际检索方式与出处。':'按名称、街区和文本关键词查找相关地点，回答可查出处与执行记录。';
+ return `<div class="status-card"><h3>本地资料与检索</h3><span class="badge">${s.place_count} 条 · ${retrievalLabel}</span><p>${retrievalNote}</p></div><div class="status-card"><h3>大模型工具助手</h3><span class="badge">${s.model_configured?'已配置 · 手动开启':'尚未配置'}</span><p>${s.model_configured?esc(s.model_name)+' 可用于问答与工具选择。':'当前使用规则工具演示。'}开启后，问题、有限历史及工具资料会发送给配置的模型服务。</p></div><div class="status-card"><h3>高德地点与路线</h3><span class="badge">${s.amap_configured?'已配置 · 按需查询':s.amap_enabled===false?'自动查询未启用':'尚未配置 · 不发外部请求'}</span><p>行程默认显示 OpenStreetMap 真实底图，无需高德 Key。高德另提供地点查询和步行路线接口，启用后需验证香港覆盖和权限。</p></div>`;
+}
 async function init(){
  try{const [s,data]=await Promise.all([api('/api/status'),api('/api/places')]);state.status=s;state.places=data.places;
   $('#place-count').textContent=s.place_count;$('#data-version').textContent=s.knowledge_version;$('#status-grid').innerHTML=statusHTML(s);

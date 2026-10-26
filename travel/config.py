@@ -1,10 +1,34 @@
 import os
+import math
 from dataclasses import dataclass
 from pathlib import Path
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values, load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
+
+
+@dataclass(frozen=True)
+class RetrievalSettings:
+    mode: str = 'bm25'
+    model_name: str = 'BAAI/bge-small-zh-v1.5'
+    min_score: float = 0.5
+
+    def __post_init__(self):
+        if self.mode not in {'bm25', 'hybrid'}:
+            raise ValueError('RETRIEVAL_MODE 须为 bm25 或 hybrid。')
+        if not self.model_name or not math.isfinite(self.min_score) or not 0 <= self.min_score <= 1:
+            raise ValueError('Embedding 模型名或相似度阈值无效。')
+
+    @classmethod
+    def from_env(cls):
+        # Read only retrieval options; do not export model/map keys into MCP's environment.
+        values = dotenv_values(ROOT / '.env')
+        def read(name, default):
+            return str(os.environ.get(name, values.get(name) or default)).strip()
+        return cls(mode=read('RETRIEVAL_MODE', 'bm25'),
+                   model_name=read('EMBEDDING_MODEL', 'BAAI/bge-small-zh-v1.5'),
+                   min_score=float(read('EMBEDDING_MIN_SCORE', '0.5')))
 
 
 @dataclass(frozen=True)

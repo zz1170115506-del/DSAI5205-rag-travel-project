@@ -42,6 +42,9 @@ async def local_session():
     # 不把模型／高德密钥传给只需本地资料的子进程。
     env = {k: v for k, v in os.environ.items() if k in ['PATH', 'SYSTEMROOT', 'WINDIR', 'TMP', 'TEMP', 'HOME']}
     env['PYTHONIOENCODING'] = 'utf-8'
+    for name in ('RETRIEVAL_MODE', 'EMBEDDING_MODEL', 'EMBEDDING_MIN_SCORE'):
+        if name in os.environ:
+            env[name] = os.environ[name]
     params = StdioServerParameters(command=sys.executable, args=['-m', 'travel.mcp_server'], cwd=ROOT, env=env)
     async with stdio_client(params) as (read, write):
         async with ClientSession(read, write, read_timeout_seconds=timedelta(seconds=20)) as session:
