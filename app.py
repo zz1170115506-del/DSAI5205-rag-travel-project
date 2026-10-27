@@ -18,6 +18,7 @@ from travel.mcp_client import ToolError, amap_search, local_call
 from travel.chat import build_router
 from travel.retrieval import retrieve
 from travel.embeddings import retrieval_status
+from travel.web_access import WebAccess, DemoRateLimit, EXPENSIVE_PATHS
 
 # 避免外部 HTTP 日志把带 key 的高德 URL 打印出来。
 logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -31,13 +32,20 @@ async def lifespan(app):
 
 
 app = FastAPI(title='港慢游 · Hong Kong Travel Assistant', version='1.3.0', docs_url=None, redoc_url=None, lifespan=lifespan)
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost', '[::1]', 'testserver'])
-app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
 settings = Settings.from_env()
+web_access = WebAccess.from_env()
+demo_rate_limit = DemoRateLimit()
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=web_access.allowed_hosts)
+app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
 # 单机演示：限制同时启动的 MCP 子进程数，避免连续点击堆积。
 semaphore = asyncio.Semaphore(4)
 agent_sessions = Sessions()
 app.include_router(build_router(lambda: settings, semaphore))
+
+
+@app.get('/healthz')
+def healthz():
+    return {'status': 'ok'}
 
 
 class AgentRequest(BaseModel):
@@ -81,14 +89,23 @@ async def delete_agent_session(body: AgentResetRequest):
 
 
 @app.middleware('http')
-async def local_origin_only(request: Request, call_next):
+async def request_guard(request: Request, call_next):
+    # Public demo credentials cover the UI, all APIs and shared conversation history.
+    if web_access.public and request.url.path != '/healthz':
+        if not web_access.authorized(request.headers.get('authorization')):
+            return JSONResponse({'detail': '请输入小组演示的访问用户名和密码。'}, status_code=401,
+                headers={'WWW-Authenticate': 'Basic realm="Travel demo", charset="UTF-8"', 'Cache-Control': 'no-store'})
     if request.method in ['POST', 'PUT', 'DELETE', 'PATCH']:
         origin = request.headers.get('origin')
-        if origin and origin != f'{request.url.scheme}://{request.headers.get("host")}':
-            return JSONResponse({'detail': '只接受本地页面的请求。'}, status_code=403)
+        expected_origin = web_access.origin if web_access.public else f'{request.url.scheme}://{request.headers.get("host")}'
+        if origin and origin != expected_origin:
+            return JSONResponse({'detail': '只接受同源页面的请求。'}, status_code=403)
         length = request.headers.get('content-length', '0')
         if not length.isdigit() or int(length) > 20_000:
             return JSONResponse({'detail': '请求过大。'}, status_code=413)
+        if web_access.public and request.url.path in EXPENSIVE_PATHS and not demo_rate_limit.allow():
+            return JSONResponse({'detail': '小组演示请求较多，请稍后再试。'}, status_code=429,
+                                headers={'Retry-After': '60', 'Cache-Control': 'no-store'})
     response = await call_next(request)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'no-referrer'

@@ -1,8 +1,10 @@
 # NVIDIA 官方 DeepSeek Flash 开发端点
 
+2026-10-27：项目示例配置已切换至 [魔搭 ModelScope](ModelScope模型接入.md)，本页保留 NVIDIA 手动配置与历史验证记录。
+
 核对日期：2026-10-26。NVIDIA 的 DeepSeek-V4.1-Flash 页面提供免费原型开发端点。它需要个人 NVIDIA API Key，免费试用的范围、额度、限流和可用性由平台决定，不代表永久或无限调用。
 
-验证状态：本地 Embedding 与检索已验证可用；2026-10-26 的 NVIDIA API 请求未完成生成，网页 Playground 也持续等待，尚未验证云端回答成功。目前保留 NVIDIA 配置，后续再重试。
+验证状态：本地 Embedding 与检索已验证可用；2026-10-26 的 NVIDIA API 请求未完成生成，网页 Playground 也持续等待，尚未验证云端回答成功。
 
 ## 获取并填写 Key
 

@@ -3,6 +3,7 @@ import asyncio
 import json
 import re
 import secrets
+import time
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, ConfigDict, StrictBool
@@ -15,6 +16,7 @@ from .history import HistoryStore
 from .maps import resolve_place, route_map
 from .transit import enrich_plan, from_station
 from .place_search import search_library
+from .map_rag import supplement_with_map
 from typing import Literal
 
 store = HistoryStore()
@@ -73,7 +75,7 @@ class TransitRequest(BaseModel):
 def explicit_name(question):
     q = question.strip(' ？?。')
     q = re.sub(r'^(请问|请介绍|介绍一下|帮我查一下|帮我找一下|介绍|查找)', '', q)
-    q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|是什么地方)$', '', q).strip()
+    q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|地址是什么|是什么地方|有什么特色|有什么特点)$', '', q).strip()
     if 2 <= len(q) <= 60 and q != question.strip(' ？?。') and not any(w in q for w in ['推荐', '有哪些', '什么景点', '行程', '几天', '天气', '票价']):
         return q
     return None
@@ -205,22 +207,21 @@ def build_router(settings_getter, semaphore):
                 await engine.graph.aupdate_state(config, {**saved['checkpoint'],**restore_memory(saved),'place_context':hydrate_context(saved)}, as_node='finish')
             try:
                 async with semaphore:
+                    turn_started = time.monotonic()
                     result = await engine.turn('chat', q, body.trip.model_dump() if body.trip else None)
                     result.pop('session_id', None)
                     # Explicit named-place questions should not be satisfied by an incidental
                     # bigram match. General travel/itinerary queries keep ordinary retrieval.
                     name = explicit_name(q)
                     intent = (await engine.graph.aget_state(config)).values.get('intent')
-                    if intent == 'search' and result['stop_reason']=='complete' and not result['plan'] and result['answer'].get('kind')!='clarify':
+                    if intent == 'search' and result['stop_reason']=='complete' and not result['plan']:
                         from .retrieval import exact_places
-                        if (name and not exact_places(name)) or not result['sources']:
+                        named_miss = bool(name and not exact_places(name))
+                        if (named_miss or not result['sources']) and (named_miss or result['answer'].get('kind')!='clarify'):
                             query=next((step.get('arguments',{}).get('query') for step in reversed(result['trace']) if step.get('tool')=='search_places' and step.get('status') in ('success','empty')),q)
-                            external = await resolve_place((query if body.use_model else name or q)[:100], cfg)
-                            result['external_lookup'] = external
-                            if external['provider'] == 'amap':
-                                result['sources'] = []
-                                result['answer'] = {'text': external['message'], 'citations': [],
-                                                    'mode': 'map_lookup', 'notice': '本地未收录 · 地图补充查询', 'model_output_accepted': False}
+                            await supplement_with_map(result,q,(name or query)[:100],cfg,body.use_model,
+                                lookup=resolve_place,time_budget=max(.1,65-(time.monotonic()-turn_started)))
+                    result['metrics']['elapsed_ms'] = round((time.monotonic()-turn_started)*1000)
                 state = (await engine.graph.aget_state(config)).values
                 history = state.get('history', [])
                 if history:
