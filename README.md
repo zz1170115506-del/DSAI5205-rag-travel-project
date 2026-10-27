@@ -43,14 +43,15 @@ Windows 使用 `.venv\Scripts\python.exe` 替换上述 Python 路径。
 
 ```dotenv
 MODEL_API_KEY=
-MODEL_BASE_URL=https://api.deepseek.com/v1
-MODEL_NAME=deepseek-flash
+MODEL_BASE_URL=https://integrate.api.nvidia.com/v1
+MODEL_NAME=deepseek-ai/deepseek-v4.1-flash
 AMAP_API_KEY=
 AMAP_ENABLED=false
 ```
 
 - 没有密钥即可使用本地规则演示，网页会标明模式。
 - 配置模型后，勾选“使用大模型”才发起模型请求；问题、有限上下文、偏好及相关资料会发送给所配置服务。
+- 当前示例配置使用 NVIDIA 官方 DeepSeek-V4.1-Flash 免费开发端点，需要自己的 NVIDIA API Key；免费试用范围、额度与可用性以平台为准。见 [NVIDIA 接入说明](docs/NVIDIA免费模型接入.md)。不自动切换到付费模型或服务。
 - 使用高德需要自己的 Web 服务 Key，并设置 `AMAP_ENABLED=true` 后重启；费用、额度和服务权限由自己的供应商账户决定。
 - 历史保存于忽略的 `work/user-data/conversations.sqlite3`。单机最多 25 段对话，每段保存最近 20 轮；模型上下文有长度边界，没有无限记忆或云同步。
 
