@@ -149,3 +149,16 @@ def test_http_route_exposes_actual_hybrid_retrieval_without_credentials(monkeypa
         status = client.get('/api/status').json()
         assert status['retrieval']['configured_mode'] == 'hybrid'
         assert 'api_key' not in json.dumps(status)
+
+
+@pytest.mark.parametrize('env_text, expected', [
+    ('EMBEDDING_MODEL=legacy-local-model\n', 'legacy-local-model'),
+    ('MODEL_MODE=remote\nEMBEDDING_MODEL=remote-only-model\n', 'BAAI/bge-small-zh-v1.5'),
+    ('MODEL_MODE=remote\nEMBEDDING_MODEL=remote-only-model\nLOCAL_EMBEDDING_MODEL=explicit-local-model\n', 'explicit-local-model'),
+])
+def test_local_and_fullstack_embedding_configuration_are_isolated(tmp_path, monkeypatch, env_text, expected):
+    (tmp_path / '.env').write_text(env_text)
+    monkeypatch.setattr(config, 'ROOT', tmp_path)
+    for key in ('LOCAL_EMBEDDING_MODEL', 'EMBEDDING_MODEL', 'MODEL_MODE'):
+        monkeypatch.delenv(key, raising=False)
+    assert RetrievalSettings.from_env().model_name == expected

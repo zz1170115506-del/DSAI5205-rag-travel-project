@@ -27,7 +27,7 @@ MODEL_API_KEY=
 MODEL_BASE_URL=https://api-inference.modelscope.cn/v1
 MODEL_NAME=deepseek-ai/DeepSeek-V4.1-Flash-1017
 RETRIEVAL_MODE=hybrid
-EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
+LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
 ```
 

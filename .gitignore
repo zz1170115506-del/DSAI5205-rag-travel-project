@@ -49,3 +49,10 @@ outputs/
 *.pem
 *.key
 AGENTS.md
+
+# Fullstack runtime and evaluation artifacts
+*.db-journal
+/data/reports/*
+!/data/reports/.gitkeep
+/data/evaluation/*
+!/data/evaluation/.gitkeep

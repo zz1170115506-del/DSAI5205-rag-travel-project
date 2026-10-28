@@ -1,0 +1,69 @@
+{
+  "health": {
+    "status": "ready",
+    "index_version": "1e3e73e512a84cfe82340eb1f946f0ef",
+    "model_mode": "remote",
+    "synthetic_data": true
+  },
+  "real_streaming_qa": "passed",
+  "token_events": 142,
+  "stream_span_seconds": 0.708,
+  "memory_roundtrip": "passed",
+  "cross_session_preferences": "passed",
+  "memory_delete": "passed",
+  "cancel": "passed",
+  "usage": {
+    "ttft_ms": 6529.7517939999925,
+    "total_ms": 7257.206335999967,
+    "model_calls": 5,
+    "provider_usage": [
+      {
+        "total_tokens": 657,
+        "prompt_tokens": 175,
+        "completion_tokens": 482,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 175,
+        "completion_tokens_details": {
+          "reasoning_tokens": 436
+        }
+      },
+      {
+        "total_tokens": 23,
+        "prompt_tokens": 23
+      },
+      {
+        "total_tokens": 23,
+        "prompt_tokens": 23
+      },
+      {
+        "total_tokens": 23,
+        "prompt_tokens": 23
+      },
+      {
+        "total_tokens": 757,
+        "prompt_tokens": 478,
+        "completion_tokens": 279,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 478,
+        "completion_tokens_details": {
+          "reasoning_tokens": 136
+        }
+      }
+    ]
+  },
+  "answer_preview": "“演示历史馆（Demo History Museum）”是一个**虚构历史馆**，用于展示“演示城市”的发展与文化，适合了解历史；类型为室内馆，建议游玩约60分钟，参考票价为0港币，所在地区标注为“演示尖沙咀区”。[1]\n\n**资料性质：是虚构资料。** 证据明确说明其“全部内容为虚构数据，不可用于真实出行”，来源类型也标为合成数据（synthetic），来源网址为示例无效地址。[1] 因此，上述名称、时长、票价和地区只能用于演示，不能作为真实旅游信息使用。\n\n来源核对时间：2026-10-24。[1]",
+  "mysql_regression": {
+    "passed": 31,
+    "warnings": 2,
+    "seconds": 5.73
+  },
+  "container_restart_persistence": "passed",
+  "docker_engine_version": "29.7.2",
+  "embedding_dimension": 1024
+}

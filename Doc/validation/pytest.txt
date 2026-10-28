@@ -1,0 +1,12 @@
+...............................                                          [100%]
+=============================== warnings summary ===============================
+../../rag-travel-venv/lib/python3.12/site-packages/starlette/testclient.py:37
+  /private/tmp/rag-travel-venv/lib/python3.12/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+tests/test_api.py::test_auth_scope_memory_deletion_and_csrf
+  /private/tmp/rag-travel-venv/lib/python3.12/site-packages/httpx/_models.py:408: DeprecationWarning: Use 'content=<...>' to upload raw bytes/text content.
+    headers, stream = encode_request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+31 passed, 2 warnings in 1.46s

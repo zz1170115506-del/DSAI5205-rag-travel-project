@@ -63,3 +63,7 @@
 - 资料引用采用规范地点 ID，并可从 `sources` 读取官方链接。引用编号通过校验不代表模型事实必然正确。
 
 详细参数与约束以 `travel/chat.py`、`travel/agent.py`、`app.py` 的 Pydantic 模型为准。当前接口没有生产鉴权、订票或实时交通承诺。
+
+## Docker 六模块接口
+
+`frontend/` 与 `backend/` 使用独立的 `/api/v1/` 协议，见[六模块 API](../Doc/09-fullstack-api.md)。本文接口只适用于根目录 `app.py` 应用。

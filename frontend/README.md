@@ -1,7 +1,17 @@
-# 前端入口
+# 港游前端
 
-当前可运行前端位于仓库根目录 [`static/`](../static/)，采用原生 HTML / CSS / JavaScript，由 FastAPI 同源提供，无需 npm 构建。
+原生 HTML、CSS、JavaScript ES Modules，无 npm 安装或编译步骤。Docker 使用 Nginx 提供静态资源，并将同源 `/api/` 转发到后端；本机 Python 预览由 FastAPI 提供相同静态文件。
 
-运行根目录 `python3 start.py`，打开本机页面即可。`static/app.js` 组织问答、行程与历史交互；`itinerary-map.js` 提供行程总览；`walking-map.mjs` 展示高德步行路线。
+功能：景点卡片、室内外筛选、混合检索、桌面景点坐标与按需外部地图、带引用/关系路径的 SSE 聊天、历史会话、停止/纠正、偏好启用/编辑/删除。
 
-此目录保留初始仓库结构，暂未迁入第二套前端应用。接口见 [`docs/api.md`](../docs/api.md)，模型和高德密钥仅在后端配置。
+外部 OpenStreetMap 地图与字体需联网；无网络时系统字体、景点卡片和文字功能仍可用。小屏将地图与详情放到景点列表下方，保留筛选与聊天；当前展示图片缺失时使用明确的图形占位，不伪造景点照片。
+
+前端不接收模型或数据库密钥；所有环境配置放根目录 `.env`。见 [运行指南](../Doc/04-run-and-env.md)。
+
+## 交互修复
+
+示例和景点提问现在一键发送；生成过程展示状态与等待反馈，引用在本页查看证据。前端回归测试见 `tests/ui-utils.test.mjs`，有 Node.js 时执行 `node --test frontend/tests/ui-utils.test.mjs`。具体验证见 [交互修复记录](../Doc/07-frontend-interaction-fix.md)。
+
+## 另一套本机界面
+
+原 main 的网页保留在根目录 `static/`，由 `python3 start.py` 提供，接口为 `docs/api.md`。本目录配套 Docker `/api/v1/`，接口见[六模块 API](../Doc/09-fullstack-api.md)，二者不能交叉使用。
