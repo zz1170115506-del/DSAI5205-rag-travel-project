@@ -39,9 +39,11 @@
 
 模型读取有界历史、规范选择、偏好与最新行程。`use_model=true` 需要本机配置模型服务，否则返回明确错误；未开启时不调用模型。
 
+相对天数修改以本轮开始时的旅行总天数为基准：“再多加一天”增加一天，“少玩一天”减少一天，“改成一天”设置为一天，同时更新已有结束日期。模型的 `update_trip` 工具新增 `day_change: {"operation":"increase","amount":1}`，也支持 `decrease` 和 `set`；不能与 `changes.days/start_date/end_date` 混用。原天数未知或调整后超出 1–366 天时保留原条件并要求澄清；本地模式的停止原因是 `clarify_days`。
+
 ### 地图补充检索
 
-本地搜索未命中，或明确指定了未收录的地点名称时，问答可按需查询高德香港 POI。需配置 `AMAP_API_KEY` 和 `AMAP_ENABLED=true`；模型模式还会将实际返回的有限地图字段发送给所配置的模型生成回答。`external_lookup` 保留候选与来源、查询时间；`trace` 包含 `map_search`，发起地图资料生成时还包含 `map_rag_answer`。
+本地搜索未命中、明确指定未收录的地点名称，或商场／博物馆推荐缺少足够的同类候选时，问答可按需查询高德香港 POI。语义相似但类别不符的结果不能满足推荐需求。“九龙有哪些商场”整理为“香港 九龙 商场”；地图补充本身不修改行程条件。类别推荐默认目标三个、最多五个候选，不保证全量覆盖。需配置 `AMAP_API_KEY` 和 `AMAP_ENABLED=true`；模型模式还会将实际返回的有限地图字段发送给所配置的模型生成回答。`external_lookup` 保留候选与来源、查询时间和 `coverage`；`trace` 包含 `map_search`，发起地图资料生成时还包含 `map_rag_answer`。
 
 地图生成成功时，`answer.mode=model`、`answer.retrieval_source=amap`、`metrics.map_rag_used=true`；正文 `[map-1]` 等编号对应 `external_lookup.results[].citation_id`，前端链接到服务端构建的高德地点页。地图查询使用供应商的关键词搜索，不宣称使用了 Embedding。`sources` 仍只用于本地规范地点，外部 POI 不会成为自动行程的地点 ID。详见 [地图补充检索说明](地图补充检索.md)。
 

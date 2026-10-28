@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlencode
 
 import httpx
+from .place_intent import requested_category, matches_category
 
 from .knowledge import get_place, normalize
 from .retrieval import exact_places
@@ -80,6 +81,7 @@ async def search_map(query, settings, http_transport=None):
                               'review_status': 'external_unreviewed', 'curated_knowledge': False})
             except (ValueError, TypeError, AttributeError):
                 continue
+        found = [p for p in found if matches_category(p, requested_category(query), external=True)]
         encoded = str(found)
         if settings.amap_api_key in encoded:
             raise ValueError('credential reflection')

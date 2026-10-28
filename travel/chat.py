@@ -20,6 +20,8 @@ from .transit import enrich_plan, from_station
 from .place_search import search_library
 from .map_rag import supplement_with_map
 from .streaming import chat_events
+from .place_intent import requested_category, matches_category, category_search, desired_count, map_category_query
+from .answers import demo_answer
 from typing import Literal
 
 store = HistoryStore()
@@ -219,12 +221,23 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
                     # bigram match. General travel/itinerary queries keep ordinary retrieval.
                     name = explicit_name(q)
                     intent = (await engine.graph.aget_state(config)).values.get('intent')
-                    if intent == 'search' and result['stop_reason']=='complete' and not result['plan']:
+                    category = requested_category(q)
+                    broad_category = bool(category and category_search(q) and not name)
+                    if (intent == 'search' or broad_category) and result['stop_reason']=='complete' and not result['plan']:
                         from .retrieval import exact_places
+                        if category:
+                            valid = [p for p in result['sources'] if matches_category(p, category)]
+                            if len(valid) != len(result['sources']):
+                                # Do not retain prose that recommended the rejected category.
+                                result['sources'] = valid
+                                result['answer'] = {**result['answer'], **demo_answer(q, valid),
+                                                    'model_output_accepted': False, 'kind': 'answer'}
+                        insufficient = broad_category and len(result['sources']) < desired_count(q)
                         named_miss = bool(name and not exact_places(name))
-                        if (named_miss or not result['sources']) and (named_miss or result['answer'].get('kind')!='clarify'):
+                        if (named_miss or insufficient or not result['sources']) and (named_miss or insufficient or result['answer'].get('kind')!='clarify'):
                             query=next((step.get('arguments',{}).get('query') for step in reversed(result['trace']) if step.get('tool')=='search_places' and step.get('status') in ('success','empty')),q)
-                            await supplement_with_map(result,q,(name or query)[:100],cfg,body.use_model,
+                            query = map_category_query(q, result['trip']['region']) if broad_category else (name or query)
+                            await supplement_with_map(result,q,query[:100],cfg,body.use_model,
                                 lookup=resolve_place,time_budget=max(.1,65-(time.monotonic()-turn_started)))
                     result['metrics']['elapsed_ms'] = round((time.monotonic()-turn_started)*1000)
                 state = (await engine.graph.aget_state(config)).values

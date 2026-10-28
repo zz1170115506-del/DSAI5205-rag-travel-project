@@ -23,7 +23,8 @@ from .transit import station_options, validate_station
 from .place_context import clean_context, resolve_reference, next_context
 from .conversation_memory import bounded_history,clean_notes,plan_snapshot,model_memory
 from .itinerary_edits import EditArgs,revise_plan
-from .trip_dates import resolve_dates, date_for_day, MAX_TRIP_DAYS
+from .trip_dates import resolve_dates, date_for_day, MAX_TRIP_DAYS, DayChange, DayChangeError, parse_day_change
+from .place_intent import requested_category, matches_category, search_region
 
 MAX_TOOLS, MAX_DECISIONS = 6, 8
 TURN_TIMEOUT, TOOL_TIMEOUT = 60, 15
@@ -79,7 +80,7 @@ def validate_trip(value):
     return trip.model_dump()
 
 
-def extract_patch(question):
+def extract_patch(question, current_days=None):
     """Conservative demo parser, also protects explicit supported constraints in model mode."""
     q = normalize(question)
     patch = {}
@@ -94,23 +95,9 @@ def extract_patch(question):
                           ('九龙', ['九龙']), ('大屿山', ['大屿山'])]:
         if any(w in region_question for w in words):
             patch['region'] = region
-    match = re.search(r'(?<![0-9.])(-?[0-9]+(?:\.[0-9]+)?|[零〇一二三四五六七八九十百千万亿两]+)\s*天', q)
-    if match:
-        raw = match[1]
-        if re.fullmatch(r'[0-9]+', raw):
-            number = int(raw)
-        elif re.fullmatch(r'[零〇一二三四五六七八九十百千两]+', raw):
-            digits = dict(zip('零〇一二三四五六七八九两', [0,0,1,2,3,4,5,6,7,8,9,2]))
-            number, digit = 0, 0
-            for char in raw:
-                if char in digits: digit = digits[char]
-                else:
-                    number += (digit or 1) * {'十':10,'百':100,'千':1000}[char]
-                    digit = 0
-            number += digit
-        else:
-            raise ValueError('请使用有效的整数旅行天数。')
-        patch['days'] = resolve_dates(number)
+    day_change = parse_day_change(q)
+    if day_change:
+        patch['days'] = day_change.apply(current_days)
     dates = re.search(r'([0-9]{4}-[0-9]{2}-[0-9]{2})\s*(?:至|到|~|～|—|–)\s*([0-9]{4}-[0-9]{2}-[0-9]{2})', q)
     if dates:
         patch.update(start_date=dates[1], end_date=dates[2])
@@ -176,10 +163,23 @@ class TripPatch(BaseModel):
     excluded_places:list[str]|None=Field(default=None,max_length=33)
 
 
+class DayChangeArgs(BaseModel):
+    model_config=ConfigDict(extra='forbid',strict=True)
+    operation:Literal['set','increase','decrease']
+    amount:int=Field(ge=1,le=MAX_TRIP_DAYS)
+
+
 class UpdateTripArgs(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True)
     changes:TripPatch=Field(default_factory=TripPatch)
     notes:list[str]|None=Field(default=None,max_length=8)
+    day_change:DayChangeArgs|None=None
+
+    @model_validator(mode='after')
+    def separate_duration_operations(self):
+        if self.day_change and {'days','start_date','end_date'} & self.changes.model_fields_set:
+            raise ValueError('day_change 不能与 days 或起止日期同时修改。')
+        return self
 
     @field_validator('notes')
     @classmethod
@@ -216,6 +216,8 @@ SYSTEM+='正常回答不要加入地图虚线、坐标系统、JSON 修复等内
 SYSTEM+='网页自动展示完整行程卡片，最终 text 只需用最多350个汉字概括本轮结果，不能重复输出整份逐日行程或工具 JSON。最终只输出一个合法 JSON 对象，不加 Markdown 围栏。'
 SYSTEM+='地点选择没有三个的数量限制。用户确认一组地点时，将整组规范 ID 一次写入 must_visit，不能遗漏、截断或只把其余地点记入 notes。只去这些时保持 only_selected=true；容量不足应说明需要增加天数，不擅自取消限制。工具规划或修改成功且满足需求后立即给最终 JSON，不重复规划。'
 SYSTEM+='当前结构化条件和最新行程优先于旧备注；notes 主要记录同行者、饮食等非结构化偏好，避免重复日期和地点选择，修改后及时更新冲突备注。'
+SYSTEM+='修改天数区分设置与增减：改成一天用 changes.days=1；再多加一天用 update_trip 的 day_change={"operation":"increase","amount":1}；少玩一天用 decrease。增减以本轮开始时的原天数为基准，不知道原天数先追问，不能把增量写成总天数。'
+SYSTEM+='商场、博物馆等明确地点类别必须满足；购物街、文化场馆不能冒充商场。检索无符合类别的结果时如实说明，应用会按需补充地图检索。'
 
 
 class ModelPolicy:
@@ -313,6 +315,8 @@ class State(TypedDict, total=False):
     stop: str
     answer: dict
     seen: list
+    initial_days: int | None
+    day_clarification: str
 
 
 async def demo_policy(s):
@@ -416,6 +420,9 @@ class AgentEngine:
             args = parsed.model_dump(exclude_unset=True)
             if name == 'search_places':
                 args.update(region=trip['region'], indoor_only=trip['rain'])
+                if requested_category(s['question']):
+                    # Keep the user's category even when the model paraphrases it away.
+                    args.update(query=s['question'], kind='attraction', region=search_region(s['question'], trip['region']))
             elif name == 'plan_itinerary':
                 if trip['days'] is None:
                     raise ValueError('days missing')
@@ -431,7 +438,18 @@ class AgentEngine:
             seen.append(signature)
             if name=='update_trip':
                 patch=parsed.changes.model_dump(exclude_unset=True)
-                if not patch and parsed.notes is None:raise ValueError('没有提供要更新的条件或备注。')
+                if not patch and parsed.notes is None and parsed.day_change is None:raise ValueError('没有提供要更新的条件或备注。')
+                if parsed.day_change:
+                    change = parsed.day_change
+                    patch['days'] = DayChange(change.operation, change.amount).apply(s.get('initial_days'))
+                if 'days' in patch or 'start_date' in patch or 'end_date' in patch:
+                    requested = parse_day_change(s['question'])
+                    if requested:
+                        expected = requested.apply(s.get('initial_days'))
+                        if requested.operation == 'set' and 'days' in patch and patch['days'] != expected:
+                            raise DayChangeError('用户要求设置旅行总天数，请用 changes.days 或 day_change 的 set；不要当作增加或减少天数。')
+                        if requested.operation != 'set' and (patch.get('days') != expected or 'start_date' in patch or 'end_date' in patch):
+                            raise DayChangeError('用户要求增减天数，请使用 day_change 的 increase/decrease 和增减量；不要把增减量设置为总天数。')
                 merged={**trip,**patch}
                 if 'days' in patch and 'start_date' not in patch and merged.get('start_date'):
                     merged['end_date']=date_for_day(merged['start_date'],patch['days']-1) if patch['days'] else None
@@ -454,9 +472,11 @@ class AgentEngine:
                 intent='search'
                 # Only canonical local records reach citations/UI; tool prose cannot forge sources.
                 found = [get_place(p['id']) for p in data['results']]
-                found = [p for p in found if (trip['region'] == '全部' or p['region'] == trip['region'])
+                region = args['region']
+                found = [p for p in found if (region == '全部' or p['region'] == region)
                         and (not trip['rain'] or p['indoor'])
-                        and (not trip['public_only'] or p['cost'] == 'public' or p['kind'] == 'food')]
+                        and (not trip['public_only'] or p['cost'] == 'public' or p['kind'] == 'food')
+                        and matches_category(p, requested_category(s['question']))]
                 # Comparisons may require separate searches; retain this turn's evidence
                 # from both, while still sending the actual latest result as observation.
                 hits = list({p['id']: p for p in [*hits, *found]}.values())[:30]
@@ -482,12 +502,14 @@ class AgentEngine:
                     observation['display_note'] = '网页完整展示并保存所有日期；此处仅提供前 7 天预览。'
                 event['status'] = 'success'
             event['protocol'] = protocol
+            if not planned:
+                hits = [p for p in hits if matches_category(p, requested_category(s['question']))]
         except TimeoutError:
             observation = {'error': 'timeout', 'message': '工具超时，可减少条件重试或停止。'}
         except ToolError:
             observation = {'error': 'constraint_conflict', 'message': '工具无法满足条件；请询问用户调整地区、室内、天数或必去地点，不能静默放宽。'}
         except Exception as exc:
-            message=str(exc)[:260] if name=='revise_itinerary' and isinstance(exc,ValueError) else ('条件更新失败。兴趣只能从 '+ '、'.join(INTERESTS)+' 中选；其余偏好可记 notes。请检查地点 ID、日期与当前条件，修正或追问。' if name=='update_trip' else '尚未确认日期或天数，请向用户追问，不得自行假设。' if name=='plan_itinerary' and trip['days'] is None else '工具/参数无效；检查白名单、规范地点编号和当前条件，可修正一次或询问用户。')
+            message=str(exc)[:260] if isinstance(exc,DayChangeError) or (name=='revise_itinerary' and isinstance(exc,ValueError)) else ('条件更新失败。兴趣只能从 '+ '、'.join(INTERESTS)+' 中选；其余偏好可记 notes。请检查地点 ID、日期与当前条件，修正或追问。' if name=='update_trip' else '尚未确认日期或天数，请向用户追问，不得自行假设。' if name=='plan_itinerary' and trip['days'] is None else '工具/参数无效；检查白名单、规范地点编号和当前条件，可修正一次或询问用户。')
             observation = {'error': 'invalid_tool_or_arguments', 'message':message}
         event['elapsed_ms'] = round((time.monotonic() - start) * 1000)
         event['message'] = observation.get('message', '没有匹配地点，可更换搜索词；保留用户条件。' if event['status'] == 'empty' else '')
@@ -523,8 +545,9 @@ class AgentEngine:
         notice = '模型选择工具 · 引用编号已校验，事实仍需核对' if self.is_model else '本地规则演示 · 未调用大模型'
         if self.is_model and reason in ('limit','repeat','timeout'):
             notice='本轮未完成 · '+{'limit':'达到工具调用上限','repeat':'重复调用已停止','timeout':'处理超时'}[reason]
-        if reason in ['live_guard', 'clarify', 'timeout', 'model_error', 'limit', 'repeat']:
+        if reason in ['live_guard', 'clarify', 'clarify_days', 'timeout', 'model_error', 'limit', 'repeat']:
             text = {'live_guard': '本地资料不能确认实时天气、票价或营业信息。请核对官网；本轮未请求模型。',
+                    'clarify_days': s.get('day_clarification', '请先确认原来的旅行天数。'),
                     'clarify': ('已记下你选的地点：'+'、'.join(get_place(pid)['name'] for pid in s['reference']['ids'])+'。' if s.get('reference') and s['reference']['kind']=='select' else '')+'请选择出发和结束日期，我会按日期逐天安排；也可以先告诉我天数。',
                     'repeat': '相同工具已重复调用，本轮已停止。请调整需求后继续。'}.get(reason, text)
         if self.is_model and not grounded and reason == 'complete' and not s.get('plan'):
@@ -534,7 +557,7 @@ class AgentEngine:
         if self.is_model and reason == 'model_error':
             notice = '模型调用未完成 · 本轮已停止'
         answer = {'text': text, 'citations': ids, 'notice': notice, 'mode': s['mode'],
-                  'kind':kind if grounded else 'answer','model_output_accepted': bool(self.is_model and grounded and reason == 'complete')}
+                  'kind':'clarify' if reason == 'clarify_days' else kind if grounded else 'answer','model_output_accepted': bool(self.is_model and grounded and reason == 'complete')}
         history = bounded_history(s.get('history', []) + [{'role': 'user', 'content': s['question']},
                     {'role': 'assistant', 'content': text}],max_messages=24 if self.is_model else 8)
         return {'answer': answer, 'stop': reason, 'history': history}
@@ -547,12 +570,17 @@ class AgentEngine:
         snapshot=plan_snapshot(old.get('plan_context'))
         merged={**old.get('trip',Trip().model_dump()),**(trip_override or {})}
         history=bounded_history(old.get('history',[]),max_messages=24 if self.is_model else 8)
+        day_clarification = ''
         if self.is_model:
             # Intent, references and edits are decided by the model, not keyword rules.
             trip=validate_trip(merged);reference=None;intent='conversation'
             stop='live_guard' if model_live_guard(question) else ''
         else:
-            patch = extract_patch(question)
+            try:
+                patch = extract_patch(question, merged.get('days'))
+            except DayChangeError as exc:
+                patch = {}
+                day_clarification = str(exc)
             reference=resolve_reference(question,place_context)
             if reference and reference['kind']=='select':
                 chosen=list(dict.fromkeys([*merged.get('must_visit',[]),*reference['ids']])) if reference.get('append') else reference['ids']
@@ -566,13 +594,20 @@ class AgentEngine:
             intent = 'plan' if planning or (followup and old.get('intent') == 'plan') else 'search'
             if reference and reference['kind'] in {'detail','transfer'}:intent='context'
             stop = 'live_guard' if needs_live_data(question) else 'clarify' if intent == 'plan' and trip['days'] is None else ''
+            if day_clarification:
+                stop = 'clarify_days'
             if reference and reference['kind']=='clarify' and stop!='live_guard':stop='reference_clarify'
         known=list(dict.fromkeys([*place_context['listed_ids'],*place_context['focus_ids'],*trip.get('must_visit',[]),*trip.get('excluded_places',[]),*[pid for day in (snapshot or {}).get('days',[]) for pid in day['place_ids']]]))
         initial_hits=[get_place(pid) for pid in known] if self.is_model else ([get_place(pid) for pid in reference['ids']] if reference and reference['kind'] in {'detail','transfer'} else [])
+        initial_hits = [p for p in initial_hits if matches_category(p, requested_category(question))]
+        if requested_category(question):
+            region = search_region(question, trip['region'])
+            initial_hits = [p for p in initial_hits if region == '全部' or p['region'] == region]
         initial = {'trip': trip,'place_context':place_context,'reference':reference,'transfer':None,'plan_context':snapshot,'memory_notes':clean_notes(old.get('memory_notes',[])), 'history': history, 'intent': intent, 'question': question,
                    'messages': history + [{'role': 'user', 'content': question}], 'trace': [], 'hits': initial_hits,
                    'plan': None, 'decision': {}, 'decisions': 0, 'tool_calls': 0, 'model_calls': 0,
-                   'seen': [], 'stop': stop, 'mode': 'model' if self.is_model else 'local_demo'}
+                   'seen': [], 'stop': stop, 'initial_days': merged.get('days'), 'day_clarification': day_clarification,
+                   'mode': 'model' if self.is_model else 'local_demo'}
         start = time.monotonic()
         model_policy = self.policy if isinstance(self.policy, ModelPolicy) else None
         before_responses = model_policy.responses if model_policy else 0
