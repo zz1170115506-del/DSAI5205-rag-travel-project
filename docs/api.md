@@ -47,6 +47,8 @@
 
 地图生成成功时，`answer.mode=model`、`answer.retrieval_source=amap`、`metrics.map_rag_used=true`；正文 `[map-1]` 等编号对应 `external_lookup.results[].citation_id`，前端链接到服务端构建的高德地点页。地图查询使用供应商的关键词搜索，不宣称使用了 Embedding。`sources` 仍只用于本地规范地点，外部 POI 不会成为自动行程的地点 ID。详见 [地图补充检索说明](地图补充检索.md)。
 
+类别检索为空时 Agent 以 `map_needed` 提前交给地图层，避免重复模型／本地工具请求；纯检索的 `repeat/limit` 也可回退。补充后的 `stop_reason` 表示最终结果，原停止原因见 `metrics.agent_stop_reason`。工具冲突、天数澄清和总超时不通过此回退绕过。
+
 ## 步行小地图
 
 ```json

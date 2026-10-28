@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 
 import httpx
 
-from .answers import needs_live_data
+from .answers import needs_live_data, demo_answer
 from .maps import SEARCH_DOC, coord
 from .place_search import poi_region
 from .place_intent import requested_category, matches_category, search_region, desired_count, category_search
@@ -150,6 +150,7 @@ async def supplement_with_map(result, question, query, settings, use_model, *, l
                     'message': '地图查询失败或超时，本轮未取得外部地点资料。'}
     if external.get('provider') != 'amap':
         return
+    previous_stop = result['stop_reason']
     category = requested_category(question)
     evidence_trip = {**result['trip'], 'region': search_region(question, result['trip']['region'])}
     external = prepare_evidence(external, evidence_trip, category)
@@ -173,10 +174,15 @@ async def supplement_with_map(result, question, query, settings, use_model, *, l
         timeout=max(.1, min(20, time_budget-(time.monotonic()-started))))
     if local and external.get('mode') != 'live':
         # A failed supplemental lookup must not erase already verified local candidates.
+        if previous_stop != 'complete':
+            result['answer'] = {**demo_answer(question, local), 'kind': 'answer', 'model_output_accepted': False}
         result['answer']['notice'] += '；地图补充未取得符合条件的候选，保留本地结果'
     else:
         result['answer'] = answer
     metrics = result['metrics']
+    if previous_stop != 'complete':
+        metrics['agent_stop_reason'] = previous_stop
+    result['stop_reason'] = 'model_error' if generation['requested'] and not generation['output_accepted'] else 'complete'
     metrics.update(map_rag_used=generation['output_accepted'],
                    map_lookup_requested=bool(external.get('external_requested')),
                    map_generation=generation)

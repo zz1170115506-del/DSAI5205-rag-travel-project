@@ -223,7 +223,10 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
                     intent = (await engine.graph.aget_state(config)).values.get('intent')
                     category = requested_category(q)
                     broad_category = bool(category and category_search(q) and not name)
-                    if (intent == 'search' or broad_category) and result['stop_reason']=='complete' and not result['plan']:
+                    search_only = bool(result['trace']) and all(step.get('tool') == 'search_places' for step in result['trace'])
+                    recoverable = broad_category and (result['stop_reason'] == 'map_needed' or
+                                  (result['stop_reason'] in {'repeat', 'limit'} and search_only))
+                    if (intent == 'search' or broad_category) and (result['stop_reason']=='complete' or recoverable) and not result['plan']:
                         from .retrieval import exact_places
                         if category:
                             valid = [p for p in result['sources'] if matches_category(p, category)]
