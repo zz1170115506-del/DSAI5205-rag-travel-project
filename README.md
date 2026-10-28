@@ -1,5 +1,19 @@
 # 港慢游 · Hong Kong, your way
 
+## 合并后的两种运行入口
+
+仓库保留两套独立实现，请按目的选择启动入口；它们没有自动共享会话、知识库或接口。
+
+| 实现 | 启动 | 默认地址 | 配置与数据 |
+| --- | --- | --- | --- |
+| 港慢游本机应用（原 main） | `python3 start.py` | `http://127.0.0.1:8765` | `MODEL_*`、`AMAP_*`、`LOCAL_EMBEDDING_MODEL`；33 条附来源地点与交通参考 |
+| 港游六模块 Docker Demo（fullstack） | `sh scripts/start-demo.sh` | `http://localhost:8080` | `LLM_*`、`EMBEDDING_*`、`MYSQL_*`；默认 6 条虚构资料 |
+
+Docker 的完整启动、环境变量与测试步骤见 [六模块运行指南](Doc/10-fullstack-guide.md)，API 见 [Docker API](Doc/09-fullstack-api.md)。下文保留原 main 本机应用的说明；`docs/api.md` 对应该应用。
+
+共用根目录 `.env`，模型变量按实现分开；本机 BGE 使用 `LOCAL_EMBEDDING_MODEL`，Docker 远端向量模型使用 `EMBEDDING_MODEL`。两套 Python 依赖使用独立虚拟环境。两套回归分别在根目录和 `backend/` 执行，避免同名 `app` 模块相互遮蔽。
+
+
 DSAI5205 香港旅行问答与行程规划项目。当前进度快照：**1.3.23 · 2026-10-23**。
 
 用同一段对话查地点、选择景点、按日期规划并继续修改行程。Python / FastAPI 后端与原生网页前端，无需前端构建。无 API Key 时可运行本地检索和规划；配置后可主动开启大模型，并使用高德地点与步行路线。
@@ -72,7 +86,7 @@ AMAP_ENABLED=false
 
 ```dotenv
 RETRIEVAL_MODE=hybrid
-EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
+LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
 ```
 
@@ -127,7 +141,7 @@ scripts/                   验证、诊断、资料维护和源码打包
 docs/                      接口、技术说明及验收证据
 ```
 
-[`docs/api.md`](docs/api.md) 记录当前接口。初始仓库的 `frontend/`、`backend/` 目录仍保留，当前可运行实现位于根目录 `static/`、`travel/` 与 `app.py`，没有重复安装两套应用。协作流程见 [开发说明](docs/development.md)。
+[`docs/api.md`](docs/api.md) 记录当前接口。本节介绍的本机应用位于根目录 `static/`、`travel/` 与 `app.py`。Docker 六模块应用位于 `frontend/`、`backend/`，使用独立入口、依赖和 API。协作流程见 [开发说明](docs/development.md)。
 
 ## 范围与贡献说明
 

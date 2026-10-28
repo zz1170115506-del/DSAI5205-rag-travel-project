@@ -27,7 +27,7 @@ MODEL_API_KEY=
 MODEL_BASE_URL=https://integrate.api.nvidia.com/v1
 MODEL_NAME=deepseek-ai/deepseek-v4.1-flash
 RETRIEVAL_MODE=hybrid
-EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
+LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
 ```
 

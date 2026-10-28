@@ -27,7 +27,9 @@ class RetrievalSettings:
         def read(name, default):
             return str(os.environ.get(name, values.get(name) or default)).strip()
         return cls(mode=read('RETRIEVAL_MODE', 'bm25'),
-                   model_name=read('EMBEDDING_MODEL', 'BAAI/bge-small-zh-v1.5'),
+                   model_name=read('LOCAL_EMBEDDING_MODEL',
+                       read('EMBEDDING_MODEL', 'BAAI/bge-small-zh-v1.5')
+                       if not read('MODEL_MODE', '') else 'BAAI/bge-small-zh-v1.5'),
                    min_score=float(read('EMBEDDING_MIN_SCORE', '0.5')))
 
 
