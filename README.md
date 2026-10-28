@@ -1,19 +1,5 @@
 # 港慢游 · Hong Kong, your way
 
-## 合并后的两种运行入口
-
-仓库保留两套独立实现，请按目的选择启动入口；它们没有自动共享会话、知识库或接口。
-
-| 实现 | 启动 | 默认地址 | 配置与数据 |
-| --- | --- | --- | --- |
-| 港慢游本机应用（原 main） | `python3 start.py` | `http://127.0.0.1:8765` | `MODEL_*`、`AMAP_*`、`LOCAL_EMBEDDING_MODEL`；33 条附来源地点与交通参考 |
-| 港游六模块 Docker Demo（fullstack） | `sh scripts/start-demo.sh` | `http://localhost:8080` | `LLM_*`、`EMBEDDING_*`、`MYSQL_*`；默认 6 条虚构资料 |
-
-Docker 的完整启动、环境变量与测试步骤见 [六模块运行指南](Doc/10-fullstack-guide.md)，API 见 [Docker API](Doc/09-fullstack-api.md)。下文保留原 main 本机应用的说明；`docs/api.md` 对应该应用。
-
-共用根目录 `.env`，模型变量按实现分开；本机 BGE 使用 `LOCAL_EMBEDDING_MODEL`，Docker 远端向量模型使用 `EMBEDDING_MODEL`。两套 Python 依赖使用独立虚拟环境。两套回归分别在根目录和 `backend/` 执行，避免同名 `app` 模块相互遮蔽。
-
-
 DSAI5205 香港旅行问答与行程规划项目。当前进度快照：**1.3.23 · 2026-10-23**。
 
 用同一段对话查地点、选择景点、按日期规划并继续修改行程。Python / FastAPI 后端与原生网页前端，无需前端构建。无 API Key 时可运行本地检索和规划；配置后可主动开启大模型，并使用高德地点与步行路线。
@@ -28,6 +14,7 @@ DSAI5205 香港旅行问答与行程规划项目。当前进度快照：**1.3.23
 - **交通与地图**：OSM 行程总览；本地港铁线路、方向、换乘、出口与到站接驳参考。步行小地图展开后自动查询高德，确认同名地点或餐饮分店后展示路线图、距离时长和导航入口，图片可放大。
 - **本机历史**：保存、继续聊、手动重命名、收藏、置顶及删除确认；最近对话与偏好收进“我的旅程”浮窗。
 - **可审查执行**：引用来源、工具过程与停止原因可查看；真实高德失败不使用示意线冒充路线。
+- **地图补充 RAG**：问答中的本地地点未命中时，可查询高德香港 POI；开启大模型后，将实际返回的名称、地址、类别和查询时间提供给模型生成带地图出处的回答。无 Key、限流或生成失败时明确显示状态。外部地点不自动加入行程，见 [地图补充检索](docs/地图补充检索.md)。
 
 混合检索将 BM25 结果与本地向量的余弦相似度结果用 RRF 排名融合，保留名称优先和筛选条件。语义模型或索引不可用时回退 BM25，并在执行记录中标明原因；尚未接入神经重排，也不宣称混合检索必然提高准确率。行程排程采用约束筛选、街区分组和近邻启发式，不宣称全局最优路线。
 
@@ -53,19 +40,21 @@ Windows 使用 `.venv\Scripts\python.exe` 替换上述 Python 路径。
 
 ## 可选配置
 
+如需让不同网络的小组成员访问，可使用 [Render 公网演示部署说明](docs/公网演示部署.md) 和根目录 `render.yaml`。云端入口要求固定 HTTPS 网址与小组访问密码，并限制模型／地图请求频率；当前是共享对话的小组演示，不提供个人账号。正常本机运行继续使用前面的启动方式。
+
 参考根目录 `.env.example` 在自己电脑创建 `.env`，不要提交真实密钥：
 
 ```dotenv
 MODEL_API_KEY=
-MODEL_BASE_URL=https://integrate.api.nvidia.com/v1
-MODEL_NAME=deepseek-ai/deepseek-v4.1-flash
+MODEL_BASE_URL=https://api-inference.modelscope.cn/v1
+MODEL_NAME=deepseek-ai/DeepSeek-V4.1-Flash-1017
 AMAP_API_KEY=
 AMAP_ENABLED=false
 ```
 
 - 没有密钥即可使用本地规则演示，网页会标明模式。
 - 配置模型后，勾选“使用大模型”才发起模型请求；问题、有限上下文、偏好及相关资料会发送给所配置服务。
-- 当前示例配置使用 NVIDIA 官方 DeepSeek-V4.1-Flash 免费开发端点，需要自己的 NVIDIA API Key；免费试用范围、额度与可用性以平台为准。见 [NVIDIA 接入说明](docs/NVIDIA免费模型接入.md)。不自动切换到付费模型或服务。
+- 当前示例配置使用魔搭 ModelScope 的 DeepSeek-V4.1-Flash-1017，需要自己的魔搭访问令牌；账号使用条件、免费试用额度与可用性以平台为准；单次真实 RAG 回答与工具流程已验证通过，耗时见接入说明。见 [魔搭接入说明](docs/ModelScope模型接入.md)。不自动切换到付费模型或服务。
 - 使用高德需要自己的 Web 服务 Key，并设置 `AMAP_ENABLED=true` 后重启；费用、额度和服务权限由自己的供应商账户决定。
 - 历史保存于忽略的 `work/user-data/conversations.sqlite3`。单机最多 25 段对话，每段保存最近 20 轮；模型上下文有长度边界，没有无限记忆或云同步。
 
@@ -86,7 +75,7 @@ AMAP_ENABLED=false
 
 ```dotenv
 RETRIEVAL_MODE=hybrid
-LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
+EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
 ```
 
@@ -141,10 +130,10 @@ scripts/                   验证、诊断、资料维护和源码打包
 docs/                      接口、技术说明及验收证据
 ```
 
-[`docs/api.md`](docs/api.md) 记录当前接口。本节介绍的本机应用位于根目录 `static/`、`travel/` 与 `app.py`。Docker 六模块应用位于 `frontend/`、`backend/`，使用独立入口、依赖和 API。协作流程见 [开发说明](docs/development.md)。
+[`docs/api.md`](docs/api.md) 记录当前接口。初始仓库的 `frontend/`、`backend/` 目录仍保留，当前可运行实现位于根目录 `static/`、`travel/` 与 `app.py`，没有重复安装两套应用。协作流程见 [开发说明](docs/development.md)。
 
 ## 范围与贡献说明
 
-本项目为 Codex 辅助开发的本地原型。港铁线路与出口为本地整理的官方资料参考，步行／乘车余量不含实时延误；未核验营业日历、天气、票务、酒店往返或完整费用预算。高德路线图使用供应商返回的 POI 坐标，不把本地近似地点坐标直接当作导航坐标。当前未提供生产部署、多用户账户或正式质量基准。
+本项目为轻量RAG的本地原型。港铁线路与出口为本地整理的官方资料参考，步行／乘车余量不含实时延误；未核验营业日历、天气、票务、酒店往返或完整费用预算。高德路线图使用供应商返回的 POI 坐标，不把本地近似地点坐标直接当作导航坐标。当前未提供生产部署、多用户账户或正式质量基准。
 
 地点摘要附来源链接与核对日期，未打包第三方全文；照片仅作装饰。Leaflet 依赖保留原许可证与来源信息。请按本人实际完成、理解和验证的工作描述个人贡献。

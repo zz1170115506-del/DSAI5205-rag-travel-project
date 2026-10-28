@@ -39,6 +39,12 @@
 
 模型读取有界历史、规范选择、偏好与最新行程。`use_model=true` 需要本机配置模型服务，否则返回明确错误；未开启时不调用模型。
 
+### 地图补充检索
+
+本地搜索未命中，或明确指定了未收录的地点名称时，问答可按需查询高德香港 POI。需配置 `AMAP_API_KEY` 和 `AMAP_ENABLED=true`；模型模式还会将实际返回的有限地图字段发送给所配置的模型生成回答。`external_lookup` 保留候选与来源、查询时间；`trace` 包含 `map_search`，发起地图资料生成时还包含 `map_rag_answer`。
+
+地图生成成功时，`answer.mode=model`、`answer.retrieval_source=amap`、`metrics.map_rag_used=true`；正文 `[map-1]` 等编号对应 `external_lookup.results[].citation_id`，前端链接到服务端构建的高德地点页。地图查询使用供应商的关键词搜索，不宣称使用了 Embedding。`sources` 仍只用于本地规范地点，外部 POI 不会成为自动行程的地点 ID。详见 [地图补充检索说明](地图补充检索.md)。
+
 ## 步行小地图
 
 ```json

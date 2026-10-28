@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: hk-travel-rag-demo
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements-embedding.txt && python scripts/build_embeddings.py --download
+    startCommand: python scripts/serve_public.py
+    healthCheckPath: /healthz
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.7
+      - key: PUBLIC_DEMO
+        value: "true"
+      - key: PUBLIC_DEMO_ANONYMOUS
+        value: "false"
+      - key: DEMO_USERNAME
+        value: team
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: MODEL_BASE_URL
+        value: https://api-inference.modelscope.cn/v1
+      - key: MODEL_NAME
+        value: deepseek-ai/DeepSeek-V4.1-Flash-1017
+      - key: MODEL_API_KEY
+        sync: false
+      - key: AMAP_API_KEY
+        sync: false
+      - key: AMAP_ENABLED
+        value: "true"
+      - key: RETRIEVAL_MODE
+        value: hybrid
+      - key: EMBEDDING_MODEL
+        value: BAAI/bge-small-zh-v1.5
+      - key: EMBEDDING_MIN_SCORE
+        value: "0.5"

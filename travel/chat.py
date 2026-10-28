@@ -3,8 +3,10 @@ import asyncio
 import json
 import re
 import secrets
+import time
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, ConfigDict, StrictBool
 
 from .agent import AgentEngine, Trip
@@ -12,14 +14,18 @@ from .place_context import hydrate_context, next_context
 from .conversation_memory import restore_memory
 from .config import Settings
 from .history import HistoryStore
+from .anonymous_history import AnonymousHistory
 from .maps import resolve_place, route_map
 from .transit import enrich_plan, from_station
 from .place_search import search_library
+from .map_rag import supplement_with_map
+from .streaming import chat_events
 from typing import Literal
 
 store = HistoryStore()
 locks = {}
 creation_lock = asyncio.Lock()
+anonymous_store = AnonymousHistory(protected=lambda: {cid for cid, lock in locks.items() if lock.locked()})
 
 
 class ChatRequest(BaseModel):
@@ -73,13 +79,13 @@ class TransitRequest(BaseModel):
 def explicit_name(question):
     q = question.strip(' ？?。')
     q = re.sub(r'^(请问|请介绍|介绍一下|帮我查一下|帮我找一下|介绍|查找)', '', q)
-    q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|是什么地方)$', '', q).strip()
+    q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|地址是什么|是什么地方|有什么特色|有什么特点)$', '', q).strip()
     if 2 <= len(q) <= 60 and q != question.strip(' ？?。') and not any(w in q for w in ['推荐', '有哪些', '什么景点', '行程', '几天', '天气', '票价']):
         return q
     return None
 
 
-def build_router(settings_getter, semaphore):
+def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
     router = APIRouter()
 
     @router.get('/api/history')
@@ -167,8 +173,9 @@ def build_router(settings_getter, semaphore):
             choices={pid:choice for pid,choice in [(body.origin_id,body.origin_poi_id),(body.destination_id,body.destination_poi_id)] if choice}
             return await route_map([body.origin_id,body.destination_id],settings_getter(),poi_choices=choices)
 
-    @router.post('/api/chat')
     async def chat(body: ChatRequest):
+        anonymous = anonymous_getter()
+        archive = anonymous_store if anonymous else store
         cfg = settings_getter()
         if body.use_model and not cfg.model_api_key:
             raise HTTPException(422, '模型尚未配置，请关闭模型选项后重试。')
@@ -181,7 +188,7 @@ def build_router(settings_getter, semaphore):
         cid = body.conversation_id or secrets.token_hex(16)
         async with creation_lock:
             if cid not in locks:
-                if len(locks) >= store.capacity + 4:
+                if len(locks) >= archive.capacity + 4:
                     # Only idle entries may be discarded; persisted history remains on disk.
                     for old in list(locks):
                         if not locks[old].locked():
@@ -194,10 +201,10 @@ def build_router(settings_getter, semaphore):
             saved = None
             if body.conversation_id:
                 try:
-                    saved = store.get(cid)
+                    saved = archive.get(cid)
                 except KeyError:
                     raise HTTPException(404, '历史已删除，请开始新对话。')
-            elif len(store.list()) >= store.capacity:
+            elif not anonymous and len(store.list()) >= store.capacity:
                 raise HTTPException(409, '历史已达 25 段，请先删除一段。')
             engine = AgentEngine(cfg if body.use_model else Settings())
             config = {'configurable': {'thread_id': 'chat'}}
@@ -205,22 +212,21 @@ def build_router(settings_getter, semaphore):
                 await engine.graph.aupdate_state(config, {**saved['checkpoint'],**restore_memory(saved),'place_context':hydrate_context(saved)}, as_node='finish')
             try:
                 async with semaphore:
+                    turn_started = time.monotonic()
                     result = await engine.turn('chat', q, body.trip.model_dump() if body.trip else None)
                     result.pop('session_id', None)
                     # Explicit named-place questions should not be satisfied by an incidental
                     # bigram match. General travel/itinerary queries keep ordinary retrieval.
                     name = explicit_name(q)
                     intent = (await engine.graph.aget_state(config)).values.get('intent')
-                    if intent == 'search' and result['stop_reason']=='complete' and not result['plan'] and result['answer'].get('kind')!='clarify':
+                    if intent == 'search' and result['stop_reason']=='complete' and not result['plan']:
                         from .retrieval import exact_places
-                        if (name and not exact_places(name)) or not result['sources']:
+                        named_miss = bool(name and not exact_places(name))
+                        if (named_miss or not result['sources']) and (named_miss or result['answer'].get('kind')!='clarify'):
                             query=next((step.get('arguments',{}).get('query') for step in reversed(result['trace']) if step.get('tool')=='search_places' and step.get('status') in ('success','empty')),q)
-                            external = await resolve_place((query if body.use_model else name or q)[:100], cfg)
-                            result['external_lookup'] = external
-                            if external['provider'] == 'amap':
-                                result['sources'] = []
-                                result['answer'] = {'text': external['message'], 'citations': [],
-                                                    'mode': 'map_lookup', 'notice': '本地未收录 · 地图补充查询', 'model_output_accepted': False}
+                            await supplement_with_map(result,q,(name or query)[:100],cfg,body.use_model,
+                                lookup=resolve_place,time_budget=max(.1,65-(time.monotonic()-turn_started)))
+                    result['metrics']['elapsed_ms'] = round((time.monotonic()-turn_started)*1000)
                 state = (await engine.graph.aget_state(config)).values
                 history = state.get('history', [])
                 if history:
@@ -236,10 +242,17 @@ def build_router(settings_getter, semaphore):
                         encoded = encoded.replace(key, '[redacted]')
                 clean = json.loads(encoded)
                 turns = (saved['turns'] if saved else []) + [{'question': q, 'result': clean['result']}]
-                store.save(cid, turns, clean['checkpoint'], body.use_model, saved['title'] if saved else q)
+                archive.save(cid, turns, clean['checkpoint'], body.use_model, saved['title'] if saved else q)
                 return clean['result']
             except ValueError as exc:
                 # Only locally generated validation messages are exposed; never provider exceptions.
                 raise HTTPException(422, '请检查日期、旅行天数及行程条件；历史过大时请开始新对话。') from None
+
+    @router.post('/api/chat')
+    async def chat_endpoint(body: ChatRequest, request: Request, stream: bool = False):
+        if stream or 'application/x-ndjson' in request.headers.get('accept', ''):
+            return StreamingResponse(chat_events(lambda: chat(body)), media_type='application/x-ndjson',
+                                     headers={'X-Accel-Buffering': 'no', 'Cache-Control': 'no-store'})
+        return await chat(body)
 
     return router

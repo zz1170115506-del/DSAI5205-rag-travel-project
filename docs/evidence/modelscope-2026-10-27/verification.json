@@ -1,0 +1,101 @@
+{
+  "verified_at_hk": "2026-10-27T20:44:27.331215+08:00",
+  "provider": "ModelScope",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "question": "大馆有什么文化特色？",
+  "external_api_verification": true,
+  "test_case_count": 1,
+  "minimal": {
+    "elapsed_seconds": 2.63,
+    "observations": [
+      {
+        "http_status": 200,
+        "finish_reason": "stop",
+        "content_characters": 2,
+        "reasoning_characters": 51,
+        "usage": {
+          "prompt_tokens": 37,
+          "completion_tokens": 14,
+          "total_tokens": 51
+        },
+        "elapsed_seconds": 2.61
+      }
+    ]
+  },
+  "basic_rag": {
+    "mode": "model",
+    "citations": [
+      "tai-kwun"
+    ],
+    "elapsed_seconds": 9.98,
+    "observations": [
+      {
+        "http_status": 200,
+        "finish_reason": "stop",
+        "content_characters": 172,
+        "reasoning_characters": 436,
+        "usage": {
+          "prompt_tokens": 635,
+          "completion_tokens": 356,
+          "total_tokens": 991
+        },
+        "elapsed_seconds": 9.97
+      }
+    ]
+  },
+  "retrieval": {
+    "recall": "SQLite FTS5 BM25 + local dense embeddings",
+    "reranker": "RRF 排名融合与名称优先（非神经重排）",
+    "candidate_count": 4,
+    "returned_count": 4,
+    "knowledge_records": 33,
+    "mode": "hybrid",
+    "configured_mode": "hybrid",
+    "embedding_used": true,
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "semantic_candidates": 2
+  },
+  "agent": {
+    "stop_reason": "complete",
+    "metrics": {
+      "model_calls": 3,
+      "tool_calls": 2,
+      "decisions": 3,
+      "elapsed_ms": 12765,
+      "model_responses": 3,
+      "live_model_responses": 3,
+      "format_repairs": 0,
+      "cost": null,
+      "external_model_verified": true
+    },
+    "steps": [
+      {
+        "tool": "search_places",
+        "status": "success",
+        "retrieval": {
+          "recall": "SQLite FTS5 BM25 + local dense embeddings",
+          "reranker": "RRF 排名融合与名称优先（非神经重排）",
+          "candidate_count": 2,
+          "returned_count": 2,
+          "knowledge_records": 33,
+          "mode": "hybrid",
+          "configured_mode": "hybrid",
+          "embedding_used": true,
+          "embedding_model": "BAAI/bge-small-zh-v1.5",
+          "semantic_candidates": 1
+        }
+      },
+      {
+        "tool": "place_detail",
+        "status": "success",
+        "retrieval": null
+      }
+    ]
+  },
+  "model_output_accepted": true,
+  "verified": {
+    "basic_rag": true,
+    "model_tool_loop": true
+  },
+  "limitations": "单次公开问题的连通性与工具流程验证，不是模型质量基准或稳定延迟保证；未验证其他问题、并发或长期可用性。"
+}

@@ -24,8 +24,8 @@ Windows 将 `.venv/bin/python` 替换为 `.venv\Scripts\python.exe`。
 
 ```dotenv
 MODEL_API_KEY=
-MODEL_BASE_URL=https://integrate.api.nvidia.com/v1
-MODEL_NAME=deepseek-ai/deepseek-v4.1-flash
+MODEL_BASE_URL=https://api-inference.modelscope.cn/v1
+MODEL_NAME=deepseek-ai/DeepSeek-V4.1-Flash-1017
 RETRIEVAL_MODE=hybrid
 LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
@@ -33,7 +33,7 @@ EMBEDDING_MIN_SCORE=0.5
 
 `MODEL_API_KEY` 先留空时，也可验证本地向量检索。之后在本地文件填入 Key、保存并重启应用，再勾选网页“使用大模型”。无需将 Key 发到聊天或提交仓库。
 
-当前示例使用 NVIDIA 官方开发端点，Key 须从该平台获取；免费试用可用性和限额以平台为准，详见 [NVIDIA 接入说明](NVIDIA免费模型接入.md)。如选择 DeepSeek 官方付费服务，则同时改用其地址 `https://api.deepseek.com/v1`、模型名 `deepseek-flash` 及对应平台的 Key。
+当前示例使用魔搭 ModelScope API-Inference，Key 须填写该平台的访问令牌，不能复用 NVIDIA Key；账号使用条件、免费试用可用性和限额以平台为准，详见 [魔搭接入说明](ModelScope模型接入.md)。如选择 DeepSeek 官方付费服务，则同时改用其地址 `https://api.deepseek.com/v1`、模型名 `deepseek-flash` 及对应平台的 Key。
 
 ## 数据与检索流程
 

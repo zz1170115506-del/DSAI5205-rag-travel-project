@@ -124,6 +124,24 @@ def test_timeout_feedback_and_recovery():
     assert result['trace'][0]['message'].startswith('工具超时')
 
 
+@pytest.mark.parametrize(('public', 'delay', 'expected'), [
+    ('false', .03, 'error'), ('true', .03, 'success'), ('true', .15, 'error')])
+def test_public_cold_tool_has_extra_time_but_still_cancels(monkeypatch, public, delay, expected):
+    import travel.agent as module
+    monkeypatch.setenv('PUBLIC_DEMO', public)
+    monkeypatch.setattr(module, 'TOOL_TIMEOUT', .005)
+    monkeypatch.setattr(module, 'PUBLIC_TOOL_TIMEOUT', .08)
+    completed = []
+    async def cold_tool(name, args):
+        await asyncio.sleep(delay)
+        completed.append(True)
+        return await fixture_tool(name, args)
+    result = run(AgentEngine(policy=scripted(tool('search_places', query='大馆'), DONE),
+                             tool_call=cold_tool).turn('s', '中环文化景点'))
+    assert result['trace'][0]['status'] == expected
+    assert bool(completed) == (expected == 'success')
+
+
 def test_empty_search_can_be_reformulated():
     result = run(AgentEngine(policy=scripted(tool('search_places', query='zzzznonexistent'), tool('search_places', query='大馆'), DONE), tool_call=fixture_tool).turn('s', '文化景点'))
     assert [t['status'] for t in result['trace']] == ['empty', 'success']

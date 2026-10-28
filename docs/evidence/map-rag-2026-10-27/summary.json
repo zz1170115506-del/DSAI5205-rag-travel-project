@@ -1,0 +1,128 @@
+{
+  "verified_at_hk": "2026-10-27T22:35:33.196428+08:00",
+  "external_amap_verified": true,
+  "external_map_generation_verified": true,
+  "python_tests": {
+    "passed": 343,
+    "failed": 0,
+    "new_map_contract_cases": 26
+  },
+  "frontend_tests": {
+    "passed": 22,
+    "failed": 0,
+    "map_citation_cases": 5
+  },
+  "ordinary_tests_use_http_fixtures": true,
+  "verified_contracts": [
+    "map POI fields are sent in the generation context",
+    "source citations and links are validated",
+    "region and unsupported indoor/free conditions are preserved",
+    "no model calls without model mode or map evidence",
+    "map/model failure preserves an explicit fallback",
+    "external POIs cannot enter canonical planner IDs",
+    "history restores the displayed map sources"
+  ],
+  "real_http_chat_verified": true,
+  "amap_query": {
+    "query": "K11 MUSEA",
+    "elapsed_seconds": 1.92,
+    "mode": "live",
+    "result_count": 5,
+    "observations": [
+      {
+        "http_status": 200,
+        "provider_status": "1",
+        "provider_info": "OK",
+        "provider_code": "10000",
+        "raw_poi_count": 5
+      }
+    ]
+  },
+  "direct_generation": {
+    "mode": "model",
+    "elapsed_seconds": 6.49,
+    "generation": {
+      "requested": true,
+      "response_received": true,
+      "live_response": true,
+      "output_accepted": true,
+      "reason": "accepted",
+      "elapsed_ms": 6493
+    },
+    "citations": [
+      "map-1",
+      "map-2"
+    ]
+  },
+  "chat": {
+    "question": "介绍K11 MUSEA",
+    "stop_reason": "complete",
+    "metrics": {
+      "model_calls": 5,
+      "tool_calls": 4,
+      "decisions": 4,
+      "elapsed_ms": 27659,
+      "model_responses": 5,
+      "live_model_responses": 5,
+      "format_repairs": 0,
+      "cost": null,
+      "external_model_verified": true,
+      "map_rag_used": true,
+      "map_lookup_requested": true,
+      "map_generation": {
+        "requested": true,
+        "response_received": true,
+        "live_response": true,
+        "output_accepted": true,
+        "reason": "accepted",
+        "elapsed_ms": 4843
+      }
+    },
+    "answer_mode": "model",
+    "retrieval_source": "amap",
+    "citations": [
+      "map-1",
+      "map-3",
+      "map-4",
+      "map-5"
+    ],
+    "model_output_accepted": true,
+    "steps": [
+      {
+        "tool": "search_places",
+        "status": "empty",
+        "elapsed_ms": 480
+      },
+      {
+        "tool": "search_places",
+        "status": "empty",
+        "elapsed_ms": 447
+      },
+      {
+        "tool": "search_places",
+        "status": "success",
+        "elapsed_ms": 437
+      },
+      {
+        "tool": "map_search",
+        "status": "success",
+        "elapsed_ms": 2607
+      },
+      {
+        "tool": "map_rag_answer",
+        "status": "success",
+        "elapsed_ms": 4843
+      }
+    ]
+  },
+  "browser_check": {
+    "label": "模型＋地图资料",
+    "source_links": "地图出处 links to uri.amap.com visible in the real persisted conversation"
+  },
+  "initial_failure": {
+    "map_lookup_succeeded": true,
+    "map_generation_accepted": false,
+    "resolution": "明确要求 citations 为编号字符串数组，并补充示例；保留严格引用与字段校验。"
+  },
+  "limitations": "仅对一个公开香港地点做了真实地图与完整问答验证；不能据此保证所有地点覆盖、模型事实准确率或固定耗时。"
+}

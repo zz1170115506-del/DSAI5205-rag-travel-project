@@ -1,4 +1,6 @@
 'use strict';
+import {readAPIResponse} from './api-response.mjs?v=1.3.25';
+import {inlineAnswerHTML} from './answer-citations.mjs?v=1.3.24';
 import {mapHTML,attachPlanMaps,disposeMaps} from './itinerary-map.js?v=1.3.23';
 import {travelDates,addDays,dateLabel} from './trip-dates.mjs?v=1.3.8';
 import {walkingMapHTML,attachWalkingMaps,disposeWalkingMaps} from './walking-map.mjs?v=1.3.23';
@@ -25,9 +27,10 @@ function switchView(name,update=true){
 }
 async function api(path,body){
   const c=new AbortController(), timer=setTimeout(()=>c.abort(),70000);
-  try{const r=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:c.signal});
-    if(!r.ok){let obj={};try{obj=await r.json();}catch{}throw Error(typeof obj.detail==='string'?obj.detail:'服务暂不可用，请重试。');}return await r.json();
-  }catch(e){if(e.name==='AbortError')throw Error('等待超时，请检查服务后重试。');if(e instanceof TypeError)throw Error('连接不到本地服务，请确认启动窗口仍在运行。');throw e;}finally{clearTimeout(timer);}
+  try{const headers=body?{'Content-Type':'application/json'}:{};if(path==='/api/chat')headers.Accept='application/x-ndjson';
+    const r=await fetch(path,{method:body?'POST':'GET',headers,body:body?JSON.stringify(body):undefined,signal:c.signal});
+    return await readAPIResponse(r);
+  }catch(e){if(e.name==='AbortError')throw Error('等待超时，请检查服务后重试。');if(e instanceof TypeError)throw Error('连接中断，请检查网络后重试；也可在“我的旅程”查看是否已保存。');throw e;}finally{clearTimeout(timer);}
 }
 function syncMust(){$('#only-selected').disabled=state.busy||state.must.size===0;if(!state.must.size)$('#only-selected').checked=false;[...$('#must-visit').options].forEach(o=>o.selected=state.must.has(o.value));$$('[data-action="must"]').forEach(b=>{b.textContent=state.must.has(b.dataset.id)?'已加入 ✓':'加入必去 +';b.setAttribute('aria-pressed',String(state.must.has(b.dataset.id)));});}
 function addMust(id){if(state.must.has(id)){state.must.delete(id);toast('已从必去地点移除');}else{state.must.add(id);toast('已加入必去地点，可在“问一问”规划');}syncMust();}
@@ -106,8 +109,7 @@ function applyTrip(t){state.tripMemory=t;
   $('#trip-memory').textContent=`这趟旅程：${t.region??'全部'} · ${t.start_date?t.start_date+' 至 '+t.end_date+' · ':''}${t.days??'待确认'} 天 · ${t.pace??'轻松'} · ${t.rain?'只选室内':'不限室内'}${t.public_only?' · 景点限公共空间':''}${t.start_station?' · 从'+t.start_station+'站出发':''}${t.only_selected?' · 只安排已选地点':''}${t.excluded_places?.length?' · 已排除 '+t.excluded_places.map(id=>state.places.find(p=>p.id===id)?.name??id).join('、'):''}${state.must.size?' · 必去 '+[...state.must].map(id=>state.places.find(p=>p.id===id)?.name??id).join('、'):''}`;
 }
 function setBusy(value){state.busy=value;$$('#plan-form input,#plan-form select').forEach(field=>field.disabled=value);if(!value)$('#only-selected').disabled=state.must.size===0;['#ask-submit','#plan-submit','#home-submit','#new-chat'].forEach(s=>$(s).disabled=value||!state.ready);$('#use-model').disabled=value||!state.status.model_configured;$$('.history-row button').forEach(b=>b.disabled=value||state.historyBusy);$$('.suggestions button').forEach(b=>b.disabled=value);}
-function modelLabel(){const model=$('#use-model').checked;$('#chat-mode').textContent=model?'大模型多轮助手':'本地规则演示';$('#model-mode-note').textContent=model?'已开启：模型会结合最近对话、偏好与已有行程理解追问；这些内容将发送给所配置的模型服务。':'当前为本地规则演示。开启“使用大模型”后，才能由模型理解上下文与行程修改。';}
-function inlineText(answer){const valid=new Set(answer.citations??[]);return esc(answer.text).replace(/\[([a-z0-9-]+)\]/g,(all,id)=>valid.has(id)?`<button class="inline-citation" data-action="detail" data-id="${esc(id)}">出处 ↗</button>`:all);}
+function modelLabel(){const model=$('#use-model').checked;$('#chat-mode').textContent=model?'大模型多轮助手':'本地规则演示';$('#model-mode-note').textContent=model?'已开启：模型会结合最近对话、偏好与已有行程理解追问；这些内容与按需查询的地图候选将发送给所配置的模型服务。':'当前为本地规则演示。开启“使用大模型”后，才能由模型理解上下文与行程修改。';}
 function externalHTML(data,showMessage=true){
   if(!data)return '';
   if(data.mode==='local')return `<p class="fine-print">找到本地官方来源记录。</p><div class="cards-grid">${data.results.map(card).join('')}</div>`;
@@ -115,12 +117,23 @@ function externalHTML(data,showMessage=true){
 }
 function renderTurns(){
  disposeWalkingMaps();disposeMaps();
- $('#chat-messages').innerHTML=state.turns.length?state.turns.map((turn,i)=>{const d=turn.result;return `<article class="chat-turn" data-turn="${i}"><div class="user-message"><p>${esc(turn.question)}</p></div><div class="assistant-message"><div class="assistant-name"><span>✧ 港慢游 · 旅行助手</span><span>${d.answer.mode==='model'?'模型模式':d.answer.mode==='map_lookup'?'地图补充':'本地资料'}</span></div><div class="answer-text">${inlineText(d.answer)}</div>${externalHTML(d.external_lookup,false)}${d.sources?.length?`<div class="chat-sources">${d.sources.map(p=>`<button class="small-button" data-action="detail" data-id="${esc(p.id)}">${esc(p.name)} · 出处 ↗</button>`).join('')}</div>`:''}${d.plan?`<div class="chat-plan">${planHTML({...d.plan,trace:[]})}</div>`:''}<details class="trace"><summary>资料与执行记录 · ${esc(d.answer.notice)}</summary><code>${esc(JSON.stringify({metrics:d.metrics,stop_reason:d.stop_reason,steps:d.trace},null,2))}</code></details></div></article>`;}).join(''):welcome;
+ $('#chat-messages').innerHTML=state.turns.length?state.turns.map((turn,i)=>{const d=turn.result;return `<article class="chat-turn" data-turn="${i}"><div class="user-message"><p>${esc(turn.question)}</p></div><div class="assistant-message"><div class="assistant-name"><span>✧ 港慢游 · 旅行助手</span><span>${d.answer.mode==='model'?(d.answer.retrieval_source==='amap'?'模型＋地图资料':'模型模式'):d.answer.mode==='map_lookup'?'地图补充':'本地资料'}</span></div><div class="answer-text">${inlineAnswerHTML(d.answer,d.external_lookup)}</div>${externalHTML(d.external_lookup,false)}${d.sources?.length?`<div class="chat-sources">${d.sources.map(p=>`<button class="small-button" data-action="detail" data-id="${esc(p.id)}">${esc(p.name)} · 出处 ↗</button>`).join('')}</div>`:''}${d.plan?`<div class="chat-plan">${planHTML({...d.plan,trace:[]})}</div>`:''}<details class="trace"><summary>资料与执行记录 · ${esc(d.answer.notice)}</summary><code>${esc(JSON.stringify({metrics:d.metrics,stop_reason:d.stop_reason,steps:d.trace},null,2))}</code></details></div></article>`;}).join(''):welcome;
  syncMust();attachPlanMaps($('#chat-messages'),state.turns);attachWalkingMaps($('#chat-messages'),state.places,api);
 }
-function rememberId(){try{if(state.conversation)localStorage.setItem('hk-travel-active-v13',state.conversation);else localStorage.removeItem('hk-travel-active-v13');}catch{toast('浏览器未保存当前对话入口，仍可从最近对话重新打开。');}}
+function showLatestAnswer(){
+ const scroll=$('#chat-scroll'),answer=$('#chat-messages .chat-turn:last-child .assistant-message');
+ if(answer)scroll.scrollTop+=answer.getBoundingClientRect().top-scroll.getBoundingClientRect().top-12;
+}
+function expandChat(expanded){
+ document.body.classList.toggle('chat-expanded',expanded);
+ const button=$('#expand-chat');button.setAttribute('aria-pressed',String(expanded));
+ button.textContent=expanded?'恢复布局 ↙':'展开对话 ↗';
+ button.title=expanded?'恢复标准对话布局':'扩大对话阅读区域';
+}
+function rememberId(){try{if(state.conversation&&state.status.history_enabled!==false)localStorage.setItem('hk-travel-active-v13',state.conversation);else localStorage.removeItem('hk-travel-active-v13');}catch{if(state.status.history_enabled!==false)toast('浏览器未保存当前对话入口，仍可从最近对话重新打开。');}}
 function historyIcon(kind){return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${{favorite:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/>',pinned:'<path d="m16 3 5 5-4 2-3 5-2 1-4-4 1-2 5-3Z"/><path d="m9 15-6 6"/>',rename:'<path d="m16 3 5 5-12 12-6 1 1-6Z"/><path d="m13 6 5 5"/>',delete:'<path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/>'}[kind]}</svg>`;}
 function renderHistory(){
+ if(state.status.history_enabled===false){state.histories=[];$('#history-count').textContent='临时会话';$('.history-filters').classList.add('hidden');$('#history-list').innerHTML='<p class="fine-print">免登录演示不提供共享历史列表。</p>';$('.history-note').textContent='当前对话可连续追问，刷新后开启新对话；闲置30分钟或服务重启后失效。';return;}
  const favoriteCount=state.histories.filter(c=>c.favorite).length;
  $('#history-favorite-count').textContent=favoriteCount;
  $$('[data-history-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.historyFilter===state.historyFilter)));
@@ -128,7 +141,7 @@ function renderHistory(){
  $('#history-list').innerHTML=rows.length?rows.map(c=>`<div class="history-row ${c.id===state.conversation?'active':''} ${c.pinned?'is-pinned':''}"><button class="history-open" data-history="${esc(c.id)}" title="${esc(c.title)}${c.pinned?' · 已置顶':''}" aria-current="${c.id===state.conversation?'true':'false'}">${esc(c.title)}</button><div class="history-actions">${['favorite','pinned'].map(flag=>{const label=(flag==='favorite'?(c.favorite?'取消收藏':'收藏'):(c.pinned?'取消置顶':'置顶'));return `<button class="history-icon history-${flag}" data-history-flag="${flag}" data-history-id="${esc(c.id)}" data-flag-value="${!c[flag]}" aria-pressed="${!!c[flag]}" title="${label}" aria-label="${label}对话 ${esc(c.title)}">${historyIcon(flag)}</button>`;}).join('')}<button class="history-icon history-rename" data-rename-history="${esc(c.id)}" title="重命名" aria-label="重命名对话 ${esc(c.title)}">${historyIcon('rename')}</button><button class="history-icon history-delete" data-delete-history="${esc(c.id)}" title="删除" aria-label="删除对话 ${esc(c.title)}">${historyIcon('delete')}</button></div></div>`).join(''):`<p class="fine-print history-empty">${state.historyFilter==='favorite'?'还没有收藏，点击对话旁的星标即可收藏。':'从一个旅行想法开始。'}</p>`;
  $$('.history-row button').forEach(b=>b.disabled=state.busy||state.historyBusy);
 }
-async function loadHistory(){const request=++historyRequest,data=await api('/api/history');if(request!==historyRequest)return;state.histories=data.conversations;$('#history-count').textContent=`${data.conversations.length} / ${data.capacity}`;renderHistory();}
+async function loadHistory(){if(state.status.history_enabled===false){renderHistory();return;}const request=++historyRequest,data=await api('/api/history');if(request!==historyRequest)return;state.histories=data.conversations;$('#history-count').textContent=`${data.conversations.length} / ${data.capacity}`;renderHistory();}
 async function updateHistoryFlag(button){
  if(state.busy||state.historyBusy)return;
  const id=button.dataset.historyId,flag=button.dataset.historyFlag;
@@ -162,12 +175,12 @@ async function confirmHistoryDelete(){
  catch(e){$('#history-delete-error').textContent=e.message;}
  finally{state.historyBusy=false;$('#confirm-history-delete').disabled=false;renderHistory();}
 }
-async function openHistory(id){if(state.busy)return;try{const saved=await api('/api/history/read',{id});state.conversation=id;state.turns=saved.turns;$('#use-model').checked=!!saved.use_model&&!!state.status.model_configured;modelLabel();applyTrip(saved.checkpoint.trip);renderTurns();rememberId();await loadHistory();switchView('ask');$('#chat-scroll').scrollTop=$('#chat-scroll').scrollHeight;}catch(e){toast(e.message);}}
+async function openHistory(id){if(state.busy)return;try{const saved=await api('/api/history/read',{id});state.conversation=id;state.turns=saved.turns;$('#use-model').checked=!!saved.use_model&&!!state.status.model_configured;modelLabel();applyTrip(saved.checkpoint.trip);renderTurns();rememberId();await loadHistory();switchView('ask');showLatestAnswer();}catch(e){toast(e.message);}}
 function newChat(){if(state.busy)return;state.conversation=null;state.turns=[];$('#use-model').checked=false;modelLabel();rememberId();applyTrip({});renderTurns();$('#question').value='';loadHistory().catch(e=>toast(e.message));}
 async function send(question){
  question=question.trim();if(!state.ready||state.busy||question.length<2)return;
  switchView('ask');setBusy(true);$('#chat-messages').insertAdjacentHTML('beforeend',loading($('#use-model').checked?'正在查找资料、选择工具并整理建议……':'正在检索资料、按条件安排旅程……'));$('#chat-scroll').scrollTop=$('#chat-scroll').scrollHeight;
- try{const data=await api('/api/chat',{question,conversation_id:state.conversation,use_model:$('#use-model').checked,trip:readTrip()});state.conversation=data.conversation_id;state.turns.push({question,result:data});state.turns=state.turns.slice(-20);applyTrip(data.trip);$('#question').value='';rememberId();renderTurns();await loadHistory();$('#chat-scroll').scrollTop=$('#chat-scroll').scrollHeight;}
+ try{const data=await api('/api/chat',{question,conversation_id:state.conversation,use_model:$('#use-model').checked,trip:readTrip()});state.conversation=data.conversation_id;state.turns.push({question,result:data});state.turns=state.turns.slice(-20);applyTrip(data.trip);$('#question').value='';rememberId();renderTurns();await loadHistory();showLatestAnswer();}
  catch(e){renderTurns();$('#chat-messages').insertAdjacentHTML('beforeend',errorHTML(e.message));$('#chat-scroll').scrollTop=$('#chat-scroll').scrollHeight;}
  finally{setBusy(false);}
 }
@@ -224,7 +237,7 @@ function statusHTML(s){
  const ready=r.index_ready&&r.dependency_available;
  const retrievalLabel=hybrid?(ready?'语义＋关键词 · 索引就绪':'关键词检索 · 语义待准备'):'关键词检索';
  const retrievalNote=hybrid?'结合语义相似度与关键词查找相关地点；语义检索不可用时自动使用关键词检索。每条回答可查看实际检索方式与出处。':'按名称、街区和文本关键词查找相关地点，回答可查出处与执行记录。';
- return `<div class="status-card"><h3>本地资料与检索</h3><span class="badge">${s.place_count} 条 · ${retrievalLabel}</span><p>${retrievalNote}</p></div><div class="status-card"><h3>大模型工具助手</h3><span class="badge">${s.model_configured?'已配置 · 手动开启':'尚未配置'}</span><p>${s.model_configured?esc(s.model_name)+' 可用于问答与工具选择。':'当前使用规则工具演示。'}开启后，问题、有限历史及工具资料会发送给配置的模型服务。</p></div><div class="status-card"><h3>高德地点与路线</h3><span class="badge">${s.amap_configured?'已配置 · 按需查询':s.amap_enabled===false?'自动查询未启用':'尚未配置 · 不发外部请求'}</span><p>行程默认显示 OpenStreetMap 真实底图，无需高德 Key。高德另提供地点查询和步行路线接口，启用后需验证香港覆盖和权限。</p></div>`;
+ return `<div class="status-card"><h3>本地资料与检索</h3><span class="badge">${s.place_count} 条 · ${retrievalLabel}</span><p>${retrievalNote}</p></div><div class="status-card"><h3>大模型工具助手</h3><span class="badge">${s.model_configured?'已配置 · 手动开启':'尚未配置'}</span><p>${s.model_configured?esc(s.model_name)+' 可用于问答与工具选择。':'当前使用规则工具演示。'}开启后，问题、有限历史及检索资料（含按需查询的地图候选）会发送给配置的模型服务。</p></div><div class="status-card"><h3>高德地点与路线</h3><span class="badge">${s.amap_configured?'已配置 · 按需查询':s.amap_enabled===false?'自动查询未启用':'尚未配置 · 不发外部请求'}</span><p>行程默认显示 OpenStreetMap 真实底图，无需高德 Key。高德另提供地点查询和步行路线接口，启用后需验证香港覆盖和权限。</p></div>`;
 }
 async function init(){
  try{const [s,data]=await Promise.all([api('/api/status'),api('/api/places')]);state.status=s;state.places=data.places;
@@ -234,7 +247,7 @@ async function init(){
   $('#start-station').innerHTML='<option value="">暂不指定 · 先看目的地出口</option>'+s.transit_stations.map(name=>`<option value="${esc(name)}">${esc(name)}站</option>`).join('');
   $('#home-start-date').value=s.today_hk;$('#home-end-date').value=addDays(s.today_hk,1);updateDateHint('home');
   $('#model-hint').textContent=s.model_configured?s.model_name:'待配置';state.ready=true;setBusy(false);await loadHistory();
-  let saved;try{saved=localStorage.getItem('hk-travel-active-v13');}catch{}if(saved&&/^[a-f0-9]{32}$/.test(saved)){try{const record=await api('/api/history/read',{id:saved});state.conversation=saved;state.turns=record.turns;applyTrip(record.checkpoint.trip);$('#use-model').checked=!!record.use_model&&!!s.model_configured;renderTurns();await loadHistory();}catch{state.conversation=null;rememberId();}}
+  let saved;try{if(s.history_enabled!==false)saved=localStorage.getItem('hk-travel-active-v13');else localStorage.removeItem('hk-travel-active-v13');}catch{}if(saved&&/^[a-f0-9]{32}$/.test(saved)){try{const record=await api('/api/history/read',{id:saved});state.conversation=saved;state.turns=record.turns;applyTrip(record.checkpoint.trip);$('#use-model').checked=!!record.use_model&&!!s.model_configured;renderTurns();await loadHistory();}catch{state.conversation=null;rememberId();}}
   modelLabel();$('.trip-settings').open=true;
  }catch(e){$('#app-error').innerHTML=`${esc(e.message)} <button class="small-button" data-action="retry-init">重试连接</button>`;$('#app-error').classList.remove('hidden');}
 }
@@ -263,6 +276,10 @@ $('#journey-panel').addEventListener('close',()=>{$('#open-journey').setAttribut
 $('#journey-panel').addEventListener('click',event=>{if(event.target!==$('#journey-panel'))return;const bounds=event.target.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)closeJourney();});
 $$('[data-journey-tab]').forEach(button=>button.addEventListener('click',()=>journeyTab(button.dataset.journeyTab)));
 $('.journey-tabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const current=$('.journey-tabs [aria-selected="true"]').dataset.journeyTab;const target=event.key==='Home'?'history':event.key==='End'?'settings':current==='history'?'settings':'history';journeyTab(target);$(`[data-journey-tab="${target}"]`).focus();});
+$('#expand-chat').addEventListener('click',()=>expandChat(!document.body.classList.contains('chat-expanded')));
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape'&&document.body.classList.contains('chat-expanded')&&!$('dialog[open]')){expandChat(false);$('#expand-chat').focus();}
+});
 $('#new-chat').addEventListener('click',newChat);$('#use-model').addEventListener('change',modelLabel);
 $('#history-rename-form').addEventListener('submit',saveHistoryRename);
 $('#cancel-history-rename').addEventListener('click',()=>$('#history-rename-dialog').close());

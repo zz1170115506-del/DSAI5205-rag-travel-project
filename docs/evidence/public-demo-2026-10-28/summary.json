@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-28",
+  "url": "https://hk-travel-rag-demo.onrender.com",
+  "platform": "Render",
+  "region": "Singapore",
+  "plan": "Free",
+  "verified_deployed_commit": "fc69d217e7727139fed69f50ec84c6ae86610116",
+  "auto_deploy": "off",
+  "authentication": {
+    "type": "HTTP Basic",
+    "username": "team",
+    "password_recorded": false,
+    "unauthenticated": {
+      "/": 401,
+      "/api/status": 401,
+      "/api/history": 401
+    },
+    "healthz": {
+      "status": 200,
+      "body": {
+        "status": "ok"
+      }
+    }
+  },
+  "local_rag": {
+    "question": "中环有什么文化景点？",
+    "verified_in": "Safari public webpage and authenticated saved result",
+    "elapsed_ms": 16632,
+    "model_output_accepted": true,
+    "citations": [
+      "tai-kwun",
+      "pmq",
+      "escalator",
+      "man-mo",
+      "zoological-gardens"
+    ],
+    "live_model_responses": 2,
+    "search_trace": [
+      {
+        "status": "success",
+        "elapsed_ms": 10868,
+        "retrieval": {
+          "recall": "SQLite FTS5 BM25 + local dense embeddings",
+          "reranker": "RRF 排名融合与名称优先（非神经重排）",
+          "candidate_count": 10,
+          "returned_count": 5,
+          "knowledge_records": 33,
+          "mode": "hybrid",
+          "configured_mode": "hybrid",
+          "embedding_used": true,
+          "embedding_model": "BAAI/bge-small-zh-v1.5",
+          "semantic_candidates": 3
+        }
+      }
+    ]
+  },
+  "map_rag": {
+    "question": "介绍K11 MUSEA",
+    "transport": "JSON Lines with heartbeat; POST /api/chat?stream=true",
+    "http_status": 200,
+    "event_status": 200,
+    "http_elapsed_seconds": 55.24,
+    "elapsed_ms": 54603,
+    "embedding_used": true,
+    "map_lookup_mode": "live",
+    "map_result_count": 5,
+    "map_rag_used": true,
+    "model_output_accepted": true,
+    "citations": [
+      "map-1",
+      "map-2"
+    ],
+    "generation": {
+      "requested": true,
+      "response_received": true,
+      "live_response": true,
+      "output_accepted": true,
+      "reason": "accepted",
+      "elapsed_ms": 6173
+    }
+  },
+  "follow_up": "Public tool budget is 25s; overall Agent deadline remains 60s. Browser chat keeps the connection active with immediate and 5-second blank heartbeats; queue plus processing is bounded at 68s. Latest deployed application code matches the repository after reverting an unneeded, undeployed compatibility experiment.",
+  "limitations": [
+    "Shared group password and history; no user isolation.",
+    "Free instance can sleep and cold start; ephemeral history can be lost.",
+    "Latency is a sample, not an SLA; API quotas and platform limits still apply.",
+    "Transient connection failures occurred during verification. Final API and Safari checks passed; this is not a load or uptime guarantee."
+  ],
+  "service_id": "srv-dbgnl9e7bikc73b4iik0",
+  "deploy_id": "dep-dbgnvpuc6qcc73c732u0",
+  "browser_verification": {
+    "safari_live_question": "passed; model answer and source buttons visibly displayed",
+    "safari_history_read": "passed; saved map answer and source links visibly displayed",
+    "independent_user_check": "User confirmed normal answers on a phone or another browser; exact browser/network/model toggle not separately recorded."
+  },
+  "validation": {
+    "python_tests_passed": 378,
+    "frontend_tests_passed": 26,
+    "temporary_password_probe": "closed; password never written to disk",
+    "secrets_recorded": false
+  }
+}

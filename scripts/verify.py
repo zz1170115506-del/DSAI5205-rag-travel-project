@@ -10,7 +10,7 @@ def main():
     env=dict(os.environ);env.pop('MODEL_API_KEY',None);env.pop('AMAP_API_KEY',None)
     env['RETRIEVAL_MODE']='bm25'
     tasks=[('python-tests',[sys.executable,'-m','pytest','-q','--junitxml='+str(args.out/'pytest.xml')]),('data-validation',[sys.executable,'scripts/manage_data.py','data/places.json']),('development-retrieval',[sys.executable,'scripts/evaluate.py']),('local-doctor',[sys.executable,'scripts/doctor.py','--mcp']),('agent-acceptance',[sys.executable,'scripts/evaluate_agent.py'])]
-    if args.node:tasks.append(('frontend-tests',[args.node,'--test','tests/plan-storage.test.mjs','tests/trip-dates.test.mjs','tests/walking-map.test.mjs']))
+    if args.node:tasks.append(('frontend-tests',[args.node,'--test',*[str(path.relative_to(ROOT)) for path in sorted((ROOT/'tests').glob('*.test.mjs'))]]))
     results=[]
     for name,command in tasks:
         run=subprocess.run(command,cwd=ROOT,env=env,capture_output=True,text=True,timeout=90)

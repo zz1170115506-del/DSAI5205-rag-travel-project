@@ -58,3 +58,53 @@ main{max-width:1500px;margin:auto}.home{padding:32px 5% 0}.hero{position:relativ
 
 /* AMap-first compact walking route */
 .walk-route-result{margin-top:0;min-width:0}.walk-route-placeholder{min-height:180px;display:grid;place-items:center;border-radius:8px;background:#f2f5ed;color:#7c8d73;font-size:11px}.walk-live-heading{margin-bottom:10px}.walk-map-notes{font-size:10px;color:var(--muted);line-height:1.7;margin-top:9px}.walk-map-notes summary{cursor:pointer}.walk-map-notes p{font-size:10px!important;margin:7px 0!important}.walk-route-result .walk-source{margin-bottom:0}.walk-mini-actions [hidden]{display:none!important}
+
+/* Give conversation reading the available viewport; keep controls compact. */
+body[data-view=ask] .topbar{height:64px;min-height:64px;padding-top:0;flex-wrap:nowrap}
+body[data-view=ask] .workspace{height:calc(100dvh - 64px);min-height:0}
+.workspace .chat-column{max-width:1320px;height:100%;min-height:0;padding:14px clamp(16px,3vw,42px) 10px}
+.workspace .chat-head{padding-bottom:10px;gap:12px}
+.workspace .chat-head .eyebrow{display:none}
+.workspace .chat-head-tools{flex-wrap:wrap;justify-content:flex-end}
+.workspace .trip-memory{padding:7px 0 3px}
+.workspace .messages{flex:1 1 0;min-height:0;max-height:none;padding:10px 4px 16px 0;scroll-padding-top:12px}
+.workspace .assistant-message{padding:20px 24px}
+.workspace .answer-text{font-size:14px;line-height:1.95}
+.workspace .chat-bottom{padding-top:8px}
+.workspace .suggestions{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin-bottom:7px;scrollbar-width:thin}
+.workspace .suggestions .chip{flex-shrink:0;padding:3px 10px}
+.workspace .composer{padding:8px 10px;gap:10px}
+.workspace .composer textarea{min-height:40px;max-height:140px;line-height:1.6;font-size:13px}
+.workspace .composer .primary{padding:9px 16px}
+.workspace .composer-footer{margin-top:5px;align-items:center}
+.workspace #model-hint{display:inline-block;max-width:min(320px,45vw);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.workspace .model-mode-note{margin:4px 0;font-size:10px;line-height:1.5}
+.chat-help{font-size:10px;line-height:1.5;color:var(--muted)}
+.chat-help summary{cursor:pointer;width:fit-content}
+.chat-help .boundary-note{margin:4px 0 0;font-size:10px}
+body.chat-expanded[data-view=ask]{overflow:hidden}
+body.chat-expanded[data-view=ask] .topbar{display:none}
+body.chat-expanded[data-view=ask] .workspace{position:fixed;inset:0;z-index:20;height:100dvh;background:var(--bg)}
+body.chat-expanded[data-view=ask] .chat-column{max-width:1440px;padding-top:10px}
+body.chat-expanded[data-view=ask] .suggestions{display:none}
+@media(max-width:700px){
+ body[data-view=ask] .topbar{height:64px;min-height:64px;padding:0 4%;gap:9px}
+ body[data-view=ask] .brand small,body[data-view=ask] .status-pill{display:none}
+ body[data-view=ask] .brand-icon{width:30px;height:32px;font-size:21px;border-radius:9px}
+ body[data-view=ask] .brand strong{font-size:18px}
+ body[data-view=ask] .tabs{gap:12px;margin-left:auto;margin-right:0}
+ body[data-view=ask] .tab{font-size:11px}
+ .workspace .chat-column{padding:10px 4% 8px}
+ .workspace .chat-head{flex-wrap:wrap;gap:7px;padding-bottom:7px}
+ .workspace .chat-head h2{font-size:16px}
+ .workspace .chat-head-tools{gap:6px}
+ .workspace .workspace-button{font-size:10px;padding:5px 8px}
+ .workspace .assistant-message{padding:16px}
+ .workspace .answer-text{font-size:14px;line-height:1.85}
+ .workspace .composer-footer{gap:4px}
+ .workspace #model-hint{display:none}
+ .workspace .composer textarea{font-size:16px}
+ .workspace .trip-memory{font-size:9px;line-height:1.5}
+ body.chat-expanded[data-view=ask] .chat-head h2{display:none}
+ body.chat-expanded[data-view=ask] .chat-head{justify-content:flex-end}
+}
