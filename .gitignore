@@ -38,8 +38,19 @@ htmlcov/
 /data/indexes/*
 !/data/indexes/.gitkeep
 
-# Runtime and evaluation artifacts
+# Runtime history, private exports and local release workspace
+work/
+outputs/
+*.sqlite
+*.sqlite3
+*.sqlite3-*
 *.db
+.envrc
+*.pem
+*.key
+AGENTS.md
+
+# Fullstack runtime and evaluation artifacts
 *.db-journal
 /data/reports/*
 !/data/reports/.gitkeep

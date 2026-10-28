@@ -1,0 +1,2982 @@
+{
+  "time_utc": "2026-10-23T11:52:58.691975+00:00",
+  "scope": "author-written development acceptance, not blind evaluation",
+  "external_model_verified": false,
+  "amap_verified": false,
+  "baseline": {
+    "endpoint": "/api/ask + /api/plan",
+    "conversation_state": false,
+    "model_chooses_tools": false,
+    "note": "interface capability comparison only; no real-model accuracy or cost improvement measured"
+  },
+  "holdout_sha256": "01c5e215f9fa3f45b28707fe5ef8c3caa5ea4c42935b426cfdb62c99e043a31b",
+  "cases": [
+    {
+      "case": "multi_turn_constraints_real_stdio",
+      "passed": true,
+      "turns": [
+        {
+          "place_context": {
+            "listed_ids": [
+              "avenue-stars",
+              "knutsford",
+              "star-ferry",
+              "art-park"
+            ],
+            "focus_ids": [
+              "avenue-stars",
+              "knutsford",
+              "star-ferry",
+              "art-park"
+            ],
+            "kind": "plan"
+          },
+          "trip": {
+            "days": 1,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [],
+            "start_station": "",
+            "only_selected": false,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "已按记住的条件逐天生成行程草案，详见下方。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": {
+            "only_selected": false,
+            "selected_place_ids": [],
+            "start_date": null,
+            "end_date": null,
+            "days_requested": 1,
+            "days": [
+              {
+                "day": 1,
+                "date": null,
+                "weekday": null,
+                "kind": "sightseeing",
+                "title": "尖沙咀与西九",
+                "stops": [
+                  {
+                    "place": {
+                      "id": "avenue-stars",
+                      "name": "星光大道",
+                      "en": "Avenue of Stars",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "拍照",
+                        "城市漫步"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.293,
+                      "lon": 114.174,
+                      "duration": 60,
+                      "priority": 10,
+                      "summary": "星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，可欣赏港岛天际线。适合轻松散步、拍照和看海港。",
+                      "tip": "海滨露天，晴天注意遮阳；没有在本资料中承诺任何灯光或烟花活动。",
+                      "aliases": [
+                        "星光大道",
+                        "维港",
+                        "維多利亞港",
+                        "维多利亚港",
+                        "海边",
+                        "夜景"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/attractions/your-guide-to-experiencing-hong-kong.html",
+                      "source_title": "HKTB · 香港体验指南",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "10:00",
+                    "end": "11:00",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "J",
+                          "walk_minutes": 10,
+                          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "knutsford",
+                      "name": "诺士佛台餐饮街区",
+                      "en": "Knutsford Terrace",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "food",
+                      "tags": [
+                        "本地美食",
+                        "城市漫步"
+                      ],
+                      "indoor": true,
+                      "cost": "meal",
+                      "lat": 22.3018,
+                      "lon": 114.1742,
+                      "duration": 60,
+                      "priority": 5,
+                      "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
+                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "aliases": [
+                        "诺士佛台",
+                        "諾士佛臺",
+                        "尖沙咀吃饭",
+                        "餐厅",
+                        "美食"
+                      ],
+                      "source": "https://www.discoverhongkong.com/ca/interactive-map/knutsford-terrace-observatory-court.html",
+                      "source_title": "HKTB · 诺士佛台与天文台围",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "11:28",
+                    "end": "12:28",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "B1",
+                          "walk_minutes": 10,
+                          "walk_note": "沿弥敦道往金巴利道方向，再核对诺士佛台入口；街区有梯级。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "station_map_reference"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "star-ferry",
+                      "name": "天星码头（尖沙咀）",
+                      "en": "Star Ferry, Tsim Sha Tsui",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "城市漫步",
+                        "拍照"
+                      ],
+                      "indoor": false,
+                      "cost": "mixed",
+                      "lat": 22.2936,
+                      "lon": 114.1694,
+                      "duration": 40,
+                      "priority": 8,
+                      "summary": "天星小轮是体验维多利亚港的经典交通方式，连接九龙与港岛的码头。这里的示意点是尖沙咀天星码头。",
+                      "tip": "本行程只安排到码头参观；乘船航线、班次和票价需另查，不能把到码头当作已经预订船票。",
+                      "aliases": [
+                        "天星小輪",
+                        "天星小轮",
+                        "Star Ferry",
+                        "渡轮",
+                        "坐船"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/attractions/the-best-vantage-points-for-viewing-the-iconic-skyline.html",
+                      "source_title": "HKTB · 天星小轮与维港观景",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "12:54",
+                    "end": "13:34",
+                    "minutes": 40,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道向文化中心、钟楼方向步行；天星码头在钟楼旁海滨。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "station_map_reference"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "L6",
+                          "walk_minutes": 8,
+                          "walk_note": "按钟楼、文化中心方向出站，到海滨后依码头标识步行。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "art-park",
+                      "name": "西九艺术公园",
+                      "en": "West Kowloon Art Park",
+                      "region": "九龙",
+                      "area": "西九",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "自然散步",
+                        "拍照"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.3007,
+                      "lon": 114.1566,
+                      "duration": 70,
+                      "priority": 7,
+                      "summary": "西九文化区的艺术公园和海滨公共空间，可散步、休息并欣赏维多利亚港。附近有 M+ 和香港故宫文化博物馆。",
+                      "tip": "公园和博物馆是不同参观项目；露天活动受天气影响。",
+                      "aliases": [
+                        "西九文化区",
+                        "西九文化區",
+                        "艺术公园",
+                        "草地",
+                        "海边"
+                      ],
+                      "source": "https://www.discoverhongkong.com/content/dam/dhk/intl/corporate/newsroom/new-stories-around-the-globe/museum-of-life/hktb-monocle-museum-of-life.pdf",
+                      "source_title": "HKTB · 西九文化区文化导览（PDF）",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "14:10",
+                    "end": "15:20",
+                    "minutes": 70,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "九龙",
+                          "exit": "C1",
+                          "walk_minutes": 18,
+                          "walk_note": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。",
+                          "sources": [
+                            "kow",
+                            "mplus"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "walk_minutes": 20,
+                          "walk_note": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。",
+                          "sources": [
+                            "aus"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · KOW",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "M+ 官方交通指引",
+                          "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  }
+                ],
+                "legs": [
+                  {
+                    "origin_id": "avenue-stars",
+                    "destination_id": "knutsford",
+                    "straight_km": 0.98,
+                    "minutes": 28,
+                    "mode": "步行估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "从星光大道步行至诺士佛台餐饮街区。"
+                        }
+                      ],
+                      "estimated_minutes": 28,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "邻近地点步行衔接"
+                    }
+                  },
+                  {
+                    "origin_id": "knutsford",
+                    "destination_id": "star-ferry",
+                    "straight_km": 1.04,
+                    "minutes": 26,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "两地可从尖沙咀站周边街区衔接。由诺士佛台餐饮街区按街道地图步行至天星码头（尖沙咀），无需进出站绕行；步行方案仍需现场确认。"
+                        }
+                      ],
+                      "estimated_minutes": 26,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "同一车站周边，建议步行"
+                    }
+                  },
+                  {
+                    "origin_id": "star-ferry",
+                    "destination_id": "art-park",
+                    "straight_km": 1.54,
+                    "minutes": 36,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "mtr",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "由天星码头（尖沙咀）步行至尖东站 L6 入口，预留约 8 分钟（估算），按站区图核对入口。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TML",
+                          "from": "尖东",
+                          "to": "柯士甸",
+                          "direction": "屯门",
+                          "line_name": "屯马线",
+                          "color_name": "棕色",
+                          "stations": [
+                            "尖东",
+                            "柯士甸"
+                          ],
+                          "stop_count": 1,
+                          "text": "在尖东站乘屯马线（棕色），往屯门方向，坐 1 站至柯士甸站下车。"
+                        },
+                        {
+                          "kind": "exit",
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "text": "在柯士甸站从 D1 出口出站。"
+                        },
+                        {
+                          "kind": "walk",
+                          "minutes": 20,
+                          "text": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。 步行预留约 20 分钟（项目估算）。"
+                        }
+                      ],
+                      "estimated_minutes": 36,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                      "title": "尖东 → 柯士甸",
+                      "origin_station": "尖东",
+                      "destination_station": "柯士甸"
+                    }
+                  }
+                ],
+                "start_guide": {
+                  "mode": "access_only",
+                  "steps": [
+                    {
+                      "kind": "exit",
+                      "station": "尖沙咀",
+                      "exit": "E",
+                      "text": "在尖沙咀站从 E 出口出站。"
+                    },
+                    {
+                      "kind": "walk",
+                      "minutes": 12,
+                      "text": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。 步行预留约 12 分钟（项目估算）。"
+                    }
+                  ],
+                  "estimated_minutes": null,
+                  "live": false,
+                  "sources": [
+                    {
+                      "name": "港铁官方线路及车站图",
+                      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                      "checked": "2026-10-22"
+                    },
+                    {
+                      "name": "港铁官方站区街道图 · TST",
+                      "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                      "checked": "2026-10-22"
+                    }
+                  ],
+                  "checked": "2026-10-22",
+                  "version": "2026-10-22.1",
+                  "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                  "title": "如何到达首站",
+                  "origin_station": null,
+                  "destination_station": "尖沙咀",
+                  "missing_origin": true,
+                  "origin_note": "尚未选择出发站：下面先给到站后的出口和接驳；选择出发港铁站后可补全上车与换乘。"
+                },
+                "transfer_minutes": 90,
+                "end": "15:20",
+                "meal_note": "餐饮候选不包含订位，其他正餐请自行安排。"
+              }
+            ],
+            "coverage": {
+              "calendar_days": 1,
+              "sightseeing_days": 1,
+              "flex_days": 0,
+              "unique_places": 4
+            },
+            "warnings": [
+              "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
+              "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
+              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
+            ],
+            "start_station": "",
+            "transit_version": "2026-10-22.1",
+            "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
+            "live_routes": false
+          },
+          "sources": [],
+          "trace": [
+            {
+              "tool": "plan_itinerary",
+              "status": "success",
+              "arguments": {
+                "days": 1,
+                "start_date": null,
+                "end_date": null,
+                "region": "九龙",
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "pace": "轻松",
+                "rain": false,
+                "public_only": false,
+                "must_visit": [],
+                "start_station": "",
+                "only_selected": false,
+                "excluded_places": []
+              },
+              "elapsed_ms": 279,
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → plan_itinerary"
+                ],
+                "arguments": {
+                  "days": 1,
+                  "start_date": null,
+                  "end_date": null,
+                  "region": "九龙",
+                  "interests": [
+                    "海港夜景",
+                    "本地美食"
+                  ],
+                  "pace": "轻松",
+                  "rain": false,
+                  "public_only": false,
+                  "must_visit": [],
+                  "start_station": "",
+                  "only_selected": false,
+                  "excluded_places": []
+                },
+                "elapsed_ms": 279,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            }
+          ],
+          "stop_reason": "complete",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 1,
+            "decisions": 2,
+            "elapsed_ms": 284,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        },
+        {
+          "place_context": {
+            "listed_ids": [
+              "hkmoa",
+              "knutsford",
+              "mplus",
+              "palace-museum"
+            ],
+            "focus_ids": [
+              "hkmoa",
+              "knutsford",
+              "mplus",
+              "palace-museum"
+            ],
+            "kind": "plan"
+          },
+          "trip": {
+            "days": 1,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": true,
+            "public_only": false,
+            "must_visit": [],
+            "start_station": "",
+            "only_selected": false,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "已按记住的条件逐天生成行程草案，详见下方。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": {
+            "only_selected": false,
+            "selected_place_ids": [],
+            "start_date": null,
+            "end_date": null,
+            "days_requested": 1,
+            "days": [
+              {
+                "day": 1,
+                "date": null,
+                "weekday": null,
+                "kind": "sightseeing",
+                "title": "尖沙咀与西九",
+                "stops": [
+                  {
+                    "place": {
+                      "id": "hkmoa",
+                      "name": "香港艺术馆",
+                      "en": "Hong Kong Museum of Art",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "文化艺术",
+                        "拍照"
+                      ],
+                      "indoor": true,
+                      "cost": "mixed",
+                      "lat": 22.2931,
+                      "lon": 114.1721,
+                      "duration": 100,
+                      "priority": 9,
+                      "summary": "位于尖沙咀梳士巴利道的香港艺术馆，展示中国文物、书画、外销艺术以及现代和香港艺术。适合喜欢艺术展览，或想安排室内参观的游客。",
+                      "tip": "展览轮换，开放日、休馆日及特别展览收费请到艺术馆官网确认。",
+                      "aliases": [
+                        "香港藝術館",
+                        "博物馆",
+                        "雨天",
+                        "室内",
+                        "艺术"
+                      ],
+                      "source": "https://www.discoverhongkong.com/hk-eng/place-to-go/arts/hong-kong-museum-of-art.html",
+                      "source_title": "HKTB · 香港艺术馆",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "10:00",
+                    "end": "11:40",
+                    "minutes": 100,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "J",
+                          "walk_minutes": 10,
+                          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "knutsford",
+                      "name": "诺士佛台餐饮街区",
+                      "en": "Knutsford Terrace",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "food",
+                      "tags": [
+                        "本地美食",
+                        "城市漫步"
+                      ],
+                      "indoor": true,
+                      "cost": "meal",
+                      "lat": 22.3018,
+                      "lon": 114.1742,
+                      "duration": 60,
+                      "priority": 5,
+                      "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
+                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "aliases": [
+                        "诺士佛台",
+                        "諾士佛臺",
+                        "尖沙咀吃饭",
+                        "餐厅",
+                        "美食"
+                      ],
+                      "source": "https://www.discoverhongkong.com/ca/interactive-map/knutsford-terrace-observatory-court.html",
+                      "source_title": "HKTB · 诺士佛台与天文台围",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "12:08",
+                    "end": "13:08",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "B1",
+                          "walk_minutes": 10,
+                          "walk_note": "沿弥敦道往金巴利道方向，再核对诺士佛台入口；街区有梯级。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "station_map_reference"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "mplus",
+                      "name": "M+ 博物馆",
+                      "en": "M+",
+                      "region": "九龙",
+                      "area": "西九",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "文化艺术",
+                        "拍照"
+                      ],
+                      "indoor": true,
+                      "cost": "ticket",
+                      "lat": 22.3002,
+                      "lon": 114.1602,
+                      "duration": 120,
+                      "priority": 8,
+                      "summary": "M+ 位于西九文化区，聚焦现代和当代视觉文化，包括视觉艺术、设计建筑与流动影像。可与西九海滨组合游览。",
+                      "tip": "展览门票、预约和休馆日请查 M+ 官网。本项目不提供实时票务。",
+                      "aliases": [
+                        "M＋",
+                        "m plus",
+                        "博物馆",
+                        "雨天",
+                        "室内",
+                        "当代艺术"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/arts/where-to-get-your-arts-and-culture-fix.html",
+                      "source_title": "HKTB · 香港艺术文化场所",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "14:02",
+                    "end": "16:02",
+                    "minutes": 120,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "九龙",
+                          "exit": "C1",
+                          "walk_minutes": 18,
+                          "walk_note": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。",
+                          "sources": [
+                            "kow",
+                            "mplus"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "walk_minutes": 20,
+                          "walk_note": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。",
+                          "sources": [
+                            "aus"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · KOW",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "M+ 官方交通指引",
+                          "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "palace-museum",
+                      "name": "香港故宫文化博物馆",
+                      "en": "Hong Kong Palace Museum",
+                      "region": "九龙",
+                      "area": "西九",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "文化艺术",
+                        "拍照"
+                      ],
+                      "indoor": true,
+                      "cost": "ticket",
+                      "lat": 22.3015,
+                      "lon": 114.1578,
+                      "duration": 120,
+                      "priority": 7,
+                      "summary": "香港故宫文化博物馆位于西九文化区，展示中华艺术与文化，并促进不同文明之间的交流。适合对历史文物、艺术展览感兴趣的游客。",
+                      "tip": "展览、门票和休馆日会变化，请到博物馆官网确认。",
+                      "aliases": [
+                        "香港故宮",
+                        "故宫",
+                        "博物馆",
+                        "雨天",
+                        "室内"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-west-kowloon-cultural-district.html",
+                      "source_title": "HKTB · 西九文化区",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "16:14",
+                    "end": "18:14",
+                    "minutes": 120,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "九龙",
+                          "exit": "C1",
+                          "walk_minutes": 28,
+                          "walk_note": "经圆方和艺术广场天桥进入西九文化区，再沿园区标识前往香港故宫；园区内需继续步行。",
+                          "sources": [
+                            "kow",
+                            "mplus"
+                          ],
+                          "basis": "station_map_reference"
+                        },
+                        {
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "walk_minutes": 30,
+                          "walk_note": "按西九文化区导向离站，经行人通道进入园区，再前往香港故宫；核对施工改道。",
+                          "sources": [
+                            "aus"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · KOW",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "M+ 官方交通指引",
+                          "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  }
+                ],
+                "legs": [
+                  {
+                    "origin_id": "hkmoa",
+                    "destination_id": "knutsford",
+                    "straight_km": 0.99,
+                    "minutes": 28,
+                    "mode": "步行估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "从香港艺术馆步行至诺士佛台餐饮街区。"
+                        }
+                      ],
+                      "estimated_minutes": 28,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "邻近地点步行衔接"
+                    }
+                  },
+                  {
+                    "origin_id": "knutsford",
+                    "destination_id": "mplus",
+                    "straight_km": 1.45,
+                    "minutes": 54,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "mtr",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "由诺士佛台餐饮街区步行至尖沙咀站 B1 入口，预留约 10 分钟（估算），按站区图核对入口。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TWL",
+                          "from": "尖沙咀",
+                          "to": "中环",
+                          "direction": "中环",
+                          "line_name": "荃湾线",
+                          "color_name": "红色",
+                          "stations": [
+                            "尖沙咀",
+                            "金钟",
+                            "中环"
+                          ],
+                          "stop_count": 2,
+                          "text": "在尖沙咀站乘荃湾线（红色），往中环方向，坐 2 站至中环站下车。"
+                        },
+                        {
+                          "kind": "station_walk",
+                          "from": "中环",
+                          "to": "香港",
+                          "text": "由中环站步行换至香港站：跟随站内通道往中环／香港站，换乘至相应线路；步行时间为估算。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TCL",
+                          "from": "香港",
+                          "to": "九龙",
+                          "direction": "东涌",
+                          "line_name": "东涌线",
+                          "color_name": "橙色",
+                          "stations": [
+                            "香港",
+                            "九龙"
+                          ],
+                          "stop_count": 1,
+                          "text": "在香港站乘东涌线（橙色），往东涌方向，坐 1 站至九龙站下车。"
+                        },
+                        {
+                          "kind": "exit",
+                          "station": "九龙",
+                          "exit": "C1",
+                          "text": "在九龙站从 C1 出口出站。"
+                        },
+                        {
+                          "kind": "walk",
+                          "minutes": 18,
+                          "text": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。 步行预留约 18 分钟（项目估算）。"
+                        }
+                      ],
+                      "estimated_minutes": 54,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · KOW",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "M+ 官方交通指引",
+                          "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                      "title": "尖沙咀 → 九龙",
+                      "origin_station": "尖沙咀",
+                      "destination_station": "九龙"
+                    }
+                  },
+                  {
+                    "origin_id": "mplus",
+                    "destination_id": "palace-museum",
+                    "straight_km": 0.29,
+                    "minutes": 12,
+                    "mode": "步行估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "从M+ 博物馆步行至香港故宫文化博物馆。"
+                        }
+                      ],
+                      "estimated_minutes": 12,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "邻近地点步行衔接"
+                    }
+                  }
+                ],
+                "start_guide": {
+                  "mode": "access_only",
+                  "steps": [
+                    {
+                      "kind": "exit",
+                      "station": "尖沙咀",
+                      "exit": "E",
+                      "text": "在尖沙咀站从 E 出口出站。"
+                    },
+                    {
+                      "kind": "walk",
+                      "minutes": 12,
+                      "text": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。 步行预留约 12 分钟（项目估算）。"
+                    }
+                  ],
+                  "estimated_minutes": null,
+                  "live": false,
+                  "sources": [
+                    {
+                      "name": "港铁官方线路及车站图",
+                      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                      "checked": "2026-10-22"
+                    },
+                    {
+                      "name": "港铁官方站区街道图 · TST",
+                      "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                      "checked": "2026-10-22"
+                    }
+                  ],
+                  "checked": "2026-10-22",
+                  "version": "2026-10-22.1",
+                  "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                  "title": "如何到达首站",
+                  "origin_station": null,
+                  "destination_station": "尖沙咀",
+                  "missing_origin": true,
+                  "origin_note": "尚未选择出发站：下面先给到站后的出口和接驳；选择出发港铁站后可补全上车与换乘。"
+                },
+                "transfer_minutes": 94,
+                "end": "18:14",
+                "meal_note": "餐饮候选不包含订位，其他正餐请自行安排。"
+              }
+            ],
+            "coverage": {
+              "calendar_days": 1,
+              "sightseeing_days": 1,
+              "flex_days": 0,
+              "unique_places": 4
+            },
+            "warnings": [
+              "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
+              "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
+              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "“只选室内”按资料标签筛选，不代表全天避雨；跨地点移动仍需户外交通。",
+              "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
+            ],
+            "start_station": "",
+            "transit_version": "2026-10-22.1",
+            "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
+            "live_routes": false
+          },
+          "sources": [],
+          "trace": [
+            {
+              "tool": "plan_itinerary",
+              "status": "success",
+              "arguments": {
+                "days": 1,
+                "start_date": null,
+                "end_date": null,
+                "region": "九龙",
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "pace": "轻松",
+                "rain": true,
+                "public_only": false,
+                "must_visit": [],
+                "start_station": "",
+                "only_selected": false,
+                "excluded_places": []
+              },
+              "elapsed_ms": 297,
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → plan_itinerary"
+                ],
+                "arguments": {
+                  "days": 1,
+                  "start_date": null,
+                  "end_date": null,
+                  "region": "九龙",
+                  "interests": [
+                    "海港夜景",
+                    "本地美食"
+                  ],
+                  "pace": "轻松",
+                  "rain": true,
+                  "public_only": false,
+                  "must_visit": [],
+                  "start_station": "",
+                  "only_selected": false,
+                  "excluded_places": []
+                },
+                "elapsed_ms": 296,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            }
+          ],
+          "stop_reason": "complete",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 1,
+            "decisions": 2,
+            "elapsed_ms": 300,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        }
+      ]
+    },
+    {
+      "case": "conflict_then_user_revision_real_stdio",
+      "passed": true,
+      "turns": [
+        {
+          "place_context": {
+            "listed_ids": [
+              "avenue-stars"
+            ],
+            "focus_ids": [
+              "avenue-stars"
+            ],
+            "kind": "selection"
+          },
+          "trip": {
+            "days": 1,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": true,
+            "public_only": false,
+            "must_visit": [
+              "avenue-stars"
+            ],
+            "start_station": "",
+            "only_selected": true,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "工具无法满足当前条件，请调整条件后重试。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": null,
+          "sources": [],
+          "trace": [
+            {
+              "tool": "plan_itinerary",
+              "status": "error",
+              "arguments": {
+                "days": 1,
+                "start_date": null,
+                "end_date": null,
+                "region": "九龙",
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "pace": "轻松",
+                "rain": true,
+                "public_only": false,
+                "must_visit": [
+                  "avenue-stars"
+                ],
+                "start_station": "",
+                "only_selected": true,
+                "excluded_places": []
+              },
+              "elapsed_ms": 337,
+              "message": "工具无法满足条件；请询问用户调整地区、室内、天数或必去地点，不能静默放宽。"
+            }
+          ],
+          "stop_reason": "tool_error",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 1,
+            "decisions": 2,
+            "elapsed_ms": 340,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        },
+        {
+          "place_context": {
+            "listed_ids": [
+              "avenue-stars"
+            ],
+            "focus_ids": [
+              "avenue-stars"
+            ],
+            "kind": "plan"
+          },
+          "trip": {
+            "days": 1,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [
+              "avenue-stars"
+            ],
+            "start_station": "",
+            "only_selected": true,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "已按记住的条件逐天生成行程草案，详见下方。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": {
+            "only_selected": true,
+            "selected_place_ids": [
+              "avenue-stars"
+            ],
+            "start_date": null,
+            "end_date": null,
+            "days_requested": 1,
+            "days": [
+              {
+                "day": 1,
+                "date": null,
+                "weekday": null,
+                "kind": "sightseeing",
+                "title": "尖沙咀与西九",
+                "stops": [
+                  {
+                    "place": {
+                      "id": "avenue-stars",
+                      "name": "星光大道",
+                      "en": "Avenue of Stars",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "拍照",
+                        "城市漫步"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.293,
+                      "lon": 114.174,
+                      "duration": 60,
+                      "priority": 10,
+                      "summary": "星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，可欣赏港岛天际线。适合轻松散步、拍照和看海港。",
+                      "tip": "海滨露天，晴天注意遮阳；没有在本资料中承诺任何灯光或烟花活动。",
+                      "aliases": [
+                        "星光大道",
+                        "维港",
+                        "維多利亞港",
+                        "维多利亚港",
+                        "海边",
+                        "夜景"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/attractions/your-guide-to-experiencing-hong-kong.html",
+                      "source_title": "HKTB · 香港体验指南",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "10:00",
+                    "end": "11:00",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "J",
+                          "walk_minutes": 10,
+                          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  }
+                ],
+                "legs": [],
+                "start_guide": {
+                  "mode": "access_only",
+                  "steps": [
+                    {
+                      "kind": "exit",
+                      "station": "尖沙咀",
+                      "exit": "E",
+                      "text": "在尖沙咀站从 E 出口出站。"
+                    },
+                    {
+                      "kind": "walk",
+                      "minutes": 12,
+                      "text": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。 步行预留约 12 分钟（项目估算）。"
+                    }
+                  ],
+                  "estimated_minutes": null,
+                  "live": false,
+                  "sources": [
+                    {
+                      "name": "港铁官方线路及车站图",
+                      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                      "checked": "2026-10-22"
+                    },
+                    {
+                      "name": "港铁官方站区街道图 · TST",
+                      "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                      "checked": "2026-10-22"
+                    }
+                  ],
+                  "checked": "2026-10-22",
+                  "version": "2026-10-22.1",
+                  "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                  "title": "如何到达首站",
+                  "origin_station": null,
+                  "destination_station": "尖沙咀",
+                  "missing_origin": true,
+                  "origin_note": "尚未选择出发站：下面先给到站后的出口和接驳；选择出发港铁站后可补全上车与换乘。"
+                },
+                "transfer_minutes": 0,
+                "end": "11:00",
+                "meal_note": "按你的选择未额外加入餐饮地点，午餐与晚餐请自行安排。"
+              }
+            ],
+            "coverage": {
+              "calendar_days": 1,
+              "sightseeing_days": 1,
+              "flex_days": 0,
+              "unique_places": 1
+            },
+            "warnings": [
+              "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
+              "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
+              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
+            ],
+            "start_station": "",
+            "transit_version": "2026-10-22.1",
+            "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
+            "live_routes": false
+          },
+          "sources": [],
+          "trace": [
+            {
+              "tool": "plan_itinerary",
+              "status": "success",
+              "arguments": {
+                "days": 1,
+                "start_date": null,
+                "end_date": null,
+                "region": "九龙",
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "pace": "轻松",
+                "rain": false,
+                "public_only": false,
+                "must_visit": [
+                  "avenue-stars"
+                ],
+                "start_station": "",
+                "only_selected": true,
+                "excluded_places": []
+              },
+              "elapsed_ms": 304,
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → plan_itinerary"
+                ],
+                "arguments": {
+                  "days": 1,
+                  "start_date": null,
+                  "end_date": null,
+                  "region": "九龙",
+                  "interests": [
+                    "海港夜景",
+                    "本地美食"
+                  ],
+                  "pace": "轻松",
+                  "rain": false,
+                  "public_only": false,
+                  "must_visit": [
+                    "avenue-stars"
+                  ],
+                  "start_station": "",
+                  "only_selected": true,
+                  "excluded_places": []
+                },
+                "elapsed_ms": 304,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            }
+          ],
+          "stop_reason": "complete",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 1,
+            "decisions": 2,
+            "elapsed_ms": 307,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        }
+      ]
+    },
+    {
+      "case": "clarification_then_continue_real_stdio",
+      "passed": true,
+      "turns": [
+        {
+          "place_context": {
+            "listed_ids": [],
+            "focus_ids": [],
+            "kind": "recommendation"
+          },
+          "trip": {
+            "days": null,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [],
+            "start_station": "",
+            "only_selected": false,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "请选择出发和结束日期，我会按日期逐天安排；也可以先告诉我天数。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": null,
+          "sources": [],
+          "trace": [],
+          "stop_reason": "clarify",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "decisions": 0,
+            "elapsed_ms": 1,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        },
+        {
+          "place_context": {
+            "listed_ids": [
+              "avenue-stars",
+              "knutsford",
+              "star-ferry",
+              "art-park",
+              "sham-shui-po",
+              "goldfish-market",
+              "temple-street",
+              "hing-kee"
+            ],
+            "focus_ids": [
+              "avenue-stars",
+              "knutsford",
+              "star-ferry",
+              "art-park",
+              "sham-shui-po",
+              "goldfish-market",
+              "temple-street",
+              "hing-kee"
+            ],
+            "kind": "plan"
+          },
+          "trip": {
+            "days": 2,
+            "start_date": null,
+            "end_date": null,
+            "region": "九龙",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [],
+            "start_station": "",
+            "only_selected": false,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "已按记住的条件逐天生成行程草案，详见下方。少走路采用轻松节奏，未验证实际步行与无障碍条件。",
+            "citations": [],
+            "notice": "本地规则演示 · 未调用大模型",
+            "mode": "local_demo",
+            "kind": "answer",
+            "model_output_accepted": false
+          },
+          "plan": {
+            "only_selected": false,
+            "selected_place_ids": [],
+            "start_date": null,
+            "end_date": null,
+            "days_requested": 2,
+            "days": [
+              {
+                "day": 1,
+                "date": null,
+                "weekday": null,
+                "kind": "sightseeing",
+                "title": "尖沙咀与西九",
+                "stops": [
+                  {
+                    "place": {
+                      "id": "avenue-stars",
+                      "name": "星光大道",
+                      "en": "Avenue of Stars",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "拍照",
+                        "城市漫步"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.293,
+                      "lon": 114.174,
+                      "duration": 60,
+                      "priority": 10,
+                      "summary": "星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，可欣赏港岛天际线。适合轻松散步、拍照和看海港。",
+                      "tip": "海滨露天，晴天注意遮阳；没有在本资料中承诺任何灯光或烟花活动。",
+                      "aliases": [
+                        "星光大道",
+                        "维港",
+                        "維多利亞港",
+                        "维多利亚港",
+                        "海边",
+                        "夜景"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/attractions/your-guide-to-experiencing-hong-kong.html",
+                      "source_title": "HKTB · 香港体验指南",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "10:00",
+                    "end": "11:00",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "J",
+                          "walk_minutes": 10,
+                          "walk_note": "循站内 J 出口及海滨导向，出站后按目标场馆／星光大道标识前往。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "knutsford",
+                      "name": "诺士佛台餐饮街区",
+                      "en": "Knutsford Terrace",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "food",
+                      "tags": [
+                        "本地美食",
+                        "城市漫步"
+                      ],
+                      "indoor": true,
+                      "cost": "meal",
+                      "lat": 22.3018,
+                      "lon": 114.1742,
+                      "duration": 60,
+                      "priority": 5,
+                      "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
+                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "aliases": [
+                        "诺士佛台",
+                        "諾士佛臺",
+                        "尖沙咀吃饭",
+                        "餐厅",
+                        "美食"
+                      ],
+                      "source": "https://www.discoverhongkong.com/ca/interactive-map/knutsford-terrace-observatory-court.html",
+                      "source_title": "HKTB · 诺士佛台与天文台围",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "11:28",
+                    "end": "12:28",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "B1",
+                          "walk_minutes": 10,
+                          "walk_note": "沿弥敦道往金巴利道方向，再核对诺士佛台入口；街区有梯级。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "station_map_reference"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "star-ferry",
+                      "name": "天星码头（尖沙咀）",
+                      "en": "Star Ferry, Tsim Sha Tsui",
+                      "region": "九龙",
+                      "area": "尖沙咀",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "城市漫步",
+                        "拍照"
+                      ],
+                      "indoor": false,
+                      "cost": "mixed",
+                      "lat": 22.2936,
+                      "lon": 114.1694,
+                      "duration": 40,
+                      "priority": 8,
+                      "summary": "天星小轮是体验维多利亚港的经典交通方式，连接九龙与港岛的码头。这里的示意点是尖沙咀天星码头。",
+                      "tip": "本行程只安排到码头参观；乘船航线、班次和票价需另查，不能把到码头当作已经预订船票。",
+                      "aliases": [
+                        "天星小輪",
+                        "天星小轮",
+                        "Star Ferry",
+                        "渡轮",
+                        "坐船"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/attractions/the-best-vantage-points-for-viewing-the-iconic-skyline.html",
+                      "source_title": "HKTB · 天星小轮与维港观景",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "12:54",
+                    "end": "13:34",
+                    "minutes": 40,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "尖沙咀",
+                          "exit": "E",
+                          "walk_minutes": 12,
+                          "walk_note": "沿梳士巴利道向文化中心、钟楼方向步行；天星码头在钟楼旁海滨。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "station_map_reference"
+                        },
+                        {
+                          "station": "尖东",
+                          "exit": "L6",
+                          "walk_minutes": 8,
+                          "walk_note": "按钟楼、文化中心方向出站，到海滨后依码头标识步行。",
+                          "sources": [
+                            "tst"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "art-park",
+                      "name": "西九艺术公园",
+                      "en": "West Kowloon Art Park",
+                      "region": "九龙",
+                      "area": "西九",
+                      "cluster": "harbour",
+                      "kind": "attraction",
+                      "tags": [
+                        "海港夜景",
+                        "自然散步",
+                        "拍照"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.3007,
+                      "lon": 114.1566,
+                      "duration": 70,
+                      "priority": 7,
+                      "summary": "西九文化区的艺术公园和海滨公共空间，可散步、休息并欣赏维多利亚港。附近有 M+ 和香港故宫文化博物馆。",
+                      "tip": "公园和博物馆是不同参观项目；露天活动受天气影响。",
+                      "aliases": [
+                        "西九文化区",
+                        "西九文化區",
+                        "艺术公园",
+                        "草地",
+                        "海边"
+                      ],
+                      "source": "https://www.discoverhongkong.com/content/dam/dhk/intl/corporate/newsroom/new-stories-around-the-globe/museum-of-life/hktb-monocle-museum-of-life.pdf",
+                      "source_title": "HKTB · 西九文化区文化导览（PDF）",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "14:10",
+                    "end": "15:20",
+                    "minutes": 70,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "九龙",
+                          "exit": "C1",
+                          "walk_minutes": 18,
+                          "walk_note": "经 ELEMENTS 圆方，依西九文化区／艺术广场天桥导向前往，再跟场馆标识步行。",
+                          "sources": [
+                            "kow",
+                            "mplus"
+                          ],
+                          "basis": "official_exit_listing"
+                        },
+                        {
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "walk_minutes": 20,
+                          "walk_note": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。",
+                          "sources": [
+                            "aus"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · KOW",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "M+ 官方交通指引",
+                          "url": "https://www.mplus.org.hk/en/plan-your-visit/",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  }
+                ],
+                "legs": [
+                  {
+                    "origin_id": "avenue-stars",
+                    "destination_id": "knutsford",
+                    "straight_km": 0.98,
+                    "minutes": 28,
+                    "mode": "步行估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "从星光大道步行至诺士佛台餐饮街区。"
+                        }
+                      ],
+                      "estimated_minutes": 28,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "邻近地点步行衔接"
+                    }
+                  },
+                  {
+                    "origin_id": "knutsford",
+                    "destination_id": "star-ferry",
+                    "straight_km": 1.04,
+                    "minutes": 26,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "两地可从尖沙咀站周边街区衔接。由诺士佛台餐饮街区按街道地图步行至天星码头（尖沙咀），无需进出站绕行；步行方案仍需现场确认。"
+                        }
+                      ],
+                      "estimated_minutes": 26,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "同一车站周边，建议步行"
+                    }
+                  },
+                  {
+                    "origin_id": "star-ferry",
+                    "destination_id": "art-park",
+                    "straight_km": 1.54,
+                    "minutes": 36,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "mtr",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "由天星码头（尖沙咀）步行至尖东站 L6 入口，预留约 8 分钟（估算），按站区图核对入口。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TML",
+                          "from": "尖东",
+                          "to": "柯士甸",
+                          "direction": "屯门",
+                          "line_name": "屯马线",
+                          "color_name": "棕色",
+                          "stations": [
+                            "尖东",
+                            "柯士甸"
+                          ],
+                          "stop_count": 1,
+                          "text": "在尖东站乘屯马线（棕色），往屯门方向，坐 1 站至柯士甸站下车。"
+                        },
+                        {
+                          "kind": "exit",
+                          "station": "柯士甸",
+                          "exit": "D1",
+                          "text": "在柯士甸站从 D1 出口出站。"
+                        },
+                        {
+                          "kind": "walk",
+                          "minutes": 20,
+                          "text": "按港铁站区图的西九文化区／M+ 导向走行人通道；核对临时工程路牌。 步行预留约 20 分钟（项目估算）。"
+                        }
+                      ],
+                      "estimated_minutes": 36,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · TST",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · AUS",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                      "title": "尖东 → 柯士甸",
+                      "origin_station": "尖东",
+                      "destination_station": "柯士甸"
+                    }
+                  }
+                ],
+                "start_guide": {
+                  "mode": "access_only",
+                  "steps": [
+                    {
+                      "kind": "exit",
+                      "station": "尖沙咀",
+                      "exit": "E",
+                      "text": "在尖沙咀站从 E 出口出站。"
+                    },
+                    {
+                      "kind": "walk",
+                      "minutes": 12,
+                      "text": "沿梳士巴利道往文化中心及尖沙咀海滨，按目标场馆或星光大道路牌前往。 步行预留约 12 分钟（项目估算）。"
+                    }
+                  ],
+                  "estimated_minutes": null,
+                  "live": false,
+                  "sources": [
+                    {
+                      "name": "港铁官方线路及车站图",
+                      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                      "checked": "2026-10-22"
+                    },
+                    {
+                      "name": "港铁官方站区街道图 · TST",
+                      "url": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+                      "checked": "2026-10-22"
+                    }
+                  ],
+                  "checked": "2026-10-22",
+                  "version": "2026-10-22.1",
+                  "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                  "title": "如何到达首站",
+                  "origin_station": null,
+                  "destination_station": "尖沙咀",
+                  "missing_origin": true,
+                  "origin_note": "尚未选择出发站：下面先给到站后的出口和接驳；选择出发港铁站后可补全上车与换乘。"
+                },
+                "transfer_minutes": 90,
+                "end": "15:20",
+                "meal_note": "餐饮候选不包含订位，其他正餐请自行安排。"
+              },
+              {
+                "day": 2,
+                "date": null,
+                "weekday": null,
+                "kind": "sightseeing",
+                "title": "街区与港式味道",
+                "stops": [
+                  {
+                    "place": {
+                      "id": "sham-shui-po",
+                      "name": "深水埗街区",
+                      "en": "Sham Shui Po",
+                      "region": "九龙",
+                      "area": "深水埗",
+                      "cluster": "local",
+                      "kind": "attraction",
+                      "tags": [
+                        "本地美食",
+                        "购物",
+                        "城市漫步"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.33,
+                      "lon": 114.1622,
+                      "duration": 80,
+                      "priority": 7,
+                      "summary": "深水埗汇集传统商店、布料与手作材料街、独立咖啡店和本地食店。适合慢逛街道、寻找日常香港生活气息。",
+                      "tip": "这是一片街区，示意点不等于一家店；请按现场情况安排购物和用餐。",
+                      "aliases": [
+                        "深水埗",
+                        "深水步",
+                        "鸭寮街",
+                        "街头小吃"
+                      ],
+                      "source": "https://tastehk.discoverhongkong.com/en/neighbourhoods/sham-shui-po.google",
+                      "source_title": "HKTB · 深水埗美食街区",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "13:00",
+                    "end": "14:20",
+                    "minutes": 80,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "深水埗",
+                          "exit": "D2",
+                          "walk_minutes": 5,
+                          "walk_note": "从黄金电脑商场一带开始街区散步；并非整个深水埗唯一入口。",
+                          "sources": [
+                            "ssp"
+                          ],
+                          "basis": "station_map_reference"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · SSP",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/ssp.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "goldfish-market",
+                      "name": "金鱼街",
+                      "en": "Goldfish Market",
+                      "region": "九龙",
+                      "area": "旺角",
+                      "cluster": "local",
+                      "kind": "attraction",
+                      "tags": [
+                        "城市漫步",
+                        "购物"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.324,
+                      "lon": 114.1705,
+                      "duration": 40,
+                      "priority": 5,
+                      "summary": "旺角通菜街北段的特色街市，以水族及宠物店铺形成鲜明街区景观；拍照应尊重店铺规则并避免闪光。",
+                      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+                      "aliases": [
+                        "金魚街",
+                        "通菜街北段"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-goldfish-market.html",
+                      "source_title": "金鱼街｜香港旅游发展局",
+                      "checked": "2026-10-22"
+                    },
+                    "start": "14:46",
+                    "end": "15:26",
+                    "minutes": 40,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "太子",
+                          "exit": "B2",
+                          "walk_minutes": 8,
+                          "walk_note": "按金鱼街／通菜街北段方向步行，街市沿街分布。",
+                          "sources": [
+                            "pre"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · PRE",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/pre.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "temple-street",
+                      "name": "庙街",
+                      "en": "Temple Street",
+                      "region": "九龙",
+                      "area": "油麻地／佐敦",
+                      "cluster": "local",
+                      "kind": "attraction",
+                      "tags": [
+                        "本地美食",
+                        "城市漫步",
+                        "拍照"
+                      ],
+                      "indoor": false,
+                      "cost": "public",
+                      "lat": 22.3065,
+                      "lon": 114.1703,
+                      "duration": 60,
+                      "priority": 9,
+                      "summary": "庙街是香港街市与本地餐饮的代表街区，可以体验街头气氛并寻找煲仔饭等食物。适合傍晚或晚间作为街区游览候选。",
+                      "tip": "街市摊位营业不统一；本项目不会承诺每个摊位当晚营业。",
+                      "aliases": [
+                        "廟街",
+                        "夜市",
+                        "煲仔饭",
+                        "夜生活"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/food-and-drink/local-cuisine-to-try-on-temple-street.html",
+                      "source_title": "HKTB · 庙街本地美食",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "17:00",
+                    "end": "18:00",
+                    "minutes": 60,
+                    "free_before_minutes": 63,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "佐敦",
+                          "exit": "A",
+                          "walk_minutes": 8,
+                          "walk_note": "沿佐敦道往庙街方向，在街口核对庙街路牌。",
+                          "sources": [
+                            "jor"
+                          ],
+                          "basis": "official_exit_listing"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · JOR",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/jor.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  },
+                  {
+                    "place": {
+                      "id": "hing-kee",
+                      "name": "兴记煲仔饭（庙街）",
+                      "en": "Hing Kee Restaurant",
+                      "region": "九龙",
+                      "area": "油麻地／佐敦",
+                      "cluster": "local",
+                      "kind": "food",
+                      "tags": [
+                        "本地美食"
+                      ],
+                      "indoor": true,
+                      "cost": "meal",
+                      "lat": 22.3107,
+                      "lon": 114.1701,
+                      "duration": 60,
+                      "priority": 8,
+                      "summary": "香港旅游发展局在庙街美食介绍中列出兴记，特色包括煲仔饭和蚝饼。可作为油麻地、佐敦一带的餐饮候选。",
+                      "tip": "煲仔饭适合作为晚餐候选；菜单、价格、座位与营业时间请向店方核实。",
+                      "aliases": [
+                        "興記",
+                        "煲仔饭",
+                        "煲仔飯",
+                        "蚝饼",
+                        "晚餐",
+                        "吃饭"
+                      ],
+                      "source": "https://www.discoverhongkong.com/eng/food-and-drink/local-cuisine-to-try-on-temple-street.html",
+                      "source_title": "HKTB · 庙街本地美食（兴记）",
+                      "checked": "2026-10-19"
+                    },
+                    "start": "18:16",
+                    "end": "19:16",
+                    "minutes": 60,
+                    "free_before_minutes": 0,
+                    "transit_access": {
+                      "options": [
+                        {
+                          "station": "油麻地",
+                          "exit": "C",
+                          "walk_minutes": 10,
+                          "walk_note": "循文明里／庙街方向步行，再核对兴记煲仔饭店名及门牌。",
+                          "sources": [
+                            "ymt"
+                          ],
+                          "basis": "station_map_reference"
+                        }
+                      ],
+                      "connector": "",
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · YMT",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/ymt.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22"
+                    }
+                  }
+                ],
+                "legs": [
+                  {
+                    "origin_id": "sham-shui-po",
+                    "destination_id": "goldfish-market",
+                    "straight_km": 1.08,
+                    "minutes": 26,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "mtr",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "由深水埗街区步行至深水埗站 D2 入口，预留约 5 分钟（估算），按站区图核对入口。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TWL",
+                          "from": "深水埗",
+                          "to": "太子",
+                          "direction": "中环",
+                          "line_name": "荃湾线",
+                          "color_name": "红色",
+                          "stations": [
+                            "深水埗",
+                            "太子"
+                          ],
+                          "stop_count": 1,
+                          "text": "在深水埗站乘荃湾线（红色），往中环方向，坐 1 站至太子站下车。"
+                        },
+                        {
+                          "kind": "exit",
+                          "station": "太子",
+                          "exit": "B2",
+                          "text": "在太子站从 B2 出口出站。"
+                        },
+                        {
+                          "kind": "walk",
+                          "minutes": 8,
+                          "text": "按金鱼街／通菜街北段方向步行，街市沿街分布。 步行预留约 8 分钟（项目估算）。"
+                        }
+                      ],
+                      "estimated_minutes": 21,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · SSP",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/ssp.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · PRE",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/pre.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                      "title": "深水埗 → 太子",
+                      "origin_station": "深水埗",
+                      "destination_station": "太子"
+                    }
+                  },
+                  {
+                    "origin_id": "goldfish-market",
+                    "destination_id": "temple-street",
+                    "straight_km": 1.95,
+                    "minutes": 31,
+                    "mode": "公共交通估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "mtr",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "由金鱼街步行至太子站 B2 入口，预留约 8 分钟（估算），按站区图核对入口。"
+                        },
+                        {
+                          "kind": "ride",
+                          "line_id": "TWL",
+                          "from": "太子",
+                          "to": "佐敦",
+                          "direction": "中环",
+                          "line_name": "荃湾线",
+                          "color_name": "红色",
+                          "stations": [
+                            "太子",
+                            "旺角",
+                            "油麻地",
+                            "佐敦"
+                          ],
+                          "stop_count": 3,
+                          "text": "在太子站乘荃湾线（红色），往中环方向，坐 3 站至佐敦站下车。"
+                        },
+                        {
+                          "kind": "exit",
+                          "station": "佐敦",
+                          "exit": "A",
+                          "text": "在佐敦站从 A 出口出站。"
+                        },
+                        {
+                          "kind": "walk",
+                          "minutes": 8,
+                          "text": "沿佐敦道往庙街方向，在街口核对庙街路牌。 步行预留约 8 分钟（项目估算）。"
+                        }
+                      ],
+                      "estimated_minutes": 30,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · PRE",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/pre.pdf",
+                          "checked": "2026-10-22"
+                        },
+                        {
+                          "name": "港铁官方站区街道图 · JOR",
+                          "url": "https://www.mtr.com.hk/archive/en/services/maps/jor.pdf",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                      "title": "太子 → 佐敦",
+                      "origin_station": "太子",
+                      "destination_station": "佐敦"
+                    }
+                  },
+                  {
+                    "origin_id": "temple-street",
+                    "destination_id": "hing-kee",
+                    "straight_km": 0.47,
+                    "minutes": 16,
+                    "mode": "步行估算",
+                    "basis": "人工近似坐标、直线距离与固定余量；不是导航路线或实时班次",
+                    "live": false,
+                    "transit_guide": {
+                      "mode": "walk",
+                      "steps": [
+                        {
+                          "kind": "walk",
+                          "text": "从庙街步行至兴记煲仔饭（庙街）。"
+                        }
+                      ],
+                      "estimated_minutes": 16,
+                      "live": false,
+                      "sources": [
+                        {
+                          "name": "港铁官方线路及车站图",
+                          "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                          "checked": "2026-10-22"
+                        }
+                      ],
+                      "checked": "2026-10-22",
+                      "version": "2026-10-22.1",
+                      "notice": "步行衔接按本地近似坐标及街区判断，未核对街道级路径；所附港铁资料不代表该步行路线已经导航验证。",
+                      "title": "邻近地点步行衔接"
+                    }
+                  }
+                ],
+                "start_guide": {
+                  "mode": "access_only",
+                  "steps": [
+                    {
+                      "kind": "exit",
+                      "station": "深水埗",
+                      "exit": "D2",
+                      "text": "在深水埗站从 D2 出口出站。"
+                    },
+                    {
+                      "kind": "walk",
+                      "minutes": 5,
+                      "text": "从黄金电脑商场一带开始街区散步；并非整个深水埗唯一入口。 步行预留约 5 分钟（项目估算）。"
+                    }
+                  ],
+                  "estimated_minutes": null,
+                  "live": false,
+                  "sources": [
+                    {
+                      "name": "港铁官方线路及车站图",
+                      "url": "https://www.mtr.com.hk/en/customer/services/system_map.html",
+                      "checked": "2026-10-22"
+                    },
+                    {
+                      "name": "港铁官方站区街道图 · SSP",
+                      "url": "https://www.mtr.com.hk/archive/en/services/maps/ssp.pdf",
+                      "checked": "2026-10-22"
+                    }
+                  ],
+                  "checked": "2026-10-22",
+                  "version": "2026-10-22.1",
+                  "notice": "线路与出口依据官方资料整理；站数和换乘由本地线路图计算。时长为估算，不含实时延误，不保证最快或无障碍；出发前核对出口及运营状态。",
+                  "title": "如何到达首站",
+                  "origin_station": null,
+                  "destination_station": "深水埗",
+                  "missing_origin": true,
+                  "origin_note": "尚未选择出发站：下面先给到站后的出口和接驳；选择出发港铁站后可补全上车与换乘。"
+                },
+                "transfer_minutes": 73,
+                "end": "19:16",
+                "meal_note": "餐饮候选不包含订位，其他正餐请自行安排。"
+              }
+            ],
+            "coverage": {
+              "calendar_days": 2,
+              "sightseeing_days": 2,
+              "flex_days": 0,
+              "unique_places": 8
+            },
+            "warnings": [
+              "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
+              "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
+              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
+            ],
+            "start_station": "",
+            "transit_version": "2026-10-22.1",
+            "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
+            "live_routes": false
+          },
+          "sources": [],
+          "trace": [
+            {
+              "tool": "plan_itinerary",
+              "status": "success",
+              "arguments": {
+                "days": 2,
+                "start_date": null,
+                "end_date": null,
+                "region": "九龙",
+                "interests": [
+                  "海港夜景",
+                  "本地美食"
+                ],
+                "pace": "轻松",
+                "rain": false,
+                "public_only": false,
+                "must_visit": [],
+                "start_station": "",
+                "only_selected": false,
+                "excluded_places": []
+              },
+              "elapsed_ms": 302,
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → plan_itinerary"
+                ],
+                "arguments": {
+                  "days": 2,
+                  "start_date": null,
+                  "end_date": null,
+                  "region": "九龙",
+                  "interests": [
+                    "海港夜景",
+                    "本地美食"
+                  ],
+                  "pace": "轻松",
+                  "rain": false,
+                  "public_only": false,
+                  "must_visit": [],
+                  "start_station": "",
+                  "only_selected": false,
+                  "excluded_places": []
+                },
+                "elapsed_ms": 301,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            }
+          ],
+          "stop_reason": "complete",
+          "metrics": {
+            "model_calls": 0,
+            "tool_calls": 1,
+            "decisions": 2,
+            "elapsed_ms": 305,
+            "model_responses": 0,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        }
+      ]
+    },
+    {
+      "case": "http_fixture_search_detail_finish_with_real_stdio",
+      "passed": true,
+      "turns": [
+        {
+          "place_context": {
+            "listed_ids": [
+              "tai-kwun"
+            ],
+            "focus_ids": [
+              "tai-kwun"
+            ],
+            "kind": "recommendation"
+          },
+          "trip": {
+            "days": null,
+            "start_date": null,
+            "end_date": null,
+            "region": "全部",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [],
+            "start_station": "",
+            "only_selected": false,
+            "excluded_places": []
+          },
+          "memory_notes": [],
+          "answer": {
+            "text": "大馆提供文化艺术空间 [tai-kwun]",
+            "citations": [
+              "tai-kwun"
+            ],
+            "notice": "模型选择工具 · 引用编号已校验，事实仍需核对",
+            "mode": "model",
+            "kind": "answer",
+            "model_output_accepted": true
+          },
+          "plan": null,
+          "sources": [
+            {
+              "id": "tai-kwun",
+              "name": "大馆",
+              "en": "Tai Kwun",
+              "region": "香港岛",
+              "area": "中环",
+              "cluster": "central",
+              "kind": "attraction",
+              "tags": [
+                "文化艺术",
+                "拍照",
+                "城市漫步"
+              ],
+              "indoor": true,
+              "cost": "mixed",
+              "lat": 22.2814,
+              "lon": 114.1545,
+              "duration": 90,
+              "priority": 9,
+              "summary": "大馆由旧中区警署建筑群活化而成，结合历史建筑、文化活动和当代艺术。适合想了解香港历史、喜欢建筑与展览的游客。",
+              "tip": "有室内展览也有露天庭院；展览、导赏的开放时间和预约要求需另查。",
+              "aliases": [
+                "大館",
+                "Tai Kwun",
+                "历史建筑",
+                "雨天"
+              ],
+              "source": "https://www.discoverhongkong.com/uk/explore/culture/tai-kwun-heritage-and-art.html",
+              "source_title": "HKTB · 大馆历史与艺术",
+              "checked": "2026-10-19"
+            }
+          ],
+          "trace": [
+            {
+              "tool": "search_places",
+              "status": "success",
+              "arguments": {
+                "query": "大馆",
+                "region": "全部",
+                "indoor_only": false
+              },
+              "elapsed_ms": 278,
+              "retrieval": {
+                "recall": "SQLite FTS5 BM25",
+                "reranker": "名称/别名、词覆盖、街区与主题特征重排（非神经模型）",
+                "candidate_count": 2,
+                "returned_count": 2,
+                "knowledge_records": 33
+              },
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → search_places"
+                ],
+                "arguments": {
+                  "query": "大馆",
+                  "region": "全部",
+                  "indoor_only": false
+                },
+                "elapsed_ms": 277,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            },
+            {
+              "tool": "place_detail",
+              "status": "success",
+              "arguments": {
+                "place_id": "tai-kwun"
+              },
+              "elapsed_ms": 291,
+              "protocol": {
+                "server": "本地香港旅行 MCP",
+                "transport": "stdio",
+                "steps": [
+                  "initialize",
+                  "tools/list",
+                  "tools/call → place_detail"
+                ],
+                "arguments": {
+                  "place_id": "tai-kwun"
+                },
+                "elapsed_ms": 290,
+                "status": "success",
+                "live_amap": false
+              },
+              "message": ""
+            }
+          ],
+          "stop_reason": "complete",
+          "metrics": {
+            "model_calls": 3,
+            "tool_calls": 2,
+            "decisions": 3,
+            "elapsed_ms": 576,
+            "model_responses": 3,
+            "live_model_responses": 0,
+            "format_repairs": 0,
+            "cost": null,
+            "external_model_verified": false
+          }
+        }
+      ]
+    }
+  ],
+  "all_passed": true
+}

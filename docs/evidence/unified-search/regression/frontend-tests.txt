@@ -1,0 +1,13 @@
+✔ valid draft restores and clear removes both cache formats (1.0565ms)
+✔ changed knowledge version and removed place reject old draft (0.101125ms)
+✔ malformed and incomplete storage never breaks startup (0.741208ms)
+✔ invalid saved inputs, missing legs and inconsistent times are rejected (0.160459ms)
+✔ disabled browser storage falls back to current-page operation (0.111167ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45.506791

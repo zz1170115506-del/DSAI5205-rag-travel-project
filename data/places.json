@@ -1,0 +1,1002 @@
+{
+  "version": "2026-10-22.1",
+  "editorial_note": "33 条香港官方来源的人工概述资料；新增 12 条于 2026-10-22 核对来源。原有 21 条保留各自核对日期。坐标、停留时间与费用类别为规划假设，不代表实时开放、门票或导航。外部高德结果单独标记，不自动入库。",
+  "places": [
+    {
+      "id": "peak",
+      "name": "太平山顶",
+      "en": "The Peak",
+      "region": "香港岛",
+      "area": "山顶",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "海港夜景",
+        "自然散步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "mixed",
+      "lat": 22.2711,
+      "lon": 114.1498,
+      "duration": 100,
+      "priority": 10,
+      "summary": "从山顶可俯瞰香港城市与维多利亚港，是欣赏天际线的经典地点。山顶公共观景区域与收费观景台、山顶缆车是不同项目。",
+      "tip": "山路有坡度；能见度会影响观景。门票、上山交通及开放情况请出发前另查。",
+      "aliases": [
+        "太平山",
+        "山顶",
+        "Victoria Peak",
+        "夜景"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/attractions/the-best-vantage-points-for-viewing-the-iconic-skyline.html",
+      "source_title": "HKTB · 香港天际线观景地点",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "tai-kwun",
+      "name": "大馆",
+      "en": "Tai Kwun",
+      "region": "香港岛",
+      "area": "中环",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "拍照",
+        "城市漫步"
+      ],
+      "indoor": true,
+      "cost": "mixed",
+      "lat": 22.2814,
+      "lon": 114.1545,
+      "duration": 90,
+      "priority": 9,
+      "summary": "大馆由旧中区警署建筑群活化而成，结合历史建筑、文化活动和当代艺术。适合想了解香港历史、喜欢建筑与展览的游客。",
+      "tip": "有室内展览也有露天庭院；展览、导赏的开放时间和预约要求需另查。",
+      "aliases": [
+        "大館",
+        "Tai Kwun",
+        "历史建筑",
+        "雨天"
+      ],
+      "source": "https://www.discoverhongkong.com/uk/explore/culture/tai-kwun-heritage-and-art.html",
+      "source_title": "HKTB · 大馆历史与艺术",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "pmq",
+      "name": "元创方 PMQ",
+      "en": "PMQ",
+      "region": "香港岛",
+      "area": "中环",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "购物",
+        "城市漫步"
+      ],
+      "indoor": true,
+      "cost": "mixed",
+      "lat": 22.2835,
+      "lon": 114.1517,
+      "duration": 60,
+      "priority": 7,
+      "summary": "前警察宿舍活化为设计创意空间，集合本地设计店和工艺工作室。可以和中环街区、大馆串成一条文化散步路线。",
+      "tip": "商店和活动时间各异，室外连廊仍可能受风雨影响。",
+      "aliases": [
+        "元創方",
+        "文创",
+        "设计",
+        "雨天"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/themed-travel/muslim-travel/explore-along-central-mid-levels-escalator.html",
+      "source_title": "HKTB · 沿中环至半山扶梯探索",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "man-mo",
+      "name": "上环文武庙",
+      "en": "Man Mo Temple",
+      "region": "香港岛",
+      "area": "上环",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "城市漫步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2839,
+      "lon": 114.1503,
+      "duration": 40,
+      "priority": 6,
+      "summary": "位于荷李活道的文武庙是香港的法定古迹，保存传统建筑与历史文物。可与上环、中环的老街一同游览。",
+      "tip": "这是宗教场所，应尊重现场参观与摄影规定；香火较多。",
+      "aliases": [
+        "文武廟",
+        "荷李活道",
+        "寺庙"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-man-mo-temple.html",
+      "source_title": "HKTB · 文武庙",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "escalator",
+      "name": "中环至半山自动扶梯",
+      "en": "Central–Mid-Levels Escalator",
+      "region": "香港岛",
+      "area": "中环",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "城市漫步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2824,
+      "lon": 114.1549,
+      "duration": 40,
+      "priority": 5,
+      "summary": "扶梯连接中环与半山社区，沿线可探索街道、店铺和文化空间。适合作为中环步行路线的一部分。",
+      "tip": "扶梯不是双向同时运行，方向和服务时间请看现场标示；返回可能需要步行。",
+      "aliases": [
+        "半山扶梯",
+        "扶手电梯",
+        "中環"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/themed-travel/muslim-travel/explore-along-central-mid-levels-escalator.html",
+      "source_title": "HKTB · 中环至半山扶梯",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "lan-fong-yuen",
+      "name": "兰芳园（中环）",
+      "en": "Lan Fong Yuen, Central",
+      "region": "香港岛",
+      "area": "中环",
+      "cluster": "central",
+      "kind": "food",
+      "tags": [
+        "本地美食",
+        "城市漫步"
+      ],
+      "indoor": true,
+      "cost": "meal",
+      "lat": 22.2827,
+      "lon": 114.155,
+      "duration": 50,
+      "priority": 9,
+      "summary": "中环结志街的老牌食店，以港式丝袜奶茶闻名，也可品尝猪扒包等茶餐厅食物。适合作为中环游览的餐饮候选。",
+      "tip": "地址为中环结志街 2 号。菜单、价格、营业时间与等位情况需到店或向店方确认。",
+      "aliases": [
+        "蘭芳園",
+        "丝袜奶茶",
+        "茶餐厅",
+        "猪扒包",
+        "吃饭"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-lan-fong-yuen.html",
+      "source_title": "HKTB · 兰芳园",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "avenue-stars",
+      "name": "星光大道",
+      "en": "Avenue of Stars",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "海港夜景",
+        "拍照",
+        "城市漫步"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.293,
+      "lon": 114.174,
+      "duration": 60,
+      "priority": 10,
+      "summary": "星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，可欣赏港岛天际线。适合轻松散步、拍照和看海港。",
+      "tip": "海滨露天，晴天注意遮阳；没有在本资料中承诺任何灯光或烟花活动。",
+      "aliases": [
+        "星光大道",
+        "维港",
+        "維多利亞港",
+        "维多利亚港",
+        "海边",
+        "夜景"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/attractions/your-guide-to-experiencing-hong-kong.html",
+      "source_title": "HKTB · 香港体验指南",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "star-ferry",
+      "name": "天星码头（尖沙咀）",
+      "en": "Star Ferry, Tsim Sha Tsui",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "海港夜景",
+        "城市漫步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "mixed",
+      "lat": 22.2936,
+      "lon": 114.1694,
+      "duration": 40,
+      "priority": 8,
+      "summary": "天星小轮是体验维多利亚港的经典交通方式，连接九龙与港岛的码头。这里的示意点是尖沙咀天星码头。",
+      "tip": "本行程只安排到码头参观；乘船航线、班次和票价需另查，不能把到码头当作已经预订船票。",
+      "aliases": [
+        "天星小輪",
+        "天星小轮",
+        "Star Ferry",
+        "渡轮",
+        "坐船"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/attractions/the-best-vantage-points-for-viewing-the-iconic-skyline.html",
+      "source_title": "HKTB · 天星小轮与维港观景",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "hkmoa",
+      "name": "香港艺术馆",
+      "en": "Hong Kong Museum of Art",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "拍照"
+      ],
+      "indoor": true,
+      "cost": "mixed",
+      "lat": 22.2931,
+      "lon": 114.1721,
+      "duration": 100,
+      "priority": 9,
+      "summary": "位于尖沙咀梳士巴利道的香港艺术馆，展示中国文物、书画、外销艺术以及现代和香港艺术。适合喜欢艺术展览，或想安排室内参观的游客。",
+      "tip": "展览轮换，开放日、休馆日及特别展览收费请到艺术馆官网确认。",
+      "aliases": [
+        "香港藝術館",
+        "博物馆",
+        "雨天",
+        "室内",
+        "艺术"
+      ],
+      "source": "https://www.discoverhongkong.com/hk-eng/place-to-go/arts/hong-kong-museum-of-art.html",
+      "source_title": "HKTB · 香港艺术馆",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "art-park",
+      "name": "西九艺术公园",
+      "en": "West Kowloon Art Park",
+      "region": "九龙",
+      "area": "西九",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "海港夜景",
+        "自然散步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.3007,
+      "lon": 114.1566,
+      "duration": 70,
+      "priority": 7,
+      "summary": "西九文化区的艺术公园和海滨公共空间，可散步、休息并欣赏维多利亚港。附近有 M+ 和香港故宫文化博物馆。",
+      "tip": "公园和博物馆是不同参观项目；露天活动受天气影响。",
+      "aliases": [
+        "西九文化区",
+        "西九文化區",
+        "艺术公园",
+        "草地",
+        "海边"
+      ],
+      "source": "https://www.discoverhongkong.com/content/dam/dhk/intl/corporate/newsroom/new-stories-around-the-globe/museum-of-life/hktb-monocle-museum-of-life.pdf",
+      "source_title": "HKTB · 西九文化区文化导览（PDF）",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "mplus",
+      "name": "M+ 博物馆",
+      "en": "M+",
+      "region": "九龙",
+      "area": "西九",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "拍照"
+      ],
+      "indoor": true,
+      "cost": "ticket",
+      "lat": 22.3002,
+      "lon": 114.1602,
+      "duration": 120,
+      "priority": 8,
+      "summary": "M+ 位于西九文化区，聚焦现代和当代视觉文化，包括视觉艺术、设计建筑与流动影像。可与西九海滨组合游览。",
+      "tip": "展览门票、预约和休馆日请查 M+ 官网。本项目不提供实时票务。",
+      "aliases": [
+        "M＋",
+        "m plus",
+        "博物馆",
+        "雨天",
+        "室内",
+        "当代艺术"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/arts/where-to-get-your-arts-and-culture-fix.html",
+      "source_title": "HKTB · 香港艺术文化场所",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "palace-museum",
+      "name": "香港故宫文化博物馆",
+      "en": "Hong Kong Palace Museum",
+      "region": "九龙",
+      "area": "西九",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "拍照"
+      ],
+      "indoor": true,
+      "cost": "ticket",
+      "lat": 22.3015,
+      "lon": 114.1578,
+      "duration": 120,
+      "priority": 7,
+      "summary": "香港故宫文化博物馆位于西九文化区，展示中华艺术与文化，并促进不同文明之间的交流。适合对历史文物、艺术展览感兴趣的游客。",
+      "tip": "展览、门票和休馆日会变化，请到博物馆官网确认。",
+      "aliases": [
+        "香港故宮",
+        "故宫",
+        "博物馆",
+        "雨天",
+        "室内"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-west-kowloon-cultural-district.html",
+      "source_title": "HKTB · 西九文化区",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "knutsford",
+      "name": "诺士佛台餐饮街区",
+      "en": "Knutsford Terrace",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "food",
+      "tags": [
+        "本地美食",
+        "城市漫步"
+      ],
+      "indoor": true,
+      "cost": "meal",
+      "lat": 22.3018,
+      "lon": 114.1742,
+      "duration": 60,
+      "priority": 5,
+      "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
+      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+      "aliases": [
+        "诺士佛台",
+        "諾士佛臺",
+        "尖沙咀吃饭",
+        "餐厅",
+        "美食"
+      ],
+      "source": "https://www.discoverhongkong.com/ca/interactive-map/knutsford-terrace-observatory-court.html",
+      "source_title": "HKTB · 诺士佛台与天文台围",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "temple-street",
+      "name": "庙街",
+      "en": "Temple Street",
+      "region": "九龙",
+      "area": "油麻地／佐敦",
+      "cluster": "local",
+      "kind": "attraction",
+      "tags": [
+        "本地美食",
+        "城市漫步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.3065,
+      "lon": 114.1703,
+      "duration": 60,
+      "priority": 9,
+      "summary": "庙街是香港街市与本地餐饮的代表街区，可以体验街头气氛并寻找煲仔饭等食物。适合傍晚或晚间作为街区游览候选。",
+      "tip": "街市摊位营业不统一；本项目不会承诺每个摊位当晚营业。",
+      "aliases": [
+        "廟街",
+        "夜市",
+        "煲仔饭",
+        "夜生活"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/food-and-drink/local-cuisine-to-try-on-temple-street.html",
+      "source_title": "HKTB · 庙街本地美食",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "hing-kee",
+      "name": "兴记煲仔饭（庙街）",
+      "en": "Hing Kee Restaurant",
+      "region": "九龙",
+      "area": "油麻地／佐敦",
+      "cluster": "local",
+      "kind": "food",
+      "tags": [
+        "本地美食"
+      ],
+      "indoor": true,
+      "cost": "meal",
+      "lat": 22.3107,
+      "lon": 114.1701,
+      "duration": 60,
+      "priority": 8,
+      "summary": "香港旅游发展局在庙街美食介绍中列出兴记，特色包括煲仔饭和蚝饼。可作为油麻地、佐敦一带的餐饮候选。",
+      "tip": "煲仔饭适合作为晚餐候选；菜单、价格、座位与营业时间请向店方核实。",
+      "aliases": [
+        "興記",
+        "煲仔饭",
+        "煲仔飯",
+        "蚝饼",
+        "晚餐",
+        "吃饭"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/food-and-drink/local-cuisine-to-try-on-temple-street.html",
+      "source_title": "HKTB · 庙街本地美食（兴记）",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "sham-shui-po",
+      "name": "深水埗街区",
+      "en": "Sham Shui Po",
+      "region": "九龙",
+      "area": "深水埗",
+      "cluster": "local",
+      "kind": "attraction",
+      "tags": [
+        "本地美食",
+        "购物",
+        "城市漫步"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.33,
+      "lon": 114.1622,
+      "duration": 80,
+      "priority": 7,
+      "summary": "深水埗汇集传统商店、布料与手作材料街、独立咖啡店和本地食店。适合慢逛街道、寻找日常香港生活气息。",
+      "tip": "这是一片街区，示意点不等于一家店；请按现场情况安排购物和用餐。",
+      "aliases": [
+        "深水埗",
+        "深水步",
+        "鸭寮街",
+        "街头小吃"
+      ],
+      "source": "https://tastehk.discoverhongkong.com/en/neighbourhoods/sham-shui-po.google",
+      "source_title": "HKTB · 深水埗美食街区",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "hop-yik-tai",
+      "name": "合益泰小食（深水埗）",
+      "en": "Hop Yik Tai",
+      "region": "九龙",
+      "area": "深水埗",
+      "cluster": "local",
+      "kind": "food",
+      "tags": [
+        "本地美食"
+      ],
+      "indoor": false,
+      "cost": "meal",
+      "lat": 22.3303,
+      "lon": 114.1618,
+      "duration": 40,
+      "priority": 7,
+      "summary": "位于深水埗桂林街的合益泰，以港式肠粉作为小食特色。适合与深水埗街区散步组合成短暂停留。",
+      "tip": "资料所列地址为桂林街 121 号。菜单和营业情况需另查；这里只安排小食，不等同于完整午餐。",
+      "aliases": [
+        "合益泰",
+        "肠粉",
+        "腸粉",
+        "小吃",
+        "吃饭"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/food-and-drink/must-try-street-food-in-hong-kong.html",
+      "source_title": "HKTB · 香港街头小食",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "nan-lian",
+      "name": "南莲园池与志莲净苑",
+      "en": "Nan Lian Garden and Chi Lin Nunnery",
+      "region": "九龙",
+      "area": "钻石山",
+      "cluster": "garden",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "文化艺术",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.339,
+      "lon": 114.2048,
+      "duration": 100,
+      "priority": 7,
+      "summary": "钻石山的南莲园池与志莲净苑相邻，以唐代风格建筑、园景和宁静气氛为特色。可作为偏好园林和传统文化的参观选择。",
+      "tip": "尊重宗教与摄影规定，雨天园路可能湿滑。",
+      "aliases": [
+        "南蓮園池",
+        "志蓮淨苑",
+        "园林",
+        "寺庙",
+        "花园"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-chi-lin-nunnery-and-nan-lian-garden.html",
+      "source_title": "HKTB · 志莲净苑与南莲园池",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "big-buddha",
+      "name": "天坛大佛与宝莲禅寺",
+      "en": "Big Buddha and Po Lin Monastery",
+      "region": "大屿山",
+      "area": "昂坪",
+      "cluster": "lantau",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "自然散步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "mixed",
+      "lat": 22.254,
+      "lon": 113.905,
+      "duration": 110,
+      "priority": 9,
+      "summary": "天坛大佛位于大屿山昂坪，附近是宝莲禅寺，是香港具有代表性的宗教与文化地点。登临大佛需要走台阶，可按体力决定参观范围。",
+      "tip": "不要把上台阶与所有内部参观都当成同一种门票；山区交通与天气需出发前核对。",
+      "aliases": [
+        "天壇大佛",
+        "宝莲寺",
+        "昂坪",
+        "大佛",
+        "寺庙"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/neighbourhoods/outlying-islands/ultimate-itinerary-for-a-family-weekend-on-lantau-island.html",
+      "source_title": "HKTB · 大屿山家庭行程",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "ngong-ping",
+      "name": "昂坪市集",
+      "en": "Ngong Ping Village",
+      "region": "大屿山",
+      "area": "昂坪",
+      "cluster": "lantau",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "购物",
+        "文化艺术"
+      ],
+      "indoor": false,
+      "cost": "mixed",
+      "lat": 22.2561,
+      "lon": 113.902,
+      "duration": 60,
+      "priority": 7,
+      "summary": "昂坪市集位于大屿山，可与天坛大佛及宝莲禅寺组合游览。周边自然景观与文化主题体验是其特色。",
+      "tip": "昂坪 360 是收费交通体验，与市集散步不同。缆车检修、天气和交通安排需另查。",
+      "aliases": [
+        "昂坪360",
+        "缆车",
+        "昂坪市集",
+        "Ngong Ping"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-lantau-island.html",
+      "source_title": "HKTB · 大屿山地点介绍",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "tai-o",
+      "name": "大澳渔村",
+      "en": "Tai O",
+      "region": "大屿山",
+      "area": "大澳",
+      "cluster": "lantau",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "本地美食",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2542,
+      "lon": 113.8631,
+      "duration": 120,
+      "priority": 8,
+      "summary": "大澳以棚屋与渔村风貌著称，街道可寻找本地小食。可与昂坪地区组合，但两地之间需要另外安排交通。",
+      "tip": "不要把地图上的直线距离当成实际道路距离；周末交通和排队应留余量。",
+      "aliases": [
+        "大澳",
+        "渔村",
+        "棚屋",
+        "Tai O"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/neighbourhoods/outlying-islands/ultimate-itinerary-for-a-family-weekend-on-lantau-island.html",
+      "source_title": "HKTB · 大屿山与大澳行程",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "hk-park",
+      "name": "香港公园",
+      "en": "Hong Kong Park",
+      "region": "香港岛",
+      "area": "金钟",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.277,
+      "lon": 114.161,
+      "duration": 60,
+      "priority": 5,
+      "summary": "城市绿地结合池塘、观鸟空间与茶具文物馆，适合在中环和金钟之间安排短暂休息。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "香港公園",
+        "金钟公园"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/outdoors/city-parks.html",
+      "source_title": "香港公园｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "zoological-gardens",
+      "name": "香港动植物公园",
+      "en": "Hong Kong Zoological and Botanical Gardens",
+      "region": "香港岛",
+      "area": "中环",
+      "cluster": "central",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2779,
+      "lon": 114.1548,
+      "duration": 60,
+      "priority": 5,
+      "summary": "香港历史悠久的城市公园，设花园、温室及鸟兽展示空间，可从中环街区延伸作绿地散步。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "香港動植物公園",
+        "动植物园"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/outdoors/city-parks.html",
+      "source_title": "香港动植物公园｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "kowloon-park",
+      "name": "九龙公园",
+      "en": "Kowloon Park",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "城市漫步"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.3008,
+      "lon": 114.169,
+      "duration": 60,
+      "priority": 5,
+      "summary": "尖沙咀繁忙街道中的城市公园，园内有中式庭园与漫画人物雕塑，可与附近街区步行活动组合。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "九龍公園"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/outdoors/city-parks.html",
+      "source_title": "九龙公园｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "victoria-park",
+      "name": "维多利亚公园",
+      "en": "Victoria Park",
+      "region": "香港岛",
+      "area": "铜锣湾",
+      "cluster": "causeway",
+      "kind": "attraction",
+      "tags": [
+        "自然散步",
+        "城市漫步"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2821,
+      "lon": 114.189,
+      "duration": 60,
+      "priority": 5,
+      "summary": "铜锣湾的开阔绿地与康乐空间，适合在购物街区之间散步和休息，季节性活动需另行核实。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "维园",
+        "維多利亞公園",
+        "維園"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/outdoors/city-parks.html",
+      "source_title": "维多利亚公园｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "blue-house",
+      "name": "蓝屋建筑群",
+      "en": "Blue House Cluster",
+      "region": "香港岛",
+      "area": "湾仔",
+      "cluster": "wan-chai",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "城市漫步",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "mixed",
+      "lat": 22.2744,
+      "lon": 114.1738,
+      "duration": 45,
+      "priority": 5,
+      "summary": "湾仔石水渠街的历史唐楼建筑群，蓝屋、黄屋和橙屋体现街区生活与建筑保育；香港故事馆设在蓝屋地下。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "蓝屋",
+        "藍屋",
+        "藍屋建築群"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-the-blue-house.html",
+      "source_title": "蓝屋建筑群｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "pak-tai-wanchai",
+      "name": "湾仔北帝庙",
+      "en": "Pak Tai Temple Wan Chai",
+      "region": "香港岛",
+      "area": "湾仔",
+      "cluster": "wan-chai",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "城市漫步"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2741,
+      "lon": 114.173,
+      "duration": 30,
+      "priority": 5,
+      "summary": "湾仔的历史庙宇，又称玉虚宫，庙内北帝像与传统建筑提供认识本地信仰文化的线索。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "灣仔北帝廟",
+        "玉虚宫",
+        "玉虛宮"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-pak-tai-temple-at-wan-chai.html",
+      "source_title": "湾仔北帝庙｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "science-museum",
+      "name": "香港科学馆",
+      "en": "Hong Kong Science Museum",
+      "region": "九龙",
+      "area": "尖沙咀东",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术"
+      ],
+      "indoor": true,
+      "cost": "ticket",
+      "lat": 22.3012,
+      "lon": 114.177,
+      "duration": 120,
+      "priority": 5,
+      "summary": "以互动展品介绍力学、声光、电磁与环境科学，适合希望通过动手体验认识科学概念的访客。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "香港科學館",
+        "科学馆",
+        "科學館"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-hong-kong-science-museum.html",
+      "source_title": "香港科学馆｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "space-museum",
+      "name": "香港太空馆",
+      "en": "Hong Kong Space Museum",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术"
+      ],
+      "indoor": true,
+      "cost": "ticket",
+      "lat": 22.2941,
+      "lon": 114.1722,
+      "duration": 90,
+      "priority": 5,
+      "summary": "尖沙咀海滨的圆顶地标，展览围绕天文学与太空科学，另设天象厅；节目和参观安排应查官网。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "香港太空館",
+        "太空馆",
+        "太空館"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/attractions/top-things-to-see-and-do-around-tsim-sha-tsui-promenade.html",
+      "source_title": "香港太空馆｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "clock-tower",
+      "name": "尖沙咀钟楼",
+      "en": "Tsim Sha Tsui Clock Tower",
+      "region": "九龙",
+      "area": "尖沙咀",
+      "cluster": "harbour",
+      "kind": "attraction",
+      "tags": [
+        "文化艺术",
+        "海港夜景",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.2936,
+      "lon": 114.1694,
+      "duration": 25,
+      "priority": 5,
+      "summary": "前九广铁路尖沙咀总站留下的红砖及花岗岩钟楼，是海滨历史地标，可在附近广场欣赏建筑外观。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "尖沙咀鐘樓",
+        "钟楼",
+        "鐘樓"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-clock-tower.html",
+      "source_title": "尖沙咀钟楼｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "goldfish-market",
+      "name": "金鱼街",
+      "en": "Goldfish Market",
+      "region": "九龙",
+      "area": "旺角",
+      "cluster": "local",
+      "kind": "attraction",
+      "tags": [
+        "城市漫步",
+        "购物"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.324,
+      "lon": 114.1705,
+      "duration": 40,
+      "priority": 5,
+      "summary": "旺角通菜街北段的特色街市，以水族及宠物店铺形成鲜明街区景观；拍照应尊重店铺规则并避免闪光。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "金魚街",
+        "通菜街北段"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/place-to-go/travel.guide-goldfish-market.html",
+      "source_title": "金鱼街｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "flower-market",
+      "name": "旺角花墟",
+      "en": "Mong Kok Flower Market",
+      "region": "九龙",
+      "area": "旺角／太子",
+      "cluster": "local",
+      "kind": "attraction",
+      "tags": [
+        "城市漫步",
+        "购物",
+        "拍照"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.3255,
+      "lon": 114.1713,
+      "duration": 40,
+      "priority": 5,
+      "summary": "旺角与太子一带的花卉零售和批发街区，适合观察本地花店与园艺生活，可结合附近街区漫步。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "花墟",
+        "花墟道"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/tours/kowloon-markets-walking.html",
+      "source_title": "旺角花墟｜香港旅游发展局",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "ladies-market",
+      "name": "女人街",
+      "en": "Ladies Market",
+      "region": "九龙",
+      "area": "旺角",
+      "cluster": "local",
+      "kind": "attraction",
+      "tags": [
+        "城市漫步",
+        "购物"
+      ],
+      "indoor": false,
+      "cost": "public",
+      "lat": 22.3192,
+      "lon": 114.1707,
+      "duration": 45,
+      "priority": 5,
+      "summary": "位于旺角通菜街一带的街市，摊档以服饰、日用品和小商品为主，适合感受热闹的街头购物环境。",
+      "tip": "参观前请查看官方来源核实实际参观区域、开放与活动安排；地图坐标和建议停留时长为本项目近似假设。",
+      "aliases": [
+        "女人街市集",
+        "通菜街女人街"
+      ],
+      "source": "https://www.discoverhongkong.com/eng/tours/kowloon-markets-walking.html",
+      "source_title": "女人街｜香港旅游发展局",
+      "checked": "2026-10-22"
+    }
+  ]
+}

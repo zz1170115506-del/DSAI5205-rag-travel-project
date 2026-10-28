@@ -26,3 +26,7 @@ bootstrap 迁移数据库、导入虚构资料并生成索引。已有真实资�
 | tests/ | 回归、接口、模型协议与交互状态测试 |
 
 详细配置、导入与 Docker 步骤见 [运行指南](../Doc/04-run-and-env.md)。
+
+## 根目录本机应用
+
+另一套 FastAPI 应用使用根目录 `app.py` 与 `travel/`，通过 `python3 start.py` 启动；它不读取 `LLM_*`。请为两套应用分别安装依赖，避免 `app.py` 和本目录 `app/` 的导入冲突。见[根目录说明](../README.md)。

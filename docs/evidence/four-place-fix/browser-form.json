@@ -1,0 +1,101 @@
+{
+  "days": [
+    {
+      "places": [
+        "元创方 PMQ",
+        "中环至半山自动扶梯"
+      ]
+    },
+    {
+      "places": [
+        "香港动植物公园",
+        "兰芳园（中环）"
+      ]
+    }
+  ],
+  "execution": {
+    "metrics": {
+      "cost": null,
+      "decisions": 2,
+      "elapsed_ms": 383,
+      "external_model_verified": false,
+      "format_repairs": 0,
+      "live_model_responses": 0,
+      "model_calls": 0,
+      "model_responses": 0,
+      "tool_calls": 1
+    },
+    "steps": [
+      {
+        "arguments": {
+          "days": 2,
+          "end_date": "2026-11-08",
+          "excluded_places": [],
+          "interests": [
+            "海港夜景",
+            "本地美食"
+          ],
+          "must_visit": [
+            "pmq",
+            "escalator",
+            "lan-fong-yuen",
+            "zoological-gardens"
+          ],
+          "only_selected": true,
+          "pace": "轻松",
+          "public_only": false,
+          "rain": false,
+          "region": "全部",
+          "start_date": "2026-11-07",
+          "start_station": ""
+        },
+        "elapsed_ms": 379,
+        "message": "",
+        "protocol": {
+          "arguments": {
+            "days": 2,
+            "end_date": "2026-11-08",
+            "excluded_places": [],
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "must_visit": [
+              "pmq",
+              "escalator",
+              "lan-fong-yuen",
+              "zoological-gardens"
+            ],
+            "only_selected": true,
+            "pace": "轻松",
+            "public_only": false,
+            "rain": false,
+            "region": "全部",
+            "start_date": "2026-11-07",
+            "start_station": ""
+          },
+          "elapsed_ms": 379,
+          "live_amap": false,
+          "server": "本地香港旅行 MCP",
+          "status": "success",
+          "steps": [
+            "initialize",
+            "tools/list",
+            "tools/call → plan_itinerary"
+          ],
+          "transport": "stdio"
+        },
+        "status": "success",
+        "tool": "plan_itinerary"
+      }
+    ],
+    "stop_reason": "complete"
+  },
+  "question": "请按已选偏好安排2026-11-07至2026-11-08的2天行程。",
+  "selected": [
+    "pmq",
+    "escalator",
+    "lan-fong-yuen",
+    "zoological-gardens"
+  ]
+}

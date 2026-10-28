@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-20",
+  "scope": "live integration smoke, not model quality benchmark",
+  "model": "deepseek-flash",
+  "authentication_http_status": 200,
+  "rag": {
+    "mode": "model",
+    "citations": [
+      "tai-kwun"
+    ]
+  },
+  "browser_agent": {
+    "metrics": {
+      "model_calls": 3,
+      "tool_calls": 2,
+      "decisions": 3,
+      "elapsed_ms": 4496,
+      "model_responses": 3,
+      "live_model_responses": 3,
+      "cost": null,
+      "external_model_verified": true
+    },
+    "stop_reason": "complete",
+    "steps": [
+      {
+        "tool": "search_places",
+        "status": "success",
+        "arguments": {
+          "query": "大馆",
+          "limit": 5,
+          "kind": "attraction",
+          "region": "全部",
+          "indoor_only": false
+        },
+        "elapsed_ms": 371,
+        "protocol": {
+          "server": "本地香港旅行 MCP",
+          "transport": "stdio",
+          "steps": [
+            "initialize",
+            "tools/list",
+            "tools/call → search_places"
+          ],
+          "arguments": {
+            "query": "大馆",
+            "limit": 5,
+            "kind": "attraction",
+            "region": "全部",
+            "indoor_only": false
+          },
+          "elapsed_ms": 371,
+          "status": "success",
+          "live_amap": false
+        },
+        "message": ""
+      },
+      {
+        "tool": "place_detail",
+        "status": "success",
+        "arguments": {
+          "place_id": "tai-kwun"
+        },
+        "elapsed_ms": 289,
+        "protocol": {
+          "server": "本地香港旅行 MCP",
+          "transport": "stdio",
+          "steps": [
+            "initialize",
+            "tools/list",
+            "tools/call → place_detail"
+          ],
+          "arguments": {
+            "place_id": "tai-kwun"
+          },
+          "elapsed_ms": 289,
+          "status": "success",
+          "live_amap": false
+        },
+        "message": ""
+      }
+    ]
+  },
+  "browser_model_text_accepted": true,
+  "initial_issue": {
+    "tools_succeeded": true,
+    "final_text_fell_back": true,
+    "reason": "dynamic-information caveat triggered conservative keyword guard"
+  },
+  "change": "prompt limits non-dynamic answers to static facts; validators retained; per-turn live-response metrics added",
+  "holdout_sha256": "01c5e215f9fa3f45b28707fe5ef8c3caa5ea4c42935b426cfdb62c99e043a31b",
+  "amap_verified": false,
+  "github_updated": false
+}

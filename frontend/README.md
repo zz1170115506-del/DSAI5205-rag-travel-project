@@ -11,3 +11,7 @@
 ## 交互修复
 
 示例和景点提问现在一键发送；生成过程展示状态与等待反馈，引用在本页查看证据。前端回归测试见 `tests/ui-utils.test.mjs`，有 Node.js 时执行 `node --test frontend/tests/ui-utils.test.mjs`。具体验证见 [交互修复记录](../Doc/07-frontend-interaction-fix.md)。
+
+## 另一套本机界面
+
+原 main 的网页保留在根目录 `static/`，由 `python3 start.py` 提供，接口为 `docs/api.md`。本目录配套 Docker `/api/v1/`，接口见[六模块 API](../Doc/09-fullstack-api.md)，二者不能交叉使用。

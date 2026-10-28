@@ -6,7 +6,7 @@
 
 - 页面：http://localhost:8080 或 http://127.0.0.1:8080
 - 就绪检查：http://localhost:8080/api/v1/health/ready
-- API 文档：后端 `/docs` 未通过当前 Nginx `/api/` 路由对外代理；接口说明见 docs/api.md。
+- API 文档：后端 `/docs` 未通过当前 Nginx `/api/` 路由对外代理；接口说明见 Doc/09-fullstack-api.md。
 
 三个常驻容器：`web`（Nginx）、`api`（FastAPI）、`mysql`（MySQL 8.4）。MySQL 和 API 已通过容器健康检查，前端页面与同源接口已通过实际访问。容器有 unless-stopped 重启策略；退出/重启 Docker Desktop 后需要先恢复引擎。
 

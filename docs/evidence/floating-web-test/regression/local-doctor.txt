@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "python": "3.14.7",
+  "platform": "Darwin arm64",
+  "packages": {
+    "fastapi": "0.146.0",
+    "mcp": "1.30.0",
+    "httpx": "0.28.1",
+    "pydantic": "2.14.1",
+    "uvicorn": "0.54.0",
+    "langgraph": "1.2.16"
+  },
+  "knowledge_version": "2026-10-22.1",
+  "records": 33,
+  "model_key_present": true,
+  "amap_key_present": true,
+  "external_requests_made": false,
+  "mcp": {
+    "trace": {
+      "server": "本地香港旅行 MCP",
+      "transport": "stdio",
+      "steps": [
+        "initialize",
+        "tools/list",
+        "tools/call → search_places"
+      ],
+      "arguments": {
+        "query": "深水埗有什么小吃",
+        "kind": "food",
+        "limit": 3
+      },
+      "elapsed_ms": 298,
+      "status": "success",
+      "live_amap": false
+    },
+    "result_ids": [
+      "hop-yik-tai"
+    ]
+  }
+}

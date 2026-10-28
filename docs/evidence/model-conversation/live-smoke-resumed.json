@@ -1,0 +1,614 @@
+{
+  "time_utc": "2026-10-23T04:41:34.821819+00:00",
+  "kind": "synthetic_live_smoke_not_quality_benchmark",
+  "model": "deepseek-flash",
+  "checks": {
+    "six_turns_completed": true,
+    "selected_exact_two": true,
+    "move_preserves_rest_day": true,
+    "replace_and_exclude": true,
+    "swap_after_database_restore": true,
+    "all_real_model_responses": true
+  },
+  "all_passed": true,
+  "rows": [
+    {
+      "turn": 1,
+      "question": "合成游客测试：我与父母同行，想在香港看海，推荐两个适合慢慢散步的地方，先不排行程。",
+      "answer": {
+        "text": "推荐两处适合与父母慢慢散步看海的地方：星光大道沿维港海滨延伸，以电影文化为主题，可边走边看港岛天际线，适合轻松散步和拍照 [avenue-stars]；西九艺术公园是海滨公共空间，可散步、休息并欣赏维港，附近还有 M+ 和香港故宫文化博物馆 [art-park]。两处均为露天场所，散步节奏可按父母体力调整；暂未排行程。",
+        "citations": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 引用编号已校验，事实仍需核对",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": null,
+        "start_date": null,
+        "end_date": null,
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [],
+        "start_station": "",
+        "only_selected": false,
+        "excluded_places": []
+      },
+      "notes": [],
+      "day_place_ids": [],
+      "trace": [
+        {
+          "tool": "search_places",
+          "status": "success",
+          "arguments": {
+            "query": "海港 海边 散步 轻松",
+            "limit": 5,
+            "region": "全部",
+            "indoor_only": false
+          },
+          "elapsed_ms": 272,
+          "retrieval": {
+            "recall": "SQLite FTS5 BM25",
+            "reranker": "名称/别名、词覆盖、街区与主题特征重排（非神经模型）",
+            "candidate_count": 3,
+            "returned_count": 3,
+            "knowledge_records": 33
+          },
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → search_places"
+            ],
+            "arguments": {
+              "query": "海港 海边 散步 轻松",
+              "limit": 5,
+              "region": "全部",
+              "indoor_only": false
+            },
+            "elapsed_ms": 272,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 2,
+        "tool_calls": 1,
+        "decisions": 2,
+        "elapsed_ms": 3281,
+        "model_responses": 2,
+        "live_model_responses": 2,
+        "format_repairs": 0,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 2,
+      "question": "那就刚才这两处吧，2026-10-24到2026-10-25，只去它们，慢慢来。",
+      "answer": {
+        "text": "已按你的要求安排：2026-10-24至10-25共两天，只去星光大道 [avenue-stars] 和西九艺术公园 [art-park]，节奏轻松，第一天星光大道、第二天西九艺术公园。这是可调整草案，交通时间为估算，不含酒店往返；开放安排请出发前查官网。",
+        "citations": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "ack",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": []
+      },
+      "notes": [
+        "与父母同行",
+        "想在香港看海",
+        "只去星光大道和西九艺术公园",
+        "慢慢散步，节奏轻松"
+      ],
+      "day_place_ids": [
+        [
+          "avenue-stars"
+        ],
+        [
+          "art-park"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "days": 2,
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-25",
+              "pace": "轻松",
+              "must_visit": [
+                "avenue-stars",
+                "art-park"
+              ],
+              "only_selected": true
+            },
+            "notes": [
+              "与父母同行",
+              "想在香港看海",
+              "只去星光大道和西九艺术公园",
+              "慢慢散步，节奏轻松"
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "plan_itinerary",
+          "status": "success",
+          "arguments": {
+            "days": 2,
+            "start_date": "2026-10-24",
+            "end_date": "2026-10-25",
+            "region": "全部",
+            "interests": [
+              "海港夜景",
+              "本地美食"
+            ],
+            "pace": "轻松",
+            "rain": false,
+            "public_only": false,
+            "must_visit": [
+              "avenue-stars",
+              "art-park"
+            ],
+            "start_station": "",
+            "only_selected": true,
+            "excluded_places": []
+          },
+          "elapsed_ms": 265,
+          "protocol": {
+            "server": "本地香港旅行 MCP",
+            "transport": "stdio",
+            "steps": [
+              "initialize",
+              "tools/list",
+              "tools/call → plan_itinerary"
+            ],
+            "arguments": {
+              "days": 2,
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-25",
+              "region": "全部",
+              "interests": [
+                "海港夜景",
+                "本地美食"
+              ],
+              "pace": "轻松",
+              "rain": false,
+              "public_only": false,
+              "must_visit": [
+                "avenue-stars",
+                "art-park"
+              ],
+              "start_station": "",
+              "only_selected": true,
+              "excluded_places": []
+            },
+            "elapsed_ms": 264,
+            "status": "success",
+            "live_amap": false
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 3795,
+        "model_responses": 3,
+        "live_model_responses": 3,
+        "format_repairs": 0,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 3,
+      "question": "第一天想休息，不删景点，把两处都挪到第二天。",
+      "answer": {
+        "text": "已确认：星光大道 [avenue-stars] 与西九艺术公园 [art-park] 均安排在10月25日，顺序不变，节奏轻松；10月24日保持休息或自由活动。交通与时间为估算，不含酒店往返，开放安排请出发前查官网。",
+        "citations": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "ack",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "art-park"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": []
+      },
+      "notes": [
+        "与父母同行",
+        "想在香港看海",
+        "只去星光大道和西九艺术公园",
+        "慢慢散步，节奏轻松"
+      ],
+      "day_place_ids": [
+        [],
+        [
+          "avenue-stars",
+          "art-park"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "pace": "轻松",
+              "must_visit": [
+                "avenue-stars",
+                "art-park"
+              ],
+              "only_selected": true
+            }
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "revise_itinerary",
+          "status": "success",
+          "arguments": {
+            "edits": [
+              {
+                "action": "move",
+                "place_id": "avenue-stars",
+                "day": 2,
+                "position": 1
+              }
+            ]
+          },
+          "elapsed_ms": 2,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 5204,
+        "model_responses": 4,
+        "live_model_responses": 4,
+        "format_repairs": 1,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 4,
+      "question": "第二天最后那个换成香港艺术馆，以后也别再加回被换掉的那处，另一处照旧。",
+      "answer": {
+        "text": "已按确认状态保留星光大道 [avenue-stars] 与香港艺术馆 [hkmoa]；西九艺术公园 [art-park] 不再加入。香港艺术馆适合室内参观，展示中国文物、书画、外销艺术及现代与香港艺术。时间与交通为估算，不含酒店往返，开放安排请出发前查官网。",
+        "citations": [
+          "avenue-stars",
+          "hkmoa",
+          "art-park"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": [
+          "art-park"
+        ]
+      },
+      "notes": [
+        "与父母同行",
+        "想在香港看海",
+        "只去星光大道和西九艺术公园",
+        "慢慢散步，节奏轻松"
+      ],
+      "day_place_ids": [
+        [],
+        [
+          "avenue-stars",
+          "hkmoa"
+        ]
+      ],
+      "trace": [
+        {
+          "tool": "update_trip",
+          "status": "success",
+          "arguments": {
+            "changes": {
+              "must_visit": [
+                "avenue-stars",
+                "hkmoa"
+              ],
+              "excluded_places": [
+                "art-park"
+              ]
+            }
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "revise_itinerary",
+          "status": "success",
+          "arguments": {
+            "edits": [
+              {
+                "action": "replace",
+                "place_id": "art-park",
+                "replacement_id": "hkmoa",
+                "day": 2
+              }
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 5076,
+        "model_responses": 4,
+        "live_model_responses": 4,
+        "format_repairs": 1,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 5,
+      "question": "把前两天互换一下，其他不要动。",
+      "answer": {
+        "text": "已确认：10月24日按星光大道 [avenue-stars]、香港艺术馆 [hkmoa] 的顺序安排，10月25日休息或自由活动，其他条件未变。时间与交通为估算，不含酒店往返，开放安排请出发前查官网。",
+        "citations": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "notice": "模型选择工具 · 展示本地规划草案，时间与交通仍为估算",
+        "mode": "model",
+        "kind": "ack",
+        "model_output_accepted": true
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": [
+          "art-park"
+        ]
+      },
+      "notes": [
+        "与父母同行",
+        "想在香港看海",
+        "只去星光大道和西九艺术公园",
+        "慢慢散步，节奏轻松"
+      ],
+      "day_place_ids": [
+        [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        []
+      ],
+      "trace": [
+        {
+          "tool": "read_itinerary",
+          "status": "success",
+          "arguments": {},
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        },
+        {
+          "tool": "revise_itinerary",
+          "status": "success",
+          "arguments": {
+            "edits": [
+              {
+                "action": "swap_days",
+                "day": 1,
+                "other_day": 2
+              }
+            ]
+          },
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 2,
+        "decisions": 3,
+        "elapsed_ms": 5145,
+        "model_responses": 4,
+        "live_model_responses": 4,
+        "format_repairs": 1,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    },
+    {
+      "turn": 6,
+      "question": "你还记得我跟谁一起，以及现在不想去哪里吗？",
+      "answer": {
+        "text": "依据当前收录的官方资料，可以先考虑：\n\n1. 星光大道（尖沙咀）：星光大道沿维多利亚港海滨延伸，以香港电影文化为主题，可欣赏港岛天际线。适合轻松散步、拍照和看海港。 [avenue-stars]\n\n2. 香港艺术馆（尖沙咀）：位于尖沙咀梳士巴利道的香港艺术馆，展示中国文物、书画、外销艺术以及现代和香港艺术。适合喜欢艺术展览，或想安排室内参观的游客。 [hkmoa]\n\n如果想把这些地点串起来，可以直接继续说“安排两天行程”，或调整左侧的旅行偏好。",
+        "citations": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "notice": "模型选择工具 · 引用编号已校验，事实仍需核对；模型成文不合格，展示本地工具结果",
+        "mode": "model",
+        "kind": "answer",
+        "model_output_accepted": false
+      },
+      "trip": {
+        "days": 2,
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-25",
+        "region": "全部",
+        "interests": [
+          "海港夜景",
+          "本地美食"
+        ],
+        "pace": "轻松",
+        "rain": false,
+        "public_only": false,
+        "must_visit": [
+          "avenue-stars",
+          "hkmoa"
+        ],
+        "start_station": "",
+        "only_selected": true,
+        "excluded_places": [
+          "art-park"
+        ]
+      },
+      "notes": [
+        "与父母同行",
+        "想在香港看海",
+        "只去星光大道和西九艺术公园",
+        "慢慢散步，节奏轻松"
+      ],
+      "day_place_ids": [],
+      "trace": [
+        {
+          "tool": "read_itinerary",
+          "status": "success",
+          "arguments": {},
+          "elapsed_ms": 0,
+          "protocol": {
+            "transport": "validated_local_state"
+          },
+          "message": ""
+        }
+      ],
+      "metrics": {
+        "model_calls": 2,
+        "tool_calls": 1,
+        "decisions": 2,
+        "elapsed_ms": 2161,
+        "model_responses": 2,
+        "live_model_responses": 2,
+        "format_repairs": 0,
+        "cost": null,
+        "external_model_verified": true
+      },
+      "stop": "complete"
+    }
+  ]
+}

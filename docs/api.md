@@ -1,58 +1,63 @@
-# 已实现 API
+# 当前 HTTP 接口
 
-前缀 `/api/v1`，启动后 `/docs` 提供 OpenAPI。模型密钥只在后端读取。
+本地地址默认 `http://127.0.0.1:8765`，网页与 API 同源。应用仅监听回环地址，校验 Host 与写请求 Origin；当前没有多用户账户系统。普通 JSON 请求一次返回，不是流式响应。
 
-## 身份与请求
+| 方法与路径 | 用途 |
+| --- | --- |
+| `GET /api/status` | 本地功能、模型及高德配置状态，不返回密钥 |
+| `POST /api/chat` | 问答、规划、连续修改与本机历史保存 |
+| `GET /api/history` | 最近对话列表 |
+| `POST /api/history/read` | 读取指定历史 |
+| `POST /api/history/update` | 更新 favorite / pinned |
+| `POST /api/history/rename` | 手动重命名 |
+| `POST /api/history/delete` | 删除指定历史，网页先确认 |
+| `GET /api/places` | 地点目录与本地检索 |
+| `POST /api/places/search` | 本地搜索，未命中时可补充高德候选 |
+| `POST /api/places/resolve` | 名称精确匹配，未命中时查询地图 |
+| `POST /api/transit/route` | 港铁起点／景点到景点的本地交通参考 |
+| `POST /api/walking-map` | 邻近步行两地点的高德路线图；支持 POI 确认 |
+| `POST /api/amap/route` | 2–6 个规范地点的高德步行参考 |
+| `POST /api/ask`、`/api/plan`、`/api/agent` | 历史兼容入口 |
 
-先 POST `/auth/guest`，请求体 `{}`。响应设置 HttpOnly、SameSite=Strict 访客 Cookie。同一浏览器跨会话复用；没有跨设备账号系统。会话、任务和偏好按服务端凭证归属校验，其他用户资源统一404。
-
-修改请求使用 `Content-Type: application/json`；浏览器 Origin 必须在根目录 ENV 的 ALLOWED_ORIGINS 中。错误体为 `{code,message}`；字段校验还含 fields。错误响应不回显密钥或原始输入。
-
-| 方法 | 路径 | 用途 |
-| --- | --- | --- |
-| POST | /auth/guest | 创建/复用访客凭证 |
-| GET | /health/live、/health/ready | 存活、数据库及索引就绪 |
-| GET | /attractions | district/theme/setting/limit/offset 筛选 |
-| GET | /attractions/{id} | 详情、图片、实体关系与字段来源 |
-| GET | /images/{id} | 本地授权 PNG/JPEG/WebP 资源 |
-| POST | /search | 混合检索，需访客身份 |
-| GET/POST | /sessions | 列出本人最近50会话/创建 |
-| GET | /sessions/{id} | 消息、约束、状态、active_run_id |
-| POST | /sessions/{id}/runs | 创建任务，重复 request_id 返回同任务 |
-| GET | /runs/{id} | 状态、最终/已保存部分答案、引用、trace、usage |
-| GET | /runs/{id}/events | SSE 事件，需本人凭证 |
-| POST | /runs/{id}/cancel | 幂等取消，终态不再改写 |
-| GET/PATCH | /me/preferences | 查看/启用/编辑本人偏好 |
-| DELETE | /me/preferences/{key} | 删除并清空偏好值，旧消息不重提取 |
-
-## 检索
+## 连续对话
 
 ```json
-{"query":"和演示历史馆同主题的景点","source_entity_id":"attr_history","relation":"HAS_THEME","channels":["vector","bm25","entity","graph"],"top_k":5}
+{
+  "question": "请按已选偏好安排两天行程",
+  "use_model": false,
+  "trip": {
+    "days": 2,
+    "must_visit": ["escalator", "pmq", "lan-fong-yuen", "zoological-gardens"],
+    "only_selected": true
+  }
+}
 ```
 
-可选字段 district、theme 为实体ID或标准名称；setting 为 indoor/outdoor/mixed；max_price 使用 HKD，按已知参考最高票价过滤；max_minutes 为单景点游玩时长上限。latitude/longitude/radius_m 用于直线距离筛选，需要同时给出经纬度。top_k 为1—20。结果带 chunk_id、attraction_id、text、source_id/source_url、locator、verified_at、score、channels、relation_paths。得分是排名融合值，不是答案置信度。
+首轮返回 `conversation_id`，继续同一段对话时带回该字段。结果还包含 `trip`、`answer`、`plan`、`sources`、`trace`、`stop_reason` 与 `metrics` 等。`answer.mode` 区分本地与模型，`stop_reason` 区分完成、工具冲突、调用上限和请求失败；不得只看 HTTP 200 就断言规划成功。
 
-## 流式问答
+按日期请求可在 trip 中传 `start_date`、`end_date`；包含首尾当天。地点 ID 来自 `data/places.json`，不能提交任意坐标或未知 ID 替代。
+
+模型读取有界历史、规范选择、偏好与最新行程。`use_model=true` 需要本机配置模型服务，否则返回明确错误；未开启时不调用模型。
+
+## 步行小地图
 
 ```json
-{"message":"安排演示尖沙咀区的室内行程，预算50港币","request_id":"客户端唯一请求ID"}
+{"origin_id":"zoological-gardens","destination_id":"lan-fong-yuen"}
 ```
 
-创建返回 run_id，随后 GET `/runs/{run_id}/events`。POST 创建时缓冲已启动，订阅前不会丢失短时事件。事件是 `data: JSON\n\n`，含 type、run_id、seq。type=status/token/citation/done/error/cancelled；token 含 text，citation 含 number/citation，done 含 status/usage。
+可选字段 `origin_poi_id`、`destination_poi_id` 必须来自本次供应商候选，服务端会重查核验。响应模式包括 `live`、`ambiguous_location`、`invalid_selection`、`disabled`、`not_configured`、`unavailable`。候选必须确认后才算路，餐饮分店不自动猜选。
 
-客户端只接收当前 run_id。补充新消息自动取消旧任务并增加会话版本；停止接口体用 `{}`。SSE 断线会取消该任务；首版不支持 Last-Event-ID 自动续流。通过任务状态或会话接口重新读取已持久化结果。
+成功结果有高德 `map_image`（PNG data URL）、距离时长、文字步骤及 `navigation_url`；当前网页只展示路线图、距离时长与导航入口，不展开逐步转弯列表。图片服务不可用时不伪造底图。密钥只在服务端使用，不返回供应商带 Key 的请求 URL。
 
-状态 queued/running/cancelling/completed/cancelled/failed/interrupted；首版取消直接事务性写入 cancelled，不要求客户端观测到 cancelling。澄清等待体现在 session.status=awaiting_input，继续输入时恢复 checkpoint；任意生成中暂停则取消本次生成，下一轮创建新任务。
+## 错误与资料
 
-## 记忆
+- 参数或地点条件无效：422；错误 JSON 使用 `detail`。
+- 无本地资料或外部查询失败：使用明确的模式与说明，不冒充已检索到资料。
+- 工具或模型中断：保留明确停止原因；失败不宣称本轮修改完成。
+- 资料引用采用规范地点 ID，并可从 `sources` 读取官方链接。引用编号通过校验不代表模型事实必然正确。
 
-```json
-{"enabled":true,"values":{"interests":["历史文化"],"avoidances":["户外"],"budget_hkd":200,"walking_minutes":30,"language":"zh-Hans"}}
-```
+详细参数与约束以 `travel/chat.py`、`travel/agent.py`、`app.py` 的 Pydantic 模型为准。当前接口没有生产鉴权、订票或实时交通承诺。
 
-启用后，聊天中的“记住我喜欢……”或“记住我的预算……”才触发规则式提取。未明确授权的推测不保存。当前条件优先；偏好不覆盖硬过滤。PATCH/DELETE 会取消本人当前任务，防止旧任务用旧记忆继续提交。
+## Docker 六模块接口
 
-## 边界
-
-无检索证据时生成器被要求说明不足；语义忠实性仍需人工评测。无实时交通/营业数据，不承诺路线实际可行；行程工具只限制已知游玩时长和参考门票合计。模拟模式是哈希向量与资料拼接，前端明确标记。
+`frontend/` 与 `backend/` 使用独立的 `/api/v1/` 协议，见[六模块 API](../Doc/09-fullstack-api.md)。本文接口只适用于根目录 `app.py` 应用。

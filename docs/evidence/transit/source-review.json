@@ -1,0 +1,134 @@
+{
+  "checked": "2026-10-22",
+  "official_station_map_downloads": [
+    {
+      "station_code": "cen",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/cen.pdf",
+      "sha256": "ffcb21aaedf2ab52121c4da3f7f31637ee1abf688469d6b7238dc9693ff30505",
+      "bytes": 894506,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "adm",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/adm.pdf",
+      "sha256": "6ae89c4edc6d14322fc672575cb3f57767e1ef7c628d8363486daec4cf28ec05",
+      "bytes": 879560,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "shw",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/shw.pdf",
+      "sha256": "552131a760aad59ed1c6e9c16e16d201d8e31f7dcf556de5c785ec9b059202b4",
+      "bytes": 786389,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "tst",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/tst.pdf",
+      "sha256": "e5137cc4218925a2687f755af5574a0236722d16abe9ea9074b47a3b559e2956",
+      "bytes": 1336977,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "ssp",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/ssp.pdf",
+      "sha256": "bc6615b3e283583aeda602b1ef8fdf59118733a5e2b7018551f159b2aeaf6dce",
+      "bytes": 569872,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "dih",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/dih.pdf",
+      "sha256": "90ae2748d69cade06b2bafec888ea39f85bfac4d9d492b2341a771f85090b948",
+      "bytes": 663112,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "wac",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/wac.pdf",
+      "sha256": "39bde8816b9adf9ab378f3f9a8540db11b0bf05eb466492800324a6157ae6689",
+      "bytes": 1120438,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "cab",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/cab.pdf",
+      "sha256": "0a280da71a21fb6f255b4a933beaecbfa85d4e99db74a2b7b9adf7b1fa7eaa3f",
+      "bytes": 859383,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "pre",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/pre.pdf",
+      "sha256": "d3ab33c2073fdcddfa5bdf4e7f5991f0dd84a206325a99bfe4ae38997f837933",
+      "bytes": 666748,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "mok",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/mok.pdf",
+      "sha256": "3fedbeb7e029e3c6486e8f0afa20e89c273e7c777df72b41c93ac8a12f759dcf",
+      "bytes": 787710,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "jor",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/jor.pdf",
+      "sha256": "063ecfe3a1f4a12ae40e1bc709d838cf36c77991e8746bbcf5203974edd0a07f",
+      "bytes": 704365,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "ymt",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/ymt.pdf",
+      "sha256": "818b2c54805ce03fce1f5d9e7fba367d400fdc1e30ea0ab42b89a0b784f00c2a",
+      "bytes": 714226,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "kow",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/kow.pdf",
+      "sha256": "7d4e6dd2a6e86960bd975f57b9edc0e28d00709b85fac42b222261b8ab0dda69",
+      "bytes": 538566,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "aus",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/aus.pdf",
+      "sha256": "5b10d24cbd81b59add0647e59049d7caba493a87f364063b1c346d3162b7cad8",
+      "bytes": 540818,
+      "checked": "2026-10-22"
+    },
+    {
+      "station_code": "tuc",
+      "source": "https://www.mtr.com.hk/archive/en/services/maps/tuc.pdf",
+      "sha256": "01c2bf21b884fc03875c7576ff55ca55b31f1f420dd7f7630f6cc52336f471bd",
+      "bytes": 580399,
+      "checked": "2026-10-22"
+    }
+  ],
+  "review_method": "PDF station-area maps rendered with pypdfium2 and inspected visually; official operator HTML checked using web tools. PDFs are read-only source material kept in ignored work directory, not redistributed in source archive.",
+  "coverage": {
+    "local_places": 33,
+    "rail_lines": 6,
+    "supported_stations": 85
+  },
+  "distinctions": [
+    "official_exit_listing: destination appears against an exit in station or operator material",
+    "station_map_reference: last-mile connection curated from station map and destination address; not official turn-by-turn navigation",
+    "rail topology route computed locally, no real-time MTR or AMap route request",
+    "travel, walking, boarding and interchange minutes are project estimates, not published timetables",
+    "historical plan times retained when adding guides; user can replan"
+  ],
+  "source_conflicts_resolved": [
+    "Central D1 on MTR map vs D2 in Zoological Gardens website: use gardens official website D2 for this record, retain its own source.",
+    "Austin WestK exits differ across operator descriptions and recent station maps: use downloaded Austin map D1 reference, keep Kowloon C1 as primary; do not combine inconsistent exit descriptions."
+  ],
+  "not_verified": [
+    "current exit openings",
+    "train/bus/tram disruptions, fares and exact schedules",
+    "actual station-platform numbers or train door positions",
+    "physical walking accuracy or accessibility",
+    "airport/light-rail branches outside curated topology"
+  ]
+}
