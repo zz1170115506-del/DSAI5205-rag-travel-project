@@ -2,6 +2,7 @@
 import asyncio
 import copy
 import json
+import os
 import re
 import secrets
 import time
@@ -26,6 +27,7 @@ from .trip_dates import resolve_dates, date_for_day, MAX_TRIP_DAYS
 
 MAX_TOOLS, MAX_DECISIONS = 6, 8
 TURN_TIMEOUT, TOOL_TIMEOUT = 60, 15
+PUBLIC_TOOL_TIMEOUT = 25
 
 
 def model_live_guard(question):
@@ -357,6 +359,10 @@ class AgentEngine:
         self.policy = policy or (ModelPolicy(self.settings) if self.settings.model_api_key else demo_policy)
         self.is_model = policy is None and bool(self.settings.model_api_key)
         self.tool_call = tool_call
+        # Free cloud CPUs need extra time to start MCP and load the cached encoder.
+        # The overall 60-second turn deadline still cancels unfinished work.
+        self.tool_timeout = (PUBLIC_TOOL_TIMEOUT if os.getenv('PUBLIC_DEMO', 'false').lower()
+                             in {'true', '1', 'yes'} else TOOL_TIMEOUT)
         self.usage = {'model_calls': 0, 'tool_calls': 0, 'decisions': 0}
         self.saver = InMemorySaver()
         builder = StateGraph(State)
@@ -442,7 +448,7 @@ class AgentEngine:
             elif name=='read_itinerary':
                 data=model_memory(s);protocol={'transport':'validated_local_state'}
             else:
-                async with asyncio.timeout(TOOL_TIMEOUT):
+                async with asyncio.timeout(self.tool_timeout):
                     data, protocol = await self.tool_call(name, args)
             if name == 'search_places':
                 intent='search'

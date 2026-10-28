@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-28",
+  "url": "https://hk-travel-rag-demo.onrender.com",
+  "platform": "Render",
+  "region": "Singapore",
+  "plan": "Free",
+  "verified_deployed_commit": "0530a79",
+  "auto_deploy": "off",
+  "authentication": {
+    "type": "HTTP Basic",
+    "username": "team",
+    "password_recorded": false,
+    "unauthenticated": {
+      "/": 401,
+      "/api/status": 401,
+      "/api/history": 401
+    },
+    "healthz": {
+      "status": 200,
+      "body": {
+        "status": "ok"
+      }
+    }
+  },
+  "local_rag": {
+    "question": "大馆有什么文化特色？",
+    "elapsed_ms": 35374,
+    "model_output_accepted": true,
+    "citations": [
+      "tai-kwun"
+    ],
+    "live_model_responses": 3,
+    "search_trace": [
+      {
+        "status": "error",
+        "elapsed_ms": 16177,
+        "message": "工具超时，可减少条件重试或停止。"
+      },
+      {
+        "status": "success",
+        "elapsed_ms": 12660,
+        "retrieval": {
+          "recall": "SQLite FTS5 BM25 + local dense embeddings",
+          "reranker": "RRF 排名融合与名称优先（非神经重排）",
+          "candidate_count": 2,
+          "returned_count": 1,
+          "knowledge_records": 33,
+          "mode": "hybrid",
+          "configured_mode": "hybrid",
+          "embedding_used": true,
+          "embedding_model": "BAAI/bge-small-zh-v1.5",
+          "semantic_candidates": 1
+        },
+        "message": ""
+      }
+    ]
+  },
+  "map_rag": {
+    "question": "介绍K11 MUSEA",
+    "http_status": 200,
+    "elapsed_ms": 20541,
+    "embedding_used": true,
+    "map_lookup_mode": "live",
+    "map_result_count": 5,
+    "map_rag_used": true,
+    "model_output_accepted": true,
+    "citations": [
+      "map-1",
+      "map-2"
+    ],
+    "generation": {
+      "requested": true,
+      "response_received": true,
+      "live_response": true,
+      "output_accepted": true,
+      "reason": "accepted",
+      "elapsed_ms": 3396
+    }
+  },
+  "follow_up": "First cold search exceeded the 15s agent tool limit, then succeeded on retry. Public-only tool budget adjusted to 25s; 60s overall turn deadline retained. Re-deploy verification pending.",
+  "limitations": [
+    "Shared group password and history; no user isolation.",
+    "Free instance can sleep and cold start; ephemeral history can be lost.",
+    "Latency is a sample, not an SLA; API quotas and platform limits still apply."
+  ]
+}
