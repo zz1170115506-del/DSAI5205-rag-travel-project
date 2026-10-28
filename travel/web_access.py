@@ -16,6 +16,7 @@ class WebAccess:
     origin: str = ''
     username: str = 'team'
     password: str = field(default='', repr=False)
+    anonymous: bool = False
 
     @classmethod
     def from_env(cls):
@@ -28,6 +29,8 @@ class WebAccess:
                 or not re.fullmatch(r'[A-Za-z0-9.-]+', parsed.hostname)
                 or any(char.isspace() for char in origin)):
             raise ValueError('公网演示需要完整且固定的 HTTPS PUBLIC_ORIGIN 或 RENDER_EXTERNAL_URL。')
+        if os.getenv('PUBLIC_DEMO_ANONYMOUS', 'false').lower() in {'true', '1', 'yes'}:
+            return cls(public=True, origin=origin, anonymous=True)
         username = os.getenv('DEMO_USERNAME', 'team')
         password = os.getenv('DEMO_PASSWORD', '')
         if (not username or ':' in username or len(password) < 16

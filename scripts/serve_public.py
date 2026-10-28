@@ -1,4 +1,4 @@
-"""Single-process cloud demo entry point; refuses to bind without access protection."""
+"""Single-process cloud demo entry point; requires explicit public configuration."""
 import os
 from pathlib import Path
 import sys
@@ -13,7 +13,7 @@ def main():
     load_dotenv(Path(__file__).resolve().parents[1] / '.env', override=False)
     access = WebAccess.from_env()
     if not access.public:
-        raise SystemExit('此入口需要 PUBLIC_DEMO=true、固定 HTTPS 网址和访问密码；本机请使用 run.py。')
+        raise SystemExit('此入口需要 PUBLIC_DEMO=true 和固定 HTTPS 网址；本机请使用 run.py。')
     port = int(os.getenv('PORT', '10000'))
     if not 1 <= port <= 65535:
         raise SystemExit('PORT 无效。')

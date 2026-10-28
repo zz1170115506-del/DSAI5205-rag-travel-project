@@ -130,9 +130,10 @@ function expandChat(expanded){
  button.textContent=expanded?'恢复布局 ↙':'展开对话 ↗';
  button.title=expanded?'恢复标准对话布局':'扩大对话阅读区域';
 }
-function rememberId(){try{if(state.conversation)localStorage.setItem('hk-travel-active-v13',state.conversation);else localStorage.removeItem('hk-travel-active-v13');}catch{toast('浏览器未保存当前对话入口，仍可从最近对话重新打开。');}}
+function rememberId(){try{if(state.conversation&&state.status.history_enabled!==false)localStorage.setItem('hk-travel-active-v13',state.conversation);else localStorage.removeItem('hk-travel-active-v13');}catch{if(state.status.history_enabled!==false)toast('浏览器未保存当前对话入口，仍可从最近对话重新打开。');}}
 function historyIcon(kind){return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${{favorite:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/>',pinned:'<path d="m16 3 5 5-4 2-3 5-2 1-4-4 1-2 5-3Z"/><path d="m9 15-6 6"/>',rename:'<path d="m16 3 5 5-12 12-6 1 1-6Z"/><path d="m13 6 5 5"/>',delete:'<path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/>'}[kind]}</svg>`;}
 function renderHistory(){
+ if(state.status.history_enabled===false){state.histories=[];$('#history-count').textContent='临时会话';$('.history-filters').classList.add('hidden');$('#history-list').innerHTML='<p class="fine-print">免登录演示不提供共享历史列表。</p>';$('.history-note').textContent='当前对话可连续追问，刷新后开启新对话；闲置30分钟或服务重启后失效。';return;}
  const favoriteCount=state.histories.filter(c=>c.favorite).length;
  $('#history-favorite-count').textContent=favoriteCount;
  $$('[data-history-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.historyFilter===state.historyFilter)));
@@ -140,7 +141,7 @@ function renderHistory(){
  $('#history-list').innerHTML=rows.length?rows.map(c=>`<div class="history-row ${c.id===state.conversation?'active':''} ${c.pinned?'is-pinned':''}"><button class="history-open" data-history="${esc(c.id)}" title="${esc(c.title)}${c.pinned?' · 已置顶':''}" aria-current="${c.id===state.conversation?'true':'false'}">${esc(c.title)}</button><div class="history-actions">${['favorite','pinned'].map(flag=>{const label=(flag==='favorite'?(c.favorite?'取消收藏':'收藏'):(c.pinned?'取消置顶':'置顶'));return `<button class="history-icon history-${flag}" data-history-flag="${flag}" data-history-id="${esc(c.id)}" data-flag-value="${!c[flag]}" aria-pressed="${!!c[flag]}" title="${label}" aria-label="${label}对话 ${esc(c.title)}">${historyIcon(flag)}</button>`;}).join('')}<button class="history-icon history-rename" data-rename-history="${esc(c.id)}" title="重命名" aria-label="重命名对话 ${esc(c.title)}">${historyIcon('rename')}</button><button class="history-icon history-delete" data-delete-history="${esc(c.id)}" title="删除" aria-label="删除对话 ${esc(c.title)}">${historyIcon('delete')}</button></div></div>`).join(''):`<p class="fine-print history-empty">${state.historyFilter==='favorite'?'还没有收藏，点击对话旁的星标即可收藏。':'从一个旅行想法开始。'}</p>`;
  $$('.history-row button').forEach(b=>b.disabled=state.busy||state.historyBusy);
 }
-async function loadHistory(){const request=++historyRequest,data=await api('/api/history');if(request!==historyRequest)return;state.histories=data.conversations;$('#history-count').textContent=`${data.conversations.length} / ${data.capacity}`;renderHistory();}
+async function loadHistory(){if(state.status.history_enabled===false){renderHistory();return;}const request=++historyRequest,data=await api('/api/history');if(request!==historyRequest)return;state.histories=data.conversations;$('#history-count').textContent=`${data.conversations.length} / ${data.capacity}`;renderHistory();}
 async function updateHistoryFlag(button){
  if(state.busy||state.historyBusy)return;
  const id=button.dataset.historyId,flag=button.dataset.historyFlag;
@@ -246,7 +247,7 @@ async function init(){
   $('#start-station').innerHTML='<option value="">暂不指定 · 先看目的地出口</option>'+s.transit_stations.map(name=>`<option value="${esc(name)}">${esc(name)}站</option>`).join('');
   $('#home-start-date').value=s.today_hk;$('#home-end-date').value=addDays(s.today_hk,1);updateDateHint('home');
   $('#model-hint').textContent=s.model_configured?s.model_name:'待配置';state.ready=true;setBusy(false);await loadHistory();
-  let saved;try{saved=localStorage.getItem('hk-travel-active-v13');}catch{}if(saved&&/^[a-f0-9]{32}$/.test(saved)){try{const record=await api('/api/history/read',{id:saved});state.conversation=saved;state.turns=record.turns;applyTrip(record.checkpoint.trip);$('#use-model').checked=!!record.use_model&&!!s.model_configured;renderTurns();await loadHistory();}catch{state.conversation=null;rememberId();}}
+  let saved;try{if(s.history_enabled!==false)saved=localStorage.getItem('hk-travel-active-v13');else localStorage.removeItem('hk-travel-active-v13');}catch{}if(saved&&/^[a-f0-9]{32}$/.test(saved)){try{const record=await api('/api/history/read',{id:saved});state.conversation=saved;state.turns=record.turns;applyTrip(record.checkpoint.trip);$('#use-model').checked=!!record.use_model&&!!s.model_configured;renderTurns();await loadHistory();}catch{state.conversation=null;rememberId();}}
   modelLabel();$('.trip-settings').open=true;
  }catch(e){$('#app-error').innerHTML=`${esc(e.message)} <button class="small-button" data-action="retry-init">重试连接</button>`;$('#app-error').classList.remove('hidden');}
 }

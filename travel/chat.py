@@ -14,6 +14,7 @@ from .place_context import hydrate_context, next_context
 from .conversation_memory import restore_memory
 from .config import Settings
 from .history import HistoryStore
+from .anonymous_history import AnonymousHistory
 from .maps import resolve_place, route_map
 from .transit import enrich_plan, from_station
 from .place_search import search_library
@@ -24,6 +25,7 @@ from typing import Literal
 store = HistoryStore()
 locks = {}
 creation_lock = asyncio.Lock()
+anonymous_store = AnonymousHistory(protected=lambda: {cid for cid, lock in locks.items() if lock.locked()})
 
 
 class ChatRequest(BaseModel):
@@ -83,7 +85,7 @@ def explicit_name(question):
     return None
 
 
-def build_router(settings_getter, semaphore):
+def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
     router = APIRouter()
 
     @router.get('/api/history')
@@ -172,6 +174,8 @@ def build_router(settings_getter, semaphore):
             return await route_map([body.origin_id,body.destination_id],settings_getter(),poi_choices=choices)
 
     async def chat(body: ChatRequest):
+        anonymous = anonymous_getter()
+        archive = anonymous_store if anonymous else store
         cfg = settings_getter()
         if body.use_model and not cfg.model_api_key:
             raise HTTPException(422, '模型尚未配置，请关闭模型选项后重试。')
@@ -184,7 +188,7 @@ def build_router(settings_getter, semaphore):
         cid = body.conversation_id or secrets.token_hex(16)
         async with creation_lock:
             if cid not in locks:
-                if len(locks) >= store.capacity + 4:
+                if len(locks) >= archive.capacity + 4:
                     # Only idle entries may be discarded; persisted history remains on disk.
                     for old in list(locks):
                         if not locks[old].locked():
@@ -197,10 +201,10 @@ def build_router(settings_getter, semaphore):
             saved = None
             if body.conversation_id:
                 try:
-                    saved = store.get(cid)
+                    saved = archive.get(cid)
                 except KeyError:
                     raise HTTPException(404, '历史已删除，请开始新对话。')
-            elif len(store.list()) >= store.capacity:
+            elif not anonymous and len(store.list()) >= store.capacity:
                 raise HTTPException(409, '历史已达 25 段，请先删除一段。')
             engine = AgentEngine(cfg if body.use_model else Settings())
             config = {'configurable': {'thread_id': 'chat'}}
@@ -238,7 +242,7 @@ def build_router(settings_getter, semaphore):
                         encoded = encoded.replace(key, '[redacted]')
                 clean = json.loads(encoded)
                 turns = (saved['turns'] if saved else []) + [{'question': q, 'result': clean['result']}]
-                store.save(cid, turns, clean['checkpoint'], body.use_model, saved['title'] if saved else q)
+                archive.save(cid, turns, clean['checkpoint'], body.use_model, saved['title'] if saved else q)
                 return clean['result']
             except ValueError as exc:
                 # Only locally generated validation messages are exposed; never provider exceptions.
