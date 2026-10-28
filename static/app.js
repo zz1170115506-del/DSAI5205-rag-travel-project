@@ -1,5 +1,6 @@
 'use strict';
 import {readAPIResponse} from './api-response.mjs?v=1.3.25';
+import {postAPI} from './api-request.mjs?v=1.3.26';
 import {inlineAnswerHTML} from './answer-citations.mjs?v=1.3.24';
 import {mapHTML,attachPlanMaps,disposeMaps} from './itinerary-map.js?v=1.3.23';
 import {travelDates,addDays,dateLabel} from './trip-dates.mjs?v=1.3.8';
@@ -27,8 +28,7 @@ function switchView(name,update=true){
 }
 async function api(path,body){
   const c=new AbortController(), timer=setTimeout(()=>c.abort(),70000);
-  try{const headers=body?{'Content-Type':'application/json'}:{};if(path==='/api/chat')headers.Accept='application/x-ndjson';
-    const r=await fetch(path,{method:body?'POST':'GET',headers,body:body?JSON.stringify(body):undefined,signal:c.signal});
+  try{const r=body?await postAPI(path,body,c.signal):await fetch(path,{credentials:'same-origin',signal:c.signal});
     return await readAPIResponse(r);
   }catch(e){if(e.name==='AbortError')throw Error('等待超时，请检查服务后重试。');if(e instanceof TypeError)throw Error('连接中断，请检查网络后重试；也可在“我的旅程”查看是否已保存。');throw e;}finally{clearTimeout(timer);}
 }
