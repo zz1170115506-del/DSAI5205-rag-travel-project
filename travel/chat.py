@@ -5,7 +5,8 @@ import re
 import secrets
 import time
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, ConfigDict, StrictBool
 
 from .agent import AgentEngine, Trip
@@ -17,6 +18,7 @@ from .maps import resolve_place, route_map
 from .transit import enrich_plan, from_station
 from .place_search import search_library
 from .map_rag import supplement_with_map
+from .streaming import chat_events
 from typing import Literal
 
 store = HistoryStore()
@@ -169,7 +171,6 @@ def build_router(settings_getter, semaphore):
             choices={pid:choice for pid,choice in [(body.origin_id,body.origin_poi_id),(body.destination_id,body.destination_poi_id)] if choice}
             return await route_map([body.origin_id,body.destination_id],settings_getter(),poi_choices=choices)
 
-    @router.post('/api/chat')
     async def chat(body: ChatRequest):
         cfg = settings_getter()
         if body.use_model and not cfg.model_api_key:
@@ -242,5 +243,12 @@ def build_router(settings_getter, semaphore):
             except ValueError as exc:
                 # Only locally generated validation messages are exposed; never provider exceptions.
                 raise HTTPException(422, '请检查日期、旅行天数及行程条件；历史过大时请开始新对话。') from None
+
+    @router.post('/api/chat')
+    async def chat_endpoint(body: ChatRequest, request: Request, stream: bool = False):
+        if stream or 'application/x-ndjson' in request.headers.get('accept', ''):
+            return StreamingResponse(chat_events(lambda: chat(body)), media_type='application/x-ndjson',
+                                     headers={'X-Accel-Buffering': 'no', 'Cache-Control': 'no-store'})
+        return await chat(body)
 
     return router

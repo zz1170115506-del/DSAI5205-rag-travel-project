@@ -1,4 +1,5 @@
 'use strict';
+import {readAPIResponse} from './api-response.mjs?v=1.3.25';
 import {inlineAnswerHTML} from './answer-citations.mjs?v=1.3.24';
 import {mapHTML,attachPlanMaps,disposeMaps} from './itinerary-map.js?v=1.3.23';
 import {travelDates,addDays,dateLabel} from './trip-dates.mjs?v=1.3.8';
@@ -26,9 +27,10 @@ function switchView(name,update=true){
 }
 async function api(path,body){
   const c=new AbortController(), timer=setTimeout(()=>c.abort(),70000);
-  try{const r=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:c.signal});
-    if(!r.ok){let obj={};try{obj=await r.json();}catch{}throw Error(typeof obj.detail==='string'?obj.detail:'服务暂不可用，请重试。');}return await r.json();
-  }catch(e){if(e.name==='AbortError')throw Error('等待超时，请检查服务后重试。');if(e instanceof TypeError)throw Error('连接不到本地服务，请确认启动窗口仍在运行。');throw e;}finally{clearTimeout(timer);}
+  try{const headers=body?{'Content-Type':'application/json'}:{};if(path==='/api/chat')headers.Accept='application/x-ndjson';
+    const r=await fetch(path,{method:body?'POST':'GET',headers,body:body?JSON.stringify(body):undefined,signal:c.signal});
+    return await readAPIResponse(r);
+  }catch(e){if(e.name==='AbortError')throw Error('等待超时，请检查服务后重试。');if(e instanceof TypeError)throw Error('连接中断，请检查网络后重试；也可在“我的旅程”查看是否已保存。');throw e;}finally{clearTimeout(timer);}
 }
 function syncMust(){$('#only-selected').disabled=state.busy||state.must.size===0;if(!state.must.size)$('#only-selected').checked=false;[...$('#must-visit').options].forEach(o=>o.selected=state.must.has(o.value));$$('[data-action="must"]').forEach(b=>{b.textContent=state.must.has(b.dataset.id)?'已加入 ✓':'加入必去 +';b.setAttribute('aria-pressed',String(state.must.has(b.dataset.id)));});}
 function addMust(id){if(state.must.has(id)){state.must.delete(id);toast('已从必去地点移除');}else{state.must.add(id);toast('已加入必去地点，可在“问一问”规划');}syncMust();}
