@@ -1,4 +1,4 @@
-"""On-demand map evidence for a local miss; external POIs remain outside the planner."""
+"""Map evidence for local misses or insufficient category coverage, outside the planner."""
 import asyncio
 import json
 import re
@@ -11,9 +11,10 @@ import httpx
 from .answers import needs_live_data
 from .maps import SEARCH_DOC, coord
 from .place_search import poi_region
+from .place_intent import requested_category, matches_category, search_region, desired_count, category_search
 
 
-def prepare_evidence(external, trip):
+def prepare_evidence(external, trip, category=None):
     """Keep bounded Hong Kong POIs, server-built links and explicit citation IDs."""
     if external.get('provider') != 'amap' or external.get('mode') != 'live':
         return external
@@ -37,6 +38,8 @@ def prepare_evidence(external, trip):
                 continue
             clean = {field: value[:limit] if isinstance(value := poi.get(field), str) else ''
                      for field, limit in [('name', 100), ('address', 300), ('district', 100), ('category', 200)]}
+            if not matches_category(clean, category, external=True):
+                continue
             if trip.get('region', '全部') != '全部' and poi_region(clean) != trip['region']:
                 continue
             clean.update(id=pid, citation_id='map-' + str(len(selected) + 1), location=location,
@@ -55,7 +58,7 @@ def prepare_evidence(external, trip):
                 'message': '地图返回的字段不足以确认室内或免费条件，未将候选当作符合偏好的推荐。请调整条件或核对地点官网。'}
     if not selected:
         return {**external, 'mode': 'filtered_external', 'results': [],
-                'message': '地图返回的地点未通过香港位置、地区或来源校验，暂无可用于回答的候选。'}
+                'message': '地图返回的地点未通过类别、香港位置、地区或来源校验，暂无符合要求的候选。'}
     return {**external, 'results': selected}
 
 
@@ -147,12 +150,18 @@ async def supplement_with_map(result, question, query, settings, use_model, *, l
                     'message': '地图查询失败或超时，本轮未取得外部地点资料。'}
     if external.get('provider') != 'amap':
         return
-    external = prepare_evidence(external, result['trip'])
-    result.update(external_lookup=external, sources=[])
+    category = requested_category(question)
+    evidence_trip = {**result['trip'], 'region': search_region(question, result['trip']['region'])}
+    external = prepare_evidence(external, evidence_trip, category)
+    local = [p for p in result['sources'] if category and matches_category(p, category)]
+    if category and category_search(question):
+        external['coverage'] = {'requested_count': desired_count(question), 'local_count': len(local),
+                                'map_count': len(external.get('results', [])), 'exhaustive': False}
+    result.update(external_lookup=external, sources=local)
     elapsed = round((time.monotonic()-started)*1000)
     result['trace'].append({'tool': 'map_search',
                             'status': 'success' if external['mode'] == 'live' else external['mode'],
-                            'arguments': {'query': query, 'region': result['trip']['region']},
+                            'arguments': {'query': query, 'region': evidence_trip['region']},
                             'elapsed_ms': elapsed,
                             'retrieval': {'source': 'amap', 'mode': external['mode'],
                                           'returned_count': len(external.get('results', [])),
@@ -162,7 +171,11 @@ async def supplement_with_map(result, question, query, settings, use_model, *, l
     cfg = settings if use_model else replace(settings, model_api_key='')
     answer, generation = await map_rag_answer(question, external, cfg, model_transport,
         timeout=max(.1, min(20, time_budget-(time.monotonic()-started))))
-    result['answer'] = answer
+    if local and external.get('mode') != 'live':
+        # A failed supplemental lookup must not erase already verified local candidates.
+        result['answer']['notice'] += '；地图补充未取得符合条件的候选，保留本地结果'
+    else:
+        result['answer'] = answer
     metrics = result['metrics']
     metrics.update(map_rag_used=generation['output_accepted'],
                    map_lookup_requested=bool(external.get('external_requested')),

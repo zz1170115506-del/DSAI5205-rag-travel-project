@@ -8,6 +8,7 @@ from functools import lru_cache
 from .config import RetrievalSettings
 from .embeddings import EmbeddingUnavailable, semantic_search
 from .knowledge import REGIONS, normalize, places, tokens
+from .place_intent import requested_category, matches_category
 
 
 @lru_cache(maxsize=1)
@@ -30,6 +31,7 @@ def _lexical_retrieve(query, limit=5, region='全部', indoor_only=False, kind='
     if not 1 <= limit <= 10 or len(query) > 500 or region not in REGIONS or kind not in {'all', 'food', 'attraction'}:
         raise ValueError('检索数量、地区或地点类型无效。')
     q = normalize(query.strip())
+    category = requested_category(query)
     query_tokens = set(tokens(q)) - {'哪里', '在哪', '请问', '帮我', '介绍', '地址', '怎么', '么去', '如何', '一下', '推荐'}
     meta = {'recall': 'SQLite FTS5 BM25', 'reranker': '名称/别名、词覆盖、街区与主题特征重排（非神经模型）',
             'candidate_count': 0, 'returned_count': 0, 'knowledge_records': len(places())}
@@ -41,6 +43,8 @@ def _lexical_retrieve(query, limit=5, region='全部', indoor_only=False, kind='
     ranked = []
     for pid, raw_score in rows:
         p = lookup[pid]
+        if not matches_category(p, category):
+            continue
         if (region != '全部' and p['region'] != region) or (indoor_only and not p['indoor']) or (kind != 'all' and p['kind'] != kind):
             continue
         aliases = [p['name'], p['en'], *p['aliases']]
@@ -82,7 +86,8 @@ def retrieve(query, limit=5, region='全部', indoor_only=False, kind='all', *, 
         meta.update(returned_count=len(lexical['results']), fallback_reason=str(exc))
         return lexical
     semantic = [p for p in semantic if (region == '全部' or p['region'] == region)
-                and (not indoor_only or p['indoor']) and (kind == 'all' or p['kind'] == kind)]
+                and (not indoor_only or p['indoor']) and (kind == 'all' or p['kind'] == kind)
+                and matches_category(p, requested_category(query))]
     combined = {}
     for rank, place in enumerate(lexical['results'], 1):
         combined[place['id']] = {**place, 'lexical_rank': rank, 'semantic_rank': None,
