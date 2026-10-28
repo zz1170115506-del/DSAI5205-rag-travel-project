@@ -11,7 +11,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat, retrieval
+from travel import chat, retrieval, map_rag
 from travel.agent import AgentEngine, Trip
 from travel.config import RetrievalSettings, Settings
 from travel.history import HistoryStore
@@ -22,7 +22,7 @@ from travel.place_intent import category_search, requested_category, matches_cat
 from travel.place_search import search_library
 from travel.trip_dates import parse_day_change
 from tests.test_agent import fixture_tool
-from tests.test_map_rag import external, result
+from tests.test_map_rag import external, result, model_response
 from tests.test_model_conversation import call, final, engine_with
 
 
@@ -139,9 +139,10 @@ def routed_web(tmp_path, monkeypatch):
     monkeypatch.setattr(app, 'settings', Settings(amap_api_key='fixture-map-key'))
     monkeypatch.setattr(chat, 'store', HistoryStore(tmp_path/'history.sqlite3'))
     monkeypatch.setattr(chat, 'locks', {})
-    def seed(sources, intent='search', kind='answer'):
+    def seed(sources, intent='search', kind='answer', stop='complete'):
         async def turn(*args):
             obj = result()
+            obj['stop_reason'] = stop
             obj['sources'] = deepcopy(sources)
             obj['trace'] = [{'tool': 'search_places', 'status': 'success', 'arguments': {'query': '商场'}}] if intent == 'search' else []
             obj['answer'] = {'text': '本地候选。', 'citations': [p['id'] for p in sources],
@@ -265,3 +266,65 @@ def test_library_query_enforces_explicit_region_even_with_all_selected():
     data = asyncio.run(search_library('九龙有哪些商场','全部', Settings(amap_api_key='fixture'),
                                        httpx.MockTransport(handler)))
     assert data['mode'] == 'filtered_external' and not data['results']
+
+
+def test_repeated_model_search_hands_off_after_first_empty_result(tmp_path, monkeypatch):
+    monkeypatch.setattr(app, 'settings', Settings(model_api_key='fixture-model-key', amap_api_key='fixture-map-key'))
+    monkeypatch.setattr(chat, 'store', HistoryStore(tmp_path/'history.sqlite3'))
+    monkeypatch.setattr(chat, 'locks', {})
+    # Simulate a provider that keeps asking to search the same empty local category.
+    queue = [call('search_places', query='购物中心') for _ in range(3)]
+    payloads = []
+    monkeypatch.setattr(chat, 'AgentEngine', lambda *args: engine_with(queue, payloads))
+    queries = []
+    async def lookup(query, cfg):
+        queries.append(query)
+        return external()
+    monkeypatch.setattr(chat, 'resolve_place', lookup)
+    actual_generation = map_rag.map_rag_answer
+    async def generate(question, evidence, cfg, transport=None, **kwargs):
+        return await actual_generation(question, evidence, cfg,
+            httpx.MockTransport(lambda request: model_response()), **kwargs)
+    monkeypatch.setattr(map_rag, 'map_rag_answer', generate)
+    with TestClient(app.app) as web:
+        response = web.post('/api/chat', json={'question':'推荐一些商场', 'use_model':True})
+        assert response.status_code == 200, response.text
+        data = response.json()
+        assert queries == ['香港 商场'] and len(payloads) == 1
+        assert data['stop_reason'] == 'complete' and data['metrics']['map_rag_used']
+        assert data['metrics']['agent_stop_reason'] == 'map_needed'
+        assert data['answer']['citations'] == ['map-1']
+        assert '重复' not in data['answer']['text']
+        saved = web.post('/api/history/read', json={'id':data['conversation_id']}).json()
+        assert saved['checkpoint']['history'][-1]['content'] == data['answer']['text']
+
+
+@pytest.mark.parametrize('stop', ['repeat', 'limit'])
+@pytest.mark.parametrize('map_mode', ['live', 'not_configured'])
+def test_search_loop_can_still_reach_map_or_show_explicit_map_failure(routed_web, monkeypatch, stop, map_mode):
+    web, seed = routed_web
+    seed([], stop=stop)
+    calls = []
+    async def lookup(query, cfg):
+        calls.append(query)
+        raw = external()
+        if map_mode != 'live':
+            raw.update(mode=map_mode, results=[], external_requested=False, message='地图未配置，暂无商场候选。')
+        return raw
+    monkeypatch.setattr(chat, 'resolve_place', lookup)
+    data = web.post('/api/chat', json={'question':'推荐一些商场'}).json()
+    assert calls == ['香港 商场']
+    assert data['external_lookup']['mode'] == map_mode
+    assert data['stop_reason'] == 'complete' and data['metrics']['agent_stop_reason'] == stop
+    assert not data['metrics']['map_rag_used']
+
+
+@pytest.mark.parametrize('stop', ['timeout', 'tool_error', 'clarify_days'])
+def test_other_failures_do_not_bypass_constraints_to_query_maps(routed_web, monkeypatch, stop):
+    web, seed = routed_web
+    seed([], stop=stop)
+    async def forbidden(*args):
+        pytest.fail('time limits and failed constraints must remain stopped')
+    monkeypatch.setattr(chat, 'resolve_place', forbidden)
+    data = web.post('/api/chat', json={'question':'推荐一些商场'}).json()
+    assert data['stop_reason'] == stop and 'external_lookup' not in data

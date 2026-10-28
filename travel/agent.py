@@ -24,7 +24,7 @@ from .place_context import clean_context, resolve_reference, next_context
 from .conversation_memory import bounded_history,clean_notes,plan_snapshot,model_memory
 from .itinerary_edits import EditArgs,revise_plan
 from .trip_dates import resolve_dates, date_for_day, MAX_TRIP_DAYS, DayChange, DayChangeError, parse_day_change
-from .place_intent import requested_category, matches_category, search_region
+from .place_intent import requested_category, matches_category, search_region, category_search
 
 MAX_TOOLS, MAX_DECISIONS = 6, 8
 TURN_TIMEOUT, TOOL_TIMEOUT = 60, 15
@@ -331,6 +331,8 @@ async def demo_policy(s):
 
 
 def finish_text(s, reason):
+    if reason == 'map_needed':
+        return '本地没有足够的同类地点资料，需要补充地图检索。'
     ref=s.get('reference')
     if ref and ref['kind']=='clarify':return ref['message']
     names='、'.join(get_place(pid)['name'] for pid in ref['ids']) if ref else ''
@@ -412,6 +414,7 @@ class AgentEngine:
         seen = s['seen'][:]
         hits, planned = s['hits'], s['plan']
         transfer=s.get('transfer')
+        handoff = ''
         intent=s['intent'];notes=s.get('memory_notes',[]);snapshot=s.get('plan_context')
         try:
             if name not in ARGS:
@@ -484,6 +487,10 @@ class AgentEngine:
                 if isinstance(data.get('retrieval'), dict):
                     event['retrieval'] = data['retrieval']
                 event['status'] = 'success' if found else 'empty'
+                if self.is_model and not hits and category_search(s['question']):
+                    # Empty category searches should hand off instead of repeating.
+                    handoff = 'map_needed'
+                    observation['message'] = '没有符合类别的本地候选，转交地图补充检索。'
             elif name == 'place_detail':
                 observation = get_place(args['place_id'])
                 event['status'] = 'success'
@@ -518,7 +525,8 @@ class AgentEngine:
             {'role': 'assistant', 'content': None, 'tool_calls': [{'id': call_id, 'type': 'function', 'function': {'name': name, 'arguments': json.dumps(d['args'], ensure_ascii=False)}}]},
             {'role': 'tool', 'tool_call_id': call_id, 'content': json.dumps(observation, ensure_ascii=False)[:16000]}]
         return {'messages': messages, 'trace': s['trace'] + [event], 'hits': hits, 'plan': planned,
-                'tool_calls': s['tool_calls'] + 1, 'seen': seen, 'transfer':transfer,'trip':trip,'intent':intent,'memory_notes':notes,'plan_context':snapshot}
+                'tool_calls': s['tool_calls'] + 1, 'seen': seen, 'transfer':transfer,'trip':trip,'intent':intent,'memory_notes':notes,'plan_context':snapshot,
+                **({'stop': handoff} if handoff else {})}
 
     async def finish(self, s):
         reason = s['stop']
