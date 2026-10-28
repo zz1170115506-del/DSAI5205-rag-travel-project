@@ -38,7 +38,7 @@ demo_rate_limit = DemoRateLimit()
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=web_access.allowed_hosts)
 app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
 # 单机演示：限制同时启动的 MCP 子进程数，避免连续点击堆积。
-semaphore = asyncio.Semaphore(4)
+semaphore = asyncio.Semaphore(1 if web_access.public else 4)
 agent_sessions = Sessions()
 app.include_router(build_router(lambda: settings, semaphore))
 
