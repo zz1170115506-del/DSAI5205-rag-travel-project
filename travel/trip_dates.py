@@ -33,7 +33,22 @@ def parse_day_change(question):
     matches = re.finditer(r'(?<![0-9.零〇一二三四五六七八九十百千万亿两])(-?[0-9]+(?:\.[0-9]+)?|[零〇一二三四五六七八九十百千万亿两]+)\s*天', q)
     match = next((m for m in matches if not re.search(r'第\s*$', q[:m.start()])), None)
     if not match:
-        return None
+        words = {'one':1, 'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7,
+                 'eight':8, 'nine':9, 'ten':10, 'another':1, 'an extra':1, 'an additional':1}
+        english = re.search(r'(?<![\w.-])(-?[0-9]+|' + '|'.join(words) + r')[\s\u2010\u2011-]+(?:(more|extra|additional|fewer|less)\s+)?days?\b', question, re.I)
+        if not english:
+            return None
+        raw = english[1].lower()
+        amount = int(raw) if re.fullmatch(r'-?[0-9]+', raw) else words[raw]
+        prefix = question[:english.start()].lower()
+        operation = 'set'
+        if english[2] and english[2].lower() in {'fewer', 'less'} or re.search(r'\b(?:remove|reduce|shorten|subtract|cut)(?:\s+(?:it|the trip|by|for|to))*\s*$', prefix):
+            operation = 'decrease'
+        elif raw in {'another', 'an extra', 'an additional'} or english[2] or re.search(r'\b(?:add|extend|increase|stay|spend)(?:\s+(?:it|the trip|by|for|an extra))*\s*$', prefix):
+            operation = 'increase'
+        if not 1 <= amount <= MAX_TRIP_DAYS:
+            raise DayChangeError('The duration or adjustment must be between 1 and 366 days.')
+        return DayChange(operation, amount)
     raw = match[1]
     if raw.isascii() and raw.isdigit():
         amount = int(raw)

@@ -11,7 +11,7 @@ test('walking navigation uses place names and has no key',()=>{
  const link=new URL(walkingLink(a,b));
  assert.equal(link.origin,'https://www.google.com');
  assert.equal(link.searchParams.get('travelmode'),'walking');
- assert.equal(link.searchParams.get('origin'),'香港 星光大道');
+ assert.equal(link.searchParams.get('origin'),'Hong Kong 星光大道');
  assert.equal(link.searchParams.get('api'),'1');
  assert.equal(link.searchParams.has('key'),false);
 });
@@ -54,7 +54,7 @@ test('ambiguous positions require selection then automatically calculate route',
  try{
   const candidates={'choice-origin':[{id:'amap-a',name:'起点',address:'甲街',map_url:'https://uri.amap.com/marker'}],'choice-destination':[{id:'amap-b',name:'终点',address:'乙街',map_url:'https://uri.amap.com/marker'}]};
   attachWalkingMaps(p.root,[{id:'choice-origin',name:'起点'},{id:'choice-destination',name:'终点'}],async(path,args)=>{calls.push(args);return calls.length===1?{mode:'ambiguous_location',candidates}:liveRoute});
-  observer.show(p.target);await nextTick();assert.equal(calls.length,1);assert.match(p.target.innerHTML,/请选择位置|确认起点和终点/);
+  observer.show(p.target);await nextTick();assert.equal(calls.length,1);assert.match(p.target.innerHTML,/Select a location|Confirm the start and destination/);
   p.selections.origin.value='amap-a';p.handlers.change({target:{matches:()=>true}});await nextTick();assert.equal(calls.length,1);
   p.selections.destination.value='amap-b';p.handlers.change({target:{matches:()=>true}});await nextTick();
   assert.equal(calls.length,2);assert.equal(calls[1].origin_poi_id,'amap-a');assert.equal(calls[1].destination_poi_id,'amap-b');assert.match(p.target.innerHTML,/walk-route-image/);
@@ -65,7 +65,7 @@ test('unavailable route shows retry without a substitute map',async()=>{
  const observer=observerFixture(),p=panelFixture('fail-origin','fail-destination');
  try{
   attachWalkingMaps(p.root,[{id:'fail-origin'},{id:'fail-destination'}],async()=>{throw Error('internal implementation details')});
-  observer.show(p.target);await nextTick();assert.match(p.target.innerHTML,/路线暂时无法加载/);
+  observer.show(p.target);await nextTick();assert.match(p.target.innerHTML,/The route could not load/);
   assert.ok(!p.target.innerHTML.includes('internal'));assert.ok(!p.target.innerHTML.includes('<img'));assert.equal(p.button.hidden,false);
  }finally{observer.restore()}
 });

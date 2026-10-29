@@ -16,6 +16,6 @@ test('in-stream errors preserve the message instead of becoming answers',async()
 });
 test('truncated, malformed and incomplete streams fail clearly',async()=>{
   for (const body of ['', '\n\n', '{broken', '{"type":"result","status":200}']) {
-    await assert.rejects(readAPIResponse(response(body)),/中断|不完整/);
+    await assert.rejects(readAPIResponse(response(body)),/interrupted|incomplete/);
   }
 });

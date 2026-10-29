@@ -67,9 +67,9 @@ def desired_count(question):
 def category_search(question):
     category = requested_category(question)
     q = text_key(question).strip(' ？?。')
-    if not category or re.search(r'在哪|地址|怎么去|有什么特色|有什么特点|\bwhere\b', q):
+    if not category or re.search(r'在哪|地址|怎么去|有什么特色|有什么特点', q):
         return False
-    if re.search(r'推荐|哪些|有什么|有啥|找|想逛|\b(?:recommend|list|any)\b', q):
+    if re.search(r'推荐|哪些|有什么|有啥|找|想逛|\b(?:recommend|list|any|what|which|suggest|find|malls|museums)\b', q):
         return True
     # A bare category / category plus area is broad; K11商场 is a named lookup.
     remaining = re.sub(PATTERNS[category], '', q)
@@ -79,6 +79,10 @@ def category_search(question):
 
 def search_region(question, fallback='全部'):
     q = text_key(question)
+    for area, region in [('hong kong island','香港岛'), ('kowloon','九龙'), ('lantau','大屿山'),
+                         ('mong kok','九龙'), ('tsim sha tsui','九龙'), ('causeway bay','香港岛'),
+                         ('central','香港岛'), ('wan chai','香港岛')]:
+        if re.search(r'\b'+area+r'\b', q):return region
     for region, aliases in [('香港岛', ['香港岛', '港岛']), ('九龙', ['九龙']), ('大屿山', ['大屿山'])]:
         if any(alias in q for alias in aliases):
             return region
@@ -91,6 +95,9 @@ def search_region(question, fallback='全部'):
 def map_category_query(question, region='全部'):
     category = requested_category(question)
     q = text_key(question)
+    for english, chinese in [('mong kok','旺角'), ('tsim sha tsui','尖沙咀'), ('causeway bay','铜锣湾'),
+                             ('central','中环'), ('wan chai','湾仔'), ('sham shui po','深水埗')]:
+        q=re.sub(r'\b'+english+r'\b',chinese,q)
     # Preserve a specifically requested neighbourhood, ahead of the inherited trip region.
     area = next((area for area in AREA_REGIONS if area in q), None)
     selected_region = search_region(question, region)

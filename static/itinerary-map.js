@@ -1,5 +1,6 @@
+import {displayText} from './english.mjs?v=20261029-en';
 // Real OSM basemap; local points remain approximate and lines show visit order only.
-const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const escapeHTML=v=>displayText(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const colors=['#217460','#be6947','#5b6fa2'];
 const liveMaps=new Set();
 let visibility;
@@ -7,8 +8,8 @@ let visibility;
 export function mapHTML(plan){
   if(!plan.days.some(d=>d.stops.length))return '';
   const days=plan.days.map((d,i)=>({...d,index:i})).filter(d=>d.stops.length);
-  const filters=days.length>7?`<label class="map-day-label">地图日期<select data-map-select aria-label="地图日期（仅含已安排地点的日期）"><option value="all">全程</option>${days.map(d=>`<option value="${d.index}">第 ${d.day} 天${d.date?' · '+escapeHTML(d.date):''}</option>`).join('')}</select></label>`:`<button class="small-button active" data-map-day="all" aria-pressed="true">全程</button>${days.map(d=>`<button class="small-button day-${d.index%3+1}" data-map-day="${d.index}" aria-pressed="false">${d.date?escapeHTML(d.date.slice(5))+' · ':''}第 ${escapeHTML(d.day)} 天</button>`).join('')}`;
-  return `<section class="map-panel itinerary-panel"><div class="map-title"><div><span class="eyebrow">YOUR HONG KONG, ON THE MAP</span><h3>这一程，在香港的哪里</h3></div><span class="badge">真实地图 · OpenStreetMap</span></div><div class="map-toolbar" aria-label="选择地图中的行程日期">${filters}<button class="small-button map-fit" data-map-fit>查看全貌 ↗</button></div><div class="itinerary-map" role="region" aria-label="香港行程互动地图"><p class="map-placeholder">地图在显示时加载……</p></div><p class="map-load-status fine-print" role="status">支持拖动、缩放，点击编号查看地点。</p><div class="map-stop-list"></div><details class="fine-print map-caption"><summary>地图说明</summary><p>底图：© OpenStreetMap contributors。编号为地点近似位置，连线表示游览顺序；具体走法请查看步行小地图或交通指引。</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">反馈地图问题 ↗</a></details></section>`;
+  const filters=days.length>7?`<label class="map-day-label">Map date<select data-map-select aria-label="Map date (days with planned stops)"><option value="all">All days</option>${days.map(d=>`<option value="${d.index}">Day ${d.day}${d.date?' · '+escapeHTML(d.date):''}</option>`).join('')}</select></label>`:`<button class="small-button active" data-map-day="all" aria-pressed="true">All days</button>${days.map(d=>`<button class="small-button day-${d.index%3+1}" data-map-day="${d.index}" aria-pressed="false">${d.date?escapeHTML(d.date.slice(5))+' · ':''}Day ${escapeHTML(d.day)}</button>`).join('')}`;
+  return `<section class="map-panel itinerary-panel"><div class="map-title"><div><span class="eyebrow">YOUR HONG KONG, ON THE MAP</span><h3>Your journey across Hong Kong</h3></div><span class="badge">OpenStreetMap basemap</span></div><div class="map-toolbar" aria-label="Choose a day on the map">${filters}<button class="small-button map-fit" data-map-fit>Fit all stops ↗</button></div><div class="itinerary-map" role="region" aria-label="Interactive Hong Kong itinerary map"><p class="map-placeholder">The map loads when visible...</p></div><p class="map-load-status fine-print" role="status">Drag to explore, zoom in, or select a numbered stop.</p><div class="map-stop-list"></div><details class="fine-print map-caption"><summary>About this map</summary><p>Basemap: © OpenStreetMap contributors. Markers are approximate; connecting lines show visit order. Use walking references or transport guides for directions.</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map issue ↗</a></details></section>`;
 }
 
 export function disposeMaps(){
@@ -35,7 +36,7 @@ export function attachPlanMaps(root,turns){
 
 function mountMap(host,plan){
   const panel=host.closest('.itinerary-panel'),status=panel.querySelector('.map-load-status');
-  if(!window.L){status.textContent='地图组件未能加载，请刷新页面；仍可通过地点列表打开外部地图。';return;}
+  if(!window.L){status.textContent='The map component could not load. Refresh, or open a place using its map link.';return;}
   host.replaceChildren();
   const L=window.L,map=L.map(host,{scrollWheelZoom:false,minZoom:9,maxZoom:18});
   const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
@@ -47,7 +48,7 @@ function mountMap(host,plan){
   let loaded=0,failed=0;
   const updateStatus=()=>{
     host.dataset.tilesLoaded=String(loaded);
-    status.textContent=loaded?(failed?'部分底图未加载，可缩放或通过地点链接打开地图。':'真实地图已加载 · 拖动浏览，点击编号查看地点。'):'地图底图暂不可用，请检查网络；可通过下方地点链接打开地图。';
+    status.textContent=loaded?(failed?'Some tiles could not load. Try zooming, or use the place links.':'Map loaded · Drag to explore and select numbered stops.'):'Map tiles are unavailable. Check your connection or use the place links below.';
   };
   tiles.on('tileload',()=>{loaded++;clearTimeout(controller.timer);updateStatus();});
   tiles.on('tileerror',()=>{failed++;updateStatus();});
@@ -67,8 +68,8 @@ function mountMap(host,plan){
       points.forEach(p=>{
         const number=numbered.indexOf(p)+1;
         const icon=L.divIcon({className:`trip-marker day-${dayIndex%3+1}`,html:`<span>${number}</span>`,iconSize:[32,32],iconAnchor:[16,16]});
-        const popup=`<span class="popup-day">第 ${escapeHTML(p.day)} 天 · 第 ${number} 站</span><h4>${escapeHTML(p.name)}</h4><p>本地资料近似定位</p><button class="text-button" data-action="detail" data-id="${escapeHTML(p.id)}">地点详情 ↗</button> <a href="https://uri.amap.com/search?keyword=${encodeURIComponent('香港 '+p.name)}&city=${encodeURIComponent('香港')}&view=map&src=hk-travel-assistant" target="_blank" rel="noopener noreferrer">高德中查找 ↗</a>`;
-        L.marker([p.lat,p.lon],{icon,title:`${number} ${p.name}`,alt:`${number} ${p.name}`,keyboard:true}).bindPopup(popup,{maxWidth:250}).addTo(group);
+        const popup=`<span class="popup-day">Day ${escapeHTML(p.day)} · Stop ${number}</span><h4>${escapeHTML(p.name)}</h4><p>Curated source · Approximate position</p><button class="text-button" data-action="detail" data-id="${escapeHTML(p.id)}">Place details ↗</button> <a href="https://uri.amap.com/search?keyword=${encodeURIComponent('Hong Kong '+p.name)}&city=${encodeURIComponent('Hong Kong')}&view=map&src=hk-travel-assistant" target="_blank" rel="noopener noreferrer">Search AMap ↗</a>`;
+        L.marker([p.lat,p.lon],{icon,title:`${number} ${displayText(p.name)}`,alt:`${number} ${displayText(p.name)}`,keyboard:true}).bindPopup(popup,{maxWidth:250}).addTo(group);
       });
     });
     panel.querySelector('.map-stop-list').innerHTML=selected.map(p=>`<button class="map-stop day-${p.dayIndex%3+1}" data-map-stop="${numbered.indexOf(p)}"><b>${numbered.indexOf(p)+1}</b>${escapeHTML(p.name)}</button>`).join('');
