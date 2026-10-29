@@ -41,6 +41,7 @@ class Settings:
     amap_api_key: str = ''
     amap_enabled: bool = True
     amap_key_present: bool = False
+    response_language: str = 'zh'
 
     @classmethod
     def from_env(cls):

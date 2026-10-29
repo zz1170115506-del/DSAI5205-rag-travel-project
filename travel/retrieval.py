@@ -7,7 +7,7 @@ from functools import lru_cache
 
 from .config import RetrievalSettings
 from .embeddings import EmbeddingUnavailable, semantic_search
-from .knowledge import REGIONS, normalize, places, tokens
+from .knowledge import REGIONS, normalize, places, tokens, retrieval_query
 from .place_intent import requested_category, matches_category
 
 
@@ -30,7 +30,7 @@ def exact_places(query):
 def _lexical_retrieve(query, limit=5, region='全部', indoor_only=False, kind='all'):
     if not 1 <= limit <= 10 or len(query) > 500 or region not in REGIONS or kind not in {'all', 'food', 'attraction'}:
         raise ValueError('检索数量、地区或地点类型无效。')
-    q = normalize(query.strip())
+    q = normalize(retrieval_query(query.strip()))
     category = requested_category(query)
     query_tokens = set(tokens(q)) - {'哪里', '在哪', '请问', '帮我', '介绍', '地址', '怎么', '么去', '如何', '一下', '推荐'}
     meta = {'recall': 'SQLite FTS5 BM25', 'reranker': '名称/别名、词覆盖、街区与主题特征重排（非神经模型）',
@@ -73,14 +73,14 @@ def retrieve(query, limit=5, region='全部', indoor_only=False, kind='all', *, 
     meta = lexical['retrieval']
     meta.update(mode='bm25', configured_mode=settings.mode, embedding_used=False,
                 embedding_model=settings.model_name if settings.mode == 'hybrid' else None)
-    q = normalize(query.strip())
+    q = normalize(retrieval_query(query.strip()))
     out_of_scope = '香港' not in q and any(v in q for v in ['东京', '大阪', '北京', '上海', '巴黎', '澳门', '深圳', '新加坡', '伦敦'])
     if settings.mode == 'bm25' or not tokens(q) or out_of_scope:
         lexical['results'] = lexical['results'][:limit]
         meta['returned_count'] = len(lexical['results'])
         return lexical
     try:
-        semantic = semantic_search(query, places(), settings, limit=len(places()))
+        semantic = semantic_search(retrieval_query(query), places(), settings, limit=len(places()))
     except EmbeddingUnavailable as exc:
         lexical['results'] = lexical['results'][:limit]
         meta.update(returned_count=len(lexical['results']), fallback_reason=str(exc))

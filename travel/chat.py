@@ -4,6 +4,7 @@ import json
 import re
 import secrets
 import time
+from dataclasses import replace
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
@@ -35,6 +36,7 @@ class ChatRequest(BaseModel):
     conversation_id: str | None = Field(default=None, pattern=r'^[a-f0-9]{32}$')
     use_model: bool = False
     trip: Trip | None = None
+    language: Literal['en', 'zh'] = 'zh'
 
 
 class HistoryRequest(BaseModel):
@@ -80,6 +82,9 @@ class TransitRequest(BaseModel):
 
 def explicit_name(question):
     q = question.strip(' ？?。')
+    english = re.fullmatch(r'(?:where is|where\'s|tell me about|introduce)\s+(.+?)(?:\s+located)?[?.!]*', q, re.I)
+    if english and not re.search(r'\b(?:what|which|recommend|malls|museums)\b', english[1], re.I):
+        return english[1].strip(' ?.!。')
     q = re.sub(r'^(请问|请介绍|介绍一下|帮我查一下|帮我找一下|介绍|查找)', '', q)
     q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|地址是什么|是什么地方|有什么特色|有什么特点)$', '', q).strip()
     if 2 <= len(q) <= 60 and q != question.strip(' ？?。') and not any(w in q for w in ['推荐', '有哪些', '什么景点', '行程', '几天', '天气', '票价']):
@@ -178,7 +183,7 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
     async def chat(body: ChatRequest):
         anonymous = anonymous_getter()
         archive = anonymous_store if anonymous else store
-        cfg = settings_getter()
+        cfg = replace(settings_getter(), response_language=body.language)
         if body.use_model and not cfg.model_api_key:
             raise HTTPException(422, '模型尚未配置，请关闭模型选项后重试。')
         q = body.question.strip()
@@ -208,7 +213,7 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
                     raise HTTPException(404, '历史已删除，请开始新对话。')
             elif not anonymous and len(store.list()) >= store.capacity:
                 raise HTTPException(409, '历史已达 25 段，请先删除一段。')
-            engine = AgentEngine(cfg if body.use_model else Settings())
+            engine = AgentEngine(cfg if body.use_model else Settings(response_language=body.language))
             config = {'configurable': {'thread_id': 'chat'}}
             if saved:
                 await engine.graph.aupdate_state(config, {**saved['checkpoint'],**restore_memory(saved),'place_context':hydrate_context(saved)}, as_node='finish')

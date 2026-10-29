@@ -1,0 +1,200 @@
+{
+  "peak": {
+    "name": "The Peak",
+    "area": "The Peak",
+    "summary": "Views across the city and Victoria Harbour. Public viewing areas, paid observation decks and the Peak Tram are separate experiences.",
+    "tip": "Expect slopes. Visibility, tickets, transport and access should be checked before departure."
+  },
+  "tai-kwun": {
+    "name": "Tai Kwun",
+    "area": "Central",
+    "summary": "A heritage and arts centre in the restored Central Police Station compound, combining historic buildings, cultural activities and contemporary art.",
+    "tip": "Indoor galleries and outdoor courtyards have different access arrangements. Check exhibition and tour schedules."
+  },
+  "pmq": {
+    "name": "PMQ",
+    "area": "Central",
+    "summary": "Former police married quarters adapted into a creative hub with local design shops and craft studios. Combine it with Tai Kwun and a Central neighbourhood walk.",
+    "tip": "Shop and event hours vary. Outdoor corridors may be exposed to wind and rain."
+  },
+  "man-mo": {
+    "name": "Man Mo Temple",
+    "area": "Sheung Wan",
+    "summary": "A declared monument on Hollywood Road, preserving traditional temple architecture and historic objects. Combine it with the streets of Sheung Wan and Central.",
+    "tip": "Respect worshippers and on-site photography rules. Incense smoke can be strong."
+  },
+  "escalator": {
+    "name": "Central–Mid-Levels Escalator",
+    "area": "Central",
+    "summary": "The escalator system links Central and the Mid-Levels, passing streets, shops and cultural spaces. It can form part of a neighbourhood walk.",
+    "tip": "The escalators do not run in both directions at once. Check direction and service signs; the return trip may involve walking."
+  },
+  "lan-fong-yuen": {
+    "name": "Lan Fong Yuen, Central",
+    "area": "Central",
+    "summary": "A longstanding eatery on Gage Street, known for Hong Kong-style milk tea and cha chaan teng dishes such as pork chop buns.",
+    "tip": "The listed address is 2 Gage Street, Central. Confirm menus, prices, hours and queues with the restaurant."
+  },
+  "avenue-stars": {
+    "name": "Avenue of Stars",
+    "area": "Tsim Sha Tsui",
+    "summary": "A harbourfront promenade celebrating Hong Kong cinema, with views of the Hong Kong Island skyline. Suitable for an easy walk and photography.",
+    "tip": "This is an outdoor waterfront. Bring sun protection. The source does not confirm any light show or fireworks."
+  },
+  "star-ferry": {
+    "name": "Star Ferry, Tsim Sha Tsui",
+    "area": "Tsim Sha Tsui",
+    "summary": "The Star Ferry is a classic way to experience Victoria Harbour. This record represents the Tsim Sha Tsui ferry pier.",
+    "tip": "The itinerary only schedules a pier visit. Sailings, fares and routes must be checked separately; no ticket is booked."
+  },
+  "hkmoa": {
+    "name": "Hong Kong Museum of Art",
+    "area": "Tsim Sha Tsui",
+    "summary": "The museum on Salisbury Road presents Chinese antiquities, painting and calligraphy, export art, and modern and Hong Kong art.",
+    "tip": "Exhibitions rotate. Confirm opening days, closures and special exhibition charges on the official website."
+  },
+  "art-park": {
+    "name": "West Kowloon Art Park",
+    "area": "West Kowloon",
+    "summary": "Public park and waterfront space in the West Kowloon Cultural District, offering harbour views near M+ and the Hong Kong Palace Museum.",
+    "tip": "The park and museums are separate visits. Outdoor activities depend on the weather."
+  },
+  "mplus": {
+    "name": "M+",
+    "area": "West Kowloon",
+    "summary": "A museum of modern and contemporary visual culture, including visual art, design, architecture and moving images. Combine it with the West Kowloon waterfront.",
+    "tip": "Check the official website for exhibition tickets, reservations and closure days. This project does not provide live ticketing."
+  },
+  "palace-museum": {
+    "name": "Hong Kong Palace Museum",
+    "area": "West Kowloon",
+    "summary": "A museum presenting Chinese art and culture and encouraging exchange between civilisations, in the West Kowloon Cultural District.",
+    "tip": "Exhibitions, tickets and closure days can change. Confirm them on the official museum website."
+  },
+  "knutsford": {
+    "name": "Knutsford Terrace",
+    "area": "Tsim Sha Tsui",
+    "summary": "A dining neighbourhood with international restaurants and bars. This is an area recommendation, rather than a restaurant reservation.",
+    "tip": "Menus and hours vary by business. Compare nearby options against your budget."
+  },
+  "temple-street": {
+    "name": "Temple Street",
+    "area": "Yau Ma Tei / Jordan",
+    "summary": "A neighbourhood associated with street markets and local food, including claypot rice. It can be considered for an evening visit.",
+    "tip": "Stall hours vary. The project does not promise that any particular stall will be open."
+  },
+  "hing-kee": {
+    "name": "Hing Kee Restaurant",
+    "area": "Yau Ma Tei / Jordan",
+    "summary": "An eatery featured in the Hong Kong Tourism Board's Temple Street food guide, known for claypot rice and oyster omelettes.",
+    "tip": "Consider it as a dinner option. Confirm menus, prices, seating and opening hours with the business."
+  },
+  "sham-shui-po": {
+    "name": "Sham Shui Po",
+    "area": "Sham Shui Po",
+    "summary": "Traditional shops, fabric and craft-material streets, independent cafes and local eateries offer a look at everyday neighbourhood life.",
+    "tip": "This record describes a neighbourhood, not a specific shop. Arrange shopping and meals according to on-site conditions."
+  },
+  "hop-yik-tai": {
+    "name": "Hop Yik Tai",
+    "area": "Sham Shui Po",
+    "summary": "An eatery on Kweilin Street known for Hong Kong-style rice rolls, suitable for a snack stop during a neighbourhood walk.",
+    "tip": "The listed address is 121 Kweilin Street. Confirm menus and opening arrangements. A snack stop is not a full lunch."
+  },
+  "nan-lian": {
+    "name": "Nan Lian Garden and Chi Lin Nunnery",
+    "area": "Diamond Hill",
+    "summary": "Adjacent garden and nunnery with Tang-style architecture, landscaped grounds and a quiet setting for traditional culture and garden visits.",
+    "tip": "Respect religious and photography rules. Garden paths may be slippery in rain."
+  },
+  "big-buddha": {
+    "name": "Big Buddha and Po Lin Monastery",
+    "area": "Ngong Ping",
+    "summary": "A prominent religious and cultural site on Lantau Island, near Po Lin Monastery. Visiting the Buddha involves steps; choose a route suited to your fitness.",
+    "tip": "Stair access and indoor visits may have different arrangements. Check mountain transport and weather before departure."
+  },
+  "ngong-ping": {
+    "name": "Ngong Ping Village",
+    "area": "Ngong Ping",
+    "summary": "A village setting on Lantau Island that can be combined with the Big Buddha and Po Lin Monastery, with natural scenery and cultural attractions nearby.",
+    "tip": "Ngong Ping 360 is a paid transport experience, separate from a village walk. Check maintenance, weather and transport arrangements."
+  },
+  "tai-o": {
+    "name": "Tai O",
+    "area": "Tai O",
+    "summary": "A fishing village known for stilt houses and local snacks. It can be combined with Ngong Ping, with additional transport between the two areas.",
+    "tip": "Straight-line distances are not road distances. Allow extra time for weekend traffic and queues."
+  },
+  "hk-park": {
+    "name": "Hong Kong Park",
+    "area": "Admiralty",
+    "summary": "An urban park with ponds, aviary space and the Flagstaff House Museum of Tea Ware, offering a break between Central and Admiralty.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "zoological-gardens": {
+    "name": "Hong Kong Zoological and Botanical Gardens",
+    "area": "Central",
+    "summary": "A historic urban park with gardens, a greenhouse and bird and animal displays, extending a Central walk into green space.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "kowloon-park": {
+    "name": "Kowloon Park",
+    "area": "Tsim Sha Tsui",
+    "summary": "An urban park amid the busy streets of Tsim Sha Tsui, with a Chinese garden and comic character sculptures.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "victoria-park": {
+    "name": "Victoria Park",
+    "area": "Causeway Bay",
+    "summary": "Open green and recreational space for a break between shopping areas. Seasonal events require separate confirmation.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "blue-house": {
+    "name": "Blue House Cluster",
+    "area": "Wan Chai",
+    "summary": "Historic tenement buildings on Stone Nullah Lane. The Blue, Yellow and Orange Houses reflect neighbourhood life and architectural conservation; the Hong Kong House of Stories is on the Blue House ground floor.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "pak-tai-wanchai": {
+    "name": "Pak Tai Temple Wan Chai",
+    "area": "Wan Chai",
+    "summary": "A historic temple also known as Yuk Hui Kung. Its Pak Tai statue and traditional architecture provide an introduction to local religious culture.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "science-museum": {
+    "name": "Hong Kong Science Museum",
+    "area": "Tsim Sha Tsui East",
+    "summary": "Interactive exhibits introduce mechanics, sound, light, electromagnetism and environmental science through hands-on activities.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "space-museum": {
+    "name": "Hong Kong Space Museum",
+    "area": "Tsim Sha Tsui",
+    "summary": "A domed waterfront landmark with astronomy and space science exhibitions and a planetarium. Consult its website for programme and visiting arrangements.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "clock-tower": {
+    "name": "Tsim Sha Tsui Clock Tower",
+    "area": "Tsim Sha Tsui",
+    "summary": "The red-brick and granite tower of the former Kowloon-Canton Railway terminus is a historic waterfront landmark, viewed from the surrounding public space.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "goldfish-market": {
+    "name": "Goldfish Market",
+    "area": "Mong Kok",
+    "summary": "A distinctive market on northern Tung Choi Street, with aquarium and pet shops. Respect shop rules and avoid flash photography.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "flower-market": {
+    "name": "Mong Kok Flower Market",
+    "area": "Mong Kok / Prince Edward",
+    "summary": "A flower retail and wholesale neighbourhood around Mong Kok and Prince Edward, suitable for observing local florists and garden culture.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  },
+  "ladies-market": {
+    "name": "Ladies Market",
+    "area": "Mong Kok",
+    "summary": "A street market around Tung Choi Street with clothing, daily goods and small accessories, offering a busy street-shopping atmosphere.",
+    "tip": "Check the official source for visiting areas, opening arrangements and events. Coordinates and suggested visit durations are approximate planning assumptions."
+  }
+}
