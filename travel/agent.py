@@ -24,7 +24,7 @@ from .place_context import clean_context, resolve_reference, next_context
 from .conversation_memory import bounded_history,clean_notes,plan_snapshot,model_memory
 from .itinerary_edits import EditArgs,revise_plan
 from .trip_dates import resolve_dates, date_for_day, MAX_TRIP_DAYS, DayChange, DayChangeError, parse_day_change
-from .place_intent import requested_category, matches_category, search_region, category_search
+from .place_intent import requested_category, matches_category, search_region, category_search, explicit_name, matches_named_place
 from .english import english_answer
 
 MAX_TOOLS, MAX_DECISIONS = 6, 8
@@ -433,6 +433,11 @@ class AgentEngine:
             args = parsed.model_dump(exclude_unset=True)
             if name == 'search_places':
                 args.update(region=trip['region'], indoor_only=trip['rain'])
+                target = explicit_name(s['question'])
+                if target:
+                    # The provider may paraphrase K11 into "places in Kowloon".
+                    # Search the actual target and reject unrelated semantic hits.
+                    args['query'] = target
                 if requested_category(s['question']):
                     # Keep the user's category even when the model paraphrases it away.
                     args.update(query=s['question'], kind='attraction', region=search_region(s['question'], trip['region']))
@@ -489,7 +494,8 @@ class AgentEngine:
                 found = [p for p in found if (region == '全部' or p['region'] == region)
                         and (not trip['rain'] or p['indoor'])
                         and (not trip['public_only'] or p['cost'] == 'public' or p['kind'] == 'food')
-                        and matches_category(p, requested_category(s['question']))]
+                        and matches_category(p, requested_category(s['question']))
+                        and (not target or matches_named_place(p, target))]
                 # Comparisons may require separate searches; retain this turn's evidence
                 # from both, while still sending the actual latest result as observation.
                 hits = list({p['id']: p for p in [*hits, *found]}.values())[:30]
@@ -497,10 +503,10 @@ class AgentEngine:
                 if isinstance(data.get('retrieval'), dict):
                     event['retrieval'] = data['retrieval']
                 event['status'] = 'success' if found else 'empty'
-                if self.is_model and not hits and category_search(s['question']):
-                    # Empty category searches should hand off instead of repeating.
+                if self.is_model and not hits and (target or category_search(s['question'])):
+                    # Empty named/category searches hand off instead of repeating.
                     handoff = 'map_needed'
-                    observation['message'] = '没有符合类别的本地候选，转交地图补充检索。'
+                    observation['message'] = '没有符合指定地点或类别的本地候选，转交地图补充检索。'
             elif name == 'place_detail':
                 observation = get_place(args['place_id'])
                 event['status'] = 'success'
@@ -629,6 +635,9 @@ class AgentEngine:
         known=list(dict.fromkeys([*place_context['listed_ids'],*place_context['focus_ids'],*trip.get('must_visit',[]),*trip.get('excluded_places',[]),*[pid for day in (snapshot or {}).get('days',[]) for pid in day['place_ids']]]))
         initial_hits=[get_place(pid) for pid in known] if self.is_model else ([get_place(pid) for pid in reference['ids']] if reference and reference['kind'] in {'detail','transfer'} else [])
         initial_hits = [p for p in initial_hits if matches_category(p, requested_category(question))]
+        target = explicit_name(question)
+        if target:
+            initial_hits = [p for p in initial_hits if matches_named_place(p, target)]
         if requested_category(question):
             region = search_region(question, trip['region'])
             initial_hits = [p for p in initial_hits if region == '全部' or p['region'] == region]

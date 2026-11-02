@@ -202,6 +202,10 @@ def between_places(origin_id,destination_id,distance_km,walking_minutes):
 def enrich_plan(plan,start_station=None):
     """Rebuild old history references on read, without rewriting stored conversations."""
     if not plan:return plan
+    # Additive plans contain transient provider stops and explicitly unverified
+    # connections. Never turn those into canonical MTR routes on history read.
+    if plan.get('append_workflow'):
+        return copy.deepcopy(plan)
     from .planner import estimate_transfer
     value=copy.deepcopy(plan);station=validate_station(start_station if start_station is not None else value.get('start_station',''))
     value['history_transport_refreshed']=value.get('transit_version')!=transit_data()['version']

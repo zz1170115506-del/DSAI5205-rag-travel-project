@@ -40,6 +40,16 @@ test('unknown provider prose keeps its citation and working source link',()=>{
  assert.match(output,/Map source/);assert.doesNotMatch(output,/[\u3400-\u9fff]/);
 });
 
+test('a mixed local and map itinerary links both citation types to their actual sources',()=>{
+ const output=inlineAnswerHTML({text:'Visit PMQ [pmq], then K11 [map-abc123].',
+  citations:['pmq','map-abc123'],retrieval_source:'mixed'},
+  {provider:'amap',mode:'live',results:[{citation_id:'map-abc123',name:'K11 MUSEA',
+    map_url:'https://uri.amap.com/marker?position=114.17%2C22.3'}]});
+ assert.match(output,/data-id="pmq"/);
+ assert.match(output,/href="https:\/\/uri\.amap\.com\/marker/);
+ assert.doesNotMatch(output,/data-id="map-abc123"/);
+});
+
 test('dynamic free-day notes retain their actual duration in English',()=>{
  const shown=displayText('按你只安排已选地点的偏好，3 天保留为休息／自由活动日，未额外添加其他地点。');
  assert.match(shown,/3 day/);assert.doesNotMatch(shown,/[\u3400-\u9fff]/);
