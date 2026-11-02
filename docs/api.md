@@ -19,6 +19,20 @@
 | `POST /api/amap/route` | 2–6 个规范地点的高德步行参考 |
 | `POST /api/ask`、`/api/plan`、`/api/agent` | 历史兼容入口 |
 
+## Main browser: additive itinerary workflow
+
+The main app sends `workflow: "itinerary"` and `language: "en"` to `POST /api/chat`:
+
+```json
+{"question":"I would like to have a look at K11 MUSEA","workflow":"itinerary","language":"en","use_model":true}
+```
+
+Newly mentioned destinations append to the existing itinerary, deduplicated by local/provider ID. Explicit removal and replacement are separate operations. Local evidence is preferred; missing names and insufficient category coverage use validated Hong Kong AMap evidence. External records are conversation-scoped, provisional stops, not curated catalogue entries. Unlocated destinations remain in `plan.pending_places`; existing stops are never replaced by unrelated retrieval hits.
+
+No duration starts a one-day draft. Existing dates and day assignments are retained where feasible; capacity-driven extension is recorded in `plan.warnings`. Map stops use labelled visiting/transfer assumptions, retain provider source links and receive no invented local MTR directions. Shared or anonymous conversation storage retains the full draft across follow-ups. `metrics.intent_generation` records structured interpretation, and `metrics.answer_generation` records the separate evidence-grounded summary. Invalid generation falls back to a deterministic update with the itinerary intact.
+
+Omitting `workflow` retains the original standalone assistant contract documented below. Native browser date controls are unchanged.
+
 ## 连续对话
 
 ```json

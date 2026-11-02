@@ -464,6 +464,7 @@
   "重复调用已停止": "Repeated calls stopped",
   "处理超时": "Request timed out",
   "没有符合类别的本地候选，转交地图补充检索。": "No matching curated places. Handing off to map search.",
+  "没有符合指定地点或类别的本地候选，转交地图补充检索。": "No curated evidence matches the requested place or category. Handing off to map search.",
   "没有匹配地点，可更换搜索词；保留用户条件。": "No matching places. Try another query; preferences are retained.",
   "本地香港旅行 MCP": "Local Hong Kong travel MCP",
   "本地香港旅行": "Local Hong Kong travel",

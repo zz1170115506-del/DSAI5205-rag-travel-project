@@ -60,7 +60,7 @@ Clear restrictive preferences, start a new chat and ask:
 
 Explain: local category matches are insufficient, so the chat service queries Hong Kong map evidence. A shopping street or museum must not substitute for a mall.
 
-Show: the `map_search` trace, provider candidates and original map links. If generation succeeds, show `[map-1]` and `map_rag_used=true`. If it fails, explain the actual failure and the evidence still available. External POIs are not yet automatically added to the itinerary.
+Show the `map_search` trace and the provisional map-sourced stops in the itinerary. Continue with “I would like to have a look at K11 MUSEA”: existing stops should remain, and the requested destination should be added without duplication. Open its provider source link. Explain that map evidence supports the location while visit durations and connecting allowances are explicitly labelled assumptions. `metrics.answer_generation.accepted` records whether the short evidence-grounded summary was accepted; a failed generation still leaves the deterministic itinerary available.
 
 ### 5. Information boundary
 

@@ -1,7 +1,6 @@
 """Unified question / itinerary / follow-up API with local SQLite history."""
 import asyncio
 import json
-import re
 import secrets
 import time
 from dataclasses import replace
@@ -21,7 +20,7 @@ from .transit import enrich_plan, from_station
 from .place_search import search_library
 from .map_rag import supplement_with_map
 from .streaming import chat_events
-from .place_intent import requested_category, matches_category, category_search, desired_count, map_category_query
+from .place_intent import requested_category, matches_category, category_search, desired_count, map_category_query, explicit_name
 from .answers import demo_answer
 from typing import Literal
 
@@ -37,6 +36,9 @@ class ChatRequest(BaseModel):
     use_model: bool = False
     trip: Trip | None = None
     language: Literal['en', 'zh'] = 'zh'
+    # The main app uses additive planning; the original assistant API remains
+    # available to integrations that expect standalone answers or tool exercises.
+    workflow: Literal['assistant', 'itinerary'] = 'assistant'
 
 
 class HistoryRequest(BaseModel):
@@ -78,18 +80,6 @@ class TransitRequest(BaseModel):
     destination_id: str = Field(min_length=1,max_length=80)
     origin_station: str = Field(default='',max_length=30)
     origin_id: str | None = Field(default=None,min_length=1,max_length=80)
-
-
-def explicit_name(question):
-    q = question.strip(' ？?。')
-    english = re.fullmatch(r'(?:where is|where\'s|tell me about|introduce)\s+(.+?)(?:\s+located)?[?.!]*', q, re.I)
-    if english and not re.search(r'\b(?:what|which|recommend|malls|museums)\b', english[1], re.I):
-        return english[1].strip(' ?.!。')
-    q = re.sub(r'^(请问|请介绍|介绍一下|帮我查一下|帮我找一下|介绍|查找)', '', q)
-    q = re.sub(r'(在哪里|在哪儿|在哪|怎么去|的地址|地址是什么|是什么地方|有什么特色|有什么特点)$', '', q).strip()
-    if 2 <= len(q) <= 60 and q != question.strip(' ？?。') and not any(w in q for w in ['推荐', '有哪些', '什么景点', '行程', '几天', '天气', '票价']):
-        return q
-    return None
 
 
 def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
@@ -213,6 +203,27 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
                     raise HTTPException(404, '历史已删除，请开始新对话。')
             elif not anonymous and len(store.list()) >= store.capacity:
                 raise HTTPException(409, '历史已达 25 段，请先删除一段。')
+            if body.workflow == 'itinerary':
+                from .journey import journey_turn
+                try:
+                    async with semaphore:
+                        async with asyncio.timeout(63):
+                            result, checkpoint = await journey_turn(q,
+                                body.trip.model_dump() if body.trip else None, saved, cfg,
+                                body.use_model, lookup=resolve_place)
+                    result['conversation_id'] = cid
+                    encoded = json.dumps({'result': result, 'checkpoint': checkpoint}, ensure_ascii=False)
+                    for key in [cfg.model_api_key, cfg.amap_api_key]:
+                        if key:
+                            encoded = encoded.replace(key, '[redacted]')
+                    clean = json.loads(encoded)
+                    turns = (saved['turns'] if saved else []) + [{'question': q, 'result': clean['result']}]
+                    archive.save(cid, turns, clean['checkpoint'], body.use_model, saved['title'] if saved else q)
+                    return clean['result']
+                except TimeoutError:
+                    raise HTTPException(504, 'Itinerary update timed out. Your previous itinerary is retained.') from None
+                except ValueError:
+                    raise HTTPException(422, 'The itinerary update could not be applied. Your previous itinerary is retained; check dates and preferences.') from None
             engine = AgentEngine(cfg if body.use_model else Settings(response_language=body.language))
             config = {'configurable': {'thread_id': 'chat'}}
             if saved:
@@ -229,9 +240,9 @@ def build_router(settings_getter, semaphore, anonymous_getter=lambda: False):
                     category = requested_category(q)
                     broad_category = bool(category and category_search(q) and not name)
                     search_only = bool(result['trace']) and all(step.get('tool') == 'search_places' for step in result['trace'])
-                    recoverable = broad_category and (result['stop_reason'] == 'map_needed' or
+                    recoverable = (broad_category or name) and (result['stop_reason'] == 'map_needed' or
                                   (result['stop_reason'] in {'repeat', 'limit'} and search_only))
-                    if (intent == 'search' or broad_category) and (result['stop_reason']=='complete' or recoverable) and not result['plan']:
+                    if (intent == 'search' or broad_category or name) and (result['stop_reason']=='complete' or recoverable) and not result['plan']:
                         from .retrieval import exact_places
                         if category:
                             valid = [p for p in result['sources'] if matches_category(p, category)]

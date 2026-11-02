@@ -3,7 +3,7 @@ const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;'
 
 export function inlineAnswerHTML(answer,external){
  const valid=new Set(answer.citations??[]);
- const mapSources=new Map(answer.retrieval_source==='amap'&&external?.provider==='amap'&&external.mode==='live'
+ const mapSources=new Map(['amap','mixed'].includes(answer.retrieval_source)&&external?.provider==='amap'&&external.mode==='live'
   ?external.results.map(p=>[p.citation_id,p]):[]);
  const text=String(answer.text??'').split(/(\[[a-z0-9-]+\])/g).map(part=>/^\[[a-z0-9-]+\]$/.test(part)?part:displayText(part)).join('');
  return escapeHTML(text).replace(/\[([a-z0-9-]+)\]/g,(all,id)=>{
