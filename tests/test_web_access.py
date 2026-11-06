@@ -8,7 +8,7 @@ import pytest
 import yaml
 
 import app
-from travel.web_access import WebAccess, DemoRateLimit
+from travel.core.web_access import WebAccess, DemoRateLimit
 
 
 PASSWORD = 'fixture-demo-password-123'
@@ -22,7 +22,7 @@ def public(monkeypatch):
         yield client
 
 
-@pytest.mark.parametrize('path', ['/', '/static/app.js', '/api/status', '/api/history', '/openapi.json'])
+@pytest.mark.parametrize('path', ['/', '/static/js/app.js', '/api/status', '/api/history', '/openapi.json'])
 def test_public_pages_and_apis_require_password(public, path):
     r = public.get(path)
     assert r.status_code == 401 and r.headers['www-authenticate'].startswith('Basic ')
@@ -75,7 +75,7 @@ def test_unauthorized_requests_do_not_consume_group_budget(public, monkeypatch):
 
 
 def test_rate_window_resets(monkeypatch):
-    import travel.web_access as module
+    import travel.core.web_access as module
     now = [100.]
     monkeypatch.setattr(module.time, 'monotonic', lambda: now[0])
     limit = DemoRateLimit(limit=1)

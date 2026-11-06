@@ -4,11 +4,11 @@ from collections import Counter
 import pytest
 from fastapi.testclient import TestClient
 import app
-from travel.agent import Trip,TripPatch,validate_trip,AgentEngine
-from travel.knowledge import places
-from travel.mcp_client import local_call
-from travel.planner import plan
-from travel.place_context import resolve_reference,clean_ids
+from travel.workflows.agent import Trip,TripPatch,validate_trip,AgentEngine
+from travel.rag.knowledge import places
+from travel.tools.mcp_client import local_call
+from travel.itinerary.planner import plan
+from travel.session.place_context import resolve_reference,clean_ids
 from tests.test_agent import fixture_tool
 from tests.test_model_conversation import engine_with,call,final
 

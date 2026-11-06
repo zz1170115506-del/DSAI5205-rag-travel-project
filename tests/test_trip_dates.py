@@ -2,9 +2,9 @@ import asyncio
 import pytest
 from fastapi.testclient import TestClient
 import app
-from travel.agent import AgentEngine, Trip, extract_patch
-from travel.planner import plan
-from travel.trip_dates import resolve_dates
+from travel.workflows.agent import AgentEngine, Trip, extract_patch
+from travel.itinerary.planner import plan
+from travel.itinerary.trip_dates import resolve_dates
 from tests.test_agent import fixture_tool
 
 @pytest.mark.parametrize('start,end,count',[
@@ -68,7 +68,7 @@ def test_dates_api_real_stdio():
 
 @pytest.mark.parametrize('count',[4,7,10,14,30,99,366])
 def test_long_dates_cover_every_day_without_duplicates(count):
- from travel.trip_dates import date_for_day
+ from travel.itinerary.trip_dates import date_for_day
  start='2026-10-24';end=date_for_day(start,count-1)
  result=plan(start_date=start,end_date=end)
  assert result['days_requested']==count==len(result['days'])
@@ -110,8 +110,8 @@ def test_long_range_real_stdio_and_capacity():
 
 
 def test_long_chat_history_and_date_followup(tmp_path,monkeypatch):
- from travel import chat
- from travel.history import HistoryStore
+ from travel.api import chat
+ from travel.session.history import HistoryStore
  monkeypatch.setattr(chat,'store',HistoryStore(tmp_path/'history.sqlite3'))
  monkeypatch.setattr(chat,'locks',{})
  with TestClient(app.app) as client:
@@ -154,8 +154,8 @@ def test_long_tool_observation_is_valid_bounded_json():
 
 
 def test_plan_conflict_never_falls_back_to_external_map(tmp_path,monkeypatch):
- from travel import chat
- from travel.history import HistoryStore
+ from travel.api import chat
+ from travel.session.history import HistoryStore
  monkeypatch.setattr(chat,'store',HistoryStore(tmp_path/'history.sqlite3'))
  monkeypatch.setattr(chat,'locks',{})
  async def forbidden(*args,**kwargs):pytest.fail('a failed plan must not trigger POI search')

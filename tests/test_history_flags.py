@@ -4,8 +4,8 @@ import sqlite3
 import pytest
 from fastapi.testclient import TestClient
 import app
-from travel import chat
-from travel.history import HistoryStore
+from travel.api import chat
+from travel.session.history import HistoryStore
 
 
 @pytest.fixture

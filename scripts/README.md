@@ -4,12 +4,15 @@
 
 | 脚本 | 用途 |
 | --- | --- |
+| `knowledge/build_index.py` | 为批准的段落及地点记录建立本地向量索引；下载模型须显式 --download |
+| `knowledge/build_chunks.py` | 从审核后的 JSONL 文档生成可部署段落与处理报告 |
 | `verify.py` | Python、前端、资料、检索、真实本地 stdio 与 Agent 综合检查 |
 | `doctor.py --mcp` | 配置与本地 MCP 诊断，不输出真实密钥 |
 | `manage_data.py` | 校验候选地点资料的结构、来源和坐标 |
 | `evaluate.py` | 作者编写的开发检索例题检查 |
 | `evaluate_agent.py` | 本地工具流程验收；模型响应使用模拟供应商 |
 | `smoke_multiturn.py --live` | 明确指定后使用自己配置的真实模型；可能产生供应商费用 |
+| `smoke_conditional.py --live` | 当前网页 API 真实联调：1–5 天、增减天数、增删换移地点及三类推荐；隔离合成历史，逐项保存结果 |
 | `evaluate_holdout.py` | 冻结保留题检查；不得据题目反复调参 |
 | `package_source.py 目标.zip` | 按 Git 文件清单导出源码与哈希清单，排除环境与本机历史 |
 

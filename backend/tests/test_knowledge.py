@@ -56,8 +56,14 @@ async def test_alias_and_language(stack, name):
 
 
 async def test_filters_applied_before_topk(stack):
-    result = await stack[2].search(SearchRequest(query='景点', district='district_tst', setting='indoor', max_price=20))
-    assert {r['attraction_id'] for r in result['results']} == {'attr_history','attr_art'}
+    result = await stack[2].search(SearchRequest(query='景点', district='district_tst', setting='indoor'))
+    assert {r['attraction_id'] for r in result['results']} == {'attr_history','attr_art','attr_science'}
+
+
+def test_search_rejects_retired_customer_price_limit():
+    from pydantic import ValidationError
+    with pytest.raises(ValidationError):
+        SearchRequest(query='景点', max_price=20)
 
 
 async def test_two_hop_relation_and_provenance(stack):

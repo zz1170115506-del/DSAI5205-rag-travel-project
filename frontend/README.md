@@ -1,5 +1,7 @@
 # 港游前端
 
+这是保留的 Docker 前端，配套 `backend/` 和 `/api/v1/`；当前演示前端为 `static/`，见 [目录说明](../docs/project-structure.md)。
+
 原生 HTML、CSS、JavaScript ES Modules，无 npm 安装或编译步骤。Docker 使用 Nginx 提供静态资源，并将同源 `/api/` 转发到后端；本机 Python 预览由 FastAPI 提供相同静态文件。
 
 功能：景点卡片、室内外筛选、混合检索、桌面景点坐标与按需外部地图、带引用/关系路径的 SSE 聊天、历史会话、停止/纠正、偏好启用/编辑/删除。

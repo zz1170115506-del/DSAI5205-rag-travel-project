@@ -1,5 +1,7 @@
 # Python 后端
 
+这是保留的 Docker 后端，配套 `frontend/` 和 `/api/v1/`；当前架构改造入口请见 [目录说明](../docs/project-structure.md)。
+
 从仓库根目录配置 `.env`；不加载 backend/.env。Python 3.12，依赖及传递版本见 requirements.lock.txt。
 
 ```bash
@@ -19,7 +21,7 @@ bootstrap 迁移数据库、导入虚构资料并生成索引。已有真实资�
 | app/rag/ingestion/ | CSV/JSON 导入、校验、去重、切分 |
 | app/rag/retrieval/ | 余弦、BM25、实体关系、RRF、筛选 |
 | app/rag/provider.py | 真实兼容 API 和显式 mock 适配器 |
-| app/agent/ | 类型化计划、意图路由、约束、预算内行程组合 |
+| app/agent/ | 类型化计划、意图路由、约束、行程组合和只读价格汇总 |
 | app/services/runs.py | 流式事件、Hook、取消、会话版本与任务状态 |
 | app/memory/ | 显式偏好提取、更新和删除 |
 | app/evaluation/ | 固定集检索/回答流程评测与逐条结果 |

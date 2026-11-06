@@ -1,0 +1,22 @@
+{
+  "all_passed": true,
+  "cases": [
+    {
+      "case": "multi_turn_constraints_real_stdio",
+      "passed": true
+    },
+    {
+      "case": "conflict_then_user_revision_real_stdio",
+      "passed": true
+    },
+    {
+      "case": "clarification_then_continue_real_stdio",
+      "passed": true
+    },
+    {
+      "case": "http_fixture_search_detail_finish_with_real_stdio",
+      "passed": true
+    }
+  ],
+  "external_model_verified": false
+}

@@ -9,16 +9,18 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from travel.answers import rag_answer
-from travel.agent import Sessions, Trip
-from travel.trip_dates import MAX_TRIP_DAYS
-from travel.config import ROOT, Settings
-from travel.knowledge import INTERESTS, REGIONS, dataset, get_place, places, search
-from travel.mcp_client import ToolError, amap_search, local_call
-from travel.chat import build_router
-from travel.retrieval import retrieve
-from travel.embeddings import retrieval_status
-from travel.web_access import WebAccess, DemoRateLimit, EXPENSIVE_PATHS
+from travel.rag.answers import rag_answer
+from travel.workflows.agent import Sessions
+from travel.itinerary.preferences import Trip
+from travel.itinerary.trip_dates import MAX_TRIP_DAYS
+from travel.core.config import ROOT, Settings
+from travel.rag.knowledge import INTERESTS, REGIONS, dataset, get_place, places, search
+from travel.tools.mcp_client import ToolError, amap_search, local_call
+from travel.api.chat import build_router
+from travel.rag.retrieval import retrieve
+from travel.rag.embeddings import retrieval_status
+from travel.rag.documents import document_retrieval_status
+from travel.core.web_access import WebAccess, DemoRateLimit, EXPENSIVE_PATHS
 
 # 避免外部 HTTP 日志把带 key 的高德 URL 打印出来。
 logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -148,12 +150,12 @@ def index():
 
 @app.get('/api/status')
 def status():
-    from travel.transit import station_options, transit_data
+    from travel.itinerary.transit import station_options, transit_data
     from datetime import datetime
     from zoneinfo import ZoneInfo
     return {'history_enabled': not web_access.anonymous, 'today_hk': datetime.now(ZoneInfo('Asia/Hong_Kong')).date().isoformat(), 'max_trip_days': MAX_TRIP_DAYS, 'name': '港慢游', 'version': app.version, 'knowledge_version': dataset()['version'],
             'place_count': len(places()), 'model_configured': bool(settings.model_api_key),
-            'retrieval': retrieval_status(),
+            'retrieval': retrieval_status(), 'document_retrieval': document_retrieval_status(),
             'model_name': settings.model_name if settings.model_api_key else None,
             'amap_configured': settings.amap_enabled and bool(settings.amap_api_key),
             'amap_enabled': settings.amap_enabled, 'amap_key_present': settings.amap_key_present or bool(settings.amap_api_key),
@@ -217,7 +219,7 @@ async def search_amap(body: AmapRequest):
     except ValueError as exc:
         raise HTTPException(422, str(exc))
     if not settings.amap_enabled:
-        from travel.maps import unavailable
+        from travel.tools.maps import unavailable
         return unavailable('disabled')
     async with semaphore:
         return await amap_search('香港 ' + p['name'], settings)

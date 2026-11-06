@@ -8,12 +8,13 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat, map_rag
-from travel.agent import AgentEngine, ModelPolicy, Trip
-from travel.config import Settings
-from travel.history import HistoryStore
-from travel.maps import search_map
-from travel.map_rag import map_rag_answer, prepare_evidence, supplement_with_map
+from travel.api import chat
+from travel.rag import map_rag
+from travel.workflows.agent import AgentEngine, ModelPolicy, Trip
+from travel.core.config import Settings
+from travel.session.history import HistoryStore
+from travel.tools.maps import search_map
+from travel.rag.map_rag import map_rag_answer, prepare_evidence, supplement_with_map
 from tests.test_agent import fixture_tool
 
 

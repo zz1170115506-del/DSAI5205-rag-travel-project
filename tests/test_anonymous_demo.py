@@ -4,10 +4,10 @@ from fastapi.testclient import TestClient
 import pytest
 
 import app
-from travel import chat
-from travel.anonymous_history import AnonymousHistory
-from travel.history import HistoryStore
-from travel.web_access import WebAccess, DemoRateLimit
+from travel.api import chat
+from travel.session.anonymous_history import AnonymousHistory
+from travel.session.history import HistoryStore
+from travel.core.web_access import WebAccess, DemoRateLimit
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def test_anonymous_opt_in_needs_fixed_https_but_no_password(monkeypatch):
 
 
 def test_open_pages_and_history_disabled_status(anonymous):
-    for path in ['/', '/static/app.js', '/api/status', '/api/places', '/healthz']:
+    for path in ['/', '/static/js/app.js', '/api/status', '/api/places', '/healthz']:
         response = anonymous.get(path)
         assert response.status_code == 200
         assert 'www-authenticate' not in response.headers
@@ -76,7 +76,7 @@ def test_full_temporary_store_evicts_idle_instead_of_blocking_public_access(anon
 
 
 def test_expiry_and_active_conversation_protection(monkeypatch):
-    import travel.anonymous_history as module
+    import travel.session.anonymous_history as module
     now=[100.]
     monkeypatch.setattr(module.time, 'monotonic', lambda: now[0])
     protected={'a'}

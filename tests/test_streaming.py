@@ -5,9 +5,10 @@ from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat, streaming
-from travel.history import HistoryStore
-from travel.web_access import WebAccess
+from travel.api import chat
+from travel.api import streaming
+from travel.session.history import HistoryStore
+from travel.core.web_access import WebAccess
 
 
 def test_pending_arrives_before_work_and_disconnect_cancels_task():

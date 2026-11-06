@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {travelDates,addDays,dateLabel} from '../static/trip-dates.mjs';
+import {travelDates,addDays,dateLabel} from '../static/js/core/trip-dates.mjs';
 test('inclusive same-day and three-day ranges',()=>{
  assert.equal(travelDates('2026-10-24','2026-10-24').days,1);
  assert.deepEqual(travelDates('2026-10-24','2026-10-26'),{days:3,start_date:'2026-10-24',end_date:'2026-10-26'});

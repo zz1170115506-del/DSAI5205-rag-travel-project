@@ -172,7 +172,7 @@ asset_path/remote_url 至少一项；禁止包含越出资源根目录的路径�
 | session_id | CHAR(36) PK | 是 | 会话 ID |
 | user_id | CHAR(36) FK users | 是 | 会话归属 |
 | title | VARCHAR(255) | 否 | 会话标题 |
-| constraints | JSON | 是 | 当前地区、预算、时长等临时条件，默认 {} |
+| constraints | JSON | 是 | 当前地区、时长等临时条件，默认 {} |
 | checkpoint | JSON | 否 | 澄清节点需要的状态；不保存模型内部推理 |
 | version | INT UNSIGNED | 是 | 每次新请求/纠正增加，用于屏蔽旧任务提交 |
 | active_run_id | CHAR(36) FK runs | 否 | 当前有效任务，终结后清空 |
@@ -217,8 +217,8 @@ sessions / messages / runs 存在相互引用，迁移先建表再补外键。�
 | --- | --- | --- | --- |
 | preference_id | CHAR(36) PK | 是 | 偏好 ID |
 | user_id | CHAR(36) FK users | 是 | 归属用户 |
-| preference_key | VARCHAR(64) | 是 | interests/avoidances/budget_hkd/walking_minutes/language 等受控键 |
-| value | JSON | 否 | 类型随 key：兴趣字符串数组、预算数值或语言字符串；删除后置 NULL |
+| preference_key | VARCHAR(64) | 是 | interests/avoidances/walking_minutes/language 等受控键 |
+| value | JSON | 否 | 类型随 key：兴趣字符串数组、步行时长或语言字符串；删除后置 NULL |
 | source_message_id | CHAR(36) FK messages | 否 | 来源消息；用户直接编辑可空 |
 | origin | VARCHAR(24) | 是 | explicit_message/user_edit |
 | confirmed_at | DATETIME(3) | 否 | 用户明确授权记录的时间，active 必填 |
@@ -266,7 +266,7 @@ BM25 保存 tokenizer 后的 token 序列和参数供可信代码重建，避免
 | relevant_entity_ids | array[string] | 是 | 标注相关实体，默认 [] |
 | relevant_chunk_ids | array[string] | 是 | 相关证据 chunk，默认 [] |
 | expected_facts | array[string] | 是 | 应包含的事实要点，默认 [] |
-| constraints | object | 是 | 必须满足的地区/预算/排除项等 |
+| constraints | object | 是 | 必须满足的地区/游玩时长/排除项等 |
 | answerable | boolean | 是 | 现有快照是否足以回答 |
 | expected_behavior | string | 是 | answer/clarify/abstain/apply_current_constraint 等受控验收标签 |
 | rubric | object | 是 | 判分项与权重，需固定版本 |

@@ -11,16 +11,16 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat
-from travel.agent import AgentEngine, ModelPolicy, Trip
-from travel.config import Settings
-from travel.english import place_texts
-from travel.history import HistoryStore
-from travel.knowledge import places
-from travel.map_rag import map_rag_answer
-from travel.place_intent import category_search, map_category_query
-from travel.retrieval import retrieve
-from travel.trip_dates import parse_day_change
+from travel.api import chat
+from travel.workflows.agent import AgentEngine, ModelPolicy, Trip
+from travel.core.config import Settings
+from travel.core.english import place_texts
+from travel.session.history import HistoryStore
+from travel.rag.knowledge import places
+from travel.rag.map_rag import map_rag_answer
+from travel.rag.place_intent import category_search, map_category_query
+from travel.rag.retrieval import retrieve
+from travel.itinerary.trip_dates import parse_day_change
 from tests.test_agent import fixture_tool
 from tests.test_map_rag import CFG, evidence, model_response
 

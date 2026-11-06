@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {walkingLink,walkingMapHTML} from '../static/walking-map.mjs';
+import {walkingLink,walkingMapHTML} from '../static/js/itinerary/walking-map.mjs';
 const a={id:'avenue-stars',name:'星光大道'},b={id:'knutsford',name:'诺士佛台'};
 test('compact map is available only for walking legs',()=>{
  assert.equal(walkingMapHTML(a,b,{transit_guide:{mode:'mtr'}}),'');
@@ -22,7 +22,7 @@ test('map labels and attributes escape hostile names',()=>{
 });
 
 // Exercise the public mounting API: a visible panel must load without a click.
-import {attachWalkingMaps,disposeWalkingMaps} from '../static/walking-map.mjs';
+import {attachWalkingMaps,disposeWalkingMaps} from '../static/js/itinerary/walking-map.mjs';
 function panelFixture(origin,destination){
  const handlers={},button={disabled:false,hidden:true,addEventListener:(name,fn)=>handlers['button:'+name]=fn},reset={hidden:true,addEventListener:(name,fn)=>handlers['reset:'+name]=fn};
  const selections={origin:{value:''},destination:{value:''}};

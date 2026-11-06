@@ -4,8 +4,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from travel.config import ROOT
-from travel.knowledge import search
+from travel.core.config import ROOT
+from travel.rag.knowledge import search
 
 cases=json.loads((ROOT/'data/eval_cases.json').read_text(encoding='utf-8'))
 success=0

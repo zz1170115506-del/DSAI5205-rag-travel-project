@@ -6,8 +6,8 @@ import httpx
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
-from travel.config import Settings
-from travel.mcp_client import amap_search
+from travel.core.config import Settings
+from travel.tools.mcp_client import amap_search
 
 
 def test_streamable_http_adapter_with_local_test_server():

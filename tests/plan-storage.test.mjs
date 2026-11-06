@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PLAN_KEY, savePlan, readSavedPlan, clearPlan} from '../static/plan-storage.mjs';
+import {PLAN_KEY, savePlan, readSavedPlan, clearPlan} from '../static/js/itinerary/plan-storage.mjs';
 const place = {id:'peak',tags:['拍照'],summary:'山顶资料',lat:22.27,lon:114.15};
 const input = {days:1,region:'全部',pace:'轻松',rain:false,public_only:false,interests:['拍照'],must_visit:['peak']};
 const plan = {days:[{stops:[{place,start:'17:00',end:'18:00'}],legs:[],end:'18:00'}],warnings:['非实时'],algorithm:'分组',trace:[{steps:['initialize']}]};

@@ -12,7 +12,7 @@ from sqlalchemy import select, text
 
 from app.core.config import get_settings
 from app.core.db import database
-from app.memory.preferences import read_profile, save_preference
+from app.memory.preferences import KEYS, read_profile, save_preference
 from app.models import Attraction, Conversation, Entity, Image, Message, Preference, Relation, Run, Source, User, now
 from app.rag.ingestion.pipeline import safe_path
 from app.rag.retrieval.search import SearchEngine, SearchRequest
@@ -237,7 +237,8 @@ def create_app(settings=None):
         with factory() as db:
             return {'enabled': user.memory_enabled,
                 'values': {p.preference_key: p.value for p in db.scalars(select(Preference).where(
-                    Preference.user_id == user.user_id, Preference.status == 'active'))}}
+                    Preference.user_id == user.user_id, Preference.status == 'active',
+                    Preference.preference_key.in_(KEYS)))}}
 
     @app.patch('/api/v1/me/preferences')
     async def patch_preferences(body: PreferencePatch, user=Depends(auth)):

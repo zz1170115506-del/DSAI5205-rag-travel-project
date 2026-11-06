@@ -35,9 +35,15 @@ async def test_invalid_model_plans_fall_back_without_losing_local_constraints(st
     assert plan._diagnostics[0]['code']=='PLANNER_SCHEMA_FALLBACK'
 
 async def test_null_model_filters_do_not_erase_current_constraints(stack):
-    response={'intent':'fact','queries':['室内景点'],'filters':{'setting':None,'max_price':None}}
-    plan,_=await make_plan('室内景点',[],{'max_price':50},stack[2],PlannerStub(response))
-    assert plan.filters['setting']=='indoor' and plan.filters['max_price']==50
+    response={'intent':'fact','queries':['室内景点'],'filters':{'setting':None,'max_minutes':None}}
+    plan,_=await make_plan('室内景点',[],{'max_minutes':50},stack[2],PlannerStub(response))
+    assert plan.filters['setting']=='indoor' and plan.filters['max_minutes']==50
+
+async def test_retired_money_constraints_do_not_survive_or_get_extracted(stack):
+    provider=ModelProvider(stack[0])
+    plan,state=await make_plan('安排室内行程，预算20港币，不超过20',[],{'max_price':10},stack[2],provider)
+    assert plan.filters['setting']=='indoor'
+    assert 'max_price' not in plan.filters and 'max_price' not in state
 
 async def test_long_user_question_uses_bounded_retrieval_queries(stack):
     question='演示景点'*700

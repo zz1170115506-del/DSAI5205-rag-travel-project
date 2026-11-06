@@ -107,10 +107,41 @@ async def test_clarification_checkpoint_resumes_relation_query(stack):
     await manager.close()
 
 
-def test_itinerary_respects_total_known_budgets(stack):
+def test_itinerary_limits_duration_and_reports_prices_without_money_filtering(stack):
     from app.agent.itinerary import arrange
     _,f,search,_=stack
-    result=arrange(f,search.rows,{'max_minutes':120,'max_price':30})
+    result=arrange(f,search.rows,{'max_minutes':120})
     assert result['known_visit_minutes']<=120
-    assert result['known_admission_hkd']<=30
+    assert result['known_admission_hkd']>=0
     assert result['attraction_ids']
+    assert arrange(f,search.rows,{'max_minutes':120,'max_price':0})==result
+
+
+def test_retired_price_preference_is_not_saved_or_used(stack):
+    from app.memory.preferences import explicit_preferences, read_profile
+    from app.models import User, now
+    _,factory,_,_=stack
+    with pytest.raises(ValueError):
+        validate_preference('budget_hkd',200)
+    assert explicit_preferences('记住我的预算200港币')=={}
+    with factory.begin() as db:
+        user=User(auth_token_hash='b'*64,memory_enabled=True)
+        db.add(user);db.flush()
+        db.add(Preference(user_id=user.user_id,preference_key='budget_hkd',value=200,status='active',
+                          origin='user_edit',confirmed_at=now()))
+        db.flush()
+        assert read_profile(db,user)=={}
+
+
+def test_unknown_prices_are_reported_separately_from_known_subtotal(stack):
+    from app.agent.itinerary import arrange
+    from app.models import Attraction
+    _,factory,search,_=stack
+    with factory.begin() as db:
+        attraction=db.get(Attraction,'attr_history')
+        attraction.ticket_price_min_hkd=None
+        attraction.ticket_price_max_hkd=None
+    result=arrange(factory,search.rows,{})
+    assert 'attr_history' in result['attraction_ids']
+    assert 'attr_history' in result['unknown_price_ids']
+    assert result['admission_prices_complete'] is False

@@ -2,11 +2,13 @@
 
 **DSAI5205 Introduction to Artificial Intelligence · Hong Kong Travel Assistant**
 
-English presentation edition · Additive itinerary update, 2 November 2026.
+English presentation edition · Directory organization and read-only price reporting, 6 November 2026.
+
+Development entry points and the new module locations are documented in [Project structure](docs/project-structure.md). The browser now uses conditional routing and a bounded Agentic RAG workflow. Start on the home page, then use the map, scrollable itinerary and conversation together in one workspace.
 
 We implemented an interactive Hong Kong travel assistant that combines **Retrieval-Augmented Generation (RAG)**, **Model Context Protocol (MCP)** tools and supplementary map retrieval. Users can ask about places, select destinations, create a day-by-day itinerary and refine it through conversation. The system retrieves source evidence before generating factual answers and shows citations that users can inspect.
 
-The application uses **training-free strategies**: a local embedding model, a cloud generation model, tool orchestration and validated conversation state. RAG supplies evidence; MCP exposes local tools; an additive itinerary service coordinates the main app; LangGraph retains the compatible assistant workflow; AMap supplements place evidence; local planning algorithms schedule the itinerary.
+The application uses **training-free strategies**: a local embedding model, a cloud generation model, tool orchestration and validated conversation state. RAG supplies evidence; MCP exposes local tools; LangGraph coordinates intent routing and evidence checks in the main app; older assistant and additive workflows remain explicit compatibility modes; AMap supplements place evidence; local planning algorithms schedule the itinerary.
 
 ## 1. Problem and course alignment
 
@@ -32,33 +34,35 @@ This README supports reproduction and explanation. The group must still submit t
 
 | Component | Responsibility | Main files |
 | --- | --- | --- |
-| **RAG** | Retrieve and filter evidence, supply it to the generation model, and validate citation IDs | `travel/retrieval.py`, `travel/embeddings.py`, `travel/journey.py`, `travel/agent.py`, `travel/map_rag.py` |
-| **MCP** | Expose local search, place details, transfer estimates and itinerary planning through a standard protocol | `travel/mcp_server.py`, `travel/mcp_client.py` |
-| **LangGraph Agent** | Coordinate model decisions, tool calls, structured preferences and bounded conversation context | `travel/agent.py`, `travel/conversation_memory.py` |
-| **AMap Web Service** | Retrieve Hong Kong place names, addresses, categories, positions and separate walking-route references | `travel/maps.py`, `travel/map_rag.py` |
-| **Additive itinerary service** | Interpret new destinations, retrieve local or map evidence, retain existing stops, schedule a draft and generate a grounded update | `travel/journey.py` |
-| **Local planner** | Apply constraints, group stops by neighbourhood and order visits using a heuristic | `travel/planner.py`, `travel/itinerary_edits.py` |
+| **RAG** | Retrieve and filter evidence, supply it to the generation model, and validate citation IDs | `travel/rag/retrieval.py`, `travel/rag/embeddings.py`, `travel/itinerary/journey.py`, `travel/workflows/agent.py`, `travel/rag/map_rag.py` |
+| **MCP** | Expose local search, place details, transfer estimates and itinerary planning through a standard protocol | `travel/tools/mcp_server.py`, `travel/tools/mcp_client.py` |
+| **LangGraph Agent** | Coordinate model decisions, tool calls, structured preferences and bounded conversation context | `travel/workflows/agent.py`, `travel/session/conversation_memory.py` |
+| **AMap Web Service** | Retrieve Hong Kong place names, addresses, categories, positions and separate walking-route references | `travel/tools/maps.py`, `travel/rag/map_rag.py` |
+| **Conditional workflow** | Route questions, run bounded evidence checks and commit validated itinerary edits | `travel/workflows/conditional.py`, `travel/workflows/rag.py` |
+| **Local planner** | Apply constraints, group stops by neighbourhood and order visits using a heuristic | `travel/itinerary/planner.py`, `travel/itinerary/itinerary_edits.py` |
 
-The main browser uses an **additive itinerary workflow**: newly mentioned destinations are additions to the current plan. Smart Assist extracts structured requests; MCP supplies local retrieval/details, and missing destinations use AMap Web Service evidence. The server retains existing stops, builds a timetable, and optionally asks the model for a short cited update using the retrieved evidence. The original LangGraph assistant remains available through the compatible assistant API. Map access uses the Web Service directly.
+The main browser uses a **conditional conversation workflow**. A new question is classified as a travel question, an explicit itinerary edit, or general conversation. Asking about a place does not add it to the itinerary. Travel questions use paragraph evidence; an edit is validated before a new itinerary version is committed. The map and scrollable itinerary are displayed separately from messages.
 
 ### Architecture
 
 ```mermaid
 flowchart TD
-    W[Browser: evolving itinerary] --> C[Chat service and conversation state]
-    C --> I[Structured request interpretation]
-    I --> T[MCP local search and place details]
-    T --> K[Curated knowledge: BM25 + BGE + RRF]
-    K --> P[Preserve stops and schedule draft]
-    I -->|Local miss or insufficient category coverage| M[AMap Hong Kong POI API]
-    M --> E[Validate provider evidence and mark provisional stops]
-    E --> P
-    P --> G[Optional evidence-grounded model summary]
-    G --> W
-    C -. Compatible assistant workflow .-> A[LangGraph Agent and original MCP planner]
+    Home[Home page travel dates and preferences] --> Initial[Create the initial itinerary]
+    Initial --> UI[Map and scrollable itinerary above conversation]
+    UI --> Router[Context-aware LLM Router]
+    Router -->|Travel question| RAG[Choose source and retrieve evidence]
+    RAG --> Check[Assess relevance coverage and temporal limits]
+    Check -->|Insufficient and under 3 rounds| RAG
+    Check --> Generate[Generate cited answer and verify]
+    Router -->|Explicit edit| Edit[Validate edits and commit a new itinerary version]
+    Router -->|General conversation| LLM[LLM response without itinerary tools]
+    Generate --> Chat[Append conversation message]
+    LLM --> Chat
+    Edit --> UI
+    Edit --> Chat
 ```
 
-**Smart Assist** enables structured model interpretation and a short evidence-grounded itinerary update. With it off, the application uses conservative local interpretation and deterministic scheduling; requested map stops can still be added. The English browser explicitly requests English answers while keeping canonical tool values compatible with existing data.
+The configured model is used automatically for routing, evidence-source selection, assessment, answer generation and verification, plus general multi-turn conversation. There is no customer-facing model toggle. Without a configured key, a conservative local demo routes explicit requests and shows source excerpts instead of claiming model verification. Each turn shares a model-call limit of eight, a maximum of three retrieval rounds and a server timeout.
 
 ### Local knowledge RAG
 
@@ -69,7 +73,7 @@ flowchart TD
 
 `data/places.en.json` provides English display names, descriptions and visiting notes for all 33 records. English query expansion bridges common English area and interest terms to the existing bilingual source index. Canonical records, source links, identifiers and original-language evidence are retained.
 
-This is a structured-record knowledge base: it does not automatically ingest PDFs or split long documents, and it does not require a separate vector database. Missing embedding dependencies or a stale index cause a recorded BM25 fallback. Similarity scores are not correctness probabilities, and hybrid retrieval is not claimed to outperform BM25 without evaluation.
+The structured catalogue is supplemented by an offline document pipeline: 20 reviewed documents produced 1,178 paragraphs, of which 1,170 are allowed into retrieval and eight await place-assignment review. Paragraphs retain source URLs, available PDF page numbers, original-text offsets and temporal notes. No separate vector database is required. Missing embedding dependencies or a stale index cause a recorded BM25 fallback. Similarity scores are not correctness probabilities, and hybrid retrieval is not claimed to outperform BM25 without evaluation.
 
 ### Supplementary map RAG
 
@@ -81,15 +85,15 @@ This is a structured-record knowledge base: it does not automatically ingest PDF
 
 Requested external POIs can be added to the current itinerary as **provisional, conversation-scoped stops**. They are never added to the curated collection or vector index. Provider names and addresses may be in the source language. Where no reliable English display text is available, the interface directs users to the original provider page rather than inventing a translation.
 
-### Additive planning in the main app
+### Conditional conversation and itinerary state
 
-- Every newly mentioned destination defaults to an addition. Existing stops are retained and deduplicated by canonical/provider ID. Explicit removal and replacement remain separate operations; a failed replacement preserves the old stop.
-- Local names resolve to curated records first. Missing names and insufficient category coverage use validated Hong Kong AMap POIs. Broad mall queries cannot use museums as substitutes.
-- An unspecified duration starts a one-day draft. Ambiguous provider matches are marked provisional rather than interrupting with a clarification question. Unlocated places remain pending beside the retained itinerary.
-- Calendar dates and prior day assignments are retained where feasible. If the stop count or estimated visit duration requires more days, the draft is extended and a visible warning records the change; the end date updates accordingly.
-- Provider POIs supply location evidence, not verified attraction descriptions or visiting times. External stops use a labelled 90-minute visit assumption and a 35-minute connecting allowance. Unknown indoor/admission/area suitability is shown as a provisional exception. They receive no fabricated MTR exit or walking route.
-- Provider GCJ-02 coordinates are not plotted as WGS84 on the approximate overview. Each provisional stop links to its provider location; local stops retain their existing map/transport references.
-- The browser sends `workflow: "itinerary"` to `POST /api/chat`. Omitting it retains the compatible standalone assistant workflow. Both local/password-protected history and temporary anonymous conversations retain the evolving itinerary.
+- The home page creates a dated trip. The next view keeps the map, a separately scrollable itinerary and the conversation in a scrollable workspace.
+- The browser sends `workflow: "conditional"`; `action: "create_plan"` initializes or replans from the form, while `action: "message"` routes a conversation turn.
+- Read-only answers return `plan_changed: false` and `plan: null`. The browser retains the current itinerary and map. Successful edits return the new plan and a higher `plan_version`.
+- Checkpoints store the current itinerary independently from message history, including discussed place IDs and pending clarification. Refreshing after a question restores the current plan rather than the last message's plan field.
+- Local edits preserve unaffected days. Failed, unresolved or stale edits retain the old plan. External POIs require actual provider evidence and remain provisional.
+- Customer monetary limits, amount filters and saved monetary preferences are removed. Source-backed price data remains read-only, with unknown prices kept separate from known subtotals. The large price and warning panels are omitted from the workspace at the user's request; price references remain in exported itineraries.
+- The older `assistant` and `itinerary` modes remain compatibility APIs. Their historical behaviour is not the browser's main workflow.
 
 ### MCP tools and conversation state
 
@@ -102,7 +106,7 @@ Requested external POIs can be added to the current itinerary as **provisional, 
 
 The Agent also has validated, in-process state tools: `update_trip`, `read_itinerary` and `revise_itinerary`. Structured conditions and the current itinerary are maintained separately from raw chat messages. Context and tool use are bounded.
 
-Duration edits distinguish **setting** and **adjustment**. For an existing three-day trip, “Add one more day” makes four days; “Make it one day” sets one day. An existing end date updates accordingly. The main itinerary workflow starts from one day if no duration exists and retains the calendar on invalid edits. The compatible assistant API retains its original clarification behaviour. Canonical region and pace values remain unchanged internally; English labels are a presentation layer.
+Duration edits distinguish **setting** and **adjustment**. For an existing three-day trip, “Add one more day” makes four days; “Make it one day” sets one day. An existing end date updates accordingly. The main browser provides explicit dates from its planning form and retains the calendar on invalid edits. The compatible assistant API retains its original clarification behaviour. Canonical region and pace values remain unchanged internally; English labels are a presentation layer.
 
 ## 3. Run locally
 
@@ -136,10 +140,10 @@ AMAP_API_KEY=
 AMAP_ENABLED=false
 ```
 
-- No key is required for the local knowledge demo. Configure the model, restart, then enable **Smart Assist** to make generation requests.
+- No key is required for the limited local knowledge demo. Configure the model and restart; the website uses it automatically for AI requests.
 - The example uses ModelScope; its model name, endpoint and access token must belong to the same selected provider.
 - AMap requires a **Web Service** key. Set `AMAP_ENABLED=true` and restart to enable it.
-- Questions, bounded conversation, preferences and relevant source/map evidence are sent to the configured model service when enabled. Provider permissions, availability and usage charges depend on your account.
+- Questions, bounded conversation, preferences and relevant source/map evidence are sent to the configured model service during AI requests. Provider permissions, availability and usage charges depend on your account.
 
 ### Prepare local embeddings
 
@@ -148,6 +152,7 @@ In the existing virtual environment:
 ```sh
 .venv/bin/python -m pip install -r requirements-embedding.txt
 .venv/bin/python scripts/build_embeddings.py --download
+.venv/bin/python scripts/knowledge/build_index.py
 ```
 
 Add to `.env` and restart:
@@ -158,7 +163,7 @@ LOCAL_EMBEDDING_MODEL=BAAI/bge-small-zh-v1.5
 EMBEDDING_MIN_SCORE=0.5
 ```
 
-Initial construction downloads the public model; normal queries use the local cache. `work/models/` and `data/indexes/places-embeddings.json` are ignored by Git. Each teammate prepares a local copy. Rebuild after changing the knowledge or embedding model.
+Initial construction downloads the public model; normal queries use the local cache. `work/models/` and `data/indexes/places-embeddings.json` and `data/indexes/document-embeddings.json` are ignored by Git. Each teammate prepares a local copy. Rebuild after changing the knowledge or embedding model.
 
 Check retrieval without a cloud generation request:
 
@@ -247,7 +252,7 @@ Historical evidence and original sources remain unchanged, including their sourc
 
 - **Coverage:** 33 source summaries cannot represent every Hong Kong place; map coverage and fields are also limited.
 - **Model behaviour:** category and citation checks catch some errors, not every incorrect claim or misunderstood follow-up.
-- **Live information:** hours, ticketing, weather, queues, live transport and a full trip budget are not verified.
+- **Live information:** hours, ticketing, weather, queues, live transport and complete trip prices are not verified.
 - **Planning:** heuristic drafts do not guarantee global optimality, shortest routes or accessibility. External POIs cannot yet be scheduled automatically.
 - **Language:** English display content is separate from canonical source data. Source-language provider fields without a reliable English rendering remain available through the original source links.
 - **Deployment:** model/map latency, quotas, failures and free-instance cold starts can affect demonstrations. This is not a production multi-user service.

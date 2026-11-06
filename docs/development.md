@@ -35,11 +35,11 @@ git push -u origin HEAD
 3. 由组员检查后合并，`main` 保持可运行。
 4. 其他组员更新本地 `main`，再从它创建下一个功能分支。
 
-当前可运行应用位于根目录，启动与验证见根目录 README；原 frontend/、backend/ 骨架保留并说明了实际入口。
+当前可运行应用位于根目录，启动与验证见根目录 README；另一套 frontend/、backend/ Docker 实现保留，入口与当前应用分开。
 
 ## 团队约定
 
-- 当前前端修改 `static/`，后端修改 `app.py` 与 `travel/`；`frontend/`、`backend/` 为保留的初始骨架。
+- 当前前端修改 `static/`，后端修改 `app.py` 与 `travel/`；`frontend/`、`backend/` 为保留的另一套 Docker 实现。
 - 接口或配置格式改变时，同时更新相应文档和 `.env.example`。
 - 同一个配置文件需要多人修改时，先协调修改范围。
 - 遇到拉取失败或冲突，先看提示并保留本地修改，避免覆盖他人的提交。

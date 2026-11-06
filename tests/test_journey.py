@@ -9,12 +9,13 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat, journey
-from travel.agent import Trip
-from travel.config import Settings
-from travel.history import HistoryStore
-from travel.knowledge import places
-from travel.transit import enrich_plan
+from travel.api import chat
+from travel.itinerary import journey
+from travel.workflows.agent import Trip
+from travel.core.config import Settings
+from travel.session.history import HistoryStore
+from travel.rag.knowledge import places
+from travel.itinerary.transit import enrich_plan
 from tests.test_agent import fixture_tool
 from tests.test_map_rag import external
 from tests.test_anonymous_demo import anonymous
@@ -248,16 +249,16 @@ def test_history_enrichment_does_not_resolve_external_ids_as_curated_records():
     assert enrich_plan(plan) == plan
 
 
-def test_main_app_requests_additive_workflow_and_retains_native_date_inputs():
+def test_main_app_requests_conditional_workflow_and_retains_native_date_inputs():
     root = Path(__file__).resolve().parents[1]
-    js = (root/'static/app.js').read_text()
-    assert "workflow:'itinerary'" in js
+    js = (root/'static/js/app.js').read_text()
+    assert "workflow:'conditional'" in js
     html = (root/'static/index.html').read_text()
     assert html.count('type="date"') == 4
 
 
 def test_main_workflow_uses_actual_mcp_stdio_for_local_evidence(web, monkeypatch):
-    from travel.mcp_client import local_call
+    from travel.tools.mcp_client import local_call
     monkeypatch.setattr(journey, 'local_call', local_call)
     data = send(web, 'I want to visit PMQ')
     step = next(s for s in data['trace'] if s['tool'] == 'place_detail')

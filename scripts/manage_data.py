@@ -2,8 +2,8 @@
 import argparse,hashlib,json,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from travel.data_validation import load_validated
-from travel.config import ROOT
+from travel.rag.data_validation import load_validated
+from travel.core.config import ROOT
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('--stage',type=Path)

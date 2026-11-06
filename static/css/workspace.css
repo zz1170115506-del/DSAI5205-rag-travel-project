@@ -1,0 +1,70 @@
+/* Taller reading panels with page scrolling and independent content scrolling. */
+body[data-view=ask]{overflow:auto}
+body[data-view=ask] .workspace{display:block;height:auto;min-height:calc(100dvh - 64px)}
+.journey-workspace{height:auto;min-height:0;max-width:1500px;margin:auto;padding:12px 3%;box-sizing:border-box;display:grid;grid-template-rows:clamp(440px,65dvh,760px) clamp(380px,58dvh,680px);gap:14px}
+.current-itinerary{min-height:0;min-width:0;overflow:hidden;position:relative}
+#plan-status:empty{display:none}
+#plan-status:not(:empty){position:absolute;inset:0;z-index:3;background:var(--bg);display:grid;place-content:center;gap:12px}
+#current-plan{height:100%;min-height:0}
+.plan-document{height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.map-column,.current-itinerary .itinerary-column{min-height:0;min-width:0;overflow:hidden;display:flex;flex-direction:column;padding:12px;margin:0;background:white;border:1px solid var(--line);border-radius:14px}
+.current-itinerary .map-panel{margin:0;padding:0;flex:1;min-height:0;display:flex;flex-direction:column;background:none;border:0}
+.current-itinerary .map-toolbar{flex-shrink:0;gap:6px;margin:0 0 8px;padding:0;align-items:center}
+.current-itinerary .map-toolbar .small-button{font-size:11px;padding:6px 9px}
+.current-itinerary .itinerary-map{flex:1;height:auto;min-height:100px;border-radius:9px}
+.map-load-status[hidden]{display:none}
+.current-itinerary .plan-tools{flex-shrink:0;display:flex;flex-direction:row;align-items:flex-start;gap:10px;margin:0;padding:0 0 10px;border-bottom:1px solid var(--line)}
+.current-itinerary .plan-tools h3{flex:1;min-width:0;font-size:15px;line-height:1.4;margin:0}
+.current-itinerary .plan-date-range{display:block;font-size:11px;margin-top:4px}
+.current-itinerary .plan-tools .small-button{font-size:11px;padding:6px 9px}
+.plan-scroll{flex:1;min-height:0;overflow:auto;padding-right:6px;scrollbar-width:thin}
+.plan-scroll:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.plan-scroll .day-card{margin:0;padding:12px 0;border-width:0 0 1px;border-radius:0;background:transparent}
+.plan-scroll .day-heading{margin-bottom:10px;align-items:flex-start}
+.plan-scroll .day-heading h3{font-size:14px}
+.plan-scroll .day-heading p{font-size:11px}
+.plan-scroll .stop{padding:12px 0}
+.plan-scroll .stop-content p,.plan-scroll .transit-guide{font-size:12px}
+.workspace #conversation-area{height:100%;min-height:0;max-width:none;display:flex;flex-direction:column;padding:12px 16px;margin:0;border:1px solid var(--line);border-radius:14px;background:white}
+.workspace #conversation-area[hidden]{display:none}
+#conversation-area .chat-head{flex-shrink:0;display:flex;flex-wrap:nowrap;align-items:center;padding:0 0 8px;margin:0;border:0;gap:10px}
+#conversation-area .chat-head>div:first-child{flex:1;min-width:0}
+#conversation-area .chat-head h2{font-size:18px}
+#conversation-area .chat-head-tools{gap:7px;flex-wrap:nowrap}
+#conversation-area .compact-label{display:none}
+#conversation-area .workspace-button{padding:6px 9px;font-size:11px}
+#conversation-area #chat-scroll{flex:1;min-height:0;max-height:none;overflow:auto;padding:8px 0;scrollbar-width:thin}
+#conversation-area .assistant-message{padding:12px 16px}
+#conversation-area .answer-text{font-size:13px;line-height:1.8}
+#conversation-area .chat-bottom{flex-shrink:0;padding-top:8px}
+#conversation-area .suggestions{margin-bottom:6px}
+#conversation-area .composer{padding:4px 8px;gap:8px;align-items:center}
+#conversation-area .composer textarea{height:32px;min-height:32px;max-height:32px;min-width:0;padding:4px 0;line-height:24px;font-size:13px;resize:none;overflow:auto}
+#conversation-area .composer .primary{height:32px;padding:5px 12px;font-size:12px;line-height:20px}
+body.chat-expanded[data-view=ask]{overflow:hidden}
+body.chat-expanded[data-view=ask] .workspace{height:100dvh;min-height:0}
+body.chat-expanded[data-view=ask] .journey-workspace{height:100%;grid-template-rows:minmax(0,1fr)}
+body.chat-expanded[data-view=ask] .current-itinerary{display:none}
+body.chat-expanded[data-view=ask] #conversation-area{grid-row:1/-1}
+@media(max-width:700px){
+ .journey-workspace{display:flex;flex-direction:column;padding:8px;gap:10px}
+ .current-itinerary{flex:none;overflow:visible}
+ #current-plan{height:auto}
+ .plan-document{height:auto;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(2,50dvh);gap:10px}
+ .map-column,.current-itinerary .itinerary-column{padding:8px;border-radius:10px}
+ .current-itinerary .map-toolbar{margin-bottom:5px}
+ .current-itinerary .map-toolbar .small-button{font-size:10px;padding:4px 7px}
+ .current-itinerary .plan-tools{gap:8px;padding-bottom:6px}
+ .current-itinerary .plan-tools h3{font-size:13px}
+ .current-itinerary .plan-date-range{font-size:10px}
+ .workspace #conversation-area{height:50dvh;flex:none;padding:10px;border-radius:10px}
+ #conversation-area .chat-head{gap:6px;padding-bottom:5px}
+ #conversation-area .chat-head h2{font-size:13px;line-height:1.35}
+ #conversation-area .chat-head h2 span{display:none}
+ #conversation-area .chat-head-tools{gap:5px}
+ #conversation-area .workspace-button{padding:4px 5px;font-size:10px}
+ #conversation-area .button-label{display:none}
+ #conversation-area .compact-label{display:inline}
+ #conversation-area .suggestions{display:none}
+ body.chat-expanded[data-view=ask] #conversation-area{height:100%;flex:1}
+}

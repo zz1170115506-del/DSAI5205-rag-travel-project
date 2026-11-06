@@ -1,6 +1,6 @@
 # 当前 HTTP 接口
 
-本地地址默认 `http://127.0.0.1:8765`，网页与 API 同源。应用仅监听回环地址，校验 Host 与写请求 Origin；当前没有多用户账户系统。普通 JSON 请求一次返回，不是流式响应。
+本地地址默认 `http://127.0.0.1:8765`，网页与 API 同源。应用仅监听回环地址，校验 Host 与写请求 Origin；当前没有多用户账户系统。普通 JSON 请求一次返回；`Accept: application/x-ndjson` 或 `stream=true` 返回心跳和最终结果事件，不把心跳作为回答。
 
 | 方法与路径 | 用途 |
 | --- | --- |
@@ -19,19 +19,48 @@
 | `POST /api/amap/route` | 2–6 个规范地点的高德步行参考 |
 | `POST /api/ask`、`/api/plan`、`/api/agent` | 历史兼容入口 |
 
-## Main browser: additive itinerary workflow
+## 当前网页的条件工作流
 
-The main app sends `workflow: "itinerary"` and `language: "en"` to `POST /api/chat`:
+首页先提交规划请求，成功后显示可整页滚动工作区内的地图、独立滚动的行程框和问答框：
 
 ```json
-{"question":"I would like to have a look at K11 MUSEA","workflow":"itinerary","language":"en","use_model":true}
+{"question":"Plan my trip","workflow":"conditional","action":"create_plan","language":"en","trip":{"start_date":"2026-11-10","end_date":"2026-11-11"}}
 ```
 
-Newly mentioned destinations append to the existing itinerary, deduplicated by local/provider ID. Explicit removal and replacement are separate operations. Local evidence is preferred; missing names and insufficient category coverage use validated Hong Kong AMap evidence. External records are conversation-scoped, provisional stops, not curated catalogue entries. Unlocated destinations remain in `plan.pending_places`; existing stops are never replaced by unrelated retrieval hits.
+返回 `conversation_id` 后，聊天沿用会话，不重复提交表单条件：
 
-No duration starts a one-day draft. Existing dates and day assignments are retained where feasible; capacity-driven extension is recorded in `plan.warnings`. Map stops use labelled visiting/transfer assumptions, retain provider source links and receive no invented local MTR directions. Shared or anonymous conversation storage retains the full draft across follow-ups. `metrics.intent_generation` records structured interpretation, and `metrics.answer_generation` records the separate evidence-grounded summary. Invalid generation falls back to a deterministic update with the itinerary intact.
+```json
+{"question":"What is the history of PMQ?","workflow":"conditional","action":"message","language":"en","conversation_id":"首轮返回的32位ID","expected_plan_version":1}
+```
 
-Omitting `workflow` retains the original standalone assistant contract documented below. Native browser date controls are unchanged.
+网页不再发送 `use_model` 开关：服务端配置模型密钥后默认启用，未配置时仅提供有限本地演示。旧会话保存的模式不会覆盖当前配置。接口仍接受显式 `use_model=false` 用于离线诊断；显式要求模型但未配置密钥时返回 422。配置状态不代表已验证供应商连通性。
+
+主应用的模型入口统一附带 `travel/core/prompts.py` 中的香港旅游助手身份提示：直接回应用户，不叙述原助手、转交或内部流程。各调用仍遵守独立的路由、检索、证据检查和结构化输出职责，不能用无依据的回答代替实际工具执行。明确天数的增减与包含首尾日期的计算由服务端完成。
+
+三个业务分支为 `travel_question`、`modify_itinerary`、`general_chat`。不明确的请求通过 `answer.kind=clarify` 澄清；组合请求可先查证再修改。提到地点、询问推荐和一般聊天不会自动添加景点。
+
+| 响应字段 | 含义 |
+|---|---|
+| `route` | 本轮业务分支 |
+| `answer` | 正文、引用 ID、模式及是否接受模型生成 |
+| `plan_changed` | 是否成功提交了行程变更 |
+| `plan` | 仅发生有效变更时返回新行程，问答轮次为 null |
+| `plan_version` | 当前有效行程版本；失败及问答不递增 |
+| `trip` | 已确认的旅行条件 |
+| `evidence` | 实际检索到的段落或工具证据，保留来源、可用页码与年份 |
+| `trace` / `metrics` | 路由、来源、评估、检索轮数、模型调用数等执行记录 |
+
+`expected_plan_version` 过期时拒绝应用修改并保留原行程。`trip` 仅在 `action=create_plan` 时用于表单规划，普通提问不能通过表单值覆盖当前旅行条件。无现有行程时，消息请求提示先从首页规划。
+
+旅游问答通过 LangGraph 选择文档、地图、交通或当前行程状态，评估证据，必要时改写查询补查，生成并检查引用回答。每轮用户请求最多检索三轮，模型角色共用八次调用上限，整轮执行有时限。关闭模型或验证失败时展示来源摘录及缺口，不把未验证生成当作可靠事实。
+
+客户金额上限和预算偏好不受支持。价格数据只读，当前汇总范围是每人每次参观的已知门票参考，缺失项目单独列出；完整行程总价保持未知。未知价格不等于免费。页面不展示冗长价格提示卡，导出行程保留价格参考。
+
+历史读取的 `checkpoint.journey_plan` 和 `checkpoint.plan_version` 是恢复当前行程的依据，即使最后一条消息的 `plan` 为 null，也不能丢失当前行程。
+
+## 保留的兼容模式
+
+省略 `workflow` 时仍使用原 `assistant` 契约；显式 `workflow=itinerary` 保留旧的添加式行程接口。以下兼容说明不代表当前网页的条件工作流。
 
 ## 连续对话
 
@@ -80,7 +109,7 @@ Omitting `workflow` retains the original standalone assistant contract documente
 - 工具或模型中断：保留明确停止原因；失败不宣称本轮修改完成。
 - 资料引用采用规范地点 ID，并可从 `sources` 读取官方链接。引用编号通过校验不代表模型事实必然正确。
 
-详细参数与约束以 `travel/chat.py`、`travel/agent.py`、`app.py` 的 Pydantic 模型为准。当前接口没有生产鉴权、订票或实时交通承诺。
+详细参数与约束以 `travel/api/chat.py`、`travel/workflows/agent.py`、`app.py` 的 Pydantic 模型为准。当前接口没有生产鉴权、订票或实时交通承诺。
 
 ## Docker 六模块接口
 

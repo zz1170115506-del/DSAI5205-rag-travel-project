@@ -12,12 +12,12 @@ from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
 import app as web
-from travel.answers import rag_answer
-from travel.config import ROOT, Settings
-from travel.data_validation import KnowledgeDataset
-from travel.knowledge import dataset, search
-from travel.mcp_client import ToolError, local_call
-from travel.planner import plan
+from travel.rag.answers import rag_answer
+from travel.core.config import ROOT, Settings
+from travel.rag.data_validation import KnowledgeDataset
+from travel.rag.knowledge import dataset, search
+from travel.tools.mcp_client import ToolError, local_call
+from travel.itinerary.planner import plan
 
 
 @pytest.mark.parametrize('change', ['duplicate','url','region','duration','tag','cost','date','extra'])

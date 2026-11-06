@@ -1,0 +1,188 @@
+{
+  "pipeline_version": "paragraphs-v1",
+  "schema_version": 1,
+  "parameters": {
+    "max_characters": 800,
+    "overlap_max_characters": 100
+  },
+  "input_document_count": 20,
+  "chunk_count": 1178,
+  "retrieval_ready_count": 1170,
+  "review_required_count": 8,
+  "excluded_document_count": 0,
+  "chunks_with_pages": 1116,
+  "chunks_with_sections": 253,
+  "short_chunk_count": 42,
+  "chunk_lengths": {
+    "min": 18,
+    "max": 800
+  },
+  "by_place": {
+    "peak": 33,
+    "pmq": 962,
+    "tai-kwun": 175,
+    "unassigned": 8
+  },
+  "documents": [
+    {
+      "document_id": "peak-14cea2c2b81b",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "peak-5fc53b7471b4",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "peak-5fc7868fc1bb",
+      "chunk_count": 3,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "peak-67d443fbd804",
+      "chunk_count": 3,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "peak-9579caf1a428",
+      "chunk_count": 17,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "peak-cd17a490cbaf",
+      "chunk_count": 6,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-00e20dc69711",
+      "chunk_count": 4,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-10d1e385af3f",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-15999ef0919e",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-19458193419f",
+      "chunk_count": 927,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-418fd12cce9c",
+      "chunk_count": 6,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-7c06aaf08380",
+      "chunk_count": 4,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-a706544ee685",
+      "chunk_count": 1,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-aa02f439eca1",
+      "chunk_count": 13,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-b9c04fed3391",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "pmq-fc85f1c82e06",
+      "chunk_count": 1,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "tai-kwun-3a4947b2740e",
+      "chunk_count": 2,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "tai-kwun-579e6e74e519",
+      "chunk_count": 5,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "tai-kwun-c2efc7390ed0",
+      "chunk_count": 168,
+      "excluded_reasons": []
+    },
+    {
+      "document_id": "tai-kwun-d0493fc79d34",
+      "chunk_count": 8,
+      "excluded_reasons": []
+    }
+  ],
+  "duplicate_text_groups": [],
+  "review_items": [
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-113302c27bfb35a14eac",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-3ad7edd754e71a69ac6f",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-21867b59fb592325c264",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-e076c57d17af8a0552c6",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-378799d431d2fde9bcae",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-0a957e0be88c20ea3e52",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-18a707c851a9ad08666c",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    },
+    {
+      "chunk_id": "tai-kwun-d0493fc79d34-0d45f82b77269673b000",
+      "reasons": [
+        "multi_place_assignment_required"
+      ]
+    }
+  ],
+  "limitations": [
+    "Page numbers are 1-based PDF physical pages, not printed page labels.",
+    "Only explicit Markdown/numbered section headings are recognized; others remain null.",
+    "Multi-place documents require manual chunk assignment before retrieval.",
+    "Short fragments and exact duplicate texts are reported, not silently deleted.",
+    "PDF layout, tables, OCR and translated/near-duplicate evidence require manual review.",
+    "Retrieval indexes and online application integration are not built by this script."
+  ],
+  "dataset_version": "fec37ed68a919b8cc9a4b796324a12552584a3aec2e80d9474d9074ad2f5bcc4"
+}

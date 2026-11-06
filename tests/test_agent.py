@@ -8,11 +8,11 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel.agent import AgentEngine, ModelPolicy, Sessions, Trip, extract_patch
-from travel.config import Settings
-from travel.knowledge import get_place, search
-from travel.mcp_client import ToolError
-from travel.planner import estimate_transfer, plan
+from travel.workflows.agent import AgentEngine, ModelPolicy, Sessions, Trip, extract_patch
+from travel.core.config import Settings
+from travel.rag.knowledge import get_place, search
+from travel.tools.mcp_client import ToolError
+from travel.itinerary.planner import estimate_transfer, plan
 
 
 def run(coro):
@@ -127,7 +127,7 @@ def test_timeout_feedback_and_recovery():
 @pytest.mark.parametrize(('public', 'delay', 'expected'), [
     ('false', .03, 'error'), ('true', .03, 'success'), ('true', .15, 'error')])
 def test_public_cold_tool_has_extra_time_but_still_cancels(monkeypatch, public, delay, expected):
-    import travel.agent as module
+    import travel.workflows.agent as module
     monkeypatch.setenv('PUBLIC_DEMO', public)
     monkeypatch.setattr(module, 'TOOL_TIMEOUT', .005)
     monkeypatch.setattr(module, 'PUBLIC_TOOL_TIMEOUT', .08)
@@ -290,7 +290,7 @@ def test_api_session_lifecycle_and_unconfigured_model(monkeypatch):
 
 
 def test_turn_deadline_cancels_and_preserves_confirmed_preferences(monkeypatch):
-    import travel.agent as module
+    import travel.workflows.agent as module
     monkeypatch.setattr(module, 'TURN_TIMEOUT', 0.02)
     async def slow(name, args):
         await asyncio.sleep(10)

@@ -2,9 +2,9 @@ import asyncio,base64,json
 import httpx,pytest
 from fastapi.testclient import TestClient
 import app
-from travel import chat
-from travel.config import Settings
-from travel.maps import route_map
+from travel.api import chat
+from travel.core.config import Settings
+from travel.tools.maps import route_map
 
 PNG=base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j4l8AAAAASUVORK5CYII=')
 
@@ -174,7 +174,7 @@ def test_food_branches_require_explicit_confirmation_and_keep_provider_ids(branc
 
 @pytest.mark.parametrize('name',['SOIL(PMQ元创方店)','兰芳园咖啡(中环店)','兰芳华厦(中环店)','兰芳园旁边的小店'])
 def test_branch_matching_does_not_use_substring_for_other_businesses(name):
- from travel.maps import is_food_branch
- from travel.knowledge import get_place
+ from travel.tools.maps import is_food_branch
+ from travel.rag.knowledge import get_place
  assert not is_food_branch(get_place('lan-fong-yuen'),name)
  assert not is_food_branch(get_place('pmq'),name)

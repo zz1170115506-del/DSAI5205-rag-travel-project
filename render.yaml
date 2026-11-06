@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     region: singapore
-    buildCommand: pip install -r requirements-embedding.txt && python scripts/build_embeddings.py --download
+    buildCommand: pip install -r requirements-embedding.txt && python scripts/build_embeddings.py --download && python scripts/knowledge/build_index.py
     startCommand: python scripts/serve_public.py
     healthCheckPath: /healthz
     autoDeployTrigger: "off"

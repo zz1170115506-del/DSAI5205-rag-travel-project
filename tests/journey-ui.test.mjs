@@ -1,17 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {runInNewContext} from 'node:vm';
-import {mapHTML} from '../static/itinerary-map.js';
-import {displayText,englishGuide,setEnglishCatalog} from '../static/english.mjs?v=20261029-en';
+import {createPlanRenderer} from '../static/js/itinerary/render.mjs';
+import {mapHTML} from '../static/js/itinerary/itinerary-map.js';
+import {priceSummaryHTML} from '../static/js/itinerary/pricing.mjs';
+import {displayText,englishGuide,setEnglishCatalog} from '../static/js/core/english.mjs?v=20261029-en';
 
-setEnglishCatalog(JSON.parse(readFileSync(new URL('../static/english-catalog.json',import.meta.url),'utf8')));
-const code=readFileSync(new URL('../static/app.js',import.meta.url),'utf8');
-const helpers=code.slice(code.indexOf('function transitGuideHTML('),code.indexOf('function downloadPlan('));
-const esc=v=>displayText(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const render=runInNewContext(helpers+'\n({planHTML,dayHTML})',{
- esc,englishGuide,dateLabel:v=>v,mapHTML,state:{status:{amap_configured:true}},
- sourceURL:v=>String(v).startsWith('https://')?esc(v):'#',walkingMapHTML:()=>'',traceHTML:()=>''});
+setEnglishCatalog(JSON.parse(readFileSync(new URL('../static/locales/en.json',import.meta.url),'utf8')));
+const render=createPlanRenderer({getStatus:()=>({amap_configured:true})});
 function fixture(){
  const local={id:'pmq',name:'PMQ',summary:'Creative spaces in Central.',lat:22.28,lon:114.15};
  const external={id:'amap-K11',provider:'amap',name:'K11 MUSEA',summary:'Map-sourced stop.',lat:null,lon:null,
@@ -39,4 +35,13 @@ test('an external-only itinerary has provider links and no misplaced WGS84 overv
  assert.match(html,/K11 MUSEA/);
  assert.doesNotMatch(html,/class="itinerary-map"/);
  assert.doesNotMatch(html,/data-action="route"/);
+});
+
+test('the compact plan scrolls separately and omits the removed summary panels',()=>{
+ const html=render.planHTML(fixture());
+ assert.match(html,/aria-label="Scrollable itinerary"/);
+ assert.doesNotMatch(html,/class="plan-price"|class="plan-notes"|class="plan-coverage"|class="map-panel"/);
+ const map=mapHTML(fixture());
+ assert.doesNotMatch(map,/map-stop-list|Your journey across Hong Kong|OpenStreetMap basemap/);
+ assert.match(map,/Interactive Hong Kong itinerary map/);
 });

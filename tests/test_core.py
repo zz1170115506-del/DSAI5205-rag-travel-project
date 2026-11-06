@@ -7,11 +7,11 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app import app
-from travel.answers import demo_answer, rag_answer
-from travel.config import ROOT, Settings
-from travel.knowledge import dataset, places, search
-from travel.mcp_client import ToolError, amap_search, local_call, local_session, unpack
-from travel.planner import estimate_transfer, plan
+from travel.rag.answers import demo_answer, rag_answer
+from travel.core.config import ROOT, Settings
+from travel.rag.knowledge import dataset, places, search
+from travel.tools.mcp_client import ToolError, amap_search, local_call, local_session, unpack
+from travel.itinerary.planner import estimate_transfer, plan
 
 
 def test_dataset_is_linked_and_unique():
@@ -139,7 +139,7 @@ def test_http_end_to_end():
         status=client.get('/api/status')
         assert status.status_code==200 and status.json()['place_count']==33
         assert 'api_key' not in status.text
-        for url in ['/','/static/style.css','/static/app.js','/static/harbour.svg','/static/icon.svg','/openapi.json']:
+        for url in ['/','/static/css/style.css','/static/js/app.js','/static/assets/harbour.svg','/static/assets/icon.svg','/openapi.json']:
             assert client.get(url).status_code==200
         assert client.get('/').headers.get('content-security-policy')
         result=client.post('/api/ask',json={'question':'深水埗有什么小吃？'})

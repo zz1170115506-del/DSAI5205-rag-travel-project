@@ -6,10 +6,12 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import config, embeddings, retrieval
-from travel.config import RetrievalSettings
-from travel.embeddings import EmbeddingUnavailable, build_index, load_index, semantic_search
-from travel.knowledge import get_place, places
+from travel.core import config
+from travel.rag import embeddings
+from travel.rag import retrieval
+from travel.core.config import RetrievalSettings
+from travel.rag.embeddings import EmbeddingUnavailable, build_index, load_index, semantic_search
+from travel.rag.knowledge import get_place, places
 
 
 class FixedEncoder:

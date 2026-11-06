@@ -9,12 +9,14 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat, map_rag, retrieval
-from travel.agent import AgentEngine, ModelPolicy, Trip
-from travel.config import RetrievalSettings, Settings
-from travel.history import HistoryStore
-from travel.knowledge import get_place
-from travel.place_intent import explicit_name
+from travel.api import chat
+from travel.rag import map_rag
+from travel.rag import retrieval
+from travel.workflows.agent import AgentEngine, ModelPolicy, Trip
+from travel.core.config import RetrievalSettings, Settings
+from travel.session.history import HistoryStore
+from travel.rag.knowledge import get_place
+from travel.rag.place_intent import explicit_name
 from tests.test_agent import fixture_tool
 from tests.test_intent_fixes import routed_web
 from tests.test_map_rag import external, model_response

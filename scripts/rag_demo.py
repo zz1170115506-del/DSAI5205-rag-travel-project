@@ -6,9 +6,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from travel.answers import rag_answer
-from travel.config import Settings
-from travel.retrieval import retrieve
+from travel.rag.answers import rag_answer
+from travel.core.config import Settings
+from travel.rag.retrieval import retrieve
 
 
 def main():

@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from dotenv import load_dotenv
 import uvicorn
-from travel.web_access import WebAccess
+from travel.core.web_access import WebAccess
 
 
 def main():

@@ -42,14 +42,9 @@ async def make_plan(question, history, previous, search, provider):
         constraints['setting'] = 'indoor' if any(t in q for t in ['不要户外', '不去户外', '不喜欢户外']) else 'outdoor'
     if '不限室内外' in q:
         constraints.pop('setting', None)
-    price = re.search(r'(?:预算|budget|不超过)\D{0,6}(\d+(?:\.\d+)?)', q)
-    if price:
-        constraints['max_price'] = float(price.group(1))
     duration = re.search(r'(\d+)\s*(小时|分钟|hours?|minutes?)', q)
     if duration:
         constraints['max_minutes'] = int(duration.group(1)) * (60 if duration.group(2) in {'小时', 'hour', 'hours'} else 1)
-    if '不限预算' in q:
-        constraints.pop('max_price', None)
     intent = 'planning' if any(t in q for t in ['行程', '安排', '规划', 'itinerary', 'plan a']) else 'compare' if any(t in q for t in ['比较', '区别', 'compare', ' vs ']) else 'fact'
     plan = Plan(intent=intent, queries=fallback_queries(question))
     if provider.settings.model_mode == 'remote':
@@ -59,13 +54,13 @@ async def make_plan(question, history, previous, search, provider):
                 'intent MUST be exactly fact, compare, planning or clarify. '
                 'queries MUST be an array of 1..3 strings, each at most 1800 characters. '
                 'filters MUST be an object, use {} if no filters; allowed keys only '
-                'district/theme/setting/max_price/max_minutes. setting MUST be indoor/outdoor/mixed; '
-                'max_price MUST be a non-negative number; max_minutes MUST be a positive integer. '
+                'district/theme/setting/max_minutes. setting MUST be indoor/outdoor/mixed; '
+                'max_minutes MUST be a positive integer. Monetary limits are not supported. '
                 'clarification MUST be null or one short question. No extra keys. '
                 'Current explicit requirements override history. No arbitrary SQL or tool calls.',
                 {'question': question, 'history': history[-6:], 'current_constraints': constraints})
             candidate = Plan.model_validate(data)
-            allowed = {'district', 'theme', 'setting', 'max_price', 'max_minutes'}
+            allowed = {'district', 'theme', 'setting', 'max_minutes'}
             if set(candidate.filters) - allowed:
                 raise ModelResponseError('Unsupported planner filter')
             # Null means no new condition; do not erase validated explicit constraints.

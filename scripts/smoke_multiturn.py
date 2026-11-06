@@ -3,10 +3,10 @@ import argparse,asyncio,json,sys
 from datetime import datetime,timezone
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from travel.agent import AgentEngine,ModelPolicy
-from travel.config import Settings,ROOT
-from travel.history import HistoryStore
-from travel.conversation_memory import restore_memory
+from travel.workflows.agent import AgentEngine,ModelPolicy
+from travel.core.config import Settings,ROOT
+from travel.session.history import HistoryStore
+from travel.session.conversation_memory import restore_memory
 
 async def main(args):
     if not args.live:raise SystemExit('真实联调需显式 --live；普通回归不调用模型。')

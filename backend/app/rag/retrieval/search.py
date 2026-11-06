@@ -22,7 +22,6 @@ class SearchRequest(BaseModel):
     district: str | None = None
     theme: str | None = None
     setting: str | None = Field(None, pattern='^(indoor|outdoor|mixed)$')
-    max_price: float | None = Field(None, ge=0)
     max_minutes: int | None = Field(None, gt=0)
     source_entity_id: str | None = None
     relation: str = Field('LOCATED_IN', pattern='^(LOCATED_IN|HAS_THEME|NEAR_STATION|SUITABLE_FOR|SUPPORTS_ACTIVITY)$')
@@ -155,8 +154,6 @@ class SearchEngine:
             for a in db.scalars(select(Attraction)):
                 if req.setting and a.setting != req.setting:
                     allowed.discard(a.entity_id)
-                if req.max_price is not None and (a.ticket_price_max_hkd is None or a.ticket_price_max_hkd > req.max_price):
-                    allowed.discard(a.entity_id)
                 if req.max_minutes is not None and (a.visit_minutes is None or a.visit_minutes > req.max_minutes):
                     allowed.discard(a.entity_id)
                 if req.latitude is not None and req.longitude is not None:
@@ -205,7 +202,7 @@ class SearchEngine:
         order, fused = rrf(rankings)
         by_id = {r['chunk_id']: r for r in self.rows}
         # Explicit filters are themselves structured evidence; return matching candidates even without lexical overlap.
-        if not order and any([req.district, req.theme, req.setting, req.max_price is not None, req.max_minutes is not None, req.latitude is not None]):
+        if not order and any([req.district, req.theme, req.setting, req.max_minutes is not None, req.latitude is not None]):
             order = [self.rows[i]['chunk_id'] for i in indices]
         interests = (profile or {}).get('interests', [])
         avoidances = (profile or {}).get('avoidances', [])

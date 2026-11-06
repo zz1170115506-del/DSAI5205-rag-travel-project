@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {displayText,displayJSON,setEnglishCatalog,englishGuide,loadEnglish} from '../static/english.mjs?v=20261029-en';
-import {inlineAnswerHTML} from '../static/answer-citations.mjs';
+import {displayText,displayJSON,setEnglishCatalog,englishGuide,loadEnglish} from '../static/js/core/english.mjs?v=20261029-en';
+import {inlineAnswerHTML} from '../static/js/chat/answer-citations.mjs';
 
-const catalog=JSON.parse(readFileSync(new URL('../static/english-catalog.json',import.meta.url),'utf8'));
+const catalog=JSON.parse(readFileSync(new URL('../static/locales/en.json',import.meta.url),'utf8'));
 const original=JSON.parse(readFileSync(new URL('../data/places.json',import.meta.url),'utf8')).places;
 const translated=JSON.parse(readFileSync(new URL('../data/places.en.json',import.meta.url),'utf8'));
 setEnglishCatalog(catalog);

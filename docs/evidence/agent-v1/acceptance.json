@@ -1,5 +1,5 @@
 {
-  "time_utc": "2026-10-23T11:52:58.691975+00:00",
+  "time_utc": "2026-11-06T13:04:16.124420+00:00",
   "scope": "author-written development acceptance, not blind evaluation",
   "external_model_verified": false,
   "amap_verified": false,
@@ -87,6 +87,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.293,
                       "lon": 114.174,
                       "duration": 60,
@@ -163,12 +164,13 @@
                       ],
                       "indoor": true,
                       "cost": "meal",
+                      "admission_price": null,
                       "lat": 22.3018,
                       "lon": 114.1742,
                       "duration": 60,
                       "priority": 5,
                       "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
-                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "tip": "各店菜单和营业时间不同；可以比较附近店铺的菜单后选择。",
                       "aliases": [
                         "诺士佛台",
                         "諾士佛臺",
@@ -229,6 +231,7 @@
                       ],
                       "indoor": false,
                       "cost": "mixed",
+                      "admission_price": null,
                       "lat": 22.2936,
                       "lon": 114.1694,
                       "duration": 40,
@@ -305,6 +308,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.3007,
                       "lon": 114.1566,
                       "duration": 70,
@@ -567,13 +571,45 @@
             "warnings": [
               "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
               "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
-              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "行程价格以有来源的已知项目为准；酒店、机票、餐饮和未核实费用不计入已知小计。",
               "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
             ],
             "start_station": "",
             "transit_version": "2026-10-22.1",
             "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
-            "live_routes": false
+            "live_routes": false,
+            "price_summary": {
+              "currency": "HKD",
+              "basis": "one_admission_per_person_per_scheduled_visit",
+              "known_min_hkd": null,
+              "known_max_hkd": null,
+              "known_items": [],
+              "unknown_items": [
+                {
+                  "place_id": "avenue-stars",
+                  "name": "星光大道",
+                  "day": 1
+                },
+                {
+                  "place_id": "star-ferry",
+                  "name": "天星码头（尖沙咀）",
+                  "day": 1
+                },
+                {
+                  "place_id": "art-park",
+                  "name": "西九艺术公园",
+                  "day": 1
+                }
+              ],
+              "admission_prices_complete": false,
+              "excluded_categories": [
+                "transport",
+                "dining",
+                "accommodation",
+                "flights"
+              ],
+              "trip_total_hkd": null
+            }
           },
           "sources": [],
           "trace": [
@@ -597,7 +633,7 @@
                 "only_selected": false,
                 "excluded_places": []
               },
-              "elapsed_ms": 279,
+              "elapsed_ms": 241,
               "protocol": {
                 "server": "本地香港旅行 MCP",
                 "transport": "stdio",
@@ -623,7 +659,7 @@
                   "only_selected": false,
                   "excluded_places": []
                 },
-                "elapsed_ms": 279,
+                "elapsed_ms": 241,
                 "status": "success",
                 "live_amap": false
               },
@@ -635,7 +671,7 @@
             "model_calls": 0,
             "tool_calls": 1,
             "decisions": 2,
-            "elapsed_ms": 284,
+            "elapsed_ms": 246,
             "model_responses": 0,
             "live_model_responses": 0,
             "format_repairs": 0,
@@ -714,6 +750,7 @@
                       ],
                       "indoor": true,
                       "cost": "mixed",
+                      "admission_price": null,
                       "lat": 22.2931,
                       "lon": 114.1721,
                       "duration": 100,
@@ -789,12 +826,13 @@
                       ],
                       "indoor": true,
                       "cost": "meal",
+                      "admission_price": null,
                       "lat": 22.3018,
                       "lon": 114.1742,
                       "duration": 60,
                       "priority": 5,
                       "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
-                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "tip": "各店菜单和营业时间不同；可以比较附近店铺的菜单后选择。",
                       "aliases": [
                         "诺士佛台",
                         "諾士佛臺",
@@ -854,6 +892,7 @@
                       ],
                       "indoor": true,
                       "cost": "ticket",
+                      "admission_price": null,
                       "lat": 22.3002,
                       "lon": 114.1602,
                       "duration": 120,
@@ -941,6 +980,7 @@
                       ],
                       "indoor": true,
                       "cost": "ticket",
+                      "admission_price": null,
                       "lat": 22.3015,
                       "lon": 114.1578,
                       "duration": 120,
@@ -1225,14 +1265,46 @@
             "warnings": [
               "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
               "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
-              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "行程价格以有来源的已知项目为准；酒店、机票、餐饮和未核实费用不计入已知小计。",
               "“只选室内”按资料标签筛选，不代表全天避雨；跨地点移动仍需户外交通。",
               "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
             ],
             "start_station": "",
             "transit_version": "2026-10-22.1",
             "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
-            "live_routes": false
+            "live_routes": false,
+            "price_summary": {
+              "currency": "HKD",
+              "basis": "one_admission_per_person_per_scheduled_visit",
+              "known_min_hkd": null,
+              "known_max_hkd": null,
+              "known_items": [],
+              "unknown_items": [
+                {
+                  "place_id": "hkmoa",
+                  "name": "香港艺术馆",
+                  "day": 1
+                },
+                {
+                  "place_id": "mplus",
+                  "name": "M+ 博物馆",
+                  "day": 1
+                },
+                {
+                  "place_id": "palace-museum",
+                  "name": "香港故宫文化博物馆",
+                  "day": 1
+                }
+              ],
+              "admission_prices_complete": false,
+              "excluded_categories": [
+                "transport",
+                "dining",
+                "accommodation",
+                "flights"
+              ],
+              "trip_total_hkd": null
+            }
           },
           "sources": [],
           "trace": [
@@ -1256,7 +1328,7 @@
                 "only_selected": false,
                 "excluded_places": []
               },
-              "elapsed_ms": 297,
+              "elapsed_ms": 240,
               "protocol": {
                 "server": "本地香港旅行 MCP",
                 "transport": "stdio",
@@ -1282,7 +1354,7 @@
                   "only_selected": false,
                   "excluded_places": []
                 },
-                "elapsed_ms": 296,
+                "elapsed_ms": 240,
                 "status": "success",
                 "live_amap": false
               },
@@ -1294,7 +1366,7 @@
             "model_calls": 0,
             "tool_calls": 1,
             "decisions": 2,
-            "elapsed_ms": 300,
+            "elapsed_ms": 243,
             "model_responses": 0,
             "live_model_responses": 0,
             "format_repairs": 0,
@@ -1371,7 +1443,7 @@
                 "only_selected": true,
                 "excluded_places": []
               },
-              "elapsed_ms": 337,
+              "elapsed_ms": 236,
               "message": "工具无法满足条件；请询问用户调整地区、室内、天数或必去地点，不能静默放宽。"
             }
           ],
@@ -1380,7 +1452,7 @@
             "model_calls": 0,
             "tool_calls": 1,
             "decisions": 2,
-            "elapsed_ms": 340,
+            "elapsed_ms": 239,
             "model_responses": 0,
             "live_model_responses": 0,
             "format_repairs": 0,
@@ -1458,6 +1530,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.293,
                       "lon": 114.174,
                       "duration": 60,
@@ -1573,13 +1646,35 @@
             "warnings": [
               "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
               "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
-              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "行程价格以有来源的已知项目为准；酒店、机票、餐饮和未核实费用不计入已知小计。",
               "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
             ],
             "start_station": "",
             "transit_version": "2026-10-22.1",
             "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
-            "live_routes": false
+            "live_routes": false,
+            "price_summary": {
+              "currency": "HKD",
+              "basis": "one_admission_per_person_per_scheduled_visit",
+              "known_min_hkd": null,
+              "known_max_hkd": null,
+              "known_items": [],
+              "unknown_items": [
+                {
+                  "place_id": "avenue-stars",
+                  "name": "星光大道",
+                  "day": 1
+                }
+              ],
+              "admission_prices_complete": false,
+              "excluded_categories": [
+                "transport",
+                "dining",
+                "accommodation",
+                "flights"
+              ],
+              "trip_total_hkd": null
+            }
           },
           "sources": [],
           "trace": [
@@ -1605,7 +1700,7 @@
                 "only_selected": true,
                 "excluded_places": []
               },
-              "elapsed_ms": 304,
+              "elapsed_ms": 239,
               "protocol": {
                 "server": "本地香港旅行 MCP",
                 "transport": "stdio",
@@ -1633,7 +1728,7 @@
                   "only_selected": true,
                   "excluded_places": []
                 },
-                "elapsed_ms": 304,
+                "elapsed_ms": 239,
                 "status": "success",
                 "live_amap": false
               },
@@ -1645,7 +1740,7 @@
             "model_calls": 0,
             "tool_calls": 1,
             "decisions": 2,
-            "elapsed_ms": 307,
+            "elapsed_ms": 242,
             "model_responses": 0,
             "live_model_responses": 0,
             "format_repairs": 0,
@@ -1787,6 +1882,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.293,
                       "lon": 114.174,
                       "duration": 60,
@@ -1863,12 +1959,13 @@
                       ],
                       "indoor": true,
                       "cost": "meal",
+                      "admission_price": null,
                       "lat": 22.3018,
                       "lon": 114.1742,
                       "duration": 60,
                       "priority": 5,
                       "summary": "诺士佛台位于尖沙咀，聚集多种国际餐厅与酒吧。这里是一个餐饮街区候选，不代表具体餐厅已经预订。",
-                      "tip": "各店菜单和营业时间不同；可以按预算在附近比较后选择。",
+                      "tip": "各店菜单和营业时间不同；可以比较附近店铺的菜单后选择。",
                       "aliases": [
                         "诺士佛台",
                         "諾士佛臺",
@@ -1929,6 +2026,7 @@
                       ],
                       "indoor": false,
                       "cost": "mixed",
+                      "admission_price": null,
                       "lat": 22.2936,
                       "lon": 114.1694,
                       "duration": 40,
@@ -2005,6 +2103,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.3007,
                       "lon": 114.1566,
                       "duration": 70,
@@ -2280,6 +2379,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.33,
                       "lon": 114.1622,
                       "duration": 80,
@@ -2344,6 +2444,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.324,
                       "lon": 114.1705,
                       "duration": 40,
@@ -2407,6 +2508,7 @@
                       ],
                       "indoor": false,
                       "cost": "public",
+                      "admission_price": null,
                       "lat": 22.3065,
                       "lon": 114.1703,
                       "duration": 60,
@@ -2470,6 +2572,7 @@
                       ],
                       "indoor": true,
                       "cost": "meal",
+                      "admission_price": null,
                       "lat": 22.3107,
                       "lon": 114.1701,
                       "duration": 60,
@@ -2747,13 +2850,60 @@
             "warnings": [
               "时间表是可调整草案，未核验开放日、实时天气、票务和交通；出发前请核对各地点官网。",
               "交通分钟数为本地估算，不含酒店往返，也不是高德导航结果。",
-              "未计算酒店、机票、门票和餐饮总费用，不能据此宣称满足总预算。",
+              "行程价格以有来源的已知项目为准；酒店、机票、餐饮和未核实费用不计入已知小计。",
               "港铁线路与出口为官方资料的本地参考；乘车时长、步行和换乘余量为估算。首站时间指抵达景点，需另预留酒店到出发站及首程交通时间。"
             ],
             "start_station": "",
             "transit_version": "2026-10-22.1",
             "algorithm": "条件筛选 → 街区分组 → 兴趣评分 → 近邻排序 → 停留与交通余量",
-            "live_routes": false
+            "live_routes": false,
+            "price_summary": {
+              "currency": "HKD",
+              "basis": "one_admission_per_person_per_scheduled_visit",
+              "known_min_hkd": null,
+              "known_max_hkd": null,
+              "known_items": [],
+              "unknown_items": [
+                {
+                  "place_id": "avenue-stars",
+                  "name": "星光大道",
+                  "day": 1
+                },
+                {
+                  "place_id": "star-ferry",
+                  "name": "天星码头（尖沙咀）",
+                  "day": 1
+                },
+                {
+                  "place_id": "art-park",
+                  "name": "西九艺术公园",
+                  "day": 1
+                },
+                {
+                  "place_id": "sham-shui-po",
+                  "name": "深水埗街区",
+                  "day": 2
+                },
+                {
+                  "place_id": "goldfish-market",
+                  "name": "金鱼街",
+                  "day": 2
+                },
+                {
+                  "place_id": "temple-street",
+                  "name": "庙街",
+                  "day": 2
+                }
+              ],
+              "admission_prices_complete": false,
+              "excluded_categories": [
+                "transport",
+                "dining",
+                "accommodation",
+                "flights"
+              ],
+              "trip_total_hkd": null
+            }
           },
           "sources": [],
           "trace": [
@@ -2777,7 +2927,7 @@
                 "only_selected": false,
                 "excluded_places": []
               },
-              "elapsed_ms": 302,
+              "elapsed_ms": 222,
               "protocol": {
                 "server": "本地香港旅行 MCP",
                 "transport": "stdio",
@@ -2803,7 +2953,7 @@
                   "only_selected": false,
                   "excluded_places": []
                 },
-                "elapsed_ms": 301,
+                "elapsed_ms": 222,
                 "status": "success",
                 "live_amap": false
               },
@@ -2815,7 +2965,7 @@
             "model_calls": 0,
             "tool_calls": 1,
             "decisions": 2,
-            "elapsed_ms": 305,
+            "elapsed_ms": 224,
             "model_responses": 0,
             "live_model_responses": 0,
             "format_repairs": 0,
@@ -2884,6 +3034,7 @@
               ],
               "indoor": true,
               "cost": "mixed",
+              "admission_price": null,
               "lat": 22.2814,
               "lon": 114.1545,
               "duration": 90,
@@ -2910,13 +3061,17 @@
                 "region": "全部",
                 "indoor_only": false
               },
-              "elapsed_ms": 278,
+              "elapsed_ms": 227,
               "retrieval": {
                 "recall": "SQLite FTS5 BM25",
                 "reranker": "名称/别名、词覆盖、街区与主题特征重排（非神经模型）",
                 "candidate_count": 2,
                 "returned_count": 2,
-                "knowledge_records": 33
+                "knowledge_records": 33,
+                "mode": "bm25",
+                "configured_mode": "bm25",
+                "embedding_used": false,
+                "embedding_model": null
               },
               "protocol": {
                 "server": "本地香港旅行 MCP",
@@ -2931,7 +3086,7 @@
                   "region": "全部",
                   "indoor_only": false
                 },
-                "elapsed_ms": 277,
+                "elapsed_ms": 227,
                 "status": "success",
                 "live_amap": false
               },
@@ -2943,7 +3098,7 @@
               "arguments": {
                 "place_id": "tai-kwun"
               },
-              "elapsed_ms": 291,
+              "elapsed_ms": 220,
               "protocol": {
                 "server": "本地香港旅行 MCP",
                 "transport": "stdio",
@@ -2955,7 +3110,7 @@
                 "arguments": {
                   "place_id": "tai-kwun"
                 },
-                "elapsed_ms": 290,
+                "elapsed_ms": 220,
                 "status": "success",
                 "live_amap": false
               },
@@ -2967,7 +3122,7 @@
             "model_calls": 3,
             "tool_calls": 2,
             "decisions": 3,
-            "elapsed_ms": 576,
+            "elapsed_ms": 454,
             "model_responses": 3,
             "live_model_responses": 0,
             "format_repairs": 0,

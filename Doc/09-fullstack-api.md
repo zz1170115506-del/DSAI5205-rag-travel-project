@@ -31,12 +31,12 @@
 {"query":"和演示历史馆同主题的景点","source_entity_id":"attr_history","relation":"HAS_THEME","channels":["vector","bm25","entity","graph"],"top_k":5}
 ```
 
-可选字段 district、theme 为实体ID或标准名称；setting 为 indoor/outdoor/mixed；max_price 使用 HKD，按已知参考最高票价过滤；max_minutes 为单景点游玩时长上限。latitude/longitude/radius_m 用于直线距离筛选，需要同时给出经纬度。top_k 为1—20。结果带 chunk_id、attraction_id、text、source_id/source_url、locator、verified_at、score、channels、relation_paths。得分是排名融合值，不是答案置信度。
+可选字段 district、theme 为实体ID或标准名称；setting 为 indoor/outdoor/mixed；max_minutes 为单景点游玩时长上限。latitude/longitude/radius_m 用于直线距离筛选，需要同时给出经纬度。top_k 为1—20。结果带 chunk_id、attraction_id、text、source_id/source_url、locator、verified_at、score、channels、relation_paths。得分是排名融合值，不是答案置信度。
 
 ## 流式问答
 
 ```json
-{"message":"安排演示尖沙咀区的室内行程，预算50港币","request_id":"客户端唯一请求ID"}
+{"message":"安排演示尖沙咀区的室内行程，并展示已知行程价格","request_id":"客户端唯一请求ID"}
 ```
 
 创建返回 run_id，随后 GET `/runs/{run_id}/events`。POST 创建时缓冲已启动，订阅前不会丢失短时事件。事件是 `data: JSON\n\n`，含 type、run_id、seq。type=status/token/citation/done/error/cancelled；token 含 text，citation 含 number/citation，done 含 status/usage。
@@ -48,10 +48,10 @@
 ## 记忆
 
 ```json
-{"enabled":true,"values":{"interests":["历史文化"],"avoidances":["户外"],"budget_hkd":200,"walking_minutes":30,"language":"zh-Hans"}}
+{"enabled":true,"values":{"interests":["历史文化"],"avoidances":["户外"],"walking_minutes":30,"language":"zh-Hans"}}
 ```
 
-启用后，聊天中的“记住我喜欢……”或“记住我的预算……”才触发规则式提取。未明确授权的推测不保存。当前条件优先；偏好不覆盖硬过滤。PATCH/DELETE 会取消本人当前任务，防止旧任务用旧记忆继续提交。
+启用后，聊天中的“记住我喜欢……”才触发规则式提取。未明确授权的推测不保存。当前条件优先；偏好不覆盖硬过滤。PATCH/DELETE 会取消本人当前任务，防止旧任务用旧记忆继续提交。
 
 ## 边界
 

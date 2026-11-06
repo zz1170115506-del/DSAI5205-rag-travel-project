@@ -7,9 +7,9 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel.config import Settings
-from travel.place_search import search_library, poi_region
-from travel import place_search
+from travel.core.config import Settings
+from travel.rag.place_search import search_library, poi_region
+from travel.rag import place_search
 
 
 def test_local_hit_and_empty_browse_never_request_amap():

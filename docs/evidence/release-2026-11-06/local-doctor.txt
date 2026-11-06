@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "python": "3.14.6",
+  "platform": "Darwin arm64",
+  "packages": {
+    "fastapi": "0.146.0",
+    "mcp": "1.30.0",
+    "httpx": "0.28.1",
+    "pydantic": "2.14.1",
+    "uvicorn": "0.54.0",
+    "langgraph": "1.2.16"
+  },
+  "knowledge_version": "2026-10-22.1",
+  "records": 33,
+  "model_key_present": true,
+  "amap_key_present": true,
+  "external_requests_made": false,
+  "retrieval": {
+    "configured_mode": "bm25",
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "dependency_available": true,
+    "index_ready": true,
+    "index_reason": null,
+    "note": "索引就绪不代表本轮已执行语义检索；以回答中的 retrieval.embedding_used 为准。"
+  },
+  "mcp": {
+    "trace": {
+      "server": "本地香港旅行 MCP",
+      "transport": "stdio",
+      "steps": [
+        "initialize",
+        "tools/list",
+        "tools/call → search_places"
+      ],
+      "arguments": {
+        "query": "深水埗有什么小吃",
+        "kind": "food",
+        "limit": 3
+      },
+      "elapsed_ms": 229,
+      "status": "success",
+      "live_amap": false
+    },
+    "result_ids": [
+      "hop-yik-tai"
+    ]
+  }
+}

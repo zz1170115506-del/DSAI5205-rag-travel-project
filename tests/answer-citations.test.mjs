@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {inlineAnswerHTML} from '../static/answer-citations.mjs';
+import {inlineAnswerHTML} from '../static/js/chat/answer-citations.mjs';
 
 const answer={text:'Test mall [map-1]',citations:['map-1'],retrieval_source:'amap'};
 const evidence={provider:'amap',mode:'live',results:[

@@ -38,7 +38,7 @@ def public_error(exc):
 def validation_summary(exc):
     """Only program-known locations and error types, without input/body/secrets."""
     if isinstance(exc, ValidationError):
-        known = {'intent','queries','filters','clarification','query','district','theme','setting','max_price','max_minutes'}
+        known = {'intent','queries','filters','clarification','query','district','theme','setting','max_minutes'}
         return [{'field': str(item['loc'][0]) if item['loc'] and item['loc'][0] in known else 'unknown_field',
                  'type': item['type']} for item in exc.errors(include_input=False, include_url=False)]
     return [{'field': 'response', 'type': type(exc).__name__}]

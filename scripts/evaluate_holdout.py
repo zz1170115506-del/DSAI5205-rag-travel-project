@@ -2,9 +2,9 @@
 import hashlib,json,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from travel.config import ROOT
-from travel.knowledge import search,places,normalize
-from travel.answers import demo_answer
+from travel.core.config import ROOT
+from travel.rag.knowledge import search,places,normalize
+from travel.rag.answers import demo_answer
 
 def names_only(case):
     q=normalize(case['question'])

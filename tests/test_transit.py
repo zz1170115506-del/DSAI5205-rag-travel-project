@@ -6,12 +6,12 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat
-from travel.agent import Trip, extract_patch
-from travel.history import HistoryStore
-from travel.knowledge import places
-from travel.planner import estimate_transfer, plan
-from travel.transit import access_for, enrich_plan, from_station, rail_path, rail_steps, transit_data
+from travel.api import chat
+from travel.workflows.agent import Trip, extract_patch
+from travel.session.history import HistoryStore
+from travel.rag.knowledge import places
+from travel.itinerary.planner import estimate_transfer, plan
+from travel.itinerary.transit import access_for, enrich_plan, from_station, rail_path, rail_steps, transit_data
 
 
 def test_all_local_places_have_source_backed_exit_or_connector():

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readAPIResponse} from '../static/api-response.mjs';
+import {readAPIResponse} from '../static/js/core/api-response.mjs';
 
 const response = (text, status=200, type='application/x-ndjson') => new Response(text,{status,headers:{'content-type':type}});
 test('chat heartbeats never appear in the final answer',async()=>{

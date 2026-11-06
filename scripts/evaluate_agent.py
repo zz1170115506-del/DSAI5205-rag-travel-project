@@ -10,8 +10,8 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from travel.agent import AgentEngine, ModelPolicy
-from travel.config import Settings
+from travel.workflows.agent import AgentEngine, ModelPolicy
+from travel.core.config import Settings
 
 
 async def main():

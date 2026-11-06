@@ -5,9 +5,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from travel.config import RetrievalSettings
-from travel.embeddings import EmbeddingUnavailable, build_index
-from travel.knowledge import places
+from travel.core.config import RetrievalSettings
+from travel.rag.embeddings import EmbeddingUnavailable, build_index
+from travel.rag.knowledge import places
 
 
 def main():

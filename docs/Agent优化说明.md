@@ -80,6 +80,6 @@ python run.py --port 8767
 
 Node 不在 PATH 时给 `verify.py` 传 `--node /绝对路径/node`。本轮实际平台为 macOS arm64 / Python 3.14.7；Windows、手机和真实模型/高德没有验收。
 
-关键文件：`travel/agent.py`、`app.py`、`static/app.js`、`tests/test_agent.py`、`scripts/evaluate_agent.py`。完整机器可读证据：`docs/evidence/agent-v1/acceptance.json` 和 `regression/summary.json`。
+关键文件：`travel/workflows/agent.py`、`app.py`、`static/app.js`、`tests/test_agent.py`、`scripts/evaluate_agent.py`。完整机器可读证据：`docs/evidence/agent-v1/acceptance.json` 和 `regression/summary.json`。
 
 实现参考：[LangGraph 官方快速开始](https://docs.langchain.com/oss/python/langgraph/quickstart)、[官方状态保存说明](https://docs.langchain.com/oss/python/langgraph/persistence)。本项目使用 StateGraph、条件边和 InMemorySaver，沿用自己已有的 MCP 工具，没有复制完整旅游应用或第三方个人经历。

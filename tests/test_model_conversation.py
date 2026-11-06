@@ -3,13 +3,14 @@ import asyncio,json
 import httpx,pytest
 from fastapi.testclient import TestClient
 import app
-from travel import agent,chat
-from travel.agent import AgentEngine,ModelPolicy,Trip
-from travel.config import Settings
-from travel.conversation_memory import plan_snapshot,restore_memory,bounded_history
-from travel.itinerary_edits import revise_plan
-from travel.planner import plan
-from travel.history import HistoryStore
+from travel.workflows import agent
+from travel.api import chat
+from travel.workflows.agent import AgentEngine,ModelPolicy,Trip
+from travel.core.config import Settings
+from travel.session.conversation_memory import plan_snapshot,restore_memory,bounded_history
+from travel.itinerary.itinerary_edits import revise_plan
+from travel.itinerary.planner import plan
+from travel.session.history import HistoryStore
 from tests.test_agent import fixture_tool
 
 def call(name,**args):return {'tool_calls':[{'type':'function','function':{'name':name,'arguments':json.dumps(args,ensure_ascii=False)}}]}

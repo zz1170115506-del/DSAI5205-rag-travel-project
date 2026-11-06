@@ -2,12 +2,12 @@ import asyncio
 import pytest
 from fastapi.testclient import TestClient
 import app
-from travel import chat
-from travel.agent import AgentEngine,Trip
-from travel.history import HistoryStore
-from travel.knowledge import get_place
-from travel.place_context import clean_context,hydrate_context,resolve_reference,visible_ids
-from travel.planner import plan
+from travel.api import chat
+from travel.workflows.agent import AgentEngine,Trip
+from travel.session.history import HistoryStore
+from travel.rag.knowledge import get_place
+from travel.session.place_context import clean_context,hydrate_context,resolve_reference,visible_ids
+from travel.itinerary.planner import plan
 from tests.test_agent import fixture_tool
 
 @pytest.fixture

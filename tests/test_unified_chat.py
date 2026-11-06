@@ -8,11 +8,11 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app
-from travel import chat
-from travel.config import Settings
-from travel.history import HistoryStore
-from travel.maps import resolve_place, route_map, search_map
-from travel.retrieval import retrieve
+from travel.api import chat
+from travel.core.config import Settings
+from travel.session.history import HistoryStore
+from travel.tools.maps import resolve_place, route_map, search_map
+from travel.rag.retrieval import retrieve
 
 
 @pytest.fixture
