@@ -18,7 +18,7 @@ body[data-view=ask] .workspace{display:block;height:auto;min-height:calc(100dvh 
 .current-itinerary .plan-date-range{display:block;font-size:11px;margin-top:4px}
 .current-itinerary .plan-tools .small-button{font-size:11px;padding:6px 9px}
 .plan-scroll{flex:1;min-height:0;overflow:auto;padding-right:6px;scrollbar-width:thin}
-.plan-scroll:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.plan-scroll:focus-visible{outline:2px solid var(--primary);outline-offset:-2px}
 .plan-scroll .day-card{margin:0;padding:12px 0;border-width:0 0 1px;border-radius:0;background:transparent}
 .plan-scroll .day-heading{margin-bottom:10px;align-items:flex-start}
 .plan-scroll .day-heading h3{font-size:14px}

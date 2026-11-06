@@ -1,7 +1,11 @@
 import {displayText} from '../core/english.mjs?v=20261029-en';
 // Real OSM basemap; local points remain approximate and lines show visit order only.
 const escapeHTML=v=>displayText(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const colors=['#217460','#be6947','#5b6fa2'];
+// Read the shared theme so route lines and numbered markers always agree.
+const routeColors=()=>{
+ const theme=getComputedStyle(document.documentElement);
+ return [1,2,3].map(day=>theme.getPropertyValue(`--map-day-${day}`).trim());
+};
 const liveMaps=new Set();
 let visibility;
 
@@ -38,7 +42,7 @@ function mountMap(host,plan){
   const panel=host.closest('.itinerary-panel'),status=panel.querySelector('.map-load-status');
   if(!window.L){status.hidden=false;status.textContent='The map component could not load. Refresh, or open a place using its map link.';return;}
   host.replaceChildren();
-  const L=window.L,map=L.map(host,{scrollWheelZoom:false,minZoom:9,maxZoom:18});
+  const colors=routeColors(),L=window.L,map=L.map(host,{scrollWheelZoom:false,minZoom:9,maxZoom:18});
   const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
     maxZoom:19,updateWhenIdle:true,keepBuffer:1,referrerPolicy:'origin',
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'

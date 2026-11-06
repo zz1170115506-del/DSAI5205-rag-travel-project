@@ -234,7 +234,7 @@ async function filterLibrary(id){
 function geometryHTML(lines){
  const valid=lines.flat().filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite));if(valid.length<2)return '';
  const xs=valid.map(p=>p[0]),ys=valid.map(p=>p[1]),minX=Math.min(...xs),minY=Math.min(...ys),dx=Math.max(.001,Math.max(...xs)-minX),dy=Math.max(.001,Math.max(...ys)-minY);
- return `<svg class="route-geometry" viewBox="0 0 640 300" role="img" aria-label="AMap walking geometry without a basemap">${lines.map(line=>`<polyline points="${line.filter(p=>p.every(Number.isFinite)).map(p=>`${25+(p[0]-minX)/dx*590},${275-(p[1]-minY)/dy*250}`).join(' ')}" fill="none" stroke="#216653" stroke-width="3"/>`).join('')}</svg>`;
+ return `<svg class="route-geometry" viewBox="0 0 640 300" role="img" aria-label="AMap walking geometry without a basemap">${lines.map(line=>`<polyline points="${line.filter(p=>p.every(Number.isFinite)).map(p=>`${25+(p[0]-minX)/dx*590},${275-(p[1]-minY)/dy*250}`).join(' ')}" fill="none" stroke="var(--primary)" stroke-width="3"/>`).join('')}</svg>`;
 }
 async function showRoute(button){
  const day=state.plan?.days[Number(button.dataset.day)];if(!day)return;

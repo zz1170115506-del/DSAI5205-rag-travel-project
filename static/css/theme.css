@@ -1,0 +1,270 @@
+/* Rose / grape puzzle theme. Colors and component finishes only:
+   page structure, responsive grids, photographs, and reading sizes stay intact. */
+
+body {
+  color-scheme: light;
+  accent-color: var(--primary);
+}
+
+::selection {
+  background: var(--accent-light);
+  color: var(--ink);
+}
+
+.brand-icon {
+  position: relative;
+  color: var(--paper);
+  border-radius: 10px;
+}
+
+.brand-icon::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 5px;
+  height: 5px;
+  background: var(--accent-vivid);
+  box-shadow: -5px -5px 0 var(--accent-vivid), -10px 0 0 var(--accent-light);
+  pointer-events: none;
+}
+
+.tab,
+.journey-tabs button {
+  transition: color .15s, border-color .15s;
+}
+
+.tab.active {
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+.status-pill {
+  background: var(--surface-muted);
+  color: var(--ink-soft);
+}
+
+.hero .eyebrow {
+  color: var(--accent-light);
+}
+
+.search-box {
+  box-shadow: 0 12px 35px #2827350c, 0 0 0 1px var(--line);
+}
+
+.search-box select,
+.date-pair input,
+.sidebar-dates input[type=date] {
+  border-bottom-color: var(--primary-border);
+}
+
+.primary,
+.outline {
+  border-radius: 10px;
+}
+
+.primary {
+  box-shadow: 0 3px 9px #692cb616;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.outline,
+.small-button,
+.workspace-button,
+.chip {
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+}
+
+.outline:hover:not(:disabled),
+.small-button:hover:not(:disabled),
+.workspace-button:hover:not(:disabled) {
+  border-color: var(--primary-border);
+}
+
+.chip,
+.interest-options span,
+.tag,
+.badge {
+  border-radius: 8px;
+}
+
+.chip {
+  background: var(--paper);
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--primary-border);
+}
+
+.chip.selected {
+  box-shadow: 0 2px 6px #692cb614;
+}
+
+.interest-options input:checked + span {
+  border-color: var(--primary);
+  color: var(--primary-hover);
+}
+
+.segmented input:checked + span {
+  color: var(--primary-hover);
+}
+
+/* Bright and quiet card bodies echo the demo without replacing their photos. */
+.destination {
+  box-shadow: 0 0 0 1px var(--line);
+  transition: box-shadow .15s;
+}
+
+.destination:hover {
+  box-shadow: 0 8px 24px #28273512, 0 0 0 1px var(--primary-border);
+}
+
+.destination:first-child .destination-body {
+  background: var(--primary);
+  color: var(--paper);
+}
+
+.destination:first-child .destination-body > span {
+  color: var(--accent-light);
+}
+
+.destination:first-child p {
+  color: #f3edf9;
+}
+
+.destination:last-child .destination-body {
+  background: var(--surface-muted);
+}
+
+.destination:last-child .destination-body > span {
+  color: var(--accent);
+}
+
+.place-card,
+.status-card,
+.map-column,
+.current-itinerary .itinerary-column,
+.workspace #conversation-area {
+  box-shadow: 0 3px 12px #28273504;
+}
+
+.place-card:hover {
+  border-color: var(--primary-border);
+  box-shadow: 0 7px 20px #692cb60b;
+}
+
+.card-number {
+  color: var(--primary);
+}
+
+.card-actions .small-button {
+  border-color: var(--primary-border);
+}
+
+.search-label:focus-within {
+  border-color: var(--primary);
+}
+
+.search-label input:focus-visible {
+  outline-offset: -2px;
+}
+
+.user-message p {
+  color: var(--primary-hover);
+  background: var(--surface-tint);
+}
+
+.assistant-message {
+  border-radius: 4px 14px 14px 14px;
+}
+
+.assistant-name > span:last-child {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.chat-head h2 span {
+  color: var(--accent);
+}
+
+.composer {
+  border-color: var(--primary-border);
+}
+
+.composer .primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.composer .primary:hover:not(:disabled) {
+  background: #b90059;
+  border-color: #b90059;
+}
+
+.workspace .welcome-icon {
+  color: var(--paper);
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.day-num {
+  border-radius: 7px;
+}
+
+.map-toolbar .small-button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--paper);
+}
+
+.trip-marker span,
+.map-stop b {
+  background: var(--map-day-1);
+}
+
+.trip-marker.day-2 span,
+.map-stop.day-2 b {
+  background: var(--map-day-2);
+}
+
+.trip-marker.day-3 span,
+.map-stop.day-3 b {
+  background: var(--map-day-3);
+}
+
+/* Real rail-line badge colors and the basemap remain geographic information. */
+.history-favorite[aria-pressed=true] {
+  color: var(--accent);
+}
+
+.history-favorite[aria-pressed=true] svg {
+  fill: var(--accent-light);
+}
+
+.journey-panel-head {
+  background: var(--surface-muted);
+}
+
+.journey-close {
+  border-radius: 9px;
+  background: var(--paper);
+}
+
+.journey-tabs button[aria-selected=true] {
+  border-bottom-color: var(--accent);
+}
+
+.journey-launcher {
+  background: var(--surface-tint);
+  border-color: var(--primary-border);
+  color: var(--primary);
+}
+
+.toast {
+  background: var(--primary);
+}
